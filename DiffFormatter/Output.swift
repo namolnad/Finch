@@ -97,7 +97,7 @@ struct Output {
 
         ### Release Manager
 
-         - \(releaseManager.cquipName)
+         - \(releaseManager.quipName)
 
         """
     }

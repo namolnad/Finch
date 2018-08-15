@@ -8,6 +8,12 @@
 
 import Foundation
 
-let router = ArgumentRouter()
+let process = ProcessInfo.processInfo
 
-router.route(arguments: ProcessInfo().arguments)
+let configurator = Configurator(processInfo: process)
+
+let router = ArgumentRouter(configuration: configurator.configuration)
+
+router.route(arguments: process.arguments)
+
+

@@ -8,33 +8,39 @@
 
 import Foundation
 
-enum User: String {
-    case bonnieHoang = "bonnie.hoang@gmail.com"
-    case danLoman = "daniel.h.loman@gmail.com"
-    case joshSchroeder = "johosher@gmail.com"
-    case mikeJablonski = "mike.jablonski.online@gmail.com"
-    case minKim = "minho.kim@gmail.com"
+struct User {
+    let email: String
+    let quipName: String
+    var formattedQuipName: String {
+        return "@" + quipName
+    }
+}
 
-    private var _quipName: String {
-        switch self {
-        case .bonnieHoang:
-            return "Bonnie Hoang"
-        case .danLoman:
-            return "Dan Loman"
-        case .joshSchroeder:
-            return "Josh Schroeder"
-        case .mikeJablonski:
-            return "Mike Jablonski"
-        case .minKim:
-            return "Min Kim"
+extension User {
+    static func from(line: String) -> User? {
+        guard let emailNSRange = matches(pattern: "%%%(.*)%%%", body: line).first?.range(at: 1),
+            let emailRange = Range(emailNSRange, in: line) else {
+                return nil // Should throw here and ensure range(at: 1) will be valid
         }
-    }
+        guard let quipNSRange = matches(pattern: "&&&(.*)&&&", body: line).last?.range(at: 1),
+            let quipRange = Range(quipNSRange, in: line) else {
+                return nil // Should throw here and ensure range(at: 1) will be valid
+        }
 
-    var quipName: String {
-        return "@" + _quipName
+        return User(
+            email: String(line[emailRange]),
+            quipName: String(line[quipRange])
+        )
     }
+}
 
-    var email: String {
-        return rawValue
+extension Array where Element == User {
+    static func from(data: Data) -> [User] {
+        guard let string = String(data: data, encoding: .utf8) else {
+            return []
+        }
+        return string
+            .components(separatedBy: "\n")
+            .compactMap(User.from)
     }
 }

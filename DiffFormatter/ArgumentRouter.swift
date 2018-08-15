@@ -12,34 +12,39 @@ let appName: String = "DiffFormatter"
 
 struct ArgumentRouter {
 
+    private let configuration: Configuration
+
+    init(configuration: Configuration) {
+        self.configuration = configuration
+    }
+
     func route(arguments: [String]) {
         var args = Array(arguments
             .lazy
             .filter { !$0.contains(appName) } // Remove call of self
             .reversed())
 
-        guard let primaryArg = args.popLast() else {
-            return
-        }
+//        guard let primaryArg = args.popLast() else {
+//            return
+//        }
+//
+        let primaryArg = testInput
 
-        let lines = Output.primary(input: primaryArg)
+        let patternCreator = FindReplacePatternCreator(configuration: configuration)
+
+        let lines = Output.primaryOutput(for: patternCreator.patterns, with: primaryArg)
             .components(separatedBy: "\n")
             .filter { !$0.isEmpty }
 
-        var features: [String] = []
+        var sections: [String: Section] = [:]
 
-        var bugFixes: [String] = []
-
-        var platformImprovements: [String] = []
-
-        lines.forEach {
-            if Tag.fixTags.contains(where: $0.contains) {
-                bugFixes.append($0)
-            } else if Tag.platformTags.contains(where: $0.contains) {
-                platformImprovements.append($0)
+        lines.forEach { line in
+            if let sectionInfo = configuration.sectionInfos.first(where: { $0.tags.contains(where: line.contains) }) {
+                sections[sectionInfo.title, default: Section(info: sectionInfo, lines: [])].lines.append(line)
             } else {
-                features.append($0)
+                sections[SectionInfo.defaultFeaturesInfo.title, default: Section(info: .defaultFeaturesInfo, lines: [])].lines.append(line)
             }
+
         }
 
         let commandValues = args.compactMap(Argument.commands)
@@ -49,14 +54,14 @@ struct ArgumentRouter {
 
         let releaseManager = commandValues
             .first { $0.command == .releaseManager }
-            .flatMap { User.init(rawValue: $0.value) }
+            .flatMap { email in configuration.users.first { $0.email == email.value } } // Unsure about this logic
 
-        output(.init(
+        output(Output(
             version: versionHeader?.value,
             releaseManager: releaseManager,
-            features: features,
-            bugFixes: bugFixes,
-            platformImprovements: platformImprovements))
+            sections: configuration.sectionInfos.compactMap { sections[$0.title] }
+            )
+        )
     }
 
     private func output(_ output: Output) {

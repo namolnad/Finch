@@ -27,7 +27,7 @@ struct Configurator {
             configuration = configuration.modifiedConfig(withNonEmptyComponentsFrom: config)
         }
 
-        if let value = processInfo.environment["DIFFFORMATTER_CONFIG"], !value.isEmpty {
+        if let value = processInfo.environment["DIFF_FORMATTER_CONFIG"], !value.isEmpty {
             // Load config overrides from custom path if env var included
             if case let config = configuration(forBasePath: value), !config.isEmpty {
                 configuration = configuration.modifiedConfig(withNonEmptyComponentsFrom: config)

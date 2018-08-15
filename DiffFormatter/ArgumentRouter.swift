@@ -44,7 +44,6 @@ struct ArgumentRouter {
             } else {
                 sections[SectionInfo.defaultFeaturesInfo.title, default: Section(info: .defaultFeaturesInfo, lines: [])].lines.append(line)
             }
-
         }
 
         let commandValues = args.compactMap(Argument.commands)

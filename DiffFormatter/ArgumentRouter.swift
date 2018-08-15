@@ -20,11 +20,9 @@ struct ArgumentRouter {
 
     func route(arguments: [String]) {
         var args = Array(arguments
-            .lazy
-            .filter { !$0.contains(appName) } // Remove call of self
+            .filter { !$0.contains(appName) }
             .reversed())
 
-//        let primaryArg = testInput
         guard let primaryArg = args.popLast() else {
             return
         }

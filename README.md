@@ -27,6 +27,8 @@ All config files should be readable with no file extension. The following specif
   - File name: `section_infos`
   - Newline separated list
   - Each line should be formatted like the following (with comma-separated tags): %%%Section Title%%%&&&section-tag1,section tag, setctiontag, other, tag&&&
+  - Sections should be listed in the order you want them to be displayed in the output
+  - Sections will be parsed in reverse and each commit will be placed into the first matching section (including matching a wild card)
 
 - Footer
   - File name: `footer`

@@ -37,11 +37,11 @@ struct ArgumentRouter {
 
         var sections: [String: Section] = [:]
 
+        let reversedSectionInfos = configuration.sectionInfos.reversed()
+
         lines.forEach { line in
-            if let sectionInfo = configuration.sectionInfos.first(where: { $0.tags.contains(where: line.contains) }) {
+            if let sectionInfo = reversedSectionInfos.first(where: { $0.tags.contains("*") || $0.tags.contains(where: line.contains) }) {
                 sections[sectionInfo.title, default: Section(info: sectionInfo, lines: [])].lines.append(line)
-            } else {
-                sections[SectionInfo.defaultFeaturesInfo.title, default: Section(info: .defaultFeaturesInfo, lines: [])].lines.append(line)
             }
         }
 

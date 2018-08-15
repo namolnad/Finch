@@ -8,10 +8,10 @@ The following portions of DiffFormatter are configurable:
 - Section Info title and corresponding tags
 - Footer
 ## Search paths & behavior
-DiffFormatter will start with a default configuration and will search several paths for overrides for your environment and project. Paths, with the behavior described as below, will be searched for files within `$SEARCH_PATH/.diff_formatter/config/` to modify configuration.
+DiffFormatter will start with a default configuration and will search several paths for configuration overrides. Whereever you want to locate your config files, you need to enclose them within a hidden folder system as shown here (home example shown): `$HOME/.diff_formatter/config/`
 
 ### Search Paths behavior
-DiffFormatter will search 2 paths for configuration files. The behavior is described as follows
+DiffFormatter will search 2 paths for configuration files. The behavior follows this order:
 1. Home directory
 2. Path found at included DIFF_FORMATTER_CONFIG environment variable __OR__ DiffFormatter's current directory if the previous env var is not present
 

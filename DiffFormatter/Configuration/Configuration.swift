@@ -32,7 +32,7 @@ extension Configuration {
     func modifiedConfig(withNonEmptyComponentsFrom otherConfig: Configuration) -> Configuration {
         var users: [User] = self.users
         var sectionInfos: [SectionInfo] = self.sectionInfos
-        var footer: String?
+        var footer: String? = self.footer
 
         if !otherConfig.users.isEmpty {
             users = otherConfig.users

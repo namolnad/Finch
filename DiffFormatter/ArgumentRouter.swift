@@ -24,11 +24,10 @@ struct ArgumentRouter {
             .filter { !$0.contains(appName) } // Remove call of self
             .reversed())
 
-//        guard let primaryArg = args.popLast() else {
-//            return
-//        }
-//
-        let primaryArg = testInput
+        //        let primaryArg = testInput
+        guard let primaryArg = args.popLast() else {
+            return
+        }
 
         let patternCreator = FindReplacePatternCreator(configuration: configuration)
 
@@ -53,12 +52,13 @@ struct ArgumentRouter {
 
         let releaseManager = commandValues
             .first { $0.command == .releaseManager }
-            .flatMap { email in configuration.users.first { $0.email == email.value } } // Unsure about this logic
+            .flatMap { email in configuration.users.first { $0.email == email.value } }
 
         output(Output(
             version: versionHeader?.value,
             releaseManager: releaseManager,
-            sections: configuration.sectionInfos.compactMap { sections[$0.title] }
+            sections: configuration.sectionInfos.compactMap { sections[$0.title] },
+            footer: configuration.footer
             )
         )
     }

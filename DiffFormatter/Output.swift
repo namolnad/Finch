@@ -16,17 +16,7 @@ struct Output {
 
     let sections: [Section]
 
-    var timeline: String {
-        return """
-
-        ### Timeline
-         - Begin development:
-         - Feature cut-off / Start of bake / dogfooding:
-         - Submission:
-         - Release (expected):
-         - Release (actual):
-        """
-    }
+    let footer: String?
 
     var finalOutput: String {
         var output = ""
@@ -43,7 +33,9 @@ struct Output {
             output.append(body(lines: $0.lines, title: $0.info.title))
         }
 
-        output.append(timeline)
+        if let value = footer {
+            output.append(value)
+        }
 
         return output
     }

@@ -10,49 +10,61 @@ import Foundation
 
 struct Configurator {
 
-    let configuration: Configuration
+    private static let configDirPathComponent: String = "/.diff_formatter/config/"
 
-    let fileManager: FileManager = .default
+    // Set defaults where possible
+    private(set) var configuration: Configuration = .default
+
+    private let fileManager: FileManager = .default
 
     init(processInfo: ProcessInfo) {
-        // Set defaults where possible
-        var users: [User] = []
-        var sectionInfos: [SectionInfo] = SectionInfo.defaultSectionInfos
-
-        let home = fileManager.homeDirectoryForCurrentUser.path
-
-        if !home.isEmpty {
-            // Load initial config from home directory if available
-            if let data = fileManager.contents(atPath: home + Configurator.pathComponent(for: .users)) {
-                users = .from(data: data)
-            }
-            if let data = fileManager.contents(atPath: home + Configurator.pathComponent(for: .sectionInfos)) {
-                sectionInfos = .from(data: data)
-            }
+        guard case let home = fileManager.homeDirectoryForCurrentUser.path, !home.isEmpty else {
+            return
         }
 
-        if let value = processInfo.environment["DIFFFORMATTER_CONFIG"], !value.isEmpty, !home.isEmpty {
+        // Load initial config from home directory if available
+        if case let config = configuration(forBasePath: home), !config.isEmpty {
+            configuration = configuration.modifiedConfig(withNonEmptyComponentsFrom: config)
+        }
+
+        if let value = processInfo.environment["DIFFFORMATTER_CONFIG"], !value.isEmpty {
             // Load config overrides from custom path if env var included
-            if let data = fileManager.contents(atPath: home + value + Configurator.pathComponent(for: .users)) {
-                users = .from(data: data)
-            }
-            if let data = fileManager.contents(atPath: home + value + Configurator.pathComponent(for: .sectionInfos)) {
-                sectionInfos = .from(data: data)
+            if case let config = configuration(forBasePath: value), !config.isEmpty {
+                configuration = configuration.modifiedConfig(withNonEmptyComponentsFrom: config)
             }
         } else if case let value = fileManager.currentDirectoryPath, !value.isEmpty {
             // Load config overrides from current directory if available
-            if let data = fileManager.contents(atPath: value + Configurator.pathComponent(for: .users)) {
-                users = .from(data: data)
-            }
-            if let data = fileManager.contents(atPath: value + Configurator.pathComponent(for: .sectionInfos)) {
-                sectionInfos = .from(data: data)
+            if case let config = configuration(forBasePath: value), !config.isEmpty {
+                configuration = configuration.modifiedConfig(withNonEmptyComponentsFrom: config)
             }
         }
+    }
 
-        self.configuration = .init(users: users, sectionInfos: sectionInfos)
+    private func configuration(forBasePath path: String) -> Configuration {
+        guard !path.isEmpty else {
+            return .empty
+        }
+
+        var users: [User] = []
+        var sectionInfos: [SectionInfo] = []
+        var footer: String?
+
+        if let data = fileManager.contents(atPath: path + Configurator.pathComponent(for: .users)) {
+            users = .from(data: data)
+        }
+
+        if let data = fileManager.contents(atPath: path + Configurator.pathComponent(for: .sectionInfos)) {
+            sectionInfos = .from(data: data)
+        }
+
+        if let data = fileManager.contents(atPath: path + Configurator.pathComponent(for: .footer)) {
+            footer = String(data: data, encoding: .utf8)
+        }
+
+        return .init(users: users, sectionInfos: sectionInfos, footer: footer)
     }
 
     private static func pathComponent(for configurationComponent: Configuration.Component) -> String {
-        return "/.diffformatter/config/" + configurationComponent.rawValue
+        return configDirPathComponent + configurationComponent.rawValue
     }
 }

@@ -20,12 +20,6 @@ struct SectionInfo: Hashable {
 extension SectionInfo {
     static let defaultFeaturesInfo: SectionInfo = .init(title: "Features", tags: ["*"])
 
-    static let defaultSectionInfos: [SectionInfo] = [
-        .init(title: "Bug Fixes", tags: ["bugfix", "cleanup", "bug fix", "bug"]),
-        .init(title: "Platform Improvements", tags: ["platform", "tooling", "upgrade"]),
-        SectionInfo.defaultFeaturesInfo,
-    ]
-
     static func from(line: String) -> SectionInfo? {
         guard let titleNSRange = matches(pattern: "%%%(.*)%%%", body: line).first?.range(at: 1),
             let titleRange = Range(titleNSRange, in: line) else {
@@ -44,6 +38,12 @@ extension SectionInfo {
 }
 
 extension Array where Element == SectionInfo {
+    static let defaultSectionInfos: [SectionInfo] = [
+        .init(title: "Bug Fixes", tags: ["bugfix", "cleanup", "bug fix", "bug"]),
+        .init(title: "Platform Improvements", tags: ["platform", "tooling", "upgrade"]),
+        SectionInfo.defaultFeaturesInfo,
+    ]
+
     static func from(data: Data) -> [SectionInfo] {
         guard let string = String(data: data, encoding: .utf8) else {
             return []

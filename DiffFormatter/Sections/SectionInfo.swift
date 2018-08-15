@@ -21,13 +21,13 @@ extension SectionInfo {
     static let defaultFeaturesInfo: SectionInfo = .init(title: "Features", tags: ["*"])
 
     static func from(line: String) -> SectionInfo? {
-        guard let titleNSRange = matches(pattern: "%%%(.*)%%%", body: line).first?.range(at: 1),
-            let titleRange = Range(titleNSRange, in: line) else {
-                return nil  // Should throw here and ensure range(at: 1) will be valid
+        guard let titleMatch = matches(pattern: "%%%(.*)%%%", body: line).first, titleMatch.numberOfRanges > 1,
+            let titleRange = Range(titleMatch.range(at: 1), in: line) else {
+                return nil // TODO: - Throw and warn of misconfiguration
         }
-        guard let tagsNSRange = matches(pattern: "&&&(.*)&&&", body: line).first?.range(at: 1),
-            let tagsRange = Range(tagsNSRange, in: line) else {
-                return nil // Should throw here and ensure range(at: 1) will be valid
+        guard let tagsMatch = matches(pattern: "&&&(.*)&&&", body: line).first, tagsMatch.numberOfRanges > 1,
+            let tagsRange = Range(tagsMatch.range(at: 1), in: line) else {
+                return nil // TODO: - Throw and warn of misconfiguration
         }
 
         return SectionInfo(
@@ -39,7 +39,7 @@ extension SectionInfo {
 
 extension Array where Element == SectionInfo {
     static let defaultSectionInfos: [SectionInfo] = [
-        SectionInfo.defaultFeaturesInfo,
+        .defaultFeaturesInfo,
         .init(title: "Bug Fixes", tags: ["bugfix", "cleanup", "bug fix", "bug"]),
         .init(title: "Platform Improvements", tags: ["platform", "tooling", "upgrade"]),
     ]

@@ -11,6 +11,7 @@ import Foundation
 struct User {
     let email: String
     let quipName: String
+
     var formattedQuipName: String {
         return "@" + quipName
     }

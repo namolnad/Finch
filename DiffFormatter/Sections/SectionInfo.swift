@@ -39,9 +39,9 @@ extension SectionInfo {
 
 extension Array where Element == SectionInfo {
     static let defaultSectionInfos: [SectionInfo] = [
+        SectionInfo.defaultFeaturesInfo,
         .init(title: "Bug Fixes", tags: ["bugfix", "cleanup", "bug fix", "bug"]),
         .init(title: "Platform Improvements", tags: ["platform", "tooling", "upgrade"]),
-        SectionInfo.defaultFeaturesInfo,
     ]
 
     static func from(data: Data) -> [SectionInfo] {

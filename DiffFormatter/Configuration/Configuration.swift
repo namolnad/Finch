@@ -29,6 +29,10 @@ extension Configuration {
             (footer?.isEmpty == true)
     }
 
+    mutating func update(with otherConfig: Configuration) {
+        self = modifiedConfig(withNonEmptyComponentsFrom: otherConfig)
+    }
+
     func modifiedConfig(withNonEmptyComponentsFrom otherConfig: Configuration) -> Configuration {
         var users: [User] = self.users
         var sectionInfos: [SectionInfo] = self.sectionInfos

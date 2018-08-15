@@ -14,11 +14,7 @@ struct Output {
 
     let releaseManager: User?
 
-    let features: [String]
-
-    let bugFixes: [String]
-
-    let platformImprovements: [String]
+    let sections: [Section]
 
     var timeline: String {
         return """
@@ -43,16 +39,8 @@ struct Output {
             output.append(formatted(releaseManager: value))
         }
 
-        if !features.isEmpty {
-            output.append(body(lines: features, title: "Features"))
-        }
-
-        if !bugFixes.isEmpty {
-            output.append(body(lines: bugFixes, title: "Bug Fixes"))
-        }
-
-        if !platformImprovements.isEmpty {
-            output.append(body(lines: platformImprovements, title: "Platform Improvements"))
+        sections.forEach {
+            output.append(body(lines: $0.lines, title: $0.info.title))
         }
 
         output.append(timeline)
@@ -73,7 +61,7 @@ struct Output {
     }
 
     // Primary parsing
-    static func primary(input: String) -> String {
+    static func primaryOutput(for patterns: [[FindReplacePattern]], with input: String) -> String {
         let sortedInput = input
             .components(separatedBy: "\n")
             .sorted(by: "@@@(.*)@@@")
@@ -97,7 +85,7 @@ struct Output {
 
         ### Release Manager
 
-         - \(releaseManager.quipName)
+         - \(releaseManager.formattedQuipName)
 
         """
     }

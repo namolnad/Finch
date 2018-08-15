@@ -16,7 +16,7 @@
 		22AACD6520EEAAE200806FF3 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6420EEAAE200806FF3 /* Regex.swift */; };
 		22AACD6720EED11200806FF3 /* FindReplacePattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6620EED11200806FF3 /* FindReplacePattern.swift */; };
 		22AACD6920EED11800806FF3 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6820EED11800806FF3 /* Pasteboard.swift */; };
-		22AACD6B20EED12500806FF3 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6A20EED12500806FF3 /* Output.swift */; };
+		22AACD6B20EED12500806FF3 /* OutputGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6A20EED12500806FF3 /* OutputGenerator.swift */; };
 		22AACD6D20EEE33500806FF3 /* ArgumentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6C20EEE33500806FF3 /* ArgumentRouter.swift */; };
 		22AACD6F20EF15C000806FF3 /* TestInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6E20EF15C000806FF3 /* TestInput.swift */; };
 		22AACD7120EF24CC00806FF3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7020EF24CC00806FF3 /* User.swift */; };
@@ -47,7 +47,7 @@
 		22AACD6420EEAAE200806FF3 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		22AACD6620EED11200806FF3 /* FindReplacePattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindReplacePattern.swift; sourceTree = "<group>"; };
 		22AACD6820EED11800806FF3 /* Pasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pasteboard.swift; sourceTree = "<group>"; };
-		22AACD6A20EED12500806FF3 /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
+		22AACD6A20EED12500806FF3 /* OutputGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputGenerator.swift; sourceTree = "<group>"; };
 		22AACD6C20EEE33500806FF3 /* ArgumentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentRouter.swift; sourceTree = "<group>"; };
 		22AACD6E20EF15C000806FF3 /* TestInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInput.swift; sourceTree = "<group>"; };
 		22AACD7020EF24CC00806FF3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -66,13 +66,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		226433502123E0A600B46082 /* Sections */ = {
+		226433502123E0A600B46082 /* Section */ = {
 			isa = PBXGroup;
 			children = (
 				226433512123E0BD00B46082 /* SectionInfo.swift */,
 				2264335321240C0C00B46082 /* Section.swift */,
 			);
-			path = Sections;
+			path = Section;
+			sourceTree = "<group>";
+		};
+		226433552124A17900B46082 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				2264334C2123DC9700B46082 /* Configurator.swift */,
+				2264334E2123DD3100B46082 /* Configuration.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		226433562124A35000B46082 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				22AACD6620EED11200806FF3 /* FindReplacePattern.swift */,
+				22AACD7420EF30B400806FF3 /* Argument.swift */,
+				22AACD7220EF30A100806FF3 /* Command.swift */,
+				226433502123E0A600B46082 /* Section */,
+				22AACD7020EF24CC00806FF3 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		226433572124A3A000B46082 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				22AACD6A20EED12500806FF3 /* OutputGenerator.swift */,
+				22AACD6820EED11800806FF3 /* Pasteboard.swift */,
+				22AACD6420EEAAE200806FF3 /* Regex.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		226433582124A3F400B46082 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		22AACD5120EEAAAC00806FF3 = {
@@ -96,18 +135,11 @@
 			children = (
 				22AACD5D20EEAAAC00806FF3 /* main.swift */,
 				22AACD6C20EEE33500806FF3 /* ArgumentRouter.swift */,
-				22AACD7420EF30B400806FF3 /* Argument.swift */,
-				22AACD7220EF30A100806FF3 /* Command.swift */,
+				226433562124A35000B46082 /* Models */,
+				226433572124A3A000B46082 /* Utilities */,
+				226433552124A17900B46082 /* Configuration */,
+				226433582124A3F400B46082 /* Extensions */,
 				22AACD6E20EF15C000806FF3 /* TestInput.swift */,
-				22AACD6420EEAAE200806FF3 /* Regex.swift */,
-				223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */,
-				22AACD6620EED11200806FF3 /* FindReplacePattern.swift */,
-				22AACD7020EF24CC00806FF3 /* User.swift */,
-				22AACD6A20EED12500806FF3 /* Output.swift */,
-				22AACD6820EED11800806FF3 /* Pasteboard.swift */,
-				226433502123E0A600B46082 /* Sections */,
-				2264334C2123DC9700B46082 /* Configurator.swift */,
-				2264334E2123DD3100B46082 /* Configuration.swift */,
 			);
 			path = DiffFormatter;
 			sourceTree = "<group>";
@@ -172,7 +204,7 @@
 				2264335421240C0C00B46082 /* Section.swift in Sources */,
 				226433522123E0BD00B46082 /* SectionInfo.swift in Sources */,
 				22AACD7120EF24CC00806FF3 /* User.swift in Sources */,
-				22AACD6B20EED12500806FF3 /* Output.swift in Sources */,
+				22AACD6B20EED12500806FF3 /* OutputGenerator.swift in Sources */,
 				2264334F2123DD3100B46082 /* Configuration.swift in Sources */,
 				22AACD6920EED11800806FF3 /* Pasteboard.swift in Sources */,
 				223745BE20F3220D0002AD6F /* String+DiffFormatter.swift in Sources */,

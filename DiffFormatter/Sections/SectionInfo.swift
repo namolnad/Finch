@@ -32,7 +32,7 @@ extension SectionInfo {
 
         return SectionInfo(
             title: String(line[titleRange]),
-            tags: Set(String(line[tagsRange]).components(separatedBy: " "))
+            tags: Set(String(line[tagsRange]).components(separatedBy: ","))
         )
     }
 }

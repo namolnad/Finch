@@ -24,7 +24,7 @@ struct ArgumentRouter {
             .filter { !$0.contains(appName) } // Remove call of self
             .reversed())
 
-        //        let primaryArg = testInput
+//        let primaryArg = testInput
         guard let primaryArg = args.popLast() else {
             return
         }

@@ -22,11 +22,11 @@ All config files should be readable with no file extension. The following specif
 - User list
   - File name: `users`
   - Newline separated list
-  - Each line should be formatted like the following: `%%%jony.ive@apple.com%%%&&&Jony.Ive&&&`
+  - Each line should be formatted like the following (email, Quip username): `%%%jony.ive@apple.com%%%&&&Jony.Ive&&&`
 - Section Info
   - File name: `section_infos`
   - Newline separated list
-  - Each line should be formatted like the following (with comma-separated tags): `%%%Platform Improvements%%%&&&platform,dependencies,performance&&&`
+  - Each line should be formatted like the following (section title, comma-separated tags): `%%%Platform Improvements%%%&&&platform,dependencies,performance&&&`
   - Sections should be listed in the order you want them to be displayed in the output
   - Sections will be parsed in reverse and each commit will be placed into the first matching section (including matching a wild card)
 

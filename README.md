@@ -15,7 +15,7 @@ DiffFormatter will search 2 paths for configuration files. The behavior is descr
 1. Home directory
 2. Path found at included DIFF_FORMATTER_CONFIG environment variable __OR__ DiffFormatter's current directory if the previous env var is not present
 
-*Note: For DIFF_FORMATTER_CONFIG, you should only include the path to the directory which contains your ".diff_formatter" directory. DiffFormatter will append the other expected path components*
+*Note: For DIFF_FORMATTER_CONFIG, you should only include the path to the directory which contains your `.diff_formatter` directory. DiffFormatter will append the other expected path components*
 
 ## Configuration file formatting expectations
 All config files should be readable with no file extension. The following specific file formats are expected for each of their corresponding categories if custom configuration is desired:

@@ -15,5 +15,3 @@ let configurator = Configurator(processInfo: process)
 let router = ArgumentRouter(configuration: configurator.configuration)
 
 router.route(arguments: process.arguments)
-
-

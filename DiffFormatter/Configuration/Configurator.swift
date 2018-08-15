@@ -23,24 +23,24 @@ struct Configurator {
         }
 
         // Load initial config from home directory if available
-        if case let config = configuration(forBasePath: home), !config.isEmpty {
-            configuration = configuration.modifiedConfig(withNonEmptyComponentsFrom: config)
+        if case let config = configuration(forPath: home), !config.isEmpty {
+            configuration.update(with: config)
         }
 
         if let value = processInfo.environment["DIFF_FORMATTER_CONFIG"], !value.isEmpty {
             // Load config overrides from custom path if env var included
-            if case let config = configuration(forBasePath: value), !config.isEmpty {
-                configuration = configuration.modifiedConfig(withNonEmptyComponentsFrom: config)
+            if case let config = configuration(forPath: value), !config.isEmpty {
+                configuration.update(with: config)
             }
         } else if case let value = fileManager.currentDirectoryPath, !value.isEmpty {
             // Load config overrides from current directory if available
-            if case let config = configuration(forBasePath: value), !config.isEmpty {
-                configuration = configuration.modifiedConfig(withNonEmptyComponentsFrom: config)
+            if case let config = configuration(forPath: value), !config.isEmpty {
+                configuration.update(with: config)
             }
         }
     }
 
-    private func configuration(forBasePath path: String) -> Configuration {
+    private func configuration(forPath path: String) -> Configuration {
         guard !path.isEmpty else {
             return .empty
         }

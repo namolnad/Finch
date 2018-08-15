@@ -42,11 +42,11 @@ All config files should be readable with no file extension. The following specif
 
 ### Features
  - |wip||custom-lib| initial work on incorporating 1.0.0 — [PR #912](https://github.com/your_repo/pull/912) — @User.3
- - |checkout| improved tracking + logging — [PR #958]
+ - |checkout| improved tracking + logging — [PR #958](https://github.com/your_repo/pull/958) - @User.2
 
 ### Bug Fixes
  - |cleanup| remove unused obj-c experiment, fix some warnings — [PR #949](https://github.com/your_repo/pull/949) — @User.1
- - |cleanup| remove unused Lib — [PR #947] - @User.3
+ - |cleanup| remove unused Lib — [PR #947](https://github.com/your_repo/pull/947) - @User.3
 
 ### Platform Improvements
  - |tooling| re-enable new build system — [PR #959](https://github.com/your_repo/pull/959) — @User.1

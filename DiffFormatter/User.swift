@@ -19,13 +19,13 @@ struct User {
 
 extension User {
     static func from(line: String) -> User? {
-        guard let emailNSRange = matches(pattern: "%%%(.*)%%%", body: line).first?.range(at: 1),
-            let emailRange = Range(emailNSRange, in: line) else {
-                return nil // Should throw here and ensure range(at: 1) will be valid
+        guard let emailMatch = matches(pattern: "%%%(.*)%%%", body: line).first, emailMatch.numberOfRanges > 1,
+            let emailRange = Range(emailMatch.range(at: 1), in: line) else {
+                return nil // TODO: - Throw and warn of misconfiguration
         }
-        guard let quipNSRange = matches(pattern: "&&&(.*)&&&", body: line).last?.range(at: 1),
-            let quipRange = Range(quipNSRange, in: line) else {
-                return nil // Should throw here and ensure range(at: 1) will be valid
+        guard let quipMatch = matches(pattern: "&&&(.*)&&&", body: line).last, quipMatch.numberOfRanges > 1,
+            let quipRange = Range(quipMatch.range(at: 1), in: line) else {
+                return nil // TODO: - Throw and warn of misconfiguration
         }
 
         return User(

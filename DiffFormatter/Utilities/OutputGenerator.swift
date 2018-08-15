@@ -8,17 +8,40 @@
 
 import Foundation
 
-struct Output {
+struct OutputGenerator {
 
-    let version: String?
+    private let version: String?
 
-    let releaseManager: User?
+    private let releaseManager: User?
 
-    let sections: [Section]
+    private let sections: [Section]
 
-    let footer: String?
+    private let footer: String?
 
-    var finalOutput: String {
+    init(configuration: Configuration, rawDiff: String, version: String?, releaseManager: User?) {
+        let patternCreator = FindReplacePatternCreator(configuration: configuration)
+
+        let lines = type(of: self).primaryOutput(for: patternCreator.patterns, with: rawDiff)
+            .components(separatedBy: "\n")
+            .filter { !$0.isEmpty }
+
+        var sections: [String: Section] = [:]
+
+        let reversedSectionInfos = configuration.sectionInfos.reversed()
+
+        lines.forEach { line in
+            if let sectionInfo = reversedSectionInfos.first(where: { $0.tags.contains("*") || $0.tags.contains(where: line.contains) }) {
+                sections[sectionInfo.title, default: Section(info: sectionInfo, lines: [])].lines.append(line)
+            }
+        }
+
+        self.version = version
+        self.releaseManager = releaseManager
+        self.sections = configuration.sectionInfos.compactMap { sections[$0.title] }
+        self.footer = configuration.footer
+    }
+
+    func generatedOutput() -> String {
         var output = ""
 
         if let value = version {
@@ -53,7 +76,7 @@ struct Output {
     }
 
     // Primary parsing
-    static func primaryOutput(for patterns: [[FindReplacePattern]], with input: String) -> String {
+    private static func primaryOutput(for patterns: [[FindReplacePattern]], with input: String) -> String {
         let sortedInput = input
             .components(separatedBy: "\n")
             .sorted(by: "@@@(.*)@@@")

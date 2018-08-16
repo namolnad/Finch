@@ -9,32 +9,23 @@
 import Foundation
 
 let testInput = """
-> &&&a5f94579f5672e39e1c0b1be2842f26f5ba2532f&&& - @@@[bug fix] fixes an issue where more views are being animated than necessary (#974)@@@###minho.kim@gmail.com###
-> &&&526fdc92099f43fbe5528acc90d27e73108b4a80&&& - @@@[bug fix] pop view controller after successfully adding a promo code … (#970)@@@###minho.kim@gmail.com###
-> &&&2f6949e851fe394a3d83de64d9b94b2133fa56cb&&& - @@@[analytics] fix checkout v2 select payment event (#969)@@@###mike.jablonski.online@gmail.com###
-> &&&f648662dca767acf7bcf35183fb35844224593a1&&& - @@@Revert "[version] 6.12.0"@@@###daniel.h.loman@gmail.com###
-> &&&fd221cab6127e702ed41c45c497e6a7fc3e90c79&&& - @@@[platform] move to incremental compilation and ensure we're using same swift version across the board (#966)@@@###minho.kim@gmail.com###
-> &&&bec456630ce52406684886e8885dfb4daba5e154&&& - @@@performance improvements (#962)@@@###minho.kim@gmail.com###
-> &&&b2e5301cdbac8ff668d6be3b9f07d3f48ff10bea&&& - @@@Green express checkout v3 (#926)@@@###johosher@gmail.com###
-> &&&0f8a8fbc399cf31c42378eeade552215037ab75e&&& - @@@Hide statusbar on app launch (#965)@@@###daniel.h.loman@gmail.com###
-> &&&94796f843169913f371de77bfd7d6cb47db527ad&&& - @@@[analytics] checkout error + cpg tracking (#964)@@@###mike.jablonski.online@gmail.com###
-> &&&e93a663004d7c2755fead1b000092abdd8f6a3a7&&& - @@@[checkout] improve ux for new address / payment (#963)@@@###mike.jablonski.online@gmail.com###
-> &&&dddab3a2cc32267c315d92afd8cde44aa266277f&&& - @@@[version] 6.12.0@@@###minho.kim@gmail.com###
-> &&&bfb2ff18211fa00abf907f7a5beee4ba689282c9&&& - @@@[upgrade] RxSwift 4.2 (#946)@@@###minho.kim@gmail.com###
-< &&&bfb2ff18211fa00abf907f7a5beedfdfsaa689282c9&&& - @@@[upgrade] RxSwift 4.2 (#946)@@@###minho.kim@gmail.com###
-> &&&7c166ae8c3271bdff4b39f0a907c9cf5c97a6128&&& - @@@[bug fix] checkout ensure valid phone fix (#961)@@@###mike.jablonski.online@gmail.com###
-> &&&35b4d09c4721cf61b1d86124fde95d13b8918200&&& - @@@[bug fix] checkout fix selection of edited address (#960)@@@###mike.jablonski.online@gmail.com###
-> &&&32c7c64ddbf796d2adeab93bec299dbf60ab3f39&&& - @@@[checkout] improved tracking + logging (#958)@@@###mike.jablonski.online@gmail.com###
-> &&&8727440a2e19959132f3a94cd158df1c327c5966&&& - @@@[tooling] re-enable new build system (#959)@@@###minho.kim@gmail.com###
-> &&&dcee57a0c5f7312c26c4984783c3f3eb60c9fd2c&&& - @@@[bug fix] fixes insets on iPhoneX devices (#954)@@@###minho.kim@gmail.com###
-> &&&1133ed6abcdd70dae8625df3b0165c0fe6fc24cf&&& - @@@[bug fix] fix comment field not showing for order issues (#953)@@@###minho.kim@gmail.com###
-> &&&19ff7202d2b587e5cc63ed50fcb31e90de000011&&& - @@@[cleanup] ICMultiSearch.h -> MultiSearch.swift (#951)@@@###minho.kim@gmail.com###
-> &&&a27874ecfd72a78d748b6f0875eba3163bd51265&&& - @@@[cleanup] remove unused obj-c ICExperiment, fix some warnings (#949)@@@###minho.kim@gmail.com###
-> &&&d6dd091b8fc5c4b9fa830402ac0f6106ff2061b0&&& - @@@[cleanup] move smaller libs/frameworks into the codebase (#948)@@@###minho.kim@gmail.com###
-> &&&61a3f4be1f1458fba06cc27cb85e7eb979732bcb&&& - @@@[cleanup] remove unused OHHTTPStubs (#947)@@@###minho.kim@gmail.com###
-> &&&d9feac030cd367e05ed66cec2b94a8e0f4889382&&& - @@@[wip][snacks] initial work on incorporating 1.0.0 (#912)@@@###minho.kim@gmail.com###
-> &&&7bf52659b107ddf4dbd2864b7b81911486e82e06&&& - @@@[version] 6.11.0@@@###daniel.h.loman@gmail.com###
-< &&&0e9d18055df14d6fb99856e035de887a416d4062&&& - @@@[test] update order issues snapshot tests@@@###minho.kim@gmail.com###
-< &&&85bc3b0c7f574a62e5a50d44891508be7ac84160&&& - @@@[bug fix] fixes insets on iPhoneX devices (#954)@@@###minho.kim@gmail.com###
-< &&&fa4040f4d4a06f4ef6e79eb84c05deec7cc78da3&&& - @@@[bug fix] fix comment field not showing for order issues (#953)@@@###minho.kim@gmail.com###
+> &&&fce9cb800905de678a99577a64c8230e63f1cc37&&& - @@@[autocomplete-v3] add analytics (#1030)@@@###minho.kim@gmail.com###
+> &&&2236c36e40c4409927fdcd2b6ebd29b18aa03e36&&& - @@@[express-placement] build error fix (#1025)@@@###6529994+bhoang8@users.noreply.github.com###
+> &&&9a33ff13804bcce98a4c81279cc1254e499e4932&&& - @@@[push-notificatons] Request for permission after user places an order with 90 day re-prompt (#1024)@@@###6529994+bhoang8@users.noreply.github.com###
+> &&&092510f3eb3f85592b6973858c2b9591dd78d692&&& - @@@[express-placement] additional clean-up for analytics and bugs (#1021)@@@###6529994+bhoang8@users.noreply.github.com###
+> &&&6e12ce047d1513a148456ede004ed4d89cedcec5&&& - @@@[codable] better supported for AnyEncodables (#1022)@@@###minho.kim@gmail.com###
+> &&&97021013d7873f399a911f87568f02f359f2c6bd&&& - @@@[analytics] Current production express placements are missing subscription_id in express_start.purchase tracking events (#1020)@@@###6529994+bhoang8@users.noreply.github.com###
+> &&&e10fb1f08c6e139099eb74109e6372cd45958440&&& - @@@[bug] Don't show express placement every cold start (#1019)@@@###6529994+bhoang8@users.noreply.github.com###
+> &&&70fbd7117720f22ddd118f60add4b55238663703&&& - @@@Syncing express params across checkout modules (#1016)@@@###johosher@gmail.com###
+> &&&853bfd88f304d16a9caf817c39dda4f057160b04&&& - @@@[bug fix] fix LossyCodableArray (#1017)@@@###mike.jablonski.online@gmail.com###
+> &&&036a288658f1b4a11ed1d649394d1e049eb7c4e6&&& - @@@[tests] fix order snapshots (#1018)@@@###mike.jablonski.online@gmail.com###
+> &&&23ac4d92a5a735dc31c64197eddedd856cc85fcc&&& - @@@Order status V2.5 (#988)@@@###minho.kim@gmail.com###
+> &&&18d8350f4dddbea42ba3acf752ad4325b8f13d9d&&& - @@@[search] consolidate searchBar cornerRadius to 4, increase autocomplete-v3 term height (#1011)@@@###minho.kim@gmail.com###
+> &&&ab9406d731c18e6500c82e865034e87fdf7986e1&&& - @@@[bug fix] minor bug fixes for cubs/pbi (#1010)@@@###minho.kim@gmail.com###
+> &&&f2a7e851e982e1d61a54dbea2f199e9d5d2404e8&&& - @@@Update all express placements to one screen (#975)@@@###6529994+bhoang8@users.noreply.github.com###
+> &&&b8a61e1fe83feabac08d3beda5237612e2d60d54&&& - @@@[carthage] move google places to internal carthage (#1008)@@@###minho.kim@gmail.com###
+> &&&29cd90a5eb4bbad531e098f673eefe43d45d44a5&&& - @@@[platform] background actions (#955)@@@###minho.kim@gmail.com###
+> &&&d157b78a5f440654ee243c676642466ff72912a6&&& - @@@[rollbar] update to v1.0.0 final (#1007)@@@###minho.kim@gmail.com###
+> &&&a7586919f6b096d884958e3386e535ecc986cd57&&& - @@@Autocomplete V3 (#1004)@@@###minho.kim@gmail.com###
+> &&&1c659ebb3dfde5b078894741a75eb0e3387656f2&&& - @@@[version] 6.13.0@@@###minho.kim@gmail.com###
 """

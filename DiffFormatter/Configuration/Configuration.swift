@@ -8,18 +8,24 @@
 
 import Foundation
 
-struct Configuration {
-    enum Component: String {
-        case users
-        case sectionInfos = "section_infos"
-        case footer
+struct Configuration: Codable {
+    let users: [User]
+    let sectionInfos: [SectionInfo]
+    let footer: String?
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+
+        users = (try? container.decode([User].self)) ?? []
+        sectionInfos = (try? container.decode([SectionInfo].self)) ?? []
+        footer = try? container.decode(String.self)
     }
 
-    let users: [User]
-
-    let sectionInfos: [SectionInfo]
-
-    let footer: String?
+    init(users: [User] = [], sectionInfos: [SectionInfo] = [], footer: String? = nil) {
+        self.users = users
+        self.sectionInfos = sectionInfos
+        self.footer = footer
+    }
 }
 
 extension Configuration {
@@ -55,7 +61,7 @@ extension Configuration {
 }
 
 extension Configuration {
-    static let empty: Configuration = .init(users: [], sectionInfos: [], footer: nil)
+    static let empty: Configuration = .init()
 
-    static let `default`: Configuration = .init(users: [], sectionInfos: .defaultSectionInfos, footer: nil)
+    static let `default`: Configuration = .init(sectionInfos: .default)
 }

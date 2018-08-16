@@ -10,7 +10,7 @@ import Foundation
 
 struct Configurator {
 
-    private static let configDirPathComponent: String = "/.diff_formatter/config/"
+    private static let configFilePathComponent: String = "/.diff_formatter/config.json"
 
     // Set defaults where possible
     private(set) var configuration: Configuration = .default
@@ -23,48 +23,38 @@ struct Configurator {
         }
 
         // Load initial config from home directory if available
-        if case let config = configuration(forPath: home), !config.isEmpty {
+        if let config = configuration(forPath: home), !config.isEmpty {
             configuration.update(with: config)
         }
 
         if let value = processInfo.environment["DIFF_FORMATTER_CONFIG"], !value.isEmpty {
             // Load config overrides from custom path if env var included
-            if case let config = configuration(forPath: value), !config.isEmpty {
+            if let config = configuration(forPath: value), !config.isEmpty {
                 configuration.update(with: config)
             }
         } else if case let value = fileManager.currentDirectoryPath, !value.isEmpty {
             // Load config overrides from current directory if available
-            if case let config = configuration(forPath: value), !config.isEmpty {
+            if let config = configuration(forPath: value), !config.isEmpty {
                 configuration.update(with: config)
             }
         }
     }
 
-    private func configuration(forPath path: String) -> Configuration {
-        guard !path.isEmpty else {
-            return .empty
+    private func configuration(forPath path: String) -> Configuration? {
+        let filePath = path + type(of: self).configFilePathComponent
+
+        guard let data = fileManager.contents(atPath: filePath) else {
+            return nil
         }
 
-        var users: [User] = []
-        var sectionInfos: [SectionInfo] = []
-        var footer: String?
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-        if let data = fileManager.contents(atPath: path + Configurator.pathComponent(for: .users)) {
-            users = .from(data: data)
+        do {
+            return try decoder.decode(Configuration.self, from: data)
+        } catch {
+            print("Error parsing configuration at path: \(filePath). \n\nError details: \n\(error)")
+            return nil
         }
-
-        if let data = fileManager.contents(atPath: path + Configurator.pathComponent(for: .sectionInfos)) {
-            sectionInfos = .from(data: data)
-        }
-
-        if let data = fileManager.contents(atPath: path + Configurator.pathComponent(for: .footer)) {
-            footer = String(data: data, encoding: .utf8)
-        }
-
-        return .init(users: users, sectionInfos: sectionInfos, footer: footer)
-    }
-
-    private static func pathComponent(for configurationComponent: Configuration.Component) -> String {
-        return configDirPathComponent + configurationComponent.rawValue
     }
 }

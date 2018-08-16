@@ -44,6 +44,6 @@ struct FindReplacePatternCreator {
     ]
 
     private var authorPatterns: [FindReplacePattern] {
-        return configuration.users.compactMap { FindReplacePattern(text: "###\($0.email)###", replacement: " \($0.formattedQuipName)") }
+        return configuration.users.compactMap { FindReplacePattern(text: "###\($0.email)###", replacement: " \($0.formattedQuipHandle)") }
     }
 }

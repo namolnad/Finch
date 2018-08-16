@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Section {
+struct Section: Codable {
     let info: SectionInfo
     var lines: [String]
 }

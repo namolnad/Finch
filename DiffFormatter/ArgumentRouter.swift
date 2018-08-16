@@ -8,8 +8,6 @@
 
 import Foundation
 
-let appName: String = "DiffFormatter"
-
 struct ArgumentRouter {
     private let configuration: Configuration
 

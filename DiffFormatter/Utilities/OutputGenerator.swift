@@ -24,14 +24,16 @@ struct OutputGenerator {
         let lines = type(of: self).primaryOutput(for: patternCreator.patterns, with: rawDiff)
             .components(separatedBy: "\n")
             .filter { !$0.isEmpty }
+            .compactMap(Line.init)
 
         var sections: [String: Section] = [:]
 
         let reversedSectionInfos = configuration.sectionInfos.reversed()
 
         lines.forEach { line in
-            if let sectionInfo = reversedSectionInfos.first(where: { $0.tags.contains("*") || $0.tags.contains(where: line.contains) }) {
-                sections[sectionInfo.title, default: Section(info: sectionInfo, lines: [])].lines.append(line)
+            if let sectionInfo = reversedSectionInfos.first(where: line.belongsTo) {
+                let defaultSection = Section(info: sectionInfo, lines: [])
+                sections[sectionInfo.title, default: defaultSection].lines.append(line.value)
             }
         }
 

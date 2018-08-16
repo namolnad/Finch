@@ -21,18 +21,16 @@ extension SectionInfo {
     static let defaultFeaturesInfo: SectionInfo = .init(title: "Features", tags: ["*"])
 
     static func from(line: String) -> SectionInfo? {
-        guard let titleMatch = matches(pattern: "%%%(.*)%%%", body: line).first, titleMatch.numberOfRanges > 1,
-            let titleRange = Range(titleMatch.range(at: 1), in: line) else {
+        guard let titleMatch = matches(pattern: "%%%(.*)%%%", body: line).first, titleMatch.numberOfRanges > 1 else {
                 return nil // TODO: - Throw and warn of misconfiguration
         }
-        guard let tagsMatch = matches(pattern: "&&&(.*)&&&", body: line).first, tagsMatch.numberOfRanges > 1,
-            let tagsRange = Range(tagsMatch.range(at: 1), in: line) else {
+        guard let tagsMatch = matches(pattern: "&&&(.*)&&&", body: line).first, tagsMatch.numberOfRanges > 1 else {
                 return nil // TODO: - Throw and warn of misconfiguration
         }
 
         return SectionInfo(
-            title: String(line[titleRange]),
-            tags: Set(String(line[tagsRange]).components(separatedBy: ","))
+            title: .init(range: titleMatch.range(at: 1), in: line),
+            tags: Set(String(range: tagsMatch.range(at: 1), in: line).components(separatedBy: ","))
         )
     }
 }

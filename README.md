@@ -1,39 +1,75 @@
 # DiffFormatter
 
-DiffFormatter is a configurable way to output version-to-version diffs for release documentation — (output specifically to Quip at the moment). The utility makes several assumptions about the desired format
+DiffFormatter is a configurable way to output version-to-version diffs for release documentation — (output specifically to Quip at the moment). The utility makes several assumptions about the desired format, and utilizes commit tag formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
+
+# Usage
+The first argument received must be a properly formatted git diff, using the following command: `git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_BRANCH...NEW_BRANCH`
+Additionally, a version (`--version`) and release manager (`--manager`) argument may be passed in. In many cases it may be easiest to create a new shell function when your shell startup files are sourced, such as the following:
+
+```
+format-version-diff() {
+  version_diff=$(git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short origin/releases/$1...origin/releases/$2)
+  DiffFormatter "$version_diff" --version=$2 --manager=$(git config --get user.email)
+}
+
+# used in the following manner:
+# format-version-diff 6.12.1 6.13.0
+```
 
 # Configuration Setup
 The following portions of DiffFormatter are configurable:
 - User list
-- Section Info title and corresponding tags
-- Footer
+- Section info (title and corresponding tags)
+- Footer (Appended to the end of the formatted diff as a simple string)
+
+To function properly, DiffFormatter requires a single configuration file with a users list at a bare minimum.
+
 ## Search paths & behavior
-DiffFormatter will start with a default configuration and will search several paths for configuration overrides. Whereever you want to locate your config files, you need to enclose them within a hidden folder system as shown here (home example shown): `$HOME/.diff_formatter/config/`
+DiffFormatter will start with a default configuration and will search several paths for configuration overrides. The expectations and behavior is as follows:
+
+### File Location
+Whether or not you provide a custom path, your config file needs to be placed in a hidden `.diff_formatter` directory. For instance, if you provide a custom path, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diff_formatter/config.json`. The same behavior is expected if you want to keep config files in your home or project directories.
 
 ### Search Paths behavior
-DiffFormatter will search 2 paths for configuration files. The behavior follows this order:
+DiffFormatter will search a total of 2 paths for custom configuration files in the following order:
 1. Home directory
 2. Path found at included DIFF_FORMATTER_CONFIG environment variable __OR__ DiffFormatter's current directory if the previous env var is not present
 
-*Note: For DIFF_FORMATTER_CONFIG, you should only include the path to the directory which contains your `.diff_formatter` directory. DiffFormatter will append the other expected path components*
+Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or non-existent config file components will be ignored. Configuration customization is not additive to the existing configuration.
 
 ## Configuration file formatting expectations
-All config files should be readable with no file extension. The following specific file formats are expected for each of their corresponding categories if custom configuration is desired:
-- User list
-  - File name: `users`
-  - Escape plus signs with a single backslash
-  - Newline separated list
-  - Each line should be formatted like the following (email, Quip username): `%%%jony.ive@apple.com%%%&&&Jony.Ive&&&`
-- Section Info
-  - File name: `section_infos`
-  - Newline separated list
-  - Each line should be formatted like the following (section title, comma-separated tags): `%%%Platform Improvements%%%&&&platform,dependencies,performance&&&`
+`config.json` should be a valid JSON file with the following format. Top level keys may be ommitted if a previous configuration has fully configured the setting as desired.
+
+```
+{
+  "users": [
+    {
+      "email": "jony.ive@apple.com",
+      "quip_handle": "Jony.Ive"
+    },
+    {
+
+      "email": "tony.stark\\+junke@gmail.com",
+      "quip_handle": "Tony.Stark"
+    }
+  ],
+  "section_infos": [
+    {
+      "title": "Features",
+      "tags": [
+        "feature",
+        "tag 2"
+      ]
+    }
+  ],
+  "footer": "Custom footer here"
+}
+```
+
+*Notes*
   - Sections should be listed in the order you want them to be displayed in the output
   - Sections will be parsed in reverse and each commit will be placed into the first matching section (including matching a wild card)
-
-- Footer
-  - File name: `footer`
-  - Any text included in this config file will be appended to the end of the formatted diff
+  - Email addresses with plus signs need the plus sign escaped with 2 backslashes
 
 # Example output
 ```

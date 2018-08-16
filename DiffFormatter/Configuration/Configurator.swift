@@ -9,7 +9,6 @@
 import Foundation
 
 struct Configurator {
-
     private static let configFilePathComponent: String = "/.diff_formatter/config.json"
 
     // Set defaults where possible

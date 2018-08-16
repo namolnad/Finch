@@ -9,12 +9,12 @@
 import Foundation
 
 struct SectionInfo: Hashable {
+    let title: String
+    let tags: Set<String>
+
     var hashValue: Int {
         return title.hashValue
     }
-
-    let title: String
-    let tags: Set<String>
 }
 
 extension SectionInfo {
@@ -46,6 +46,7 @@ extension Array where Element == SectionInfo {
         guard let string = String(data: data, encoding: .utf8) else {
             return []
         }
+
         return string
             .components(separatedBy: "\n")
             .compactMap(SectionInfo.from)

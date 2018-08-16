@@ -30,13 +30,13 @@ struct FindReplacePatternCreator {
         ("^(.*)(@@@(.*)@@@)(.*)(\n(.*)\\2(.*))+$", ""),
         ("^<(.*)$", ""),
         ("^(.*)@@@\\[version\\](.*)$", ""),
-        ]
+    ]
 
     private let formattingPatterns: [FindReplacePattern] = [
         ("\\[", "|"),
         ("\\]", "|"),
         ("^>", " -"),
-        ]
+    ]
 
     private let linkPatterns: [FindReplacePattern] = [
         ("&&&(.*)&&&(.*)@@@(.*)\\(#(.*)\\)@@@", "$3— [PR #$4](https://github.com/instacart/instacart-ios/pull/$4) —"),

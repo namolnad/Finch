@@ -29,6 +29,7 @@ struct Argument {
             // Unrecognized argument
             return nil
         }
+
         return (command, components[1])
     }
 }

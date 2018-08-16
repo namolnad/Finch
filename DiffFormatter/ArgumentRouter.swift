@@ -11,13 +11,14 @@ import Foundation
 let appName: String = "DiffFormatter"
 
 struct ArgumentRouter {
-
     private let configuration: Configuration
 
     init(configuration: Configuration) {
         self.configuration = configuration
     }
+}
 
+extension ArgumentRouter {
     func route(arguments: [String]) {
         var args = Array(arguments
             .filter { !$0.contains(appName) }

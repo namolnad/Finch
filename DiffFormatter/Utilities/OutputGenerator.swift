@@ -9,15 +9,13 @@
 import Foundation
 
 struct OutputGenerator {
-
     private let version: String?
-
     private let releaseManager: User?
-
     private let sections: [Section]
-
     private let footer: String?
+}
 
+extension OutputGenerator {
     init(configuration: Configuration, rawDiff: String, version: String?, releaseManager: User?) {
         let patternCreator = FindReplacePatternCreator(configuration: configuration)
 
@@ -72,9 +70,7 @@ struct OutputGenerator {
 
         """
 
-        return lines.reduce(output) {
-            return $0 + $1 + "\n"
-        }
+        return lines.reduce(output) { $0 + $1 + "\n" }
     }
 
     // Primary parsing

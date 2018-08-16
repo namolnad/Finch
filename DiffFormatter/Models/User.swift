@@ -38,6 +38,7 @@ extension Array where Element == User {
         guard let string = String(data: data, encoding: .utf8) else {
             return []
         }
+
         return string
             .components(separatedBy: "\n")
             .compactMap(User.from)

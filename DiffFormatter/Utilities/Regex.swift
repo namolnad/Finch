@@ -27,6 +27,7 @@ func matches(pattern: String, body: String) -> [NSTextCheckingResult] {
     guard let expression = try? NSRegularExpression(pattern: pattern, options: [.anchorsMatchLines]) else {
         return []
     }
+
     let range: NSRange = .init(location: 0, length: body.count)
     let options: NSRegularExpression.MatchingOptions = [.withTransparentBounds]
 

@@ -28,7 +28,7 @@ To function properly, DiffFormatter requires a single configuration file with a 
 DiffFormatter will start with a default configuration and will search several paths for configuration overrides. The expectations and behavior is as follows:
 
 ### File Location
-Whether or not you provide a custom path, your config file needs to be placed in a hidden `.diff_formatter` directory. For instance, if you provide a custom path, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diff_formatter/config.json`. The same behavior is expected if you want to keep config files in your home or project directories.
+Whether or not you provide a custom path, your config file needs to be placed in a hidden `.diff_formatter` directory. For instance, if you provide a custom path, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diff_formatter/config.json`. The same format is expected if you want to keep config files in your home or project directories.
 
 ### Search Paths behavior
 DiffFormatter will search a total of 2 paths for custom configuration files in the following order:
@@ -73,6 +73,8 @@ Any non-empty configuration variables included in the config file found in each 
 
 # Example output
 ```
+# 6.13.0
+
 ### Release Manager
 
  - @User.2

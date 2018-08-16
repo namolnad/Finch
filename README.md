@@ -21,6 +21,7 @@ DiffFormatter will search 2 paths for configuration files. The behavior follows 
 All config files should be readable with no file extension. The following specific file formats are expected for each of their corresponding categories if custom configuration is desired:
 - User list
   - File name: `users`
+  - Escape plus signs with a single backslash
   - Newline separated list
   - Each line should be formatted like the following (email, Quip username): `%%%jony.ive@apple.com%%%&&&Jony.Ive&&&`
 - Section Info

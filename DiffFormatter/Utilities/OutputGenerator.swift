@@ -22,7 +22,7 @@ extension OutputGenerator {
         let lines = type(of: self).primaryOutput(for: patternCreator.patterns, with: rawDiff)
             .components(separatedBy: "\n")
             .filter { !$0.isEmpty }
-            .compactMap(Line.init)
+            .compactMap { Line(configuration: configuration, value: $0) }
 
         var sections: [String: Section] = [:]
 

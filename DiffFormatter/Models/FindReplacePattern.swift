@@ -26,17 +26,26 @@ struct FindReplacePatternCreator {
         self.configuration = configuration
     }
 
-    private let exclusionPatterns: [FindReplacePattern] = [
-        ("^(.*)(@@@(.*)@@@)(.*)(\n(.*)\\2(.*))+$", ""),
-        ("^<(.*)$", ""),
-        ("^(.*)@@@\\[version\\](.*)$", ""),
-    ]
+    private var exclusionPatterns: [FindReplacePattern] {
+        let inputDelimiters = configuration.delimiterConfig.input
 
-    private let formattingPatterns: [FindReplacePattern] = [
-        ("\\[", "|"),
-        ("\\]", "|"),
-        ("^>", " -"),
-    ]
+        return [
+            ("^(.*)(@@@(.*)@@@)(.*)(\n(.*)\\2(.*))+$", ""),
+            ("^<(.*)$", ""),
+            ("^(.*)@@@\(inputDelimiters.left.escaped)version\(inputDelimiters.right.escaped)(.*)$", ""),
+        ]
+    }
+
+    private var formattingPatterns: [FindReplacePattern] {
+        let inputDelimiters = configuration.delimiterConfig.input
+        let outputDelimiters = configuration.delimiterConfig.output
+
+        return [
+            (inputDelimiters.left.escaped, outputDelimiters.left.escaped),
+            (inputDelimiters.right.escaped, outputDelimiters.right.escaped),
+            ("^>", " -"),
+        ]
+    }
 
     private let linkPatterns: [FindReplacePattern] = [
         ("&&&(.*)&&&(.*)@@@(.*)\\(#(.*)\\)@@@", "$3— [PR #$4](https://github.com/instacart/instacart-ios/pull/$4) —"),

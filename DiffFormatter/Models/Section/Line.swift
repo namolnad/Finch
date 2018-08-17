@@ -12,10 +12,11 @@ struct Line {
     let tags: Set<String>
     let value: String
 
-    init(value: String) {
+    init(configuration: Configuration, value: String) {
         self.value = value
+        let outputDelimiters = configuration.delimiterConfig.output
         self.tags = Set(
-            matches(pattern: "\\|([^\\|]*)\\|", body: value).compactMap {
+            matches(pattern: "\(outputDelimiters.left.escaped)([^\(outputDelimiters.left.escaped)\(outputDelimiters.right.escaped)]*)\(outputDelimiters.right.escaped)", body: value).compactMap {
                 guard $0.numberOfRanges > 0 else {
                     return nil
                 }

@@ -9,17 +9,19 @@
 import Foundation
 
 struct Configuration: Codable {
-    let usersConfig: UsersConfiguration
-    let delimiterConfig: DelimiterConfiguration
-    let sectionInfos: [SectionInfo]
-    let footer: String?
     var users: [User] {
         return usersConfig.users
     }
 
-    var userHandlePrefix: String? {
-        return usersConfig.userHandlePrefix
+    var userHandlePrefix: String {
+        return usersConfig.userHandlePrefix ?? ""
     }
+
+    let delimiterConfig: DelimiterConfiguration
+    let sectionInfos: [SectionInfo]
+    let footer: String?
+
+    private let usersConfig: UsersConfiguration
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -79,7 +81,7 @@ extension Configuration {
             outputDelimiters = otherConfig.delimiterConfig.output
         }
 
-        if let value = otherConfig.userHandlePrefix {
+        if let value = otherConfig.usersConfig.userHandlePrefix {
             userHandlePrefix = value
         }
 

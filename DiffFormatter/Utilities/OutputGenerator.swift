@@ -40,7 +40,7 @@ extension OutputGenerator {
         self.releaseManager = releaseManager
         self.sections = configuration.sectionInfos.compactMap { sections[$0.title] }
         self.footer = configuration.footer
-        self.userHandlePrefix = configuration.userHandlePrefix ?? ""
+        self.userHandlePrefix = configuration.userHandlePrefix
     }
 
     func generatedOutput() -> String {

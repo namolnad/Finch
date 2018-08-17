@@ -98,7 +98,7 @@ extension OutputGenerator {
 
         ### Release Manager
 
-         - \(releaseManager.formattedQuipHandle)
+         - \(releaseManager.formattedUserHandle)
 
         """
     }

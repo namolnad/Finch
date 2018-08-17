@@ -2,15 +2,15 @@
     "users": [
               {
               "email": "jony.ive@apple.com",
-              "quip_handle": "Jony.Ive"
+              "user_handle": "Jony.Ive"
               },
               {
               "email": "long_live_the_citadel@rick.com",
-              "quip_handle": "Rick.Sanchez"
+              "user_handle": "Rick.Sanchez"
               },
               {
               "email": "elvis1935+still-alive@theking.com",
-              "quip_handle": "Elvis.Presley"
+              "user_handle": "Elvis.Presley"
               }
               ],
     "section_infos": [

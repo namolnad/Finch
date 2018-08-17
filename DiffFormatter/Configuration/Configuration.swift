@@ -46,7 +46,8 @@ extension Configuration {
             sectionInfos.isEmpty &&
             (footer?.isEmpty == true) &&
             delimiterConfig.input.isEmpty &&
-            delimiterConfig.output.isEmpty
+            delimiterConfig.output.isEmpty &&
+            userHandlePrefix.isEmpty
     }
 
     mutating func update(with otherConfig: Configuration) {

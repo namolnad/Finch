@@ -12,6 +12,7 @@ struct Configuration: Codable {
     let users: [User]
     let sectionInfos: [SectionInfo]
     let footer: String?
+    let delimiterConfig: DelimiterConfiguration = .default
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

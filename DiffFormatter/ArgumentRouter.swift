@@ -17,13 +17,14 @@ struct ArgumentRouter {
 }
 
 extension ArgumentRouter {
-    func route(arguments: [String]) {
+    @discardableResult
+    func route(arguments: [String]) -> Bool {
         var args = Array(arguments
             .filter { !$0.contains(appName) }
             .reversed())
 
         guard let primaryArg = args.popLast() else {
-            return
+            return false
         }
 
         let commandValues = args.compactMap(Argument.commands)
@@ -44,6 +45,8 @@ extension ArgumentRouter {
         )
 
         output(generator: outputGenerator)
+
+        return true
     }
 
     private func output(generator: OutputGenerator) {

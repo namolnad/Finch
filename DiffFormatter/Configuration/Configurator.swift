@@ -11,12 +11,14 @@ import Foundation
 struct Configurator {
     private static let configFilePathComponent: String = "/.diff_formatter/config.json"
 
-    // Set defaults where possible
+    // Start with default configuration
     private(set) var configuration: Configuration = .default
 
-    private let fileManager: FileManager = .default
+    private let fileManager: FileManager
 
-    init(processInfo: ProcessInfo) {
+    init(processInfo: ProcessInfo, fileManager: FileManager = .default) {
+        self.fileManager = fileManager
+
         guard case let home = fileManager.homeDirectoryForCurrentUser.path, !home.isEmpty else {
             return
         }

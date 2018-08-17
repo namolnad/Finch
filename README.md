@@ -1,6 +1,6 @@
 # DiffFormatter
 
-DiffFormatter is a configurable way to output version-to-version diffs for release documentation — (output specifically to Quip at the moment). The utility makes several assumptions about the desired format, and utilizes commit tag formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
+DiffFormatter is a configurable way to output version-to-version diffs for Markdown-formatted release documentation. The utility makes several assumptions about the desired format, and utilizes commit tag formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
 
 # Usage
 The first argument received must be a properly formatted git diff, using the following command: `git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_BRANCH...NEW_BRANCH`
@@ -19,10 +19,12 @@ format-version-diff() {
 # Configuration Setup
 The following portions of DiffFormatter are configurable:
 - User list
+- User handle prefix
 - Section info (title and corresponding tags)
+- Tag input and output delimiters
 - Footer (Appended to the end of the formatted diff as a simple string)
 
-To function properly, DiffFormatter requires a single configuration file with a users list at a bare minimum.
+To function properly, DiffFormatter requires a users list at a bare minimum.
 
 ## Search paths & behavior
 DiffFormatter will start with a default configuration and will search several paths for configuration overrides. The expectations and behavior is as follows:
@@ -42,17 +44,20 @@ Any non-empty configuration variables included in the config file found in each 
 
 ```
 {
-  "users": [
-    {
-      "email": "jony.ive@apple.com",
-      "quip_handle": "Jony.Ive"
-    },
-    {
+  "users_config": {
+    "users": [
+      {
+        "email": "jony.ive@apple.com",
+        "quip_handle": "Jony.Ive"
+      },
+      {
 
-      "email": "tony.stark+junk@gmail.com",
-      "quip_handle": "Tony.Stark"
-    }
-  ],
+        "email": "tony.stark+junk@gmail.com",
+        "quip_handle": "Tony.Stark"
+      }
+    ],
+    "userHandlePrefix": "%"
+  }
   "section_infos": [
     {
       "title": "Features",
@@ -62,7 +67,13 @@ Any non-empty configuration variables included in the config file found in each 
       ]
     }
   ],
-  "footer": "Custom footer here"
+  "footer": "Custom footer here",
+  "delimiter_config": {
+    "output": {
+        "left": "**❲**",
+        "right": "**❳**"
+    }
+  }
 }
 ```
 

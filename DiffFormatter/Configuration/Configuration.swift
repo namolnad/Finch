@@ -9,22 +9,29 @@
 import Foundation
 
 struct Configuration: Codable {
-    let users: [User]
+    let usersConfig: UsersConfiguration
+    let delimiterConfig: DelimiterConfiguration
     let sectionInfos: [SectionInfo]
     let footer: String?
-    let delimiterConfig: DelimiterConfiguration
+    var users: [User] {
+        return usersConfig.users
+    }
+
+    var userHandlePrefix: String? {
+        return usersConfig.userHandlePrefix
+    }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        users = (try? container.decode([User].self, forKey: .users)) ?? []
+        usersConfig = (try? container.decode(UsersConfiguration.self, forKey: .usersConfig)) ?? .empty
         sectionInfos = (try? container.decode([SectionInfo].self, forKey: .sectionInfos)) ?? []
         footer = try? container.decode(String.self, forKey: .footer)
         delimiterConfig = (try? container.decode(DelimiterConfiguration.self, forKey: .delimiterConfig)) ?? .empty
     }
 
-    init(users: [User] = [], sectionInfos: [SectionInfo] = [], footer: String? = nil, delimiterConfig: DelimiterConfiguration = .empty) {
-        self.users = users
+    init(usersConfig: UsersConfiguration = .empty, sectionInfos: [SectionInfo] = [], footer: String? = nil, delimiterConfig: DelimiterConfiguration = .empty) {
+        self.usersConfig = usersConfig
         self.sectionInfos = sectionInfos
         self.footer = footer
         self.delimiterConfig = delimiterConfig
@@ -46,6 +53,7 @@ extension Configuration {
 
     func modifiedConfig(withNonEmptyComponentsFrom otherConfig: Configuration) -> Configuration {
         var users: [User] = self.users
+        var userHandlePrefix = self.userHandlePrefix
         var sectionInfos: [SectionInfo] = self.sectionInfos
         var footer: String? = self.footer
         var inputDelimiters: DelimiterPair = delimiterConfig.input
@@ -71,12 +79,16 @@ extension Configuration {
             outputDelimiters = otherConfig.delimiterConfig.output
         }
 
-        return .init(users: users, sectionInfos: sectionInfos, footer: footer, delimiterConfig: .init(input: inputDelimiters, output: outputDelimiters))
+        if let value = otherConfig.userHandlePrefix {
+            userHandlePrefix = value
+        }
+
+        return .init(usersConfig: .init(users: users, userHandlePrefix: userHandlePrefix), sectionInfos: sectionInfos, footer: footer, delimiterConfig: .init(input: inputDelimiters, output: outputDelimiters))
     }
 }
 
 extension Configuration {
     static let empty: Configuration = .init()
 
-    static let `default`: Configuration = .init(sectionInfos: .default, delimiterConfig: .default)
+    static let `default`: Configuration = .init(usersConfig: .default,sectionInfos: .default, delimiterConfig: .default)
 }

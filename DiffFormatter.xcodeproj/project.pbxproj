@@ -47,6 +47,8 @@
 		22FAE6A32127492F0097A0A5 /* DelimiterConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE6A22127492F0097A0A5 /* DelimiterConfiguration.swift */; };
 		22FAE6A4212749C30097A0A5 /* DelimiterConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE6A22127492F0097A0A5 /* DelimiterConfiguration.swift */; };
 		22FAE6A621274F4C0097A0A5 /* custom_delimiter_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE6A521274F4C0097A0A5 /* custom_delimiter_config.json */; };
+		22FAE6A821277DC60097A0A5 /* UsersConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE6A721277DC60097A0A5 /* UsersConfiguration.swift */; };
+		22FAE6A921277F330097A0A5 /* UsersConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE6A721277DC60097A0A5 /* UsersConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,6 +90,7 @@
 		22FAE69F2127450D0097A0A5 /* DelimiterPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelimiterPair.swift; sourceTree = "<group>"; };
 		22FAE6A22127492F0097A0A5 /* DelimiterConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelimiterConfiguration.swift; sourceTree = "<group>"; };
 		22FAE6A521274F4C0097A0A5 /* custom_delimiter_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = custom_delimiter_config.json; sourceTree = "<group>"; };
+		22FAE6A721277DC60097A0A5 /* UsersConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,7 @@
 				2264334C2123DC9700B46082 /* Configurator.swift */,
 				2264334E2123DD3100B46082 /* Configuration.swift */,
 				22FAE6A22127492F0097A0A5 /* DelimiterConfiguration.swift */,
+				22FAE6A721277DC60097A0A5 /* UsersConfiguration.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -313,6 +317,7 @@
 				226433692126425000B46082 /* InputMock.swift in Sources */,
 				2264336E212643C200B46082 /* SectionInfo.swift in Sources */,
 				2264336D212643BF00B46082 /* Section.swift in Sources */,
+				22FAE6A921277F330097A0A5 /* UsersConfiguration.swift in Sources */,
 				22643370212643C800B46082 /* Command.swift in Sources */,
 				22FAE692212718660097A0A5 /* ProcessInfoMock.swift in Sources */,
 				22643372212643CD00B46082 /* FindReplacePattern.swift in Sources */,
@@ -343,6 +348,7 @@
 				22AACD6520EEAAE200806FF3 /* Regex.swift in Sources */,
 				22AACD7320EF30A100806FF3 /* Command.swift in Sources */,
 				22AACD6720EED11200806FF3 /* FindReplacePattern.swift in Sources */,
+				22FAE6A821277DC60097A0A5 /* UsersConfiguration.swift in Sources */,
 				22AACD6D20EEE33500806FF3 /* ArgumentRouter.swift in Sources */,
 				22AACD7520EF30B400806FF3 /* Argument.swift in Sources */,
 				2264335A2125037E00B46082 /* Line.swift in Sources */,

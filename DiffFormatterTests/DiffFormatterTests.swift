@@ -16,8 +16,10 @@ class DiffFormatterTests: XCTestCase {
         let users = configurator.configuration.users
         XCTAssertEqual(users.count, 3)
         XCTAssertEqual(users[1].email, "long_live_the_citadel@rick.com")
-        XCTAssertEqual(users[2].formattedUserHandle, "@Elvis.Presley")
+        XCTAssertEqual(users[2].userHandle, "Elvis.Presley")
         XCTAssertEqual(users[2].email, "elvis1935+still-alive@theking.com")
+
+        XCTAssertEqual(configurator.configuration.userHandlePrefix, "@")
 
         let sectionInfos = configurator.configuration.sectionInfos
         XCTAssertEqual(sectionInfos.count, 3)

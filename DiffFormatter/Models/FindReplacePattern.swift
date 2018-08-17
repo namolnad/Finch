@@ -53,6 +53,7 @@ struct FindReplacePatternCreator {
     ]
 
     private var authorPatterns: [FindReplacePattern] {
-        return configuration.users.compactMap { FindReplacePattern(text: "###\($0.email.escaped)###", replacement: " \($0.formattedUserHandle.escaped)") }
+        let prefix = (configuration.userHandlePrefix ?? "").escaped
+        return configuration.users.compactMap { FindReplacePattern(text: "###\($0.email.escaped)###", replacement: " \(prefix)\($0.userHandle.escaped)") }
     }
 }

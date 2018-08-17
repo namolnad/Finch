@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct DelimiterPair: Codable {
+struct DelimiterPair: Codable, Equatable {
     let left: String
     let right: String
 }
@@ -16,4 +16,10 @@ struct DelimiterPair: Codable {
 extension DelimiterPair {
     static let defaultInput: DelimiterPair = .init(left: "[", right: "]")
     static let defaultOutput: DelimiterPair = .init(left: "|", right: "|")
+    static let empty: DelimiterPair = .init(left: "", right: "")
+
+    var isEmpty: Bool {
+        return left.isEmpty ||
+        right.isEmpty
+    }
 }

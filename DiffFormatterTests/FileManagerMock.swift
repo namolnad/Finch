@@ -25,13 +25,15 @@ final class FileManagerMock: FileManager {
     }
 
     override func contents(atPath path: String) -> Data? {
-        switch path.components(separatedBy: "/").first! {
+        let firstPathComponent = path.components(separatedBy: "/").first!
+
+        switch firstPathComponent {
         case currentDirectoryPath:
             return nil
         case homeDirectoryForCurrentUser.path:
             return data(for: "default_config")
         case customConfigPath:
-            fatalError()
+            return data(for: firstPathComponent)
         default:
             fatalError()
         }

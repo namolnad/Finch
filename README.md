@@ -49,7 +49,7 @@ Any non-empty configuration variables included in the config file found in each 
     },
     {
 
-      "email": "tony.stark\\+junke@gmail.com",
+      "email": "tony.stark+junk@gmail.com",
       "quip_handle": "Tony.Stark"
     }
   ],
@@ -69,7 +69,6 @@ Any non-empty configuration variables included in the config file found in each 
 *Notes*
   - Sections should be listed in the order you want them to be displayed in the output
   - Sections will be parsed in reverse and each commit will be placed into the first matching section (including matching a wild card)
-  - Email addresses with plus signs need the plus sign escaped with 2 backslashes
 
 # Example output
 ```

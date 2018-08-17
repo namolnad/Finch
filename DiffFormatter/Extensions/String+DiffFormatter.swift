@@ -32,4 +32,8 @@ extension String {
 
         self.init(body[range])
     }
+
+    var escaped: String {
+        return NSRegularExpression.escapedPattern(for: self)
+    }
 }

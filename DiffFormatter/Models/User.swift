@@ -10,9 +10,9 @@ import Foundation
 
 struct User: Codable {
     let email: String
-    private let quipHandle: String
+    private let userHandle: String
 
-    var formattedQuipHandle: String {
-        return "@" + quipHandle
+    var formattedUserHandle: String {
+        return "@" + userHandle
     }
 }

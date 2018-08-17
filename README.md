@@ -4,12 +4,12 @@ DiffFormatter is a configurable way to output version-to-version diffs for relea
 
 # Usage
 The first argument received must be a properly formatted git diff, using the following command: `git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_BRANCH...NEW_BRANCH`
-Additionally, a version (`--version`) and release manager (`--manager`) argument may be passed in. In many cases it may be easiest to create a new shell function when your shell startup files are sourced, such as the following:
+Additionally, a version (`--version`) and release manager (`--release-manager`) argument may be passed in. In many cases it may be easiest to create a new shell function when your shell startup files are sourced, such as the following:
 
 ```
 format-version-diff() {
   version_diff=$(git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short origin/releases/$1...origin/releases/$2)
-  DiffFormatter "$version_diff" --version=$2 --manager=$(git config --get user.email)
+  DiffFormatter "$version_diff" --version=$2 --release-manager=$(git config --get user.email)
 }
 
 # used in the following manner:

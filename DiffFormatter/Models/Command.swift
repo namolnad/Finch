@@ -12,5 +12,5 @@ typealias CommandValue = (command: Command, value: String)
 
 enum Command: String {
     case version
-    case releaseManager = "manager"
+    case releaseManager = "release-manager"
 }

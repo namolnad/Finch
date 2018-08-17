@@ -13,6 +13,7 @@ struct OutputGenerator {
     private let releaseManager: User?
     private let sections: [Section]
     private let footer: String?
+    private let userHandlePrefix: String
 }
 
 extension OutputGenerator {
@@ -39,6 +40,7 @@ extension OutputGenerator {
         self.releaseManager = releaseManager
         self.sections = configuration.sectionInfos.compactMap { sections[$0.title] }
         self.footer = configuration.footer
+        self.userHandlePrefix = configuration.userHandlePrefix ?? ""
     }
 
     func generatedOutput() -> String {
@@ -98,7 +100,7 @@ extension OutputGenerator {
 
         ### Release Manager
 
-         - \(releaseManager.formattedUserHandle)
+         - \(userHandlePrefix)\(releaseManager.userHandle)
 
         """
     }

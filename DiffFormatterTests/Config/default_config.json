@@ -1,18 +1,21 @@
 {
-    "users": [
-              {
-              "email": "jony.ive@apple.com",
-              "user_handle": "Jony.Ive"
-              },
-              {
-              "email": "long_live_the_citadel@rick.com",
-              "user_handle": "Rick.Sanchez"
-              },
-              {
-              "email": "elvis1935+still-alive@theking.com",
-              "user_handle": "Elvis.Presley"
-              }
-              ],
+    "users_config": {
+        "users": [
+         {
+         "email": "jony.ive@apple.com",
+         "user_handle": "Jony.Ive"
+         },
+         {
+         "email": "long_live_the_citadel@rick.com",
+         "user_handle": "Rick.Sanchez"
+         },
+         {
+         "email": "elvis1935+still-alive@theking.com",
+         "user_handle": "Elvis.Presley"
+         }
+         ],
+        "userHandlePrefix": "@"
+    },
     "section_infos": [
                       {
                       "title": "Features",

@@ -14,7 +14,7 @@
 		2264335421240C0C00B46082 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264335321240C0C00B46082 /* Section.swift */; };
 		2264335A2125037E00B46082 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226433592125037E00B46082 /* Line.swift */; };
 		226433622126421100B46082 /* DiffFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226433612126421100B46082 /* DiffFormatterTests.swift */; };
-		226433692126425000B46082 /* TestInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6E20EF15C000806FF3 /* TestInput.swift */; };
+		226433692126425000B46082 /* InputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6E20EF15C000806FF3 /* InputMock.swift */; };
 		2264336A2126438500B46082 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264334E2123DD3100B46082 /* Configuration.swift */; };
 		2264336B212643A600B46082 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7020EF24CC00806FF3 /* User.swift */; };
 		2264336C212643B400B46082 /* ArgumentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6C20EEE33500806FF3 /* ArgumentRouter.swift */; };
@@ -39,6 +39,9 @@
 		22AACD7120EF24CC00806FF3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7020EF24CC00806FF3 /* User.swift */; };
 		22AACD7320EF30A100806FF3 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7220EF30A100806FF3 /* Command.swift */; };
 		22AACD7520EF30B400806FF3 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7420EF30B400806FF3 /* Argument.swift */; };
+		22FAE692212718660097A0A5 /* ProcessInfoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE691212718660097A0A5 /* ProcessInfoMock.swift */; };
+		22FAE69421271B4E0097A0A5 /* FileManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE69321271B4E0097A0A5 /* FileManagerMock.swift */; };
+		22FAE69B21272AD60097A0A5 /* default_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE69A21272AD60097A0A5 /* default_config.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,10 +73,13 @@
 		22AACD6820EED11800806FF3 /* Pasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pasteboard.swift; sourceTree = "<group>"; };
 		22AACD6A20EED12500806FF3 /* OutputGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputGenerator.swift; sourceTree = "<group>"; };
 		22AACD6C20EEE33500806FF3 /* ArgumentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentRouter.swift; sourceTree = "<group>"; };
-		22AACD6E20EF15C000806FF3 /* TestInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInput.swift; sourceTree = "<group>"; };
+		22AACD6E20EF15C000806FF3 /* InputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMock.swift; sourceTree = "<group>"; };
 		22AACD7020EF24CC00806FF3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		22AACD7220EF30A100806FF3 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		22AACD7420EF30B400806FF3 /* Argument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Argument.swift; sourceTree = "<group>"; };
+		22FAE691212718660097A0A5 /* ProcessInfoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessInfoMock.swift; sourceTree = "<group>"; };
+		22FAE69321271B4E0097A0A5 /* FileManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerMock.swift; sourceTree = "<group>"; };
+		22FAE69A21272AD60097A0A5 /* default_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = default_config.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,9 +152,12 @@
 		226433602126421100B46082 /* DiffFormatterTests */ = {
 			isa = PBXGroup;
 			children = (
-				22AACD6E20EF15C000806FF3 /* TestInput.swift */,
+				22FAE69521271DE00097A0A5 /* Config */,
 				226433612126421100B46082 /* DiffFormatterTests.swift */,
 				226433632126421100B46082 /* Info.plist */,
+				22AACD6E20EF15C000806FF3 /* InputMock.swift */,
+				22FAE691212718660097A0A5 /* ProcessInfoMock.swift */,
+				22FAE69321271B4E0097A0A5 /* FileManagerMock.swift */,
 			);
 			path = DiffFormatterTests;
 			sourceTree = "<group>";
@@ -182,6 +191,14 @@
 				226433582124A3F400B46082 /* Extensions */,
 			);
 			path = DiffFormatter;
+			sourceTree = "<group>";
+		};
+		22FAE69521271DE00097A0A5 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				22FAE69A21272AD60097A0A5 /* default_config.json */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22FAE69B21272AD60097A0A5 /* default_config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,15 +297,17 @@
 				22643375212643D200B46082 /* Regex.swift in Sources */,
 				22643377212643D800B46082 /* String+DiffFormatter.swift in Sources */,
 				22643374212643D200B46082 /* Pasteboard.swift in Sources */,
-				226433692126425000B46082 /* TestInput.swift in Sources */,
+				226433692126425000B46082 /* InputMock.swift in Sources */,
 				2264336E212643C200B46082 /* SectionInfo.swift in Sources */,
 				2264336D212643BF00B46082 /* Section.swift in Sources */,
 				22643370212643C800B46082 /* Command.swift in Sources */,
+				22FAE692212718660097A0A5 /* ProcessInfoMock.swift in Sources */,
 				22643372212643CD00B46082 /* FindReplacePattern.swift in Sources */,
 				2264336F212643C500B46082 /* Line.swift in Sources */,
 				226433622126421100B46082 /* DiffFormatterTests.swift in Sources */,
 				22643371212643CA00B46082 /* Argument.swift in Sources */,
 				22643376212643D500B46082 /* Configurator.swift in Sources */,
+				22FAE69421271B4E0097A0A5 /* FileManagerMock.swift in Sources */,
 				2264336C212643B400B46082 /* ArgumentRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

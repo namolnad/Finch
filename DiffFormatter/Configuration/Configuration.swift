@@ -14,11 +14,11 @@ struct Configuration: Codable {
     let footer: String?
 
     init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        users = (try? container.decode([User].self)) ?? []
-        sectionInfos = (try? container.decode([SectionInfo].self)) ?? []
-        footer = try? container.decode(String.self)
+        users = (try? container.decode([User].self, forKey: .users)) ?? []
+        sectionInfos = (try? container.decode([SectionInfo].self, forKey: .sectionInfos)) ?? []
+        footer = try? container.decode(String.self, forKey: .footer)
     }
 
     init(users: [User] = [], sectionInfos: [SectionInfo] = [], footer: String? = nil) {

@@ -57,7 +57,7 @@ Any non-empty configuration variables included in the config file found in each 
       }
     ],
     "userHandlePrefix": "%"
-  }
+  },
   "section_infos": [
     {
       "title": "Features",

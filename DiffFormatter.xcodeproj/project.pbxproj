@@ -42,10 +42,11 @@
 		22FAE692212718660097A0A5 /* ProcessInfoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE691212718660097A0A5 /* ProcessInfoMock.swift */; };
 		22FAE69421271B4E0097A0A5 /* FileManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE69321271B4E0097A0A5 /* FileManagerMock.swift */; };
 		22FAE69B21272AD60097A0A5 /* default_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE69A21272AD60097A0A5 /* default_config.json */; };
-		22FAE69D212740080097A0A5 /* DelimiterConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE69C212740080097A0A5 /* DelimiterConfiguration.swift */; };
-		22FAE69E2127400C0097A0A5 /* DelimiterConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE69C212740080097A0A5 /* DelimiterConfiguration.swift */; };
 		22FAE6A02127450D0097A0A5 /* DelimiterPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE69F2127450D0097A0A5 /* DelimiterPair.swift */; };
 		22FAE6A1212745FE0097A0A5 /* DelimiterPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE69F2127450D0097A0A5 /* DelimiterPair.swift */; };
+		22FAE6A32127492F0097A0A5 /* DelimiterConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE6A22127492F0097A0A5 /* DelimiterConfiguration.swift */; };
+		22FAE6A4212749C30097A0A5 /* DelimiterConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE6A22127492F0097A0A5 /* DelimiterConfiguration.swift */; };
+		22FAE6A621274F4C0097A0A5 /* custom_delimiter_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE6A521274F4C0097A0A5 /* custom_delimiter_config.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,8 +85,9 @@
 		22FAE691212718660097A0A5 /* ProcessInfoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessInfoMock.swift; sourceTree = "<group>"; };
 		22FAE69321271B4E0097A0A5 /* FileManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerMock.swift; sourceTree = "<group>"; };
 		22FAE69A21272AD60097A0A5 /* default_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = default_config.json; sourceTree = "<group>"; };
-		22FAE69C212740080097A0A5 /* DelimiterConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelimiterConfiguration.swift; sourceTree = "<group>"; };
 		22FAE69F2127450D0097A0A5 /* DelimiterPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelimiterPair.swift; sourceTree = "<group>"; };
+		22FAE6A22127492F0097A0A5 /* DelimiterConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelimiterConfiguration.swift; sourceTree = "<group>"; };
+		22FAE6A521274F4C0097A0A5 /* custom_delimiter_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = custom_delimiter_config.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +123,7 @@
 			children = (
 				2264334C2123DC9700B46082 /* Configurator.swift */,
 				2264334E2123DD3100B46082 /* Configuration.swift */,
-				22FAE69C212740080097A0A5 /* DelimiterConfiguration.swift */,
+				22FAE6A22127492F0097A0A5 /* DelimiterConfiguration.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				22FAE69A21272AD60097A0A5 /* default_config.json */,
+				22FAE6A521274F4C0097A0A5 /* custom_delimiter_config.json */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22FAE6A621274F4C0097A0A5 /* custom_delimiter_config.json in Resources */,
 				22FAE69B21272AD60097A0A5 /* default_config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,7 +305,6 @@
 				22643373212643D200B46082 /* OutputGenerator.swift in Sources */,
 				22FAE6A1212745FE0097A0A5 /* DelimiterPair.swift in Sources */,
 				2264336B212643A600B46082 /* User.swift in Sources */,
-				22FAE69E2127400C0097A0A5 /* DelimiterConfiguration.swift in Sources */,
 				22643378212643DC00B46082 /* main.swift in Sources */,
 				2264336A2126438500B46082 /* Configuration.swift in Sources */,
 				22643375212643D200B46082 /* Regex.swift in Sources */,
@@ -315,6 +318,7 @@
 				22643372212643CD00B46082 /* FindReplacePattern.swift in Sources */,
 				2264336F212643C500B46082 /* Line.swift in Sources */,
 				226433622126421100B46082 /* DiffFormatterTests.swift in Sources */,
+				22FAE6A4212749C30097A0A5 /* DelimiterConfiguration.swift in Sources */,
 				22643371212643CA00B46082 /* Argument.swift in Sources */,
 				22643376212643D500B46082 /* Configurator.swift in Sources */,
 				22FAE69421271B4E0097A0A5 /* FileManagerMock.swift in Sources */,
@@ -328,6 +332,7 @@
 			files = (
 				22FAE6A02127450D0097A0A5 /* DelimiterPair.swift in Sources */,
 				2264335421240C0C00B46082 /* Section.swift in Sources */,
+				22FAE6A32127492F0097A0A5 /* DelimiterConfiguration.swift in Sources */,
 				226433522123E0BD00B46082 /* SectionInfo.swift in Sources */,
 				22AACD7120EF24CC00806FF3 /* User.swift in Sources */,
 				22AACD6B20EED12500806FF3 /* OutputGenerator.swift in Sources */,
@@ -341,7 +346,6 @@
 				22AACD6D20EEE33500806FF3 /* ArgumentRouter.swift in Sources */,
 				22AACD7520EF30B400806FF3 /* Argument.swift in Sources */,
 				2264335A2125037E00B46082 /* Line.swift in Sources */,
-				22FAE69D212740080097A0A5 /* DelimiterConfiguration.swift in Sources */,
 				2264334D2123DC9700B46082 /* Configurator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,8 +14,13 @@ struct Line {
 
     init(configuration: Configuration, value: String) {
         self.value = value
-        let outputDelimiters = configuration.delimiterConfig.output
-        self.tags = matches(pattern: "\(outputDelimiters.left.escaped)([^\(outputDelimiters.left.escaped)\(outputDelimiters.right.escaped)]*)\(outputDelimiters.right.escaped)", body: value).compactMap {
+
+        let leftDelim = configuration.delimiterConfig.output.left.escaped
+        let rightDelim = configuration.delimiterConfig.output.right.escaped
+
+        let pattern = "\(leftDelim)([^\(leftDelim)\(rightDelim)]*)\(rightDelim)"
+
+        self.tags = matches(pattern: pattern, body: value).compactMap {
             guard $0.numberOfRanges > 0 else {
                 return nil
             }
@@ -25,14 +30,6 @@ struct Line {
 }
 
 extension Line {
-    func belongsTo(sectionInfo: SectionInfo) -> Bool {
-        guard !sectionInfo.tags.contains("*") else {
-            return true
-        }
-
-        return tags.first(where: sectionInfo.tags.contains) != nil
-    }
-
     func placeInOwningSection(tagToSectionInfo: [String: SectionInfo], titleToSection: inout [String: Section]) {
         for tag in tags {
             if let sectionInfo = tagToSectionInfo[tag] {

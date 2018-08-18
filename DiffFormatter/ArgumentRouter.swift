@@ -37,9 +37,7 @@ extension ArgumentRouter {
 
         let commandValues = args.compactMap(Argument.commands)
 
-        let versionHeader = commandValues
-            .first { $0.command == .version }?
-            .value
+        let versionHeader: String? = args.contains("--\(Command.noShowVersion.rawValue)") ? nil : newVersion
 
         let releaseManager = commandValues
             .first { $0.command == .releaseManager }
@@ -56,8 +54,6 @@ extension ArgumentRouter {
                 projectDir: projectDir,
                 oldVersion: oldVersion,
                 newVersion: newVersion).diff
-
-
 
         let outputGenerator = OutputGenerator(
             configuration: configuration,

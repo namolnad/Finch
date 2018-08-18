@@ -12,7 +12,7 @@ typealias CommandValue = (command: Command, value: String)
 
 enum Command: String {
     case gitDiff = "git-diff"
+    case noShowVersion = "no-show-version"
     case projectDir = "project-dir"
     case releaseManager = "release-manager"
-    case version
 }

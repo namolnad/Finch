@@ -3,9 +3,8 @@
 DiffFormatter is a configurable way to output version-to-version diffs for Markdown-formatted release documentation. The utility makes several assumptions about the desired format, and utilizes commit tag formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
 
 # Usage
-The first two arguments received must be the version strings, in order of: OLD_VERSION NEW_VERSION (branch or tag).
-Other accepted argurments are:
-1. A version string for the version header (`--version`)
+The first two arguments received must be the version strings, in order of: OLD_VERSION NEW_VERSION (branch or tag). Other accepted argurments are:
+1. The ability to hide the version header (`--no-show-version`)
 2. Release manager (`--release-manager`)
 3. Project directory (`--project-dir`) if DiffFormatter is not called from project directory
 4. Manual git diff (`--git-diff`). Must be received in format: git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_VERSION...NEW_VERSION
@@ -17,7 +16,7 @@ format-version-diff() {
   DiffFormatter $1 $2 --version=$2 --release-manager=$(git config --get user.email)
 }
 
-# used in the following manner:
+# Used in the following manner:
 # format-version-diff 6.12.1 6.13.0
 ```
 
@@ -28,6 +27,8 @@ The following portions of DiffFormatter are configurable:
 - Section info (title and corresponding tags)
 - Tag input and output delimiters
 - Footer (Appended to the end of the formatted diff as a simple string)
+- Git executable path
+- Git branch (or tag) prefix
 
 To function properly, DiffFormatter requires a users list at a bare minimum.
 
@@ -78,6 +79,9 @@ Any non-empty configuration variables included in the config file found in each 
         "left": "**❲**",
         "right": "**❳**"
     }
+  },
+  "git_config": {
+    "branch_prefix": "origin/releases/"
   }
 }
 ```

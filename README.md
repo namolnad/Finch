@@ -3,13 +3,18 @@
 DiffFormatter is a configurable way to output version-to-version diffs for Markdown-formatted release documentation. The utility makes several assumptions about the desired format, and utilizes commit tag formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
 
 # Usage
-The first argument received must be a properly formatted git diff, using the following command: `git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_BRANCH...NEW_BRANCH`
-Additionally, a version (`--version`) and release manager (`--release-manager`) argument may be passed in. In many cases it may be easiest to create a new shell function when your shell startup files are sourced, such as the following:
+The first two arguments received must be the version strings, in order of: OLD_VERSION NEW_VERSION (branch or tag).
+Other accepted argurments are:
+1. A version string for the version header (`--version`)
+2. Release manager (`--release-manager`)
+3. Project directory (`--project-dir`) if DiffFormatter is not called from project directory
+4. Manual git diff (`--git-diff`). Must be received in format: git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_VERSION...NEW_VERSION
+
+In many cases it may be easiest to create a new shell function when your shell startup files are sourced, such as the following:
 
 ```
 format-version-diff() {
-  version_diff=$(git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short origin/releases/$1...origin/releases/$2)
-  DiffFormatter "$version_diff" --version=$2 --release-manager=$(git config --get user.email)
+  DiffFormatter $1 $2 --version=$2 --release-manager=$(git config --get user.email)
 }
 
 # used in the following manner:

@@ -27,9 +27,9 @@ extension OutputGenerator {
 
         var sections: [String: Section] = [:]
 
-        let tagToSectionInfo: [String: SectionInfo] = configuration.sectionInfos.reduce(into: [:]) { current, next in
-            next.tags.forEach { tag in
-                current[tag] = next
+        let tagToSectionInfo: [String: SectionInfo] = configuration.sectionInfos.reduce(into: [:]) { tagSectionInfoMap, sectionInfo in
+            sectionInfo.tags.forEach { tag in
+                tagSectionInfoMap[tag] = sectionInfo
             }
         }
 

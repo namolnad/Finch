@@ -11,6 +11,8 @@ import Foundation
 typealias CommandValue = (command: Command, value: String)
 
 enum Command: String {
-    case version
+    case gitDiff = "git-diff"
+    case projectDir = "project-dir"
     case releaseManager = "release-manager"
+    case version
 }

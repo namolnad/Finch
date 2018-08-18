@@ -23,7 +23,15 @@ extension ArgumentRouter {
             .filter { !$0.contains(appName) }
             .reversed())
 
-        guard let primaryArg = args.popLast() else {
+        guard !args.contains("--help") else {
+            print("Please refer to the README for usage instructions")
+            return true
+        }
+
+        guard let oldVersion = args.popLast() else {
+            return false
+        }
+        guard let newVersion = args.popLast() else {
             return false
         }
 
@@ -37,9 +45,23 @@ extension ArgumentRouter {
             .first { $0.command == .releaseManager }
             .flatMap { email in configuration.users.first { $0.email == email.value } }
 
+        let projectDir = commandValues
+            .first { $0.command == .projectDir }?
+            .value ?? configuration.currentDirectory
+
+        let rawDiff = commandValues
+            .first { $0.command == .gitDiff }?
+            .value ??
+            GitDiffer(configuration: configuration,
+                projectDir: projectDir,
+                oldVersion: oldVersion,
+                newVersion: newVersion).diff
+
+
+
         let outputGenerator = OutputGenerator(
             configuration: configuration,
-            rawDiff: primaryArg,
+            rawDiff: rawDiff,
             version: versionHeader,
             releaseManager: releaseManager
         )

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221E3E1A2127E36800256B13 /* GitDiffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E192127E36800256B13 /* GitDiffer.swift */; };
+		221E3E1C2127E6CB00256B13 /* GitConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */; };
+		221E3E1D2127E79600256B13 /* GitDiffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E192127E36800256B13 /* GitDiffer.swift */; };
+		221E3E1E2127E79F00256B13 /* GitConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */; };
+		221E3E202127F28F00256B13 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Shell.swift */; };
 		223745BE20F3220D0002AD6F /* String+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */; };
 		2264334D2123DC9700B46082 /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264334C2123DC9700B46082 /* Configurator.swift */; };
 		2264334F2123DD3100B46082 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264334E2123DD3100B46082 /* Configuration.swift */; };
@@ -64,6 +69,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		221E3E192127E36800256B13 /* GitDiffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitDiffer.swift; sourceTree = "<group>"; };
+		221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitConfiguration.swift; sourceTree = "<group>"; };
+		221E3E1F2127F28F00256B13 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DiffFormatter.swift"; sourceTree = "<group>"; };
 		2264334C2123DC9700B46082 /* Configurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurator.swift; sourceTree = "<group>"; };
 		2264334E2123DD3100B46082 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -128,6 +136,7 @@
 				2264334E2123DD3100B46082 /* Configuration.swift */,
 				22FAE6A22127492F0097A0A5 /* DelimiterConfiguration.swift */,
 				22FAE6A721277DC60097A0A5 /* UsersConfiguration.swift */,
+				221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -141,6 +150,7 @@
 				226433502123E0A600B46082 /* Section */,
 				22AACD7020EF24CC00806FF3 /* User.swift */,
 				22FAE69F2127450D0097A0A5 /* DelimiterPair.swift */,
+				221E3E192127E36800256B13 /* GitDiffer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,6 +161,7 @@
 				22AACD6A20EED12500806FF3 /* OutputGenerator.swift */,
 				22AACD6820EED11800806FF3 /* Pasteboard.swift */,
 				22AACD6420EEAAE200806FF3 /* Regex.swift */,
+				221E3E1F2127F28F00256B13 /* Shell.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -310,6 +321,7 @@
 				22FAE6A1212745FE0097A0A5 /* DelimiterPair.swift in Sources */,
 				2264336B212643A600B46082 /* User.swift in Sources */,
 				22643378212643DC00B46082 /* main.swift in Sources */,
+				221E3E1D2127E79600256B13 /* GitDiffer.swift in Sources */,
 				2264336A2126438500B46082 /* Configuration.swift in Sources */,
 				22643375212643D200B46082 /* Regex.swift in Sources */,
 				22643377212643D800B46082 /* String+DiffFormatter.swift in Sources */,
@@ -326,6 +338,7 @@
 				22FAE6A4212749C30097A0A5 /* DelimiterConfiguration.swift in Sources */,
 				22643371212643CA00B46082 /* Argument.swift in Sources */,
 				22643376212643D500B46082 /* Configurator.swift in Sources */,
+				221E3E1E2127E79F00256B13 /* GitConfiguration.swift in Sources */,
 				22FAE69421271B4E0097A0A5 /* FileManagerMock.swift in Sources */,
 				2264336C212643B400B46082 /* ArgumentRouter.swift in Sources */,
 			);
@@ -340,7 +353,9 @@
 				22FAE6A32127492F0097A0A5 /* DelimiterConfiguration.swift in Sources */,
 				226433522123E0BD00B46082 /* SectionInfo.swift in Sources */,
 				22AACD7120EF24CC00806FF3 /* User.swift in Sources */,
+				221E3E1C2127E6CB00256B13 /* GitConfiguration.swift in Sources */,
 				22AACD6B20EED12500806FF3 /* OutputGenerator.swift in Sources */,
+				221E3E1A2127E36800256B13 /* GitDiffer.swift in Sources */,
 				2264334F2123DD3100B46082 /* Configuration.swift in Sources */,
 				22AACD6920EED11800806FF3 /* Pasteboard.swift in Sources */,
 				223745BE20F3220D0002AD6F /* String+DiffFormatter.swift in Sources */,
@@ -348,6 +363,7 @@
 				22AACD6520EEAAE200806FF3 /* Regex.swift in Sources */,
 				22AACD7320EF30A100806FF3 /* Command.swift in Sources */,
 				22AACD6720EED11200806FF3 /* FindReplacePattern.swift in Sources */,
+				221E3E202127F28F00256B13 /* Shell.swift in Sources */,
 				22FAE6A821277DC60097A0A5 /* UsersConfiguration.swift in Sources */,
 				22AACD6D20EEE33500806FF3 /* ArgumentRouter.swift in Sources */,
 				22AACD7520EF30B400806FF3 /* Argument.swift in Sources */,

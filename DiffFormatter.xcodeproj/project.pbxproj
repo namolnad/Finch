@@ -12,6 +12,7 @@
 		221E3E1D2127E79600256B13 /* GitDiffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E192127E36800256B13 /* GitDiffer.swift */; };
 		221E3E1E2127E79F00256B13 /* GitConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */; };
 		221E3E202127F28F00256B13 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Shell.swift */; };
+		221E3E212127F73100256B13 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Shell.swift */; };
 		223745BE20F3220D0002AD6F /* String+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */; };
 		2264334D2123DC9700B46082 /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264334C2123DC9700B46082 /* Configurator.swift */; };
 		2264334F2123DD3100B46082 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264334E2123DD3100B46082 /* Configuration.swift */; };
@@ -150,7 +151,6 @@
 				226433502123E0A600B46082 /* Section */,
 				22AACD7020EF24CC00806FF3 /* User.swift */,
 				22FAE69F2127450D0097A0A5 /* DelimiterPair.swift */,
-				221E3E192127E36800256B13 /* GitDiffer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -158,6 +158,7 @@
 		226433572124A3A000B46082 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				221E3E192127E36800256B13 /* GitDiffer.swift */,
 				22AACD6A20EED12500806FF3 /* OutputGenerator.swift */,
 				22AACD6820EED11800806FF3 /* Pasteboard.swift */,
 				22AACD6420EEAAE200806FF3 /* Regex.swift */,
@@ -319,6 +320,7 @@
 			files = (
 				22643373212643D200B46082 /* OutputGenerator.swift in Sources */,
 				22FAE6A1212745FE0097A0A5 /* DelimiterPair.swift in Sources */,
+				221E3E212127F73100256B13 /* Shell.swift in Sources */,
 				2264336B212643A600B46082 /* User.swift in Sources */,
 				22643378212643DC00B46082 /* main.swift in Sources */,
 				221E3E1D2127E79600256B13 /* GitDiffer.swift in Sources */,

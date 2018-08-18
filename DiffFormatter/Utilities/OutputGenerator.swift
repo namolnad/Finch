@@ -27,13 +27,14 @@ extension OutputGenerator {
 
         var sections: [String: Section] = [:]
 
-        let reversedSectionInfos = configuration.sectionInfos.reversed()
-
-        lines.forEach { line in
-            if let sectionInfo = reversedSectionInfos.first(where: line.belongsTo) {
-                let defaultSection = Section(info: sectionInfo, lines: [])
-                sections[sectionInfo.title, default: defaultSection].lines.append(line.value)
+        let tagToSectionInfo: [String: SectionInfo] = configuration.sectionInfos.reduce(into: [:]) { current, next in
+            next.tags.forEach { tag in
+                current[tag] = next
             }
+        }
+
+        lines.forEach {
+            $0.placeInOwningSection(tagToSectionInfo: tagToSectionInfo, titleToSection: &sections)
         }
 
         self.version = version

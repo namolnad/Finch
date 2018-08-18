@@ -79,7 +79,9 @@ Any non-empty configuration variables included in the config file found in each 
 
 *Notes*
   - Sections should be listed in the order you want them to be displayed in the output
-  - Sections will be parsed in reverse and each commit will be placed into the first matching section (including matching a wild card)
+  - If included sections have duplicative tags, the last section with a given tag wins. Each matching commit will be placed into it's owning section.
+  - One wildcard section can be included. Do so by including a * in the section's tag config.
+  - Commits will only appear in a single section. Searching first first for a section matching the first commit tag, then the second and so on.
 
 # Example output
 ```

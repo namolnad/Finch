@@ -9,6 +9,33 @@
 import Foundation
 
 struct Configuration: Codable {
+    private(set) var delimiterConfig: DelimiterConfiguration
+    private(set) var sectionInfos: [SectionInfo]
+    private(set) var footer: String?
+    private(set) var gitConfig: GitConfiguration
+    private(set) var usersConfig: UsersConfiguration
+    private(set) var currentDirectory: String = ""
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        usersConfig = (try? container.decode(UsersConfiguration.self, forKey: .usersConfig)) ?? .blank
+        sectionInfos = (try? container.decode([SectionInfo].self, forKey: .sectionInfos)) ?? []
+        footer = try? container.decode(String.self, forKey: .footer)
+        delimiterConfig = (try? container.decode(DelimiterConfiguration.self, forKey: .delimiterConfig)) ?? .blank
+        gitConfig = (try? container.decode(GitConfiguration.self, forKey: .gitConfig)) ?? .blank
+    }
+
+    init(usersConfig: UsersConfiguration = .blank, sectionInfos: [SectionInfo] = [], footer: String? = nil, delimiterConfig: DelimiterConfiguration = .blank, gitConfig: GitConfiguration = .blank) {
+        self.usersConfig = usersConfig
+        self.sectionInfos = sectionInfos
+        self.footer = footer
+        self.delimiterConfig = delimiterConfig
+        self.gitConfig = gitConfig
+    }
+}
+
+extension Configuration {
     var users: [User] {
         return usersConfig.users
     }
@@ -24,104 +51,49 @@ struct Configuration: Codable {
     var gitBranchPrefix: String {
         return gitConfig.branchPrefix ?? ""
     }
-
-    let delimiterConfig: DelimiterConfiguration
-    let sectionInfos: [SectionInfo]
-    let footer: String?
-    private let gitConfig: GitConfiguration
-    private let usersConfig: UsersConfiguration
-    private(set) var currentDirectory: String = ""
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        usersConfig = (try? container.decode(UsersConfiguration.self, forKey: .usersConfig)) ?? .empty
-        sectionInfos = (try? container.decode([SectionInfo].self, forKey: .sectionInfos)) ?? []
-        footer = try? container.decode(String.self, forKey: .footer)
-        delimiterConfig = (try? container.decode(DelimiterConfiguration.self, forKey: .delimiterConfig)) ?? .empty
-        gitConfig = (try? container.decode(GitConfiguration.self, forKey: .gitConfig)) ?? .empty
-    }
-
-    init(usersConfig: UsersConfiguration = .empty, sectionInfos: [SectionInfo] = [], footer: String? = nil, delimiterConfig: DelimiterConfiguration = .empty, gitConfig: GitConfiguration = .empty) {
-        self.usersConfig = usersConfig
-        self.sectionInfos = sectionInfos
-        self.footer = footer
-        self.delimiterConfig = delimiterConfig
-        self.gitConfig = gitConfig
-    }
 }
 
 extension Configuration {
-    var isEmpty: Bool {
-        return users.isEmpty &&
-            sectionInfos.isEmpty &&
-            (footer?.isEmpty == true) &&
-            delimiterConfig.input.isEmpty &&
-            delimiterConfig.output.isEmpty &&
-            userHandlePrefix.isEmpty &&
-            gitBranchPrefix.isEmpty &&
-            (gitExecutablePath?.isEmpty == true)
-    }
-
     mutating func update(with otherConfig: Configuration) {
-        self = modifiedConfig(withNonEmptyComponentsFrom: otherConfig)
-    }
-
-    func modifiedConfig(withNonEmptyComponentsFrom otherConfig: Configuration) -> Configuration {
-        var users = self.users
-        var userHandlePrefix = self.userHandlePrefix
-        var sectionInfos = self.sectionInfos
-        var footer = self.footer
-        var inputDelimiters = delimiterConfig.input
-        var outputDelimiters = delimiterConfig.output
-        var gitBranchPrefix = self.gitBranchPrefix
-        var gitExecutablePath = self.gitExecutablePath
-
-        if !otherConfig.users.isEmpty {
-            users = otherConfig.users
-        }
-
+        // Sections & Footer
         if !otherConfig.sectionInfos.isEmpty {
-            sectionInfos = otherConfig.sectionInfos
+            self.sectionInfos = otherConfig.sectionInfos
         }
 
         if let value = otherConfig.footer {
-            footer = value
+            self.footer = value
         }
 
-        if !otherConfig.delimiterConfig.input.isEmpty {
-            inputDelimiters = otherConfig.delimiterConfig.input
-        }
-
-        if !otherConfig.delimiterConfig.output.isEmpty {
-            outputDelimiters = otherConfig.delimiterConfig.output
+        // Users configuration
+        if !otherConfig.users.isEmpty {
+            self.usersConfig = UsersConfiguration(users: otherConfig.users, userHandlePrefix: self.usersConfig.userHandlePrefix)
         }
 
         if let value = otherConfig.usersConfig.userHandlePrefix {
-            userHandlePrefix = value
+            self.usersConfig = UsersConfiguration(users: self.usersConfig.users, userHandlePrefix: value)
         }
 
+        // Delimiter configuration
+        if !otherConfig.delimiterConfig.input.isBlank {
+            self.delimiterConfig = DelimiterConfiguration(input: otherConfig.delimiterConfig.input, output: self.delimiterConfig.output)
+        }
+
+        if !otherConfig.delimiterConfig.output.isBlank {
+            self.delimiterConfig = DelimiterConfiguration(input: self.delimiterConfig.input, output: otherConfig.delimiterConfig.output)
+        }
+
+        // Git configuration
         if let value = otherConfig.gitConfig.branchPrefix {
-            gitBranchPrefix = value
+            self.gitConfig = GitConfiguration(branchPrefix: value, executablePath: self.gitConfig.executablePath)
         }
 
         if let value = otherConfig.gitConfig.executablePath {
-            gitExecutablePath = value
+            self.gitConfig = GitConfiguration(branchPrefix: self.gitConfig.branchPrefix, executablePath: value)
         }
-
-        return .init(
-            usersConfig: .init(users: users, userHandlePrefix: userHandlePrefix),
-            sectionInfos: sectionInfos,
-            footer: footer,
-            delimiterConfig: .init(input: inputDelimiters, output: outputDelimiters),
-            gitConfig: .init(branchPrefix: gitBranchPrefix, executablePath: gitExecutablePath)
-        )
     }
 }
 
 extension Configuration {
-    static let empty: Configuration = .init()
-
     static func `default`(currentDirectory: String) -> Configuration {
         var config = Configuration(
             usersConfig: .default,
@@ -132,5 +104,20 @@ extension Configuration {
         config.currentDirectory = currentDirectory
 
         return config
+    }
+}
+
+protocol Blankable {
+    var isBlank: Bool { get }
+}
+
+extension Configuration {
+    var isBlank: Bool {
+        return delimiterConfig.isBlank &&
+            sectionInfos.isEmpty &&
+            (footer?.isEmpty == true) &&
+            gitConfig.isBlank &&
+            usersConfig.isBlank &&
+            currentDirectory.isEmpty
     }
 }

@@ -14,6 +14,13 @@ struct GitConfiguration: Codable {
 }
 
 extension GitConfiguration {
-    static let empty: GitConfiguration = .init(branchPrefix: nil, executablePath: nil)
+    static let blank: GitConfiguration = .init(branchPrefix: nil, executablePath: nil)
     static let `default`: GitConfiguration = .init(branchPrefix: "", executablePath: nil)
+}
+
+extension GitConfiguration: Blankable {
+    var isBlank: Bool {
+        return (branchPrefix?.isEmpty == true) &&
+            (executablePath?.isEmpty == true)
+    }
 }

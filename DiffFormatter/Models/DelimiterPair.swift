@@ -16,10 +16,12 @@ struct DelimiterPair: Codable, Equatable {
 extension DelimiterPair {
     static let defaultInput: DelimiterPair = .init(left: "[", right: "]")
     static let defaultOutput: DelimiterPair = .init(left: "|", right: "|")
-    static let empty: DelimiterPair = .init(left: "", right: "")
+    static let blank: DelimiterPair = .init(left: "", right: "")
+}
 
-    var isEmpty: Bool {
+extension DelimiterPair: Blankable {
+    var isBlank: Bool {
         return left.isEmpty ||
-        right.isEmpty
+            right.isEmpty
     }
 }

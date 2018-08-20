@@ -26,18 +26,18 @@ struct Configurator {
         }
 
         // Load initial config from home directory if available
-        if let config = configuration(forPath: home), !config.isEmpty {
+        if let config = configuration(forPath: home), !config.isBlank {
             configuration.update(with: config)
         }
 
         if let value = processInfo.environment["DIFF_FORMATTER_CONFIG"], !value.isEmpty {
             // Load config overrides from custom path if env var included
-            if let config = configuration(forPath: value), !config.isEmpty {
+            if let config = configuration(forPath: value), !config.isBlank {
                 configuration.update(with: config)
             }
         } else if case let value = fileManager.currentDirectoryPath, !value.isEmpty {
             // Load config overrides from current directory if available
-            if let config = configuration(forPath: value), !config.isEmpty {
+            if let config = configuration(forPath: value), !config.isBlank {
                 configuration.update(with: config)
             }
         }

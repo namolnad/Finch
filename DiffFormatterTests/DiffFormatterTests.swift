@@ -38,7 +38,7 @@ class DiffFormatterTests: XCTestCase {
     func testArgumentRouter() {
         let router = ArgumentRouter(configuration: .mock)
 
-        XCTAssertTrue(router.route(arguments: [inputMock, "--version=6.13.0"]))
+        XCTAssertTrue(router.route(arguments: ["6.12.1", "6.13.0", "--git-diff=\(inputMock)"]))
         XCTAssertFalse(router.route(arguments: []))
     }
 

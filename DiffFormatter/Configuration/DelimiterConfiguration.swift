@@ -15,8 +15,8 @@ struct DelimiterConfiguration: Codable, Equatable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        input = (try? container.decode(DelimiterPair.self, forKey: .input)) ?? .empty
-        output = (try? container.decode(DelimiterPair.self, forKey: .output)) ?? .empty
+        input = (try? container.decode(DelimiterPair.self, forKey: .input)) ?? .blank
+        output = (try? container.decode(DelimiterPair.self, forKey: .output)) ?? .blank
     }
 
     init(input: DelimiterPair, output: DelimiterPair) {
@@ -28,5 +28,11 @@ struct DelimiterConfiguration: Codable, Equatable {
 extension DelimiterConfiguration {
     static let `default`: DelimiterConfiguration = .init(input: .defaultInput, output: .defaultOutput)
 
-    static let empty: DelimiterConfiguration = .init(input: .empty, output: .empty)
+    static let blank: DelimiterConfiguration = .init(input: .blank, output: .blank)
+}
+
+extension DelimiterConfiguration: Blankable {
+    var isBlank: Bool {
+        return input.isBlank && output.isBlank
+    }
 }

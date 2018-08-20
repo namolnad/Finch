@@ -14,6 +14,13 @@ struct UsersConfiguration: Codable {
 }
 
 extension UsersConfiguration {
-    static let empty: UsersConfiguration = .init(users: [], userHandlePrefix: nil)
+    static let blank: UsersConfiguration = .init(users: [], userHandlePrefix: nil)
     static let `default`: UsersConfiguration = .init(users: [], userHandlePrefix: "@")
+}
+
+extension UsersConfiguration: Blankable {
+    var isBlank: Bool {
+        return users.isEmpty &&
+            (userHandlePrefix?.isEmpty == true)
+    }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 struct Configurator {
-    private static let configFilePathComponent: String = "/.diff_formatter/config.json"
+    private static let configFilePathComponent: String = "/.diff_formatter"
 
     private(set) var configuration: Configuration
 

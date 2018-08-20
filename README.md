@@ -1,6 +1,6 @@
 # DiffFormatter
 
-DiffFormatter is a configurable way to output version-to-version diffs for Markdown-formatted release documentation. The utility makes several assumptions about the desired format, and utilizes commit tag formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
+DiffFormatter is a configurable way to output version-to-version diffs for Markdown-formatted release documentation. The utility makes several assumptions about the desired format, and utilizes commit "tag" formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
 
 # Usage
 The first two arguments received must be the version strings, in order of: OLD_VERSION NEW_VERSION (branch or tag). Other accepted argurments are:
@@ -13,7 +13,7 @@ In many cases it may be easiest to create a new shell function when your shell s
 
 ```
 format-version-diff() {
-  DiffFormatter $1 $2 --version=$2 --release-manager=$(git config --get user.email)
+  DiffFormatter $1 $2 --version=$2 --project-dir=/Users/YourUser/Code/YourProject --release-manager=$(git config --get user.email)
 }
 
 # Used in the following manner:
@@ -30,23 +30,19 @@ The following portions of DiffFormatter are configurable:
 - Git executable path
 - Git branch (or tag) prefix
 
-To function properly, DiffFormatter requires a users list at a bare minimum.
+To function properly, DiffFormatter requires at least a users list.
 
-## Search paths & behavior
-DiffFormatter will start with a default configuration and will search several paths for configuration overrides. The expectations and behavior is as follows:
+## File Type & Search Behavior
+DiffFormatter will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.diff_formatter` file with no extension, placed in either the home, current or a custom directory. For instance, if you provide a custom path through an env variable, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diff_formatter`.
 
-### File Location
-Whether or not you provide a custom path, your config file needs to be placed in a hidden `.diff_formatter` directory. For instance, if you provide a custom path, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diff_formatter/config.json`. The same format is expected if you want to keep config files in your home or project directories.
-
-### Search Paths behavior
-DiffFormatter will search a total of 2 paths for custom configuration files in the following order:
+A total of 2 paths will be searched for custom configuration files, in the following order:
 1. Home directory
 2. Path found at included DIFF_FORMATTER_CONFIG environment variable __OR__ DiffFormatter's current directory if the previous env var is not present
 
-Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or non-existent config file components will be ignored. Configuration customization is not additive to the existing configuration.
+Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or omitted config file components will be ignored. Configuration customization is not additive to the existing configuration.
 
 ## Configuration file formatting expectations
-`config.json` should be a valid JSON file with the following format. Top level keys may be ommitted if a previous configuration has fully configured the setting as desired.
+`.diff_formatter` should be a valid JSON file with the following format. Top level keys may be ommitted if a previous configuration has fully configured the setting as desired.
 
 ```
 {
@@ -62,7 +58,7 @@ Any non-empty configuration variables included in the config file found in each 
         "quip_handle": "Tony.Stark"
       }
     ],
-    "userHandlePrefix": "%"
+    "user_handle_prefix": "%"
   },
   "section_infos": [
     {

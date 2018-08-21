@@ -1,0 +1,37 @@
+{
+  "users_config": {
+    "users": [
+      {
+        "email": "your@email.com",
+        "user_handle": "First.Last"
+      }
+    ],
+    "user_handle_prefix": null ## Defaults to @
+  },
+  "section_infos": [
+    {
+      "title": "Features",
+      "tags": ["*"]
+    },
+    {
+      "title": "Bug Fixes",
+      "tags": [
+        "bugfix",
+        "bug fix",
+        "bug"
+      ]
+    }
+  ],
+  "footer": "\n### Timeline\n- Begin development:\n- Feature cut-off / Start of bake / dogfooding:\n- Submission:\n- Release (expected):\n- Release (actual):\n", ## Defaults to ""
+  "delimiter_config": {
+    "input": null, ## Defaults to {"left": "[", "right": "]"}
+    "output": {
+      "left": "**❲**", ## Defaults to "|"
+      "right": "**❳**" ## Defaults to "|"
+    }
+  },
+  "git_config": {
+    "executable_path": null, ## Defaults to use 'which git', configure if you're facing issues
+    "branch_prefix": "origin/releases/" ## Defaults to "", configure to follow your convention
+  }
+}

@@ -10,8 +10,10 @@ import Foundation
 
 struct ArgumentRouter {
     private let configuration: Configuration
+    private let app: App
 
-    init(configuration: Configuration) {
+    init(app: App, configuration: Configuration) {
+        self.app = app
         self.configuration = configuration
     }
 }
@@ -20,14 +22,17 @@ extension ArgumentRouter {
     @discardableResult
     func route(arguments: [String]) -> Bool {
         var args = Array(arguments
-            .filter { !$0.contains(appName) }
+            .filter { !$0.contains(app.name) }
             .reversed())
 
-        guard !args.contains("--help") else {
+        guard !args.contains(where: { ["--help", "-h"].contains($0) }) else {
             print("Please refer to the README for usage instructions")
             return true
         }
-
+        guard !args.contains(where: { ["-v", "--version"].contains($0) }) else {
+            print("\(app.name) \(app.version) (\(app.buildNumber))")
+            return true
+        }
         guard let oldVersion = args.popLast() else {
             return false
         }

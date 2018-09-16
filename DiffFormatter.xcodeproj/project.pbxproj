@@ -35,7 +35,8 @@
 		22643375212643D200B46082 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6420EEAAE200806FF3 /* Regex.swift */; };
 		22643376212643D500B46082 /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264334C2123DC9700B46082 /* Configurator.swift */; };
 		22643377212643D800B46082 /* String+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */; };
-		22643378212643DC00B46082 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD5D20EEAAAC00806FF3 /* main.swift */; };
+		228D0DFE214ED79100D808F7 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D0DFD214ED79100D808F7 /* App.swift */; };
+		228D0E00214EE61800D808F7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD5D20EEAAAC00806FF3 /* main.swift */; };
 		22AACD5E20EEAAAC00806FF3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD5D20EEAAAC00806FF3 /* main.swift */; };
 		22AACD6520EEAAE200806FF3 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6420EEAAE200806FF3 /* Regex.swift */; };
 		22AACD6720EED11200806FF3 /* FindReplacePattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6620EED11200806FF3 /* FindReplacePattern.swift */; };
@@ -82,6 +83,8 @@
 		2264335F2126421100B46082 /* DiffFormatterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		226433612126421100B46082 /* DiffFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffFormatterTests.swift; sourceTree = "<group>"; };
 		226433632126421100B46082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		228D0DFC214ED03400D808F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		228D0DFD214ED79100D808F7 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		22AACD5A20EEAAAC00806FF3 /* DiffFormatter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DiffFormatter; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AACD5D20EEAAAC00806FF3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		22AACD6420EEAAE200806FF3 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
@@ -188,6 +191,15 @@
 			path = DiffFormatterTests;
 			sourceTree = "<group>";
 		};
+		228D0DFB214ED01100D808F7 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				228D0DFD214ED79100D808F7 /* App.swift */,
+				228D0DFC214ED03400D808F7 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		22AACD5120EEAAAC00806FF3 = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +223,7 @@
 			children = (
 				22AACD5D20EEAAAC00806FF3 /* main.swift */,
 				22AACD6C20EEE33500806FF3 /* ArgumentRouter.swift */,
+				228D0DFB214ED01100D808F7 /* App */,
 				226433562124A35000B46082 /* Models */,
 				226433572124A3A000B46082 /* Utilities */,
 				226433552124A17900B46082 /* Configuration */,
@@ -322,7 +335,6 @@
 				22FAE6A1212745FE0097A0A5 /* DelimiterPair.swift in Sources */,
 				221E3E212127F73100256B13 /* Shell.swift in Sources */,
 				2264336B212643A600B46082 /* User.swift in Sources */,
-				22643378212643DC00B46082 /* main.swift in Sources */,
 				221E3E1D2127E79600256B13 /* GitDiffer.swift in Sources */,
 				2264336A2126438500B46082 /* Configuration.swift in Sources */,
 				22643375212643D200B46082 /* Regex.swift in Sources */,
@@ -335,6 +347,7 @@
 				22643370212643C800B46082 /* Command.swift in Sources */,
 				22FAE692212718660097A0A5 /* ProcessInfoMock.swift in Sources */,
 				22643372212643CD00B46082 /* FindReplacePattern.swift in Sources */,
+				228D0E00214EE61800D808F7 /* main.swift in Sources */,
 				2264336F212643C500B46082 /* Line.swift in Sources */,
 				226433622126421100B46082 /* DiffFormatterTests.swift in Sources */,
 				22FAE6A4212749C30097A0A5 /* DelimiterConfiguration.swift in Sources */,
@@ -363,6 +376,7 @@
 				223745BE20F3220D0002AD6F /* String+DiffFormatter.swift in Sources */,
 				22AACD5E20EEAAAC00806FF3 /* main.swift in Sources */,
 				22AACD6520EEAAE200806FF3 /* Regex.swift in Sources */,
+				228D0DFE214ED79100D808F7 /* App.swift in Sources */,
 				22AACD7320EF30A100806FF3 /* Command.swift in Sources */,
 				22AACD6720EED11200806FF3 /* FindReplacePattern.swift in Sources */,
 				221E3E202127F28F00256B13 /* Shell.swift in Sources */,
@@ -529,9 +543,13 @@
 		22AACD6220EEAAAC00806FF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_NUMBER = "$(BUILD_NUMBER)";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				INFOPLIST_FILE = DiffFormatter/App/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -541,9 +559,14 @@
 		22AACD6320EEAAAC00806FF3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_NUMBER = "$(BUILD_NUMBER)";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				DSTROOT = /;
+				INFOPLIST_FILE = DiffFormatter/App/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

@@ -10,10 +10,8 @@ import Foundation
 
 let process = ProcessInfo.processInfo
 
-let appName = process.processName
-
 let configurator = Configurator(processInfo: process)
 
-let router = ArgumentRouter(configuration: configurator.configuration)
+let router = ArgumentRouter(app: App(), configuration: configurator.configuration)
 
 router.route(arguments: process.arguments)

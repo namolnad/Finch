@@ -544,10 +544,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_NUMBER = "$(BUILD_NUMBER)";
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DiffFormatter/App/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -560,10 +560,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_NUMBER = "$(BUILD_NUMBER)";
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				DEVELOPMENT_TEAM = "";
 				DSTROOT = /;
 				INFOPLIST_FILE = DiffFormatter/App/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;

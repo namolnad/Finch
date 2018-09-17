@@ -1,0 +1,21 @@
+#!/usr/local/bin/bash
+
+## Install script
+
+ROOT_DIR="$(dirname "$(tmp=${0%/*}; echo "$PWD${tmp##\.}")")"
+
+APP_NAME='DiffFormatter'
+BUILD_NUMBER=$(git --git-dir="$ROOT_DIR/.git" rev-list HEAD --count)
+CONFIG_PATH="$HOME/.diff_formatter"
+CONFIG_MESSAGE='Add/overwrite default config in home directory? (y/n) '
+
+BUILD_NUMBER=$BUILD_NUMBER xcodebuild clean install -project "$ROOT_DIR/$APP_NAME.xcodeproj" -target $APP_NAME
+
+read -p "$CONFIG_MESSAGE" -n 1 -t 10 -r CONFIRMATION < /dev/tty
+
+if [[ ! $CONFIRMATION =~ ^[Yy]$ ]]; then
+  echo -e "\n\nInstall completed without adding default config\n"
+else
+  echo -e "\n\nInstalling default config to: $CONFIG_PATH\n"
+  cp "$ROOT_DIR/.diff_formatter_template" $CONFIG_PATH
+fi

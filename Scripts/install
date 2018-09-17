@@ -2,11 +2,6 @@
 
 ## Install script
 
-if [[ "$EUID" -eq 0 ]];then
-  echo "Do NOT run install as root. Will damage system when cleaning install dir."
-  exit 1
-fi
-
 ROOT_DIR="$(dirname "$(tmp=${0%/*}; echo "$PWD${tmp##\.}")")"
 
 APP_NAME='DiffFormatter'
@@ -16,7 +11,7 @@ CONFIG_MESSAGE='Add/overwrite default config in home directory? (y/n) '
 
 BUILD_NUMBER=$BUILD_NUMBER xcodebuild clean install -project "$ROOT_DIR/$APP_NAME.xcodeproj" -target $APP_NAME
 
-read -p "$CONFIG_MESSAGE" -n 1 -t 10 -r CONFIRMATION < /dev/tty
+read -p "$CONFIG_MESSAGE" -n 1 -t 5 -r CONFIRMATION < /dev/tty
 
 if [[ ! $CONFIRMATION =~ ^[Yy]$ ]]; then
   echo -e "\n\nInstall completed without adding default config\n"

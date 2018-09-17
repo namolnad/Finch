@@ -564,7 +564,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				DEVELOPMENT_TEAM = "";
-				DSTROOT = /;
+				DSTROOT = /tmp/DiffFormatter.dst;
 				INFOPLIST_FILE = DiffFormatter/App/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";

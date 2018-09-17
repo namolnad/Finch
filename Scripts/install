@@ -2,6 +2,11 @@
 
 ## Install script
 
+if [[ "$EUID" -eq 0 ]];then
+  echo "Do NOT run install as root. Will damage system when cleaning install dir."
+  exit 1
+fi
+
 ROOT_DIR="$(dirname "$(tmp=${0%/*}; echo "$PWD${tmp##\.}")")"
 
 APP_NAME='DiffFormatter'

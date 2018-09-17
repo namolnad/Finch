@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+
+# Redirect output to stderr.
+exec 1>&2
+
+git=`sh /etc/profile; which git`
+
+# Increment commit count before setting plist value
+PRE_COMMIT_COUNT=`"$git" rev-list @ --count`
+POST_COMMIT_COUNT=$(echo "$PRE_COMMIT_COUNT + 1" | bc)
+
+PLIST_PATH="$PWD/DiffFormatter/App/Info.plist"
+/usr/libexec/PlistBuddy -c "Set :CFBundleVersion $POST_COMMIT_COUNT" "$PLIST_PATH"
+$git add "$PLIST_PATH"

@@ -5,11 +5,10 @@
 ROOT_DIR="$(dirname "$(tmp=${0%/*}; echo "$PWD${tmp##\.}")")"
 
 APP_NAME='DiffFormatter'
-BUILD_NUMBER=$(git --git-dir="$ROOT_DIR/.git" rev-list HEAD --count)
 CONFIG_PATH="$HOME/.diff_formatter"
 CONFIG_MESSAGE='Add/overwrite default config in home directory? (y/n) '
 
-# BUILD_NUMBER=$BUILD_NUMBER xcodebuild clean install -project "$ROOT_DIR/$APP_NAME.xcodeproj" -target $APP_NAME
+xcodebuild clean install -project "$ROOT_DIR/$APP_NAME.xcodeproj" -target $APP_NAME
 
 # Exit early if install called from within another script
 

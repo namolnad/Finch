@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Project setup script
+
+ROOT_DIR="$(dirname "$(tmp=${0%/*}; echo "$PWD${tmp##\.}")")"
+
+ln -fs $ROOT_DIR/Scripts/Hooks/pre-commit $ROOT_DIR/.git/hooks/pre-commit

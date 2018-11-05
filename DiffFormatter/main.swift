@@ -12,6 +12,14 @@ let process = ProcessInfo.processInfo
 
 let configurator = Configurator(processInfo: process)
 
-let router = ArgumentRouter(app: App(), configuration: configurator.configuration)
+let app = App()
 
-router.route(arguments: process.arguments)
+let router = ArgumentRouter(app: app, configuration: configurator.configuration)
+
+let args = Array(process.arguments
+    .filter { !$0.contains(app.name) }
+    .reversed())
+
+if case .notHandled = router.route(arguments: args) {
+    print("Unable to handle included arguments")
+}

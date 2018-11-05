@@ -325,6 +325,7 @@
 					};
 					22AACD5920EEAAAC00806FF3 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -589,7 +590,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -605,7 +606,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

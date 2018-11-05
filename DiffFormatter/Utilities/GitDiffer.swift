@@ -8,23 +8,29 @@
 
 import Foundation
 
-struct GitDiffer {
-    private let configuration: Configuration
-    private let projectDir: String
-    private let oldVersion: String
-    private let newVersion: String
+extension Utilities {
+    struct GitDiffer {
+        private let configuration: Configuration
+        private let projectDir: String
+        private let oldVersion: String
+        private let newVersion: String
 
-    init(configuration: Configuration, projectDir: String, oldVersion: String, newVersion: String) {
-        self.configuration = configuration
-        self.projectDir = projectDir
-        self.oldVersion = oldVersion
-        self.newVersion = newVersion
+        init(configuration: Configuration, projectDir: String, oldVersion: String, newVersion: String) {
+            self.configuration = configuration
+            self.projectDir = projectDir
+            self.oldVersion = oldVersion
+            self.newVersion = newVersion
+        }
     }
 }
 
-extension GitDiffer {
+extension Utilities.GitDiffer {
     var diff: String {
-        return shell(executablePath: gitExecutablePath, arguments: gitArguments, currentDirectoryPath: projectDir) ??
+        guard !Utilities.isTest else {
+            return ""
+        }
+
+        return Utilities.shell(executablePath: gitExecutablePath, arguments: gitArguments, currentDirectoryPath: projectDir) ??
         ""
     }
 
@@ -32,7 +38,7 @@ extension GitDiffer {
         if let path = configuration.gitExecutablePath {
             return path
         }
-        guard let path = shell(executablePath: "/bin/bash", arguments: ["-c", "which git"], currentDirectoryPath: projectDir) else {
+        guard let path = Utilities.shell(executablePath: "/bin/bash", arguments: ["-c", "which git"], currentDirectoryPath: projectDir) else {
             return ""
         }
 

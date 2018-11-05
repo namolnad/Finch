@@ -36,21 +36,24 @@ class DiffFormatterTests: XCTestCase {
     }
 
     func testArgumentRouter() {
-        let router = ArgumentRouter(configuration: .mock)
+        let router = ArgumentRouter(app: .mock, configuration: .mock)
 
-        XCTAssertTrue(router.route(arguments: ["6.12.1", "6.13.0", "--git-diff=\(inputMock)"]))
-        XCTAssertFalse(router.route(arguments: []))
+        let routableArgs: [String] = ["6.12.1", "6.13.0", "--git-diff=\(inputMock)"]
+        XCTAssertTrue(router.route(arguments: routableArgs) == .handled)
+
+        let notRoutableArgs: [String] = []
+        XCTAssertTrue(router.route(arguments: notRoutableArgs) == .notHandled)
     }
 
     func testOutputGenerator() {
-        let outputGenerator = OutputGenerator(
+        let outputGenerator: Utilities.OutputGenerator = .init(
             configuration: .mock,
             rawDiff: inputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.users.first
         )
 
-        XCTAssertEqual(outputGenerator.generatedOutput(), OutputGenerator.mockOutput)
+        XCTAssertEqual(outputGenerator.generatedOutput(), Utilities.mockOutput)
     }
 
     func testCustomDelimiterOutput() {
@@ -59,14 +62,14 @@ class DiffFormatterTests: XCTestCase {
         let processInfoMock = ProcessInfoMock(arguments: [], environment: ["DIFF_FORMATTER_CONFIG": customPath])
         let fileManagerMock = FileManagerMock(customConfigPath: customPath)
 
-        let outputGenerator = OutputGenerator(
+        let outputGenerator: Utilities.OutputGenerator = .init(
             configuration: Configurator(processInfo: processInfoMock, fileManager: fileManagerMock).configuration,
             rawDiff: inputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.users.first
         )
 
-        XCTAssertEqual(outputGenerator.generatedOutput(), OutputGenerator.mockCustomDelimiterOutput)
+        XCTAssertEqual(outputGenerator.generatedOutput(), Utilities.mockCustomDelimiterOutput)
     }
 
 }
@@ -84,7 +87,11 @@ fileprivate extension Configuration {
     static let mock: Configuration = Configurator(processInfo: .mock, fileManager: .mock).configuration
 }
 
-fileprivate extension OutputGenerator {
+fileprivate extension App {
+    static let mock: App = .init(buildNumber: "12345", name: "DiffFormatter", version: "1.0.1")
+}
+
+fileprivate extension Utilities {
     static let mockOutput: String = """
 
 # 6.13.0

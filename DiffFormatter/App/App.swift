@@ -12,7 +12,9 @@ struct App {
     let buildNumber: String
     let name: String
     let version: String
+}
 
+extension App {
     init(bundle: Bundle = .main) {
         self.buildNumber = bundle.buildNumber
         self.name = bundle.appName

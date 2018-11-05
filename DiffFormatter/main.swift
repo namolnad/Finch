@@ -16,9 +16,9 @@ let app = App()
 
 let router = ArgumentRouter(app: app, configuration: configurator.configuration)
 
-let args = Array(process.arguments
+let args: [String] = process
+    .arguments
     .filter { !$0.contains(app.name) }
-    .reversed())
 
 if case .notHandled = router.route(arguments: args) {
     print("Unable to handle included arguments")

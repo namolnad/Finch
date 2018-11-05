@@ -9,12 +9,6 @@
 import Foundation
 
 struct ArgumentRouter {
-    enum HandleResult {
-        case handled
-        case notHandled
-        case partiallyHandled(unprocessedArgs: [String])
-    }
-
     private let configuration: Configuration
     private let app: App
 
@@ -36,14 +30,16 @@ extension ArgumentRouter {
     }
 
     func route(arguments: [String]) -> HandleResult {
+        let args: [String] = arguments.reversed()
+
         for handler in handlers {
-            switch handler.handle(routingContext, arguments) {
+            switch handler.handle(routingContext, args) {
             case .handled:
                 return .handled
             case .notHandled:
                 continue
             case .partiallyHandled(unprocessedArgs: let unprocessedArgs):
-                return route(arguments: unprocessedArgs)
+                return route(arguments: unprocessedArgs.reversed())
             }
         }
 

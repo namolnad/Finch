@@ -8,15 +8,17 @@
 
 import Foundation
 
-struct OutputGenerator {
-    private let version: String?
-    private let releaseManager: User?
-    private let sections: [Section]
-    private let footer: String?
-    private let userHandlePrefix: String
+extension Utilities {
+    struct OutputGenerator {
+        private let version: String?
+        private let releaseManager: User?
+        private let sections: [Section]
+        private let footer: String?
+        private let userHandlePrefix: String
+    }
 }
 
-extension OutputGenerator {
+extension Utilities.OutputGenerator {
     init(configuration: Configuration, rawDiff: String, version: String?, releaseManager: User?) {
         let patternCreator = FindReplacePatternCreator(configuration: configuration)
 
@@ -85,7 +87,7 @@ extension OutputGenerator {
 
         return patterns
             .flatMap { $0 }
-            .reduce(sortedInput, findReplace)
+            .reduce(sortedInput, Utilities.findReplace)
     }
 
     private func header(version: String) -> String {

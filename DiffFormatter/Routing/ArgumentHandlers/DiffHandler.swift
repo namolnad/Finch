@@ -31,12 +31,12 @@ extension ArgumentRouter {
         let rawDiff = commandValues
             .first { $0.command == .gitDiff }?
             .value ??
-            GitDiffer(configuration: context.configuration,
+            Utilities.GitDiffer(configuration: context.configuration,
                       projectDir: projectDir,
                       oldVersion: oldVersion,
                       newVersion: newVersion).diff
 
-        let outputGenerator = OutputGenerator(
+        let outputGenerator: Utilities.OutputGenerator = .init(
             configuration: context.configuration,
             rawDiff: rawDiff,
             version: versionHeader,
@@ -48,10 +48,14 @@ extension ArgumentRouter {
         return .handled
     }
 
-    private static func output(generator: OutputGenerator) {
+    private static func output(generator: Utilities.OutputGenerator) {
+        guard !Utilities.isTest else {
+            return
+        }
+
         let result = generator.generatedOutput()
 
-        pbCopy(text: result)
+        Utilities.pbCopy(text: result)
 
         print("Output copied to pasteboard: \(result)")
     }

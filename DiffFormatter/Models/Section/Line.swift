@@ -20,7 +20,7 @@ struct Line {
 
         let pattern = "\(leftDelim)([^\(leftDelim)\(rightDelim)]*)\(rightDelim)"
 
-        self.tags = matches(pattern: pattern, body: value).compactMap {
+        self.tags = Utilities.matches(pattern: pattern, body: value).compactMap {
             guard $0.numberOfRanges > 0 else {
                 return nil
             }

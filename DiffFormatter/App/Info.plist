@@ -7,8 +7,8 @@
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.8</string>
+	<string>0.0.9</string>
 	<key>CFBundleVersion</key>
-	<string>78</string>
+	<string>79</string>
 </dict>
 </plist>

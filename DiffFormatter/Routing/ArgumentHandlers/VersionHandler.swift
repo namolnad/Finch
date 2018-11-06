@@ -9,7 +9,7 @@
 import Foundation
 
 extension ArgumentRouter {
-    private static let versionArguments: [String] = ["--version, -v"]
+    private static let versionArguments: [String] = ["--version", "-v"]
 
     static let versionHandler: RouterArgumentHandling = .init { context, args in
         guard args.contains(where: versionArguments.contains) else {

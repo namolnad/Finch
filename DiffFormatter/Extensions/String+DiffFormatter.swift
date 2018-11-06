@@ -11,10 +11,10 @@ import Foundation
 extension Array where Element == String {
     func sorted(by pattern: String) -> [String] {
         return sorted {
-            guard let match1 = matches(pattern: pattern, body: $0).first else {
+            guard let match1 = Utilities.matches(pattern: pattern, body: $0).first else {
                 return false
             }
-            guard let match2 = matches(pattern: pattern, body: $1).first else {
+            guard let match2 = Utilities.matches(pattern: pattern, body: $1).first else {
                 return false
             }
 

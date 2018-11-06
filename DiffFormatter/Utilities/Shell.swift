@@ -8,17 +8,19 @@
 
 import Foundation
 
-func shell(executablePath: String, arguments: [String], currentDirectoryPath: String) -> String? {
-    let task = Process()
-    task.executableURL = URL(fileURLWithPath: executablePath)
-    task.currentDirectoryURL = URL(fileURLWithPath: currentDirectoryPath)
-    task.arguments = arguments
-
-    let pipe = Pipe()
-    task.standardOutput = pipe
-    task.standardError = pipe
-    try? task.run()
-
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    return String(data: data, encoding: .utf8)
+extension Utilities {
+    static func shell(executablePath: String, arguments: [String], currentDirectoryPath: String) -> String? {
+        let task = Process()
+        task.executableURL = URL(fileURLWithPath: executablePath)
+        task.currentDirectoryURL = URL(fileURLWithPath: currentDirectoryPath)
+        task.arguments = arguments
+        
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.standardError = pipe
+        try? task.run()
+        
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        return String(data: data, encoding: .utf8)
+    }
 }

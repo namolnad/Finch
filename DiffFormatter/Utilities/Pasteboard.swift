@@ -8,7 +8,9 @@
 
 import AppKit.NSPasteboard
 
-func pbCopy(text: String) {
-    NSPasteboard.general.declareTypes([.string], owner: nil)
-    NSPasteboard.general.setString(text, forType: .string)
+extension Utilities {
+    static func pbCopy(text: String) {
+        NSPasteboard.general.declareTypes([.string], owner: nil)
+        NSPasteboard.general.setString(text, forType: .string)
+    }
 }

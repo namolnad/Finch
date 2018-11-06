@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+## Test script
+
+ROOT_DIR="$(dirname "$(tmp=${0%/*}; echo "$PWD${tmp##\.}")")"
+APP_NAME='DiffFormatter'
+
+xcodebuild \
+  -project "$ROOT_DIR/$APP_NAME.xcodeproj" \
+  -scheme $APP_NAME \
+  -sdk macosx \
+  build test RUN_CLANG_STATIC_ANALYZER=NO | xcpretty --test --color
+

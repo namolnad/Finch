@@ -455,7 +455,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 92AC5VS8HG;
 				INFOPLIST_FILE = DiffFormatterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -474,7 +474,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 92AC5VS8HG;
 				INFOPLIST_FILE = DiffFormatterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -607,7 +607,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 92AC5VS8HG;
 				INFOPLIST_FILE = DiffFormatter/App/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -623,7 +623,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 92AC5VS8HG;
 				DSTROOT = /tmp/DiffFormatter.dst;
 				INFOPLIST_FILE = DiffFormatter/App/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;

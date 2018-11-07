@@ -9,9 +9,9 @@
 import Foundation
 
 extension ArgumentRouter {
-    typealias RouterArgumentHandling = ArgumentHandling<String>
+    typealias RouterArgumentHandling = ArgumentHandling<ArgumentScheme>
 
-    struct ArgumentHandling<Argument> {
-        var handle: (Context, [Argument]) -> HandleResult
+    struct ArgumentHandling<Arguments> {
+        var handle: (Context, Arguments) -> HandleResult
     }
 }

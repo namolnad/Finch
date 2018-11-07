@@ -9,28 +9,32 @@
 import Foundation
 
 extension ArgumentRouter {
-    static let diffHandler: RouterArgumentHandling = .init { context, args in
-        var args = args
-
-        guard let oldVersion = args.popLast(), let newVersion = args.popLast() else {
+    static let diffHandler: RouterArgumentHandling = .init { context, scheme in
+        guard let oldVersion = scheme.oldVersion, let newVersion = scheme.newVersion else {
             return .notHandled
         }
 
-        let commandValues = args.compactMap(Argument.commands)
+        let versionHeader: String? = scheme.args.contains(.flag(.noShowVersion)) ? nil : scheme.newVersion
 
-        let versionHeader: String? = args.contains("--\(Command.noShowVersion.rawValue)") ? nil : newVersion
+        var releaseManager: User?
+        for case let .actionable(.releaseManager, email) in scheme.args {
+            releaseManager = context.configuration.users.first { $0.email == email }
+            break
+        }
 
-        let releaseManager = commandValues
-            .first { $0.command == .releaseManager }
-            .flatMap { email in context.configuration.users.first { $0.email == email.value } }
+        var projectDir: String = context.configuration.currentDirectory
+        for case let .actionable(.projectDir, dir) in scheme.args {
+            projectDir = dir
+            break
+        }
 
-        let projectDir = commandValues
-            .first { $0.command == .projectDir }?
-            .value ?? context.configuration.currentDirectory
+        var manualDiff: String?
+        for case let .actionable(.gitDiff, diff) in scheme.args {
+            manualDiff = diff
+            break
+        }
 
-        let rawDiff = commandValues
-            .first { $0.command == .gitDiff }?
-            .value ??
+        let rawDiff = manualDiff ??
             Utilities.GitDiffer(configuration: context.configuration,
                       projectDir: projectDir,
                       oldVersion: oldVersion,

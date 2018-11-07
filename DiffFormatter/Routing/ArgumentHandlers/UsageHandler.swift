@@ -9,10 +9,10 @@
 import Foundation
 
 extension ArgumentRouter {
-    private static let usageArguments: [String] = ["--help", "-h"]
+    private static let usageArguments: [Argument] = [.flag(.help), .flag(.helpAbbreviated)]
 
-    static let usageHandler: RouterArgumentHandling = .init { context, args in
-        guard args.contains(where: usageArguments.contains) else {
+    static let usageHandler: RouterArgumentHandling = .init { context, scheme in
+        guard scheme.args.contains(where: usageArguments.contains) else {
             return .notHandled
         }
 

@@ -29,17 +29,16 @@ extension ArgumentRouter {
         return .init(app: app, configuration: configuration)
     }
 
-    func route(arguments: [String]) -> HandleResult {
-        let args: [String] = arguments.reversed()
-
+    func route(argScheme: ArgumentScheme) -> HandleResult {
         for handler in handlers {
-            switch handler.handle(routingContext, args) {
+            switch handler.handle(routingContext, argScheme) {
             case .handled:
                 return .handled
             case .notHandled:
                 continue
             case .partiallyHandled(unprocessedArgs: let unprocessedArgs):
-                return route(arguments: unprocessedArgs.reversed())
+                let unprocessed = ArgumentScheme(oldVersion: argScheme.oldVersion, newVersion: argScheme.newVersion, args: unprocessedArgs)
+                return route(argScheme: unprocessed)
             }
         }
 

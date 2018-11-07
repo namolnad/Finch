@@ -10,6 +10,8 @@
 		221E3E1A2127E36800256B13 /* GitDiffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E192127E36800256B13 /* GitDiffer.swift */; };
 		221E3E1C2127E6CB00256B13 /* GitConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */; };
 		221E3E202127F28F00256B13 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Shell.swift */; };
+		2221C32621920784008D2AA7 /* ArgumentScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221C32521920784008D2AA7 /* ArgumentScheme.swift */; };
+		2221C327219207B9008D2AA7 /* ArgumentScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221C32521920784008D2AA7 /* ArgumentScheme.swift */; };
 		223745BE20F3220D0002AD6F /* String+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */; };
 		225623C82190FA8000D43338 /* ArgumentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6C20EEE33500806FF3 /* ArgumentRouter.swift */; };
 		225623C92190FA8000D43338 /* ArgumentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23592190BBC4000BAD64 /* ArgumentHandler.swift */; };
@@ -88,6 +90,7 @@
 		221E3E192127E36800256B13 /* GitDiffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitDiffer.swift; sourceTree = "<group>"; };
 		221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitConfiguration.swift; sourceTree = "<group>"; };
 		221E3E1F2127F28F00256B13 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
+		2221C32521920784008D2AA7 /* ArgumentScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentScheme.swift; sourceTree = "<group>"; };
 		223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DiffFormatter.swift"; sourceTree = "<group>"; };
 		225623E3219100F500D43338 /* UtilitiesNamespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesNamespace.swift; sourceTree = "<group>"; };
 		2264334C2123DC9700B46082 /* Configurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurator.swift; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 			children = (
 				22AACD6620EED11200806FF3 /* FindReplacePattern.swift */,
 				22AACD7420EF30B400806FF3 /* Argument.swift */,
+				2221C32521920784008D2AA7 /* ArgumentScheme.swift */,
 				22AACD7220EF30A100806FF3 /* Command.swift */,
 				226433502123E0A600B46082 /* Section */,
 				22AACD7020EF24CC00806FF3 /* User.swift */,
@@ -391,6 +395,7 @@
 				225623DA2190FAA000D43338 /* Pasteboard.swift in Sources */,
 				225623DD2190FAA600D43338 /* Configurator.swift in Sources */,
 				225623D72190FA9B00D43338 /* Line.swift in Sources */,
+				2221C327219207B9008D2AA7 /* ArgumentScheme.swift in Sources */,
 				225623E12190FAA600D43338 /* GitConfiguration.swift in Sources */,
 				225623CE2190FA8A00D43338 /* DiffHandler.swift in Sources */,
 				225623CA2190FA8000D43338 /* RoutingContext.swift in Sources */,
@@ -430,6 +435,7 @@
 				223745BE20F3220D0002AD6F /* String+DiffFormatter.swift in Sources */,
 				22AACD5E20EEAAAC00806FF3 /* main.swift in Sources */,
 				22AB23612190C1F1000BAD64 /* VersionHandler.swift in Sources */,
+				2221C32621920784008D2AA7 /* ArgumentScheme.swift in Sources */,
 				22AACD6520EEAAE200806FF3 /* Regex.swift in Sources */,
 				22AB23682190E130000BAD64 /* HandleResult.swift in Sources */,
 				228D0DFE214ED79100D808F7 /* App.swift in Sources */,

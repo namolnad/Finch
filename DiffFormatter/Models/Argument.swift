@@ -8,28 +8,37 @@
 
 import Foundation
 
-struct Argument {
-    static func commands(argument: String) -> CommandValue? {
-        var arg = argument
+enum Argument: Equatable {
+    enum ArgumentType: String {
+        case gitDiff = "--git-diff"
+        case help = "--help"
+        case helpAbbreviated = "-h"
+        case noShowVersion = "--no-show-version"
+        case projectDir = "--project-dir"
+        case releaseManager = "--release-manager"
+        case version = "--version"
+        case versionAbbreviated = "-v"
+    }
 
-        guard let range = arg.range(of: "--") else {
-            // No command tag
+    typealias Value = String
+
+    case flag(ArgumentType)
+    case actionable(ArgumentType, Value)
+
+    init?(value: String) {
+        let components = value.components(separatedBy: "=")
+
+        guard let first = components.first, let argType = ArgumentType(rawValue: first) else {
             return nil
         }
 
-        arg.removeSubrange(range)
-
-        guard case let components = arg
-            .components(separatedBy: "="),
-            components.count == 2 else {
-                // Malformed argument
-                return nil
-        }
-        guard let command = Command(rawValue: components[0]) else {
-            // Unrecognized argument
+        switch (components.count, components.last) {
+        case (1, _):
+            self = .flag(argType)
+        case (2, let value?):
+            self = .actionable(argType, value)
+        default:
             return nil
         }
-
-        return (command, components[1])
     }
 }

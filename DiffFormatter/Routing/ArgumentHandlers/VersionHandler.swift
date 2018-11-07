@@ -9,10 +9,10 @@
 import Foundation
 
 extension ArgumentRouter {
-    private static let versionArguments: [String] = ["--version", "-v"]
+    private static let versionArguments: [Argument] = [.flag(.version), .flag(.versionAbbreviated)]
 
-    static let versionHandler: RouterArgumentHandling = .init { context, args in
-        guard args.contains(where: versionArguments.contains) else {
+    static let versionHandler: RouterArgumentHandling = .init { context, scheme in
+        guard scheme.args.contains(where: versionArguments.contains) else {
             return .notHandled
         }
 

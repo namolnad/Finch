@@ -12,7 +12,7 @@ extension ArgumentRouter {
     enum HandleResult {
         case handled
         case notHandled
-        case partiallyHandled(unprocessedArgs: [String])
+        case partiallyHandled(unprocessedArgs: [Argument])
     }
 }
 

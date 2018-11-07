@@ -10,16 +10,18 @@ import Foundation
 
 let process = ProcessInfo.processInfo
 
-let configurator = Configurator(processInfo: process)
-
 let app = App()
 
-let router = ArgumentRouter(app: app, configuration: configurator.configuration)
-
-let args: [String] = process
+var args: [String] = process
     .arguments
     .filter { !$0.contains(app.name) }
 
-if case .notHandled = router.route(arguments: args) {
+let scheme = ArgumentScheme(arguments: args)
+
+let configurator = Configurator(processInfo: process, argScheme: scheme)
+
+let router = ArgumentRouter(app: app, configuration: configurator.configuration)
+
+if case .notHandled = router.route(argScheme: scheme) {
     print("Unable to handle included arguments")
 }

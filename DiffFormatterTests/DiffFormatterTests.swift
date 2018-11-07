@@ -11,7 +11,7 @@ import XCTest
 
 class DiffFormatterTests: XCTestCase {
     func testConfigurator() {
-        let configurator = Configurator(processInfo: .mock, fileManager: .mock)
+        let configurator = Configurator(processInfo: .mock, argScheme: .mock, fileManager: .mock)
 
         let users = configurator.configuration.users
         XCTAssertEqual(users.count, 3)
@@ -39,10 +39,11 @@ class DiffFormatterTests: XCTestCase {
         let router = ArgumentRouter(app: .mock, configuration: .mock)
 
         let routableArgs: [String] = ["6.12.1", "6.13.0", "--git-diff=\(inputMock)"]
-        XCTAssertTrue(router.route(arguments: routableArgs) == .handled)
+        let scheme = ArgumentScheme(arguments: routableArgs)
 
-        let notRoutableArgs: [String] = []
-        XCTAssertTrue(router.route(arguments: notRoutableArgs) == .notHandled)
+        XCTAssertTrue(router.route(argScheme: scheme) == .handled)
+
+        XCTAssertTrue(router.route(argScheme: .mock) == .notHandled)
     }
 
     func testOutputGenerator() {
@@ -63,7 +64,7 @@ class DiffFormatterTests: XCTestCase {
         let fileManagerMock = FileManagerMock(customConfigPath: customPath)
 
         let outputGenerator: Utilities.OutputGenerator = .init(
-            configuration: Configurator(processInfo: processInfoMock, fileManager: fileManagerMock).configuration,
+            configuration: Configurator(processInfo: processInfoMock, argScheme: .mock, fileManager: fileManagerMock).configuration,
             rawDiff: inputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.users.first
@@ -84,7 +85,11 @@ fileprivate extension FileManager {
 
 fileprivate extension Configuration {
     // TODO: - Shouldn't rely on configurator for mock
-    static let mock: Configuration = Configurator(processInfo: .mock, fileManager: .mock).configuration
+    static let mock: Configuration = Configurator(processInfo: .mock, argScheme: .mock, fileManager: .mock).configuration
+}
+
+fileprivate extension ArgumentScheme {
+    static let mock: ArgumentScheme = ArgumentScheme(oldVersion: nil, newVersion: nil, args: [])
 }
 
 fileprivate extension App {

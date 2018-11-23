@@ -11,16 +11,16 @@ import Foundation
 extension Utilities {
     struct OutputGenerator {
         private let version: String?
-        private let releaseManager: User?
+        private let releaseManager: Contributor?
         private let sections: [Section]
         private let footer: String?
-        private let userHandlePrefix: String
+        private let contributorHandlePrefix: String
     }
 }
 
 extension Utilities.OutputGenerator {
-    init(configuration: Configuration, rawDiff: String, version: String?, releaseManager: User?) {
         let patternCreator = FindReplacePatternCreator(configuration: configuration)
+    init(configuration: Configuration, rawDiff: String, version: String?, releaseManager: Contributor?) {
 
         let lines = type(of: self).primaryOutput(for: patternCreator.patterns, with: rawDiff)
             .components(separatedBy: "\n")
@@ -43,7 +43,7 @@ extension Utilities.OutputGenerator {
         self.releaseManager = releaseManager
         self.sections = configuration.sectionInfos.compactMap { sections[$0.title] }
         self.footer = configuration.footer
-        self.userHandlePrefix = configuration.userHandlePrefix
+        self.contributorHandlePrefix = configuration.contributorHandlePrefix
     }
 
     func generatedOutput() -> String {
@@ -98,12 +98,12 @@ extension Utilities.OutputGenerator {
         """
     }
 
-    private func formatted(releaseManager: User) -> String {
+    private func formatted(releaseManager: Contributor) -> String {
         return """
 
         ### Release Manager
 
-         - \(userHandlePrefix)\(releaseManager.userHandle)
+         - \(contributorHandlePrefix)\(releaseManager.handle)
 
         """
     }

@@ -1,20 +1,20 @@
 {
-    "users_config": {
-        "users": [
+    "contributors_config": {
+        "contributors": [
                   {
                   "email": "jony.ive@apple.com",
-                  "user_handle": "Jony.Ive"
+                  "handle": "Jony.Ive"
                   },
                   {
                   "email": "long_live_the_citadel@rick.com",
-                  "user_handle": "Rick.Sanchez"
+                  "handle": "Rick.Sanchez"
                   },
                   {
                   "email": "elvis1935+still-alive@theking.com",
-                  "user_handle": "Elvis.Presley"
+                  "handle": "Elvis.Presley"
                   }
                   ],
-        "userHandlePrefix": "@"
+        "contributorHandlePrefix": "@"
     },
     "section_infos": [
                       {

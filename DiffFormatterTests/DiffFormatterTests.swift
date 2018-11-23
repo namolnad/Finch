@@ -13,13 +13,13 @@ class DiffFormatterTests: XCTestCase {
     func testConfigurator() {
         let configurator = Configurator(processInfo: .mock, argScheme: .mock, fileManager: .mock)
 
-        let users = configurator.configuration.users
-        XCTAssertEqual(users.count, 3)
-        XCTAssertEqual(users[1].email, "long_live_the_citadel@rick.com")
-        XCTAssertEqual(users[2].userHandle, "Elvis.Presley")
-        XCTAssertEqual(users[2].email, "elvis1935+still-alive@theking.com")
+        let contributors = configurator.configuration.contributors
+        XCTAssertEqual(contributors.count, 3)
+        XCTAssertEqual(contributors[1].email, "long_live_the_citadel@rick.com")
+        XCTAssertEqual(contributors[2].handle, "Elvis.Presley")
+        XCTAssertEqual(contributors[2].email, "elvis1935+still-alive@theking.com")
 
-        XCTAssertEqual(configurator.configuration.userHandlePrefix, "@")
+        XCTAssertEqual(configurator.configuration.contributorHandlePrefix, "@")
 
         let sectionInfos = configurator.configuration.sectionInfos
         XCTAssertEqual(sectionInfos.count, 3)
@@ -51,7 +51,7 @@ class DiffFormatterTests: XCTestCase {
             configuration: .mock,
             rawDiff: inputMock,
             version: "6.13.0",
-            releaseManager: Configuration.mock.users.first
+            releaseManager: Configuration.mock.contributors.first
         )
 
         XCTAssertEqual(outputGenerator.generatedOutput(), Utilities.mockOutput)
@@ -67,7 +67,7 @@ class DiffFormatterTests: XCTestCase {
             configuration: Configurator(processInfo: processInfoMock, argScheme: .mock, fileManager: fileManagerMock).configuration,
             rawDiff: inputMock,
             version: "6.13.0",
-            releaseManager: Configuration.mock.users.first
+            releaseManager: Configuration.mock.contributors.first
         )
 
         XCTAssertEqual(outputGenerator.generatedOutput(), Utilities.mockCustomDelimiterOutput)

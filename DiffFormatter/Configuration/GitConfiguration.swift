@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GitConfiguration: Codable {
+struct GitConfiguration: Decodable {
     let branchPrefix: String?
     let executablePath: String?
 }

@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct DelimiterConfiguration: Codable, Equatable {
+struct DelimiterConfiguration: Decodable, Equatable {
+    enum CodingKeys: String, CodingKey {
+        case input
+        case output
+    }
     let input: DelimiterPair
     let output: DelimiterPair
 

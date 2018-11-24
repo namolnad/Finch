@@ -1,5 +1,5 @@
 //
-//  Regex.swift
+//  Utilities_Regex.swift
 //  DiffFormatter
 //
 //  Created by Dan Loman on 7/5/18.
@@ -9,8 +9,8 @@
 import Foundation
 
 extension Utilities {
-    static func findReplace(in body: String, with pattern: FindReplacePattern) -> String {
-        return findReplace(pattern: pattern.text, in: body, with: pattern.replacement)
+    static func findReplace(in body: String, using pattern: Regex.Replacement) -> String {
+        return findReplace(pattern: pattern.matching, in: body, with: pattern.replacement)
     }
 
     static func findReplace(pattern: String, in body: String, with replacement: String) -> String {
@@ -24,7 +24,7 @@ extension Utilities {
         return expression.stringByReplacingMatches(in: body, options: [], range: .init(location: 0, length: body.count), withTemplate: replacement)
     }
 
-    static func matches(pattern: String, body: String) -> [NSTextCheckingResult] {
+    static func matches(pattern: Regex.Pattern, body: String) -> [NSTextCheckingResult] {
         guard let expression = try? NSRegularExpression(pattern: pattern, options: [.anchorsMatchLines]) else {
             return []
         }
@@ -33,5 +33,21 @@ extension Utilities {
         let options: NSRegularExpression.MatchingOptions = [.withTransparentBounds]
 
         return expression.matches(in: body, options: options, range: range)
+    }
+
+    static func firstMatch(pattern: Regex.Pattern, body: String) -> String? {
+        return Utilities.matches(pattern: pattern, body: body)
+            .first?
+            .firstMatch(in: body)
+    }
+}
+
+extension NSTextCheckingResult {
+    func firstMatch(in body: String) -> String? {
+        guard numberOfRanges > 0 else {
+            return nil
+        }
+
+        return String(range: range(at: 1), in: body)
     }
 }

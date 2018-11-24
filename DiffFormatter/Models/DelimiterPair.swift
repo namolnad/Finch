@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct DelimiterPair: Codable, Equatable {
+struct DelimiterPair: Decodable, Equatable {
     let left: String
     let right: String
 }

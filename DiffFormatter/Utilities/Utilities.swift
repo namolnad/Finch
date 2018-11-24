@@ -1,5 +1,5 @@
 //
-//  UtilitiesNamespace.swift
+//  Utilities.swift
 //  DiffFormatter
 //
 //  Created by Dan Loman on 11/5/18.

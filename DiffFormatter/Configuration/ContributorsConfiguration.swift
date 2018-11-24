@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ContributorsConfiguration: Codable {
+struct ContributorsConfiguration: Decodable {
     let contributors: [Contributor]
     let contributorHandlePrefix: String?
 }

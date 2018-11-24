@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Contributor: Codable {
+struct Contributor: Decodable {
     let email: String
     let handle: String
 }

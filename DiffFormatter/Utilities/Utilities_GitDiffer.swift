@@ -1,5 +1,5 @@
 //
-//  GitDiffer.swift
+//  Utilities_GitDiffer.swift
 //  DiffFormatter
 //
 //  Created by Dan Loman on 8/17/18.

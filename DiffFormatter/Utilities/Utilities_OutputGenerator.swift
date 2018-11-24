@@ -1,5 +1,5 @@
 //
-//  Outputs.swift
+//  Utilities_OutputGenerator.swift
 //  DiffFormatter
 //
 //  Created by Dan Loman on 7/5/18.
@@ -19,29 +19,40 @@ extension Utilities {
 }
 
 extension Utilities.OutputGenerator {
-        let patternCreator = FindReplacePatternCreator(configuration: configuration)
     init(configuration: Configuration, rawDiff: String, version: String?, releaseManager: Contributor?) {
+        let transformerFactory = TransformerFactory(configuration: configuration)
 
-        let lines = type(of: self).primaryOutput(for: patternCreator.patterns, with: rawDiff)
-            .components(separatedBy: "\n")
-            .filter { !$0.isEmpty }
-            .compactMap { Line(configuration: configuration, value: $0) }
+        let linesComponents = type(of: self)
+            .filteredLines(input: rawDiff, using: transformerFactory.initialTransformers)
+            .compactMap { LineComponents(rawLine: $0, configuration: configuration) }
 
-        var sections: [String: Section] = [:]
+        var sections: [Section] = configuration
+            .sectionInfos
+            .map { Section(configuration: configuration, info: $0, linesComponents: []) }
 
-        let tagToSectionInfo: [String: SectionInfo] = configuration.sectionInfos.reduce(into: [:]) { tagSectionInfoMap, sectionInfo in
-            sectionInfo.tags.forEach { tag in
-                tagSectionInfoMap[tag] = sectionInfo
+        let tagToIndex: [String: Int] = sections
+            .enumerated()
+            .reduce([:]) { partial, next in
+            var map = partial
+            next.element.info.tags.forEach { tag in
+                map.updateValue(next.offset, forKey: tag)
             }
+            return map
         }
 
-        lines.forEach {
-            $0.placeInOwningSection(tagToSectionInfo: tagToSectionInfo, titleToSection: &sections)
+        for components in linesComponents {
+            let tag = components.tags.first(where: tagToIndex.keys.contains) ?? "*"
+            guard let index = tagToIndex[tag] else {
+                continue
+            }
+            let section = sections[index]
+
+            sections[index] = section.inserting(lineComponents: components)
         }
 
         self.version = version
         self.releaseManager = releaseManager
-        self.sections = configuration.sectionInfos.compactMap { sections[$0.title] }
+        self.sections = sections
         self.footer = configuration.footer
         self.contributorHandlePrefix = configuration.contributorHandlePrefix
     }
@@ -58,7 +69,7 @@ extension Utilities.OutputGenerator {
         }
 
         sections.forEach {
-            output.append(body(lines: $0.lines, title: $0.info.title))
+            output.append($0.output)
         }
 
         if let value = footer {
@@ -68,26 +79,13 @@ extension Utilities.OutputGenerator {
         return output
     }
 
-    private func body(lines: [String], title: String) -> String {
-        let output = """
-
-        ### \(title)
-
-        """
-
-        return lines.reduce(output) { $0 + $1 + "\n" }
-    }
-
-    // Primary parsing
-    private static func primaryOutput(for patterns: [[FindReplacePattern]], with input: String) -> String {
-        let sortedInput = input
+    // Normalizes input/removes
+    private static func filteredLines(input: String, using transformers: [Transformer]) -> [String] {
+        return transformers
+            .reduce(input) { $1.transform(text: $0) }
             .components(separatedBy: "\n")
             .sorted(by: "@@@(.*)@@@")
-            .joined(separator: "\n")
-
-        return patterns
-            .flatMap { $0 }
-            .reduce(sortedInput, Utilities.findReplace)
+            .filter { !$0.isEmpty }
     }
 
     private func header(version: String) -> String {

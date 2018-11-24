@@ -1,5 +1,5 @@
 //
-//  Pasteboard.swift
+//  Utilities_Pasteboard.swift
 //  DiffFormatter
 //
 //  Created by Dan Loman on 7/5/18.

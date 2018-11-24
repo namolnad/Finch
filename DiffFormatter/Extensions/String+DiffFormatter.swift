@@ -9,7 +9,7 @@
 import Foundation
 
 extension Array where Element == String {
-    func sorted(by pattern: String) -> [String] {
+    func sorted(by pattern: Regex.Pattern) -> [String] {
         return sorted {
             guard let match1 = Utilities.matches(pattern: pattern, body: $0).first else {
                 return false
@@ -35,5 +35,11 @@ extension String {
 
     var escaped: String {
         return NSRegularExpression.escapedPattern(for: self)
+    }
+}
+
+extension String: LineOutputtable {
+    func output(components: Section.Line.Components, context: Section.Line.Context) -> String {
+        return self
     }
 }

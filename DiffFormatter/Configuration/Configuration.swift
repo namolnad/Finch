@@ -8,26 +8,34 @@
 
 import Foundation
 
-struct Configuration: Codable {
+struct Configuration: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case delimiterConfig
+        case sectionInfos
+        case footer
+        case gitConfig
+        case contributorsConfig
+        case currentDirectory
+    }
     private(set) var delimiterConfig: DelimiterConfiguration
-    private(set) var sectionInfos: [SectionInfo]
+    private(set) var sectionInfos: [Section.Info]
     private(set) var footer: String?
     private(set) var gitConfig: GitConfiguration
-    private(set) var usersConfig: UsersConfiguration
+    private(set) var contributorsConfig: ContributorsConfiguration
     private(set) var currentDirectory: String = ""
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        usersConfig = (try? container.decode(UsersConfiguration.self, forKey: .usersConfig)) ?? .blank
-        sectionInfos = (try? container.decode([SectionInfo].self, forKey: .sectionInfos)) ?? []
-        footer = try? container.decode(String.self, forKey: .footer)
-        delimiterConfig = (try? container.decode(DelimiterConfiguration.self, forKey: .delimiterConfig)) ?? .blank
-        gitConfig = (try? container.decode(GitConfiguration.self, forKey: .gitConfig)) ?? .blank
+        contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
+        sectionInfos = container.decode(forKey: .sectionInfos, default: [])
+        footer = container.optionalDecode(forKey: .footer)
+        delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
+        gitConfig = container.decode(forKey: .gitConfig, default: .default)
     }
 
-    init(usersConfig: UsersConfiguration = .blank, sectionInfos: [SectionInfo] = [], footer: String? = nil, delimiterConfig: DelimiterConfiguration = .blank, gitConfig: GitConfiguration = .blank) {
-        self.usersConfig = usersConfig
+    init(contributorsConfig: ContributorsConfiguration = .blank, sectionInfos: [Section.Info] = [], footer: String? = nil, delimiterConfig: DelimiterConfiguration = .blank, gitConfig: GitConfiguration = .blank) {
+        self.contributorsConfig = contributorsConfig
         self.sectionInfos = sectionInfos
         self.footer = footer
         self.delimiterConfig = delimiterConfig
@@ -36,12 +44,12 @@ struct Configuration: Codable {
 }
 
 extension Configuration {
-    var users: [User] {
-        return usersConfig.users
+    var contributors: [Contributor] {
+        return contributorsConfig.contributors
     }
 
-    var userHandlePrefix: String {
-        return usersConfig.userHandlePrefix ?? ""
+    var contributorHandlePrefix: String {
+        return contributorsConfig.contributorHandlePrefix ?? ""
     }
 
     var gitExecutablePath: String? {
@@ -64,13 +72,13 @@ extension Configuration {
             self.footer = value
         }
 
-        // Users configuration
-        if !otherConfig.users.isEmpty {
-            self.usersConfig = UsersConfiguration(users: otherConfig.users, userHandlePrefix: self.usersConfig.userHandlePrefix)
+        // Contributors configuration
+        if !otherConfig.contributors.isEmpty {
+            self.contributorsConfig = ContributorsConfiguration(contributors: otherConfig.contributors, contributorHandlePrefix: self.contributorsConfig.contributorHandlePrefix)
         }
 
-        if let value = otherConfig.usersConfig.userHandlePrefix {
-            self.usersConfig = UsersConfiguration(users: self.usersConfig.users, userHandlePrefix: value)
+        if let value = otherConfig.contributorsConfig.contributorHandlePrefix {
+            self.contributorsConfig = ContributorsConfiguration(contributors: self.contributorsConfig.contributors, contributorHandlePrefix: value)
         }
 
         // Delimiter configuration
@@ -84,11 +92,15 @@ extension Configuration {
 
         // Git configuration
         if let value = otherConfig.gitConfig.branchPrefix {
-            self.gitConfig = GitConfiguration(branchPrefix: value, executablePath: self.gitConfig.executablePath)
+            self.gitConfig = GitConfiguration(branchPrefix: value, executablePath: self.gitConfig.executablePath, repoBaseUrl: self.gitConfig.repoBaseUrl)
         }
 
         if let value = otherConfig.gitConfig.executablePath {
-            self.gitConfig = GitConfiguration(branchPrefix: self.gitConfig.branchPrefix, executablePath: value)
+            self.gitConfig = GitConfiguration(branchPrefix: self.gitConfig.branchPrefix, executablePath: value, repoBaseUrl: self.gitConfig.repoBaseUrl)
+        }
+
+        if case let value = otherConfig.gitConfig.repoBaseUrl, !value.isEmpty {
+            self.gitConfig = GitConfiguration(branchPrefix: self.gitConfig.branchPrefix, executablePath: self.gitConfig.executablePath, repoBaseUrl: value)
         }
     }
 }
@@ -96,7 +108,7 @@ extension Configuration {
 extension Configuration {
     static func `default`(currentDirectory: String) -> Configuration {
         var config = Configuration(
-            usersConfig: .default,
+            contributorsConfig: .default,
             sectionInfos: .default,
             delimiterConfig: .default,
             gitConfig: .default
@@ -117,7 +129,7 @@ extension Configuration {
             sectionInfos.isEmpty &&
             (footer?.isEmpty == true) &&
             gitConfig.isBlank &&
-            usersConfig.isBlank &&
+            contributorsConfig.isBlank &&
             currentDirectory.isEmpty
     }
 }

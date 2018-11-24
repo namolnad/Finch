@@ -8,14 +8,31 @@
 
 import Foundation
 
-struct GitConfiguration: Codable {
+struct GitConfiguration {
+    enum CodingKeys: String, CodingKey {
+        case branchPrefix
+        case executablePath
+        case repoBaseUrl
+    }
+
     let branchPrefix: String?
     let executablePath: String?
+    let repoBaseUrl: String
+}
+
+extension GitConfiguration: Decodable {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        self.branchPrefix = container.optionalDecode(forKey: .branchPrefix)
+        self.executablePath = container.optionalDecode(forKey: .executablePath)
+        self.repoBaseUrl = container.decode(forKey: .repoBaseUrl, default: "")
+    }
 }
 
 extension GitConfiguration {
-    static let blank: GitConfiguration = .init(branchPrefix: nil, executablePath: nil)
-    static let `default`: GitConfiguration = .init(branchPrefix: "", executablePath: nil)
+    static let blank: GitConfiguration = .init(branchPrefix: nil, executablePath: nil, repoBaseUrl: "")
+    static let `default`: GitConfiguration = .init(branchPrefix: "", executablePath: nil, repoBaseUrl: "")
 }
 
 extension GitConfiguration: Blankable {

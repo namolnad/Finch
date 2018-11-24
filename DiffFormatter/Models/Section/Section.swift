@@ -8,13 +8,48 @@
 
 import Foundation
 
-struct Section: Codable {
-    let info: SectionInfo
-    var lines: [String]
+struct Section {
+    struct Line {
+        let value: String
+    }
+
+    let configuration: Configuration
+    let info: Info
+    let linesComponents: [Line.Components]
 }
 
 extension Section {
-    static func `default`(for info: SectionInfo) -> Section {
-        return Section(info: info, lines: [])
+    var lines: [Line] {
+        return linesComponents.map { components -> Section.Line in
+            return .from(components: components, context: .init(
+                configuration: configuration,
+                sectionInfo: info)
+            )
+        }
+    }
+
+    func inserting(lineComponents: Line.Components) -> Section {
+        return .init(
+            configuration: configuration,
+            info: info,
+            linesComponents: linesComponents + [lineComponents]
+        )
+    }
+}
+
+extension Section {
+    static func `default`(for info: Section.Info, configuration: Configuration) -> Section {
+        return Section(configuration: configuration, info: info, linesComponents: [])
+    }
+}
+
+extension Section: Outputtable {
+    var output: String {
+        return """
+
+        ### \(info.title)
+        \(lines.output)
+
+        """
     }
 }

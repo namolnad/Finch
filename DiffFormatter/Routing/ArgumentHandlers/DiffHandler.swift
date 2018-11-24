@@ -16,9 +16,9 @@ extension ArgumentRouter {
 
         let versionHeader: String? = scheme.args.contains(.flag(.noShowVersion)) ? nil : scheme.newVersion
 
-        var releaseManager: User?
+        var releaseManager: Contributor?
         for case let .actionable(.releaseManager, email) in scheme.args {
-            releaseManager = context.configuration.users.first { $0.email == email }
+            releaseManager = context.configuration.contributors.first { $0.email == email }
             break
         }
 

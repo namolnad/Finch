@@ -32,7 +32,7 @@ The following portions of DiffFormatter are configurable:
 - Git branch (or tag) prefix
 - Git repo base url
 
-To function properly, DiffFormatter requires at least a users list.
+To function properly, DiffFormatter requires at least a contributors list.
 
 ## File Type & Search Behavior
 DiffFormatter will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.diff_formatter` file with no extension, placed in either the home, current or a custom directory. For instance, if you provide a custom path through an env variable, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diff_formatter`.

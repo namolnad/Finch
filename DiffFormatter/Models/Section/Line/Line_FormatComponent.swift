@@ -26,10 +26,10 @@ extension Section.Line.FormatComponent: LineOutputtable {
         switch self {
         case .commitTypeHyperlink:
             var urlTitle = "Commit"
-            var url = "\(context.configuration.repoBaseUrl)/commit/\(components.sha)"
+            var url = "\(context.configuration.gitConfig.repoBaseUrl)/commit/\(components.sha)"
             if let prNum = components.pullRequestNumber {
                 urlTitle = "PR #\(prNum)"
-                url = "\(context.configuration.repoBaseUrl)/pull/\(prNum)"
+                url = "\(context.configuration.gitConfig.repoBaseUrl)/pull/\(prNum)"
             }
             return "[\(urlTitle)](\(url))"
         case .contributorEmail:

@@ -41,5 +41,7 @@
                       }
                       ],
     "footer": "\n### Timeline\n- Begin development:\n- Feature cut-off / Start of bake / dogfooding:\n- Submission:\n- Release (expected):\n- Release (actual):\n",
-    "repo_base_url": "https://github.com/citadel-of-ricks/C-137"
+    "git_config": {
+        "repo_base_url": "https://github.com/citadel-of-ricks/C-137"
+    }
 }

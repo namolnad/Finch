@@ -22,22 +22,29 @@ format-version-diff() {
 
 # Configuration Setup
 The following portions of DiffFormatter are configurable:
-- User list
-- User handle prefix
+- Contributor list
+- Contributor handle prefix
 - Section info (title and corresponding tags)
+- Section's line format
 - Tag input and output delimiters
 - Footer (Appended to the end of the formatted diff as a simple string)
 - Git executable path
 - Git branch (or tag) prefix
+- Git repo base url
 
 To function properly, DiffFormatter requires at least a users list.
 
 ## File Type & Search Behavior
 DiffFormatter will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.diff_formatter` file with no extension, placed in either the home, current or a custom directory. For instance, if you provide a custom path through an env variable, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diff_formatter`.
 
-A total of 2 paths will be searched for custom configuration files, in the following order:
-1. Home directory
-2. Path found at included DIFF_FORMATTER_CONFIG environment variable __OR__ DiffFormatter's current directory if the previous env var is not present
+The config search paths will be executed in the following mannger:
+- Env var
+  - DIFF_FORMATTER_CONFIG
+__OR__
+- Built in defaults overridden w/ waterfall technique
+  - Home directory
+  - DiffFormatter's current directory
+  - --proj-dir argument
 
 Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or omitted config file components will be ignored. Configuration customization is not additive to the existing configuration.
 
@@ -46,8 +53,8 @@ Any non-empty configuration variables included in the config file found in each 
 
 ```
 {
-  "users_config": {
-    "users": [
+  "contributors_config": {
+    "contributors": [
       {
         "email": "jony.ive@apple.com",
         "quip_handle": "Jony.Ive"
@@ -58,7 +65,7 @@ Any non-empty configuration variables included in the config file found in each 
         "quip_handle": "Tony.Stark"
       }
     ],
-    "user_handle_prefix": "%"
+    "contributor_handle_prefix": "%"
   },
   "section_infos": [
     {
@@ -66,7 +73,9 @@ Any non-empty configuration variables included in the config file found in each 
       "tags": [
         "feature",
         "tag 2"
-      ]
+      ],
+      "format_string": " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>",
+      "capitalizes_message": true
     }
   ],
   "footer": "Custom footer here",
@@ -77,7 +86,8 @@ Any non-empty configuration variables included in the config file found in each 
     }
   },
   "git_config": {
-    "branch_prefix": "origin/releases/"
+    "branch_prefix": "origin/releases/",
+    "repo_base_url": "https://github.com/org/repo"
   }
 }
 ```
@@ -86,7 +96,7 @@ Any non-empty configuration variables included in the config file found in each 
   - Sections should be listed in the order you want them to be displayed in the output
   - If included sections have duplicative tags, the last section with a given tag wins. Each matching commit will be placed into it's owning section.
   - One wildcard section can be included. Do so by including a * in the section's tag config.
-  - Commits will only appear in a single section. Searching first first for a section matching the first commit tag, then the second and so on.
+  - Commits will only appear in a single section. Searches first for a section matching the first commit tag, then the second and so on.
 
 # Example output
 ```

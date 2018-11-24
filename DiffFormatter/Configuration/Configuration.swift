@@ -16,7 +16,6 @@ struct Configuration: Decodable {
         case gitConfig
         case contributorsConfig
         case currentDirectory
-        case repoBaseUrl
     }
     private(set) var delimiterConfig: DelimiterConfiguration
     private(set) var sectionInfos: [Section.Info]
@@ -24,7 +23,6 @@ struct Configuration: Decodable {
     private(set) var gitConfig: GitConfiguration
     private(set) var contributorsConfig: ContributorsConfiguration
     private(set) var currentDirectory: String = ""
-    private(set) var repoBaseUrl: String
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -33,17 +31,15 @@ struct Configuration: Decodable {
         sectionInfos = container.decode(forKey: .sectionInfos, default: [])
         footer = container.optionalDecode(forKey: .footer)
         delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
-        gitConfig = container.decode(forKey: .gitConfig, default: .blank)
-        repoBaseUrl = container.decode(forKey: .repoBaseUrl, default: "")
+        gitConfig = container.decode(forKey: .gitConfig, default: .default)
     }
 
-    init(contributorsConfig: ContributorsConfiguration = .blank, sectionInfos: [Section.Info] = [], footer: String? = nil, delimiterConfig: DelimiterConfiguration = .blank, gitConfig: GitConfiguration = .blank, repoBaseUrl: String) {
+    init(contributorsConfig: ContributorsConfiguration = .blank, sectionInfos: [Section.Info] = [], footer: String? = nil, delimiterConfig: DelimiterConfiguration = .blank, gitConfig: GitConfiguration = .blank) {
         self.contributorsConfig = contributorsConfig
         self.sectionInfos = sectionInfos
         self.footer = footer
         self.delimiterConfig = delimiterConfig
         self.gitConfig = gitConfig
-        self.repoBaseUrl = repoBaseUrl
     }
 }
 
@@ -96,15 +92,15 @@ extension Configuration {
 
         // Git configuration
         if let value = otherConfig.gitConfig.branchPrefix {
-            self.gitConfig = GitConfiguration(branchPrefix: value, executablePath: self.gitConfig.executablePath)
+            self.gitConfig = GitConfiguration(branchPrefix: value, executablePath: self.gitConfig.executablePath, repoBaseUrl: self.gitConfig.repoBaseUrl)
         }
 
         if let value = otherConfig.gitConfig.executablePath {
-            self.gitConfig = GitConfiguration(branchPrefix: self.gitConfig.branchPrefix, executablePath: value)
+            self.gitConfig = GitConfiguration(branchPrefix: self.gitConfig.branchPrefix, executablePath: value, repoBaseUrl: self.gitConfig.repoBaseUrl)
         }
 
-        if case let value = otherConfig.repoBaseUrl, !value.isEmpty {
-            self.repoBaseUrl = value
+        if case let value = otherConfig.gitConfig.repoBaseUrl, !value.isEmpty {
+            self.gitConfig = GitConfiguration(branchPrefix: self.gitConfig.branchPrefix, executablePath: self.gitConfig.executablePath, repoBaseUrl: value)
         }
     }
 }
@@ -115,8 +111,7 @@ extension Configuration {
             contributorsConfig: .default,
             sectionInfos: .default,
             delimiterConfig: .default,
-            gitConfig: .default,
-            repoBaseUrl: ""
+            gitConfig: .default
         )
         config.currentDirectory = currentDirectory
 

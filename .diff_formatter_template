@@ -1,17 +1,18 @@
 {
-  "users_config": {
-    "users": [
+  "contributors_config": {
+    "contributors": [
       {
         "email": "your@email.com",
-        "user_handle": "First.Last"
+        "handle": "First.Last"
       }
     ],
-    "user_handle_prefix": null ## Defaults to @
+    "contributor_handle_prefix": null ## Defaults to @
   },
   "section_infos": [
     {
       "title": "Features",
-      "tags": ["*"]
+      "tags": ["*"],
+      "format_string": " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>"
     },
     {
       "title": "Bug Fixes",
@@ -32,6 +33,7 @@
   },
   "git_config": {
     "executable_path": null, ## Defaults to use 'which git', configure if you're facing issues
-    "branch_prefix": "origin/releases/" ## Defaults to "", configure to follow your convention
+    "branch_prefix": "origin/releases/", ## Defaults to "", configure to follow your convention
+    "repo_base_url": "https://github.com/org/repo"
   }
 }

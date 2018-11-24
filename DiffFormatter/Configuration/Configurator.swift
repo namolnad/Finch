@@ -21,6 +21,14 @@ struct Configurator {
         // Start with default configuration
         self.configuration = .default(currentDirectory: fileManager.currentDirectoryPath)
 
+        // Return early if env var config is passed in
+        if let value = processInfo.environment["DIFF_FORMATTER_CONFIG"], !value.isEmpty {
+            if let config = configuration(forPath: value), !config.isBlank {
+                configuration.update(with: config)
+                return
+            }
+        }
+
         guard case let home = fileManager.homeDirectoryForCurrentUser.path, !home.isEmpty else {
             return
         }
@@ -43,13 +51,6 @@ struct Configurator {
                 configuration.update(with: config)
             }
             break
-        }
-
-        // Load config overrides from custom path if env var included
-        if let value = processInfo.environment["DIFF_FORMATTER_CONFIG"], !value.isEmpty {
-            if let config = configuration(forPath: value), !config.isBlank {
-                configuration.update(with: config)
-            }
         }
     }
 

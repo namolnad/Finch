@@ -39,7 +39,7 @@ extension String {
 }
 
 extension String: LineOutputtable {
-    func output(components: LineComponents, configuration: Configuration, sectionInfo: Section.Info) -> String {
+    func output(components: Section.Line.Components, context: Section.Line.Context) -> String {
         return self
     }
 }

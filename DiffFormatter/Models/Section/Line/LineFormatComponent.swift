@@ -8,38 +8,40 @@
 
 import Foundation
 
-enum LineFormatComponent: String {
-    case commitTypeHyperlink = "commit_type_hyperlink"
-    case contributorEmail = "contributor_email"
-    case contributorHandle = "contributor_handle"
-    case message
-    case sha
-    case tags
+extension Section.Line {
+    enum FormatComponent: String {
+        case commitTypeHyperlink = "commit_type_hyperlink"
+        case contributorEmail = "contributor_email"
+        case contributorHandle = "contributor_handle"
+        case message
+        case sha
+        case tags
+    }
 }
 
-extension LineFormatComponent: Decodable {}
+extension Section.Line.FormatComponent: Decodable {}
 
-extension LineFormatComponent: LineOutputtable {
-    func output(components: LineComponents, configuration: Configuration, sectionInfo: Section.Info) -> String {
+extension Section.Line.FormatComponent: LineOutputtable {
+    func output(components: Section.Line.Components, context: Section.Line.Context) -> String {
         switch self {
         case .commitTypeHyperlink:
             var urlTitle = "Commit"
-            var url = "\(configuration.repoBaseUrl)/commit/\(components.sha)"
+            var url = "\(context.configuration.repoBaseUrl)/commit/\(components.sha)"
             if let prNum = components.pullRequestNumber {
                 urlTitle = "PR #\(prNum)"
-                url = "\(configuration.repoBaseUrl)/pull/\(prNum)"
+                url = "\(context.configuration.repoBaseUrl)/pull/\(prNum)"
             }
             return "[\(urlTitle)](\(url))"
         case .contributorEmail:
             return components.contributorEmail
         case .contributorHandle:
-            guard let contributor = configuration.contributors.first(where: { $0.email == components.contributorEmail }) else {
+            guard let contributor = context.configuration.contributors.first(where: { $0.email == components.contributorEmail }) else {
                 return components.contributorEmail
             }
 
-            return "\(configuration.contributorHandlePrefix)\(contributor.handle)"
+            return "\(context.configuration.contributorHandlePrefix)\(contributor.handle)"
         case .message:
-            if sectionInfo.capitalizesMessage {
+            if context.sectionInfo.capitalizesMessage {
                 return components.message.capitalized
             } else {
                 return components.message
@@ -48,7 +50,7 @@ extension LineFormatComponent: LineOutputtable {
             return components.sha
         case .tags:
             return components.tags
-                .reduce("") { $0 + "\(configuration.delimiterConfig.output.left)\($1)\(configuration.delimiterConfig.output.right)" }
+                .reduce("") { $0 + "\(context.configuration.delimiterConfig.output.left)\($1)\(context.configuration.delimiterConfig.output.right)" }
         }
     }
 }

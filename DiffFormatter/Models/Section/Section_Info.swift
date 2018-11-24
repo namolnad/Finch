@@ -88,6 +88,12 @@ private extension String {
             components.append(component)
             component = ""
         }
+        func string(for formatComponent: Section.Line.FormatComponent) -> String {
+            return formatComponent.rawValue
+        }
+        func format(component: Section.Line.FormatComponent) -> LineOutputtable {
+            return component
+        }
 
         for idx in indices.dropFirst().dropLast() {
             let nextEqualToCurrent = self[index(after: idx)] == self[idx]
@@ -114,22 +120,27 @@ private extension String {
 
         var transformedComp: [LineOutputtable] = []
 
-        for comp in components {
-            switch comp {
-            case "<<\(LineFormatComponent.commitTypeHyperlink.rawValue)>>": transformedComp.append(LineFormatComponent.commitTypeHyperlink)
-            case "<<\(LineFormatComponent.contributorEmail.rawValue)>>":
-                transformedComp.append(LineFormatComponent.contributorEmail)
-            case "<<\(LineFormatComponent.contributorHandle.rawValue)>>":
-                transformedComp.append(LineFormatComponent.contributorHandle)
-            case "<<\(LineFormatComponent.message.rawValue)>>":
-                transformedComp.append(LineFormatComponent.message)
-            case "<<\(LineFormatComponent.tags.rawValue)>>":
-                transformedComp.append(LineFormatComponent.tags)
-            case "<<\(LineFormatComponent.sha.rawValue)>>":
-                transformedComp.append(LineFormatComponent.sha)
+        for component in components {
+            let outputtable: LineOutputtable
+
+            switch component {
+            case "<<\(string(for: .commitTypeHyperlink))>>":
+                outputtable = format(component: .commitTypeHyperlink)
+            case "<<\(string(for: .contributorEmail))>>":
+                outputtable = format(component: .contributorEmail)
+            case "<<\(string(for: .contributorHandle))>>":
+                outputtable = format(component: .contributorHandle)
+            case "<<\(string(for: .message))>>":
+                outputtable = format(component: .message)
+            case "<<\(string(for: .tags))>>":
+                outputtable = format(component: .tags)
+            case "<<\(string(for: .sha))>>":
+                outputtable = format(component: .sha)
             default:
-                transformedComp.append(comp)
+                outputtable = component
             }
+
+            transformedComp.append(outputtable)
         }
 
         return transformedComp

@@ -24,7 +24,7 @@ extension Utilities.OutputGenerator {
 
         let linesComponents = type(of: self)
             .filteredLines(input: rawDiff, using: transformerFactory.initialTransformers)
-            .compactMap { LineComponents(rawLine: $0, configuration: configuration) }
+            .compactMap { Section.Line.Components(rawLine: $0, configuration: configuration) }
 
         var sections: [Section] = configuration
             .sectionInfos

@@ -76,7 +76,7 @@ class DiffFormatterTests: XCTestCase {
     func testLineComponentParsing() {
         let sample = "&&&5a544059e165f0703843d1c6c509cc853ad6afa4&&& - @@@[tag1][tag2] fixing something somewhere (#1234)@@@###author@email.com###"
 
-        let component = LineComponents(rawLine: sample, configuration: .mock)
+        let component = Section.Line.Components(rawLine: sample, configuration: .mock)
 
         XCTAssert(component.contributorEmail == "author@email.com")
         XCTAssert(component.sha == "5a544059e165f0703843d1c6c509cc853ad6afa4")
@@ -86,7 +86,7 @@ class DiffFormatterTests: XCTestCase {
 
         let sample2 = "&&&5a544059e165f0703843d1c6c509cc853ad6afa4&&& - @@@[tag1]fixing something somewhere@@@###author+1234@email.com###"
 
-        let component2 = LineComponents(rawLine: sample2, configuration: .mock)
+        let component2 = Section.Line.Components(rawLine: sample2, configuration: .mock)
 
         XCTAssert(component2.contributorEmail == "author+1234@email.com")
         XCTAssert(component2.sha == "5a544059e165f0703843d1c6c509cc853ad6afa4")

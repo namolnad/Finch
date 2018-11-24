@@ -19,11 +19,11 @@ struct Section {
 
     let configuration: Configuration
     let info: Info
-    let linesComponents: [LineComponents]
+    let linesComponents: [Line.Components]
 }
 
 extension Section {
-    func inserting(lineComponents: LineComponents) -> Section {
+    func inserting(lineComponents: Line.Components) -> Section {
         return .init(
             configuration: configuration,
             info: info,
@@ -37,7 +37,8 @@ extension Section {
         return linesComponents
             .map { component in
                 let value = info.format.reduce("") { partial, next in
-                    let nextOut = next.output(components: component, configuration: configuration, sectionInfo: info)
+                    let context = Line.Context(configuration: configuration, sectionInfo: info)
+                    let nextOut = next.output(components: component, context: context)
                     if partial.hasSuffix(" ") && nextOut.hasPrefix(" ") {
                         return partial + String(nextOut.dropFirst())
                     } else {

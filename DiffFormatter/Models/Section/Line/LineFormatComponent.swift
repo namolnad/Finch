@@ -20,7 +20,7 @@ enum LineFormatComponent: String {
 extension LineFormatComponent: Decodable {}
 
 extension LineFormatComponent: LineOutputtable {
-    func output(components: LineComponents, configuration: Configuration) -> String {
+    func output(components: LineComponents, configuration: Configuration, sectionInfo: Section.Info) -> String {
         switch self {
         case .commitTypeHyperlink:
             var urlTitle = "Commit"
@@ -39,7 +39,11 @@ extension LineFormatComponent: LineOutputtable {
 
             return "\(configuration.contributorHandlePrefix)\(contributor.handle)"
         case .message:
-            return components.message
+            if sectionInfo.capitalizesMessage {
+                return components.message.capitalized
+            } else {
+                return components.message
+            }
         case .sha:
             return components.sha
         case .tags:

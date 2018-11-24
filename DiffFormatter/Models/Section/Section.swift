@@ -37,7 +37,7 @@ extension Section {
         return linesComponents
             .map { component in
                 let value = info.format.reduce("") { partial, next in
-                    let nextOut = next.output(components: component, configuration: configuration)
+                    let nextOut = next.output(components: component, configuration: configuration, sectionInfo: info)
                     if partial.hasSuffix(" ") && nextOut.hasPrefix(" ") {
                         return partial + String(nextOut.dropFirst())
                     } else {

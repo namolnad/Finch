@@ -8,6 +8,33 @@
 
 import Foundation
 
+struct LineComponents {
+    enum Kind: Int {
+        case sha = 1
+        case message
+        case pullRequestNumber
+        case contributorEmail
+    }
+
+    let contributorEmail: String
+    let message: String
+    let pullRequestNumber: Int?
+    let sha: String
+    let tags: [String]
+
+    init(rawLine: String, configuration: Configuration) {
+        let componentString: (Kind) -> String = { kind in
+            return rawLine.component(kind: kind, configuration: configuration)
+        }
+
+        self.contributorEmail = componentString(.contributorEmail)
+        self.message = (Utilities.firstMatch(pattern: .filteredMessagePattern(from: configuration), body: rawLine) ?? componentString(.message)).trimmingCharacters(in: .whitespacesAndNewlines)
+        self.pullRequestNumber = Int(componentString(.pullRequestNumber))
+        self.sha = componentString(.sha)
+        self.tags = Utilities.matches(pattern: .tagPattern(from: configuration), body: rawLine).compactMap { $0.firstMatch(in: rawLine) }
+    }
+}
+
 extension LineComponents.Kind {
     var regEx: String {
         switch self {
@@ -33,33 +60,6 @@ extension LineComponents.Kind {
         case .contributorEmail:
             return "###"
         }
-    }
-}
-
-struct LineComponents {
-    enum Kind: Int {
-        case sha = 1
-        case message
-        case pullRequestNumber
-        case contributorEmail
-    }
-
-    let contributorEmail: String
-    let message: String
-    let pullRequestNumber: Int?
-    let sha: String
-    let tags: [String]
-
-    init(rawLine: String, configuration: Configuration) {
-        let componentString: (Kind) -> String = { kind in
-            return rawLine.component(kind: kind, configuration: configuration)
-        }
-
-        self.contributorEmail = componentString(.contributorEmail)
-        self.message = (Utilities.firstMatch(pattern: .filteredMessagePattern(from: configuration), body: rawLine) ?? componentString(.message)).trimmingCharacters(in: .whitespacesAndNewlines)
-        self.pullRequestNumber = Int(componentString(.pullRequestNumber))
-        self.sha = componentString(.sha)
-        self.tags = Utilities.matches(pattern: .tagPattern(from: configuration), body: rawLine).compactMap { $0.firstMatch(in: rawLine) }
     }
 }
 

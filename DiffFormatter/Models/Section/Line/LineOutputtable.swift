@@ -9,5 +9,5 @@
 import Foundation
 
 protocol LineOutputtable {
-    func output(components: LineComponents, configuration: Configuration) -> String
+    func output(components: LineComponents, configuration: Configuration, sectionInfo: Section.Info) -> String
 }

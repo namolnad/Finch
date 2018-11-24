@@ -11,16 +11,19 @@ import Foundation
 extension Section {
     struct Info {
         enum CodingKeys: String, CodingKey {
+            case capitalizesMessage
             case formatString
             case tags
             case title
         }
 
+        let capitalizesMessage: Bool
         private let formatString: String
         let tags: Set<String>
         let title: String
 
-        init(formatString: String, tags: [String], title: String) {
+        init(capitalizesMessage: Bool, formatString: String, tags: [String], title: String) {
+            self.capitalizesMessage = capitalizesMessage
             self.formatString = formatString
             self.tags = Set(tags)
             self.title = title
@@ -40,14 +43,26 @@ extension Section.Info: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         self.formatString = container.decode(forKey: .formatString, default: .defaultFormatString)
+        self.capitalizesMessage = container.decode(forKey: .capitalizesMessage, default: false)
         self.tags = try container.decode(forKey: .tags)
         self.title = try container.decode(forKey: .title)
     }
 }
 
 extension Section.Info {
-    fileprivate static let `default`: Section.Info = .init(formatString: .defaultFormatString, tags: ["*"], title: "Features")
-    fileprivate static let bugs: Section.Info = .init(formatString: .defaultFormatString, tags: ["bugfix", "bug fix", "bug"], title: "Bug Fixes")
+    fileprivate static let `default`: Section.Info = .init(
+        capitalizesMessage: false,
+        formatString: .defaultFormatString,
+        tags: ["*"],
+        title: "Features"
+    )
+
+    fileprivate static let bugs: Section.Info = .init(
+        capitalizesMessage: false,
+        formatString: .defaultFormatString,
+        tags: ["bugfix", "bug fix", "bug"],
+        title: "Bug Fixes"
+    )
 }
 
 extension Array where Element == Section.Info {

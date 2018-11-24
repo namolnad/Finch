@@ -13,7 +13,7 @@ In many cases it may be easiest to create a new shell function when your shell s
 
 ```
 format-version-diff() {
-  DiffFormatter $1 $2 --project-dir=/Users/YourUser/Code/YourProject --release-manager=$(git config --get user.email)
+  DiffFormatter $@ --project-dir="$HOME/Code/YourProject" --release-manager=$(git config --get user.email)
 }
 
 # Used in the following manner:

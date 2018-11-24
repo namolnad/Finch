@@ -1,5 +1,5 @@
 //
-//  LineFormatComponent.swift
+//  Line_FormatComponent.swift
 //  DiffFormatter
 //
 //  Created by Dan Loman on 11/23/18.

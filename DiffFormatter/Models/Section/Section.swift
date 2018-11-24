@@ -10,11 +10,7 @@ import Foundation
 
 struct Section {
     struct Line {
-        private let value: String
-
-        init(value: String) {
-            self.value = value
-        }
+        let value: String
     }
 
     let configuration: Configuration
@@ -23,6 +19,15 @@ struct Section {
 }
 
 extension Section {
+    var lines: [Line] {
+        return linesComponents.map { components -> Section.Line in
+            return .from(components: components, context: .init(
+                configuration: configuration,
+                sectionInfo: info)
+            )
+        }
+    }
+
     func inserting(lineComponents: Line.Components) -> Section {
         return .init(
             configuration: configuration,
@@ -33,33 +38,8 @@ extension Section {
 }
 
 extension Section {
-    var lines: [Line] {
-        return linesComponents
-            .map { component in
-                let value = info.format.reduce("") { partial, next in
-                    let context = Line.Context(configuration: configuration, sectionInfo: info)
-                    let nextOut = next.output(components: component, context: context)
-                    if partial.hasSuffix(" ") && nextOut.hasPrefix(" ") {
-                        return partial + String(nextOut.dropFirst())
-                    } else {
-                        return partial + nextOut
-                    }
-                }
-
-                return Line(value: value)
-        }
-    }
-}
-
-extension Section {
     static func `default`(for info: Section.Info, configuration: Configuration) -> Section {
         return Section(configuration: configuration, info: info, linesComponents: [])
-    }
-}
-
-extension Section.Line: Outputtable {
-    var output: String {
-        return value
     }
 }
 

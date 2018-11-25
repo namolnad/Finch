@@ -18,7 +18,7 @@ extension ContributorsConfiguration {
     static let `default`: ContributorsConfiguration = .init(contributors: [], contributorHandlePrefix: "@")
 }
 
-extension ContributorsConfiguration: Blankable {
+extension ContributorsConfiguration {
     var isBlank: Bool {
         return contributors.isEmpty &&
             (contributorHandlePrefix?.isEmpty == true)

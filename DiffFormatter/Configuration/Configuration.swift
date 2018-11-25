@@ -119,10 +119,6 @@ extension Configuration {
     }
 }
 
-protocol Blankable {
-    var isBlank: Bool { get }
-}
-
 extension Configuration {
     var isBlank: Bool {
         return delimiterConfig.isBlank &&

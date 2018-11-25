@@ -37,12 +37,6 @@ extension Section {
     }
 }
 
-extension Section {
-    static func `default`(for info: Section.Info, configuration: Configuration) -> Section {
-        return Section(configuration: configuration, info: info, linesComponents: [])
-    }
-}
-
 extension Section: Outputtable {
     var output: String {
         return """

@@ -29,7 +29,6 @@
 		225623CF2190FA8E00D43338 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D0DFD214ED79100D808F7 /* App.swift */; };
 		225623D02190FA9300D43338 /* TransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6620EED11200806FF3 /* TransformerFactory.swift */; };
 		225623D12190FA9300D43338 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7420EF30B400806FF3 /* Argument.swift */; };
-		225623D22190FA9300D43338 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7220EF30A100806FF3 /* Command.swift */; };
 		225623D32190FA9600D43338 /* Contributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7020EF24CC00806FF3 /* Contributor.swift */; };
 		225623D42190FA9600D43338 /* DelimiterPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE69F2127450D0097A0A5 /* DelimiterPair.swift */; };
 		225623D52190FA9B00D43338 /* Section_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226433512123E0BD00B46082 /* Section_Info.swift */; };
@@ -69,7 +68,6 @@
 		22AACD6B20EED12500806FF3 /* Utilities_OutputGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6A20EED12500806FF3 /* Utilities_OutputGenerator.swift */; };
 		22AACD6D20EEE33500806FF3 /* ArgumentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6C20EEE33500806FF3 /* ArgumentRouter.swift */; };
 		22AACD7120EF24CC00806FF3 /* Contributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7020EF24CC00806FF3 /* Contributor.swift */; };
-		22AACD7320EF30A100806FF3 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7220EF30A100806FF3 /* Command.swift */; };
 		22AACD7520EF30B400806FF3 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7420EF30B400806FF3 /* Argument.swift */; };
 		22AB235A2190BBC4000BAD64 /* ArgumentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23592190BBC4000BAD64 /* ArgumentHandler.swift */; };
 		22AB235E2190BCAC000BAD64 /* UsageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB235D2190BCAC000BAD64 /* UsageHandler.swift */; };
@@ -135,7 +133,6 @@
 		22AACD6C20EEE33500806FF3 /* ArgumentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentRouter.swift; sourceTree = "<group>"; };
 		22AACD6E20EF15C000806FF3 /* InputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMock.swift; sourceTree = "<group>"; };
 		22AACD7020EF24CC00806FF3 /* Contributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contributor.swift; sourceTree = "<group>"; };
-		22AACD7220EF30A100806FF3 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		22AACD7420EF30B400806FF3 /* Argument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Argument.swift; sourceTree = "<group>"; };
 		22AB23592190BBC4000BAD64 /* ArgumentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentHandler.swift; sourceTree = "<group>"; };
 		22AB235D2190BCAC000BAD64 /* UsageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageHandler.swift; sourceTree = "<group>"; };
@@ -176,7 +173,6 @@
 			children = (
 				22AACD7420EF30B400806FF3 /* Argument.swift */,
 				2221C32521920784008D2AA7 /* ArgumentScheme.swift */,
-				22AACD7220EF30A100806FF3 /* Command.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -460,7 +456,6 @@
 				225623E12190FAA600D43338 /* GitConfiguration.swift in Sources */,
 				225623CE2190FA8A00D43338 /* DiffHandler.swift in Sources */,
 				225623CA2190FA8000D43338 /* RoutingContext.swift in Sources */,
-				225623D22190FA9300D43338 /* Command.swift in Sources */,
 				225623C92190FA8000D43338 /* ArgumentHandler.swift in Sources */,
 				225623CD2190FA8A00D43338 /* VersionHandler.swift in Sources */,
 				225623E22190FAAA00D43338 /* String+DiffFormatter.swift in Sources */,
@@ -508,7 +503,6 @@
 				22AACD6520EEAAE200806FF3 /* Utilities_Regex.swift in Sources */,
 				22AB23682190E130000BAD64 /* HandleResult.swift in Sources */,
 				228D0DFE214ED79100D808F7 /* App.swift in Sources */,
-				22AACD7320EF30A100806FF3 /* Command.swift in Sources */,
 				22AACD6720EED11200806FF3 /* TransformerFactory.swift in Sources */,
 				221E3E202127F28F00256B13 /* Utilities_Shell.swift in Sources */,
 				22FAE6A821277DC60097A0A5 /* ContributorsConfiguration.swift in Sources */,

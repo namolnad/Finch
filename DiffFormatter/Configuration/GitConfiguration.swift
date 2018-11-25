@@ -35,7 +35,7 @@ extension GitConfiguration {
     static let `default`: GitConfiguration = .init(branchPrefix: "", executablePath: nil, repoBaseUrl: "")
 }
 
-extension GitConfiguration: Blankable {
+extension GitConfiguration {
     var isBlank: Bool {
         return (branchPrefix?.isEmpty == true) &&
             (executablePath?.isEmpty == true)

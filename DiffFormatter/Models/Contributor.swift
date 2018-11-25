@@ -12,7 +12,3 @@ struct Contributor: Decodable {
     let email: String
     let handle: String
 }
-
-extension Contributor {
-    static let unknown: Contributor = .init(email: "_unknown", handle: "_unknown")
-}

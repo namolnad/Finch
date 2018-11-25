@@ -20,10 +20,6 @@ enum Regex {
 extension Regex.Pattern {
     static let rawPattern: Regex.Pattern = "&&&(.*?)&&&(?:.*?)@@@(.*?)\\(#(.*?)\\)@@@###(.*?)###"
 
-    static func contributorPattern(from contributor: Contributor) -> Regex.Pattern {
-        return "###\(contributor.email.escaped)###"
-    }
-
     static func filteredMessagePattern(from configuration: Configuration) -> Regex.Pattern {
         let leftDelim = configuration.delimiterConfig.input.left.escaped
         let rightDelim = configuration.delimiterConfig.input.right.escaped

@@ -19,7 +19,7 @@ extension DelimiterPair {
     static let blank: DelimiterPair = .init(left: "", right: "")
 }
 
-extension DelimiterPair: Blankable {
+extension DelimiterPair {
     var isBlank: Bool {
         return left.isEmpty ||
             right.isEmpty

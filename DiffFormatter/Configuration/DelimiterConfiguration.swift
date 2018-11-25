@@ -35,7 +35,7 @@ extension DelimiterConfiguration {
     static let blank: DelimiterConfiguration = .init(input: .blank, output: .blank)
 }
 
-extension DelimiterConfiguration: Blankable {
+extension DelimiterConfiguration {
     var isBlank: Bool {
         return input.isBlank && output.isBlank
     }

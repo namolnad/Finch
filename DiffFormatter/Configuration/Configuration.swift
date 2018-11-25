@@ -10,36 +10,36 @@ import Foundation
 
 struct Configuration: Decodable {
     enum CodingKeys: String, CodingKey {
+        case contributorsConfig
         case delimiterConfig
-        case sectionInfos
         case footer
         case gitConfig
-        case contributorsConfig
-        case currentDirectory
+        case sectionInfos
     }
-    private(set) var delimiterConfig: DelimiterConfiguration
-    private(set) var sectionInfos: [Section.Info]
-    private(set) var footer: String?
-    private(set) var gitConfig: GitConfiguration
+
     private(set) var contributorsConfig: ContributorsConfiguration
     private(set) var currentDirectory: String = ""
+    private(set) var delimiterConfig: DelimiterConfiguration
+    private(set) var footer: String?
+    private(set) var gitConfig: GitConfiguration
+    private(set) var sectionInfos: [Section.Info]
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
-        sectionInfos = container.decode(forKey: .sectionInfos, default: [])
-        footer = container.optionalDecode(forKey: .footer)
         delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
+        footer = container.optionalDecode(forKey: .footer)
         gitConfig = container.decode(forKey: .gitConfig, default: .default)
+        sectionInfos = container.decode(forKey: .sectionInfos, default: [])
     }
 
     init(contributorsConfig: ContributorsConfiguration = .blank, sectionInfos: [Section.Info] = [], footer: String? = nil, delimiterConfig: DelimiterConfiguration = .blank, gitConfig: GitConfiguration = .blank) {
         self.contributorsConfig = contributorsConfig
-        self.sectionInfos = sectionInfos
-        self.footer = footer
         self.delimiterConfig = delimiterConfig
+        self.footer = footer
         self.gitConfig = gitConfig
+        self.sectionInfos = sectionInfos
     }
 }
 

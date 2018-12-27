@@ -4,28 +4,21 @@
 #
 version: 2
 jobs:
-  build:
-    macos:
-      xcode: "10.1.0"
-
-    steps:
-      - checkout
 
   test:
-
     # Specify the Xcode version to use
     macos:
       xcode: "10.1.0"
 
     steps:
       # Build the app and run tests
+      - checkout
       - run:
           name: Tests
           command: ./Scripts/test
 
-workflow:
+workflows:
   version: 2
-  build-and-test:
+  build:
     jobs:
-      - build
       - test

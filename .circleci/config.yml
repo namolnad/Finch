@@ -4,7 +4,6 @@
 #
 version: 2
 jobs:
-
   test:
     # Specify the Xcode version to use
     macos:
@@ -13,6 +12,10 @@ jobs:
     steps:
       # Build the app and run tests
       - checkout
+      - run:
+          name: Decode Certficates
+          context: DiffFormatter
+          command: base64 -D -o Certificates.p12 <<< $Certificates
       - run:
           name: Tests
           command: ./Scripts/test

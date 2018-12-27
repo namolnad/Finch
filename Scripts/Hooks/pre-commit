@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 #
+# Return early unless INCREMENT_VERSION is defined
+if [[ -z "${INCREMENT_VERSION}" ]]; then
+  exit 0
+fi
 
 # Redirect output to stderr.
 exec 1>&2

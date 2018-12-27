@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build-and-test:
+  test:
 
     # Specify the Xcode version to use
     macos:
@@ -18,3 +18,8 @@ jobs:
           name: Tests
           command: ./Scripts/test
 
+workflow:
+  version: 2
+  test:
+    jobs:
+      - test

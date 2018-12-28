@@ -13,6 +13,7 @@ jobs:
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
       LANGUAGE: en_US.UTF-8
+    context: DiffFormatter
 
     steps:
       # Build the app and run tests
@@ -26,11 +27,9 @@ jobs:
             - vendor/bundle
       - run:
           name: Decode Certficates
-          context: DiffFormatter
           command: base64 -D -o Certificates.p12 <<< $CERT
       - run:
           name: Tests
-          context: DiffFormatter
           command: bundle exec fastlane test --verbose
 
 workflows:

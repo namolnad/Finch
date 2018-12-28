@@ -17,8 +17,6 @@ class Fastfile: LaneFile {
     func testLane() {
         desc("Run tests")
 
-        verbose(message: "hello \(environmentVariable(get: "CERTIFICATE_PASSWORD").suffix(4))")
-
         scan()
 	}
 
@@ -30,13 +28,13 @@ class Fastfile: LaneFile {
             return
         }
 
-        verbose(message: "hello \(environmentVariable(get: "CERTIFICATE_PASSWORD").suffix(4))")
+        let certPassword = environmentVariable(get: "CERTIFICATE_PASSWORD")
 
         importCertificate(
             keychainName: environmentVariable(get: "MATCH_KEYCHAIN_NAME"),
             keychainPassword: environmentVariable(get: "MATCH_KEYCHAIN_PASSWORD"),
             certificatePath: environmentVariable(get: "CERTIFICATE_PATH"),
-            certificatePassword: environmentVariable(get: "CERTIFICATE_PASSWORD"),
+            certificatePassword: certPassword.isEmpty ? "hello" : certPassword,
             logOutput: true
         )
     }

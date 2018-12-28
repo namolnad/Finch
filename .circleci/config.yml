@@ -19,10 +19,10 @@ jobs:
       # Build the app and run tests
       - checkout
       - restore_cache:
-          key: 1-gems-{{ checksum "Gemfile.lock" }}
-      - run: bundle check || bundle install --path $BUNDLE_PATH
+          key: 2-gems-{{ checksum "Gemfile.lock" }}
+      - run: bundle check || bundle install
       - save_cache:
-          key: 1-gems-{{ checksum "Gemfile.lock" }}
+          key: 2-gems-{{ checksum "Gemfile.lock" }}
           paths:
             - $BUNDLE_PATH
       - run:

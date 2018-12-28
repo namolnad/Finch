@@ -1,5 +1,5 @@
-var appIdentifier: String { return "DiffFormatter" } // The bundle identifier of your app
-var appleID: String { return "daniel.h.loman@gmail.com" } // Your Apple email address
+var appIdentifier: String { return "DiffFormatter" }
+var appleID: String { return environmentVariable(get: "APPLE_ID") }
 
 
 

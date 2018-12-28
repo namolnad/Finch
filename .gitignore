@@ -16,8 +16,12 @@ DerivedData
 .idea/
 *.hmap
 *.xccheckout
+test_output/*
 
 #CocoaPods
 Pods
 
 *.env
+#Fastlane
+fastlane/*
+

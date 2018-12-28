@@ -28,13 +28,11 @@ class Fastfile: LaneFile {
             return
         }
 
-        let certPassword = environmentVariable(get: "CERTIFICATE_PASSWORD")
-
         importCertificate(
             keychainName: environmentVariable(get: "MATCH_KEYCHAIN_NAME"),
             keychainPassword: environmentVariable(get: "MATCH_KEYCHAIN_PASSWORD"),
             certificatePath: environmentVariable(get: "CERTIFICATE_PATH"),
-            certificatePassword: certPassword.isEmpty ? "hello" : certPassword,
+            certificatePassword: environmentVariable(get: "CERTIFICATE_PASSWORD"),
             logOutput: true
         )
     }

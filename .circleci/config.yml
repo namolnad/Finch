@@ -26,7 +26,7 @@ jobs:
             - vendor/bundle
       - run:
           name: Decode Certficates
-          command: base64 -D -o Certificates.p12 <<< $CERT
+          command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
       - run:
           name: Tests
           command: bundle exec fastlane test --verbose

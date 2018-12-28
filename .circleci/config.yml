@@ -24,7 +24,7 @@ jobs:
 
       - run:
           name: Bundle Install
-          command: bundle check || bundle install
+          command: bundle check --path $BUNDLE_PATH || bundle install --path $BUNDLE_PATH
 
       - save_cache:
           key: 1-gems-{{ checksum "Gemfile.lock" }}
@@ -36,7 +36,7 @@ jobs:
           command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
 
       - run:
-          name: Tests
+          name: Run Tests
           command: bundle exec fastlane test
 
 workflows:

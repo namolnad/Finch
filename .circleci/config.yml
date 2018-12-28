@@ -30,6 +30,7 @@ jobs:
           command: base64 -D -o Certificates.p12 <<< $CERT
       - run:
           name: Tests
+          context: DiffFormatter
           command: bundle exec fastlane test --verbose
 
 workflows:

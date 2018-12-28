@@ -15,7 +15,7 @@ struct ContributorsConfiguration: Decodable {
 
 extension ContributorsConfiguration {
     static let blank: ContributorsConfiguration = .init(contributors: [], contributorHandlePrefix: nil)
-    static let `default`: ContributorsConfiguration = .init(contributors: [], contributorHandlePrefix: "@")
+    static let `default`: ContributorsConfiguration = .init(contributors: [], contributorHandlePrefix: "")
 }
 
 extension ContributorsConfiguration {

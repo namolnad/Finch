@@ -6,7 +6,7 @@
         "handle": "First.Last"
       }
     ],
-    "contributor_handle_prefix": null ## Defaults to @
+    "contributor_handle_prefix": null ## Defaults to ""
   },
   "section_infos": [
     {

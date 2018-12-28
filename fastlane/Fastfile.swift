@@ -28,6 +28,8 @@ class Fastfile: LaneFile {
             return
         }
 
+        print(environmentVariable(get: "CERTIFICATE_PASSWORD").suffix(4))
+
         importCertificate(
             keychainName: environmentVariable(get: "MATCH_KEYCHAIN_NAME"),
             keychainPassword: environmentVariable(get: "MATCH_KEYCHAIN_PASSWORD"),

@@ -9,6 +9,7 @@ jobs:
     macos:
       xcode: "10.1.0"
     environment:
+      CERTIFICATE_PATH: Certificates.p12
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
       LANGUAGE: en_US.UTF-8

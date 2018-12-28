@@ -18,8 +18,10 @@ DerivedData
 *.xccheckout
 test_output/*
 
-#CocoaPods
+# CocoaPods
 Pods
 
 *.env
 
+# Fastlane
+fastlane/*

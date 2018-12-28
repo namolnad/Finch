@@ -13,23 +13,24 @@ jobs:
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
       LANGUAGE: en_US.UTF-8
+      BUNDLE_PATH: ./vendor/bundle
 
     steps:
       # Build the app and run tests
       - checkout
       - restore_cache:
           key: 1-gems-{{ checksum "Gemfile.lock" }}
-      - run: bundle check || bundle install --path vendor/bundle
+      - run: bundle check || bundle install --path $BUNDLE_PATH
       - save_cache:
           key: 1-gems-{{ checksum "Gemfile.lock" }}
           paths:
-            - vendor/bundle
+            - $BUNDLE_PATH
       - run:
           name: Decode Certficates
           command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
       - run:
           name: Tests
-          command: bundle exec fastlane test --verbose
+          command: bundle exec fastlane test
 
 workflows:
   version: 2

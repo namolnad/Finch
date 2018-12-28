@@ -23,20 +23,16 @@ class Fastfile: LaneFile {
     func setUpKeychain() {
         desc("Set up keychain for CircleCI")
 
-        guard !environmentVariable(get: "CIRCLECI").isEmpty else {
+        guard !environmentVariable(get: "CI").isEmpty else {
+            log(message: "Not running on CI, skipping 'set_up_keychain'")
             return
         }
 
         importCertificate(
             keychainName: environmentVariable(get: "MATCH_KEYCHAIN_NAME"),
-            keychainPassword: environmentVariable(
-                get: "MATCH_KEYCHAIN_PASSWORD"
-            ),
-            certificatePath: "Certificates.p12",
-            certificatePassword: environmentVariable(
-                get: "CERTIFICATE_PASSWORD"
-            ),
-            logOutput: true
+            keychainPassword: environmentVariable(get: "MATCH_KEYCHAIN_PASSWORD"),
+            certificatePath: environmentVariable(get: "CERTIFICATE_PATH"),
+            certificatePassword: environmentVariable(get: "CERTIFICATE_PASSWORD")
         )
     }
 }

@@ -32,8 +32,7 @@ class Fastfile: LaneFile {
             keychainName: environmentVariable(get: "MATCH_KEYCHAIN_NAME"),
             keychainPassword: environmentVariable(get: "MATCH_KEYCHAIN_PASSWORD"),
             certificatePath: environmentVariable(get: "CERTIFICATE_PATH"),
-            certificatePassword: environmentVariable(get: "CERTIFICATE_PASSWORD"),
-            logOutput: true
+            certificatePassword: environmentVariable(get: "CERTIFICATE_PASSWORD")
         )
     }
 }

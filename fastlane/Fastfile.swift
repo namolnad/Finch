@@ -17,13 +17,13 @@ class Fastfile: LaneFile {
     func testLane() {
         desc("Run tests")
 
+        verbose(message: "hello \(environmentVariable(get: "CERTIFICATE_PASSWORD").suffix(4))")
+
         scan()
 	}
 
     func setUpKeychain() {
         desc("Set up keychain for CircleCI")
-
-        verbose(message: "hello blah")
 
         guard !environmentVariable(get: "CI").isEmpty else {
             log(message: "Not running on CI, skipping 'set_up_keychain'")

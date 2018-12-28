@@ -4,18 +4,36 @@
 #
 version: 2
 jobs:
-
   test:
-    # Specify the Xcode version to use
     macos:
       xcode: "10.1.0"
-
+    environment:
+      BUNDLE_PATH: vendor/bundle
+      CERTIFICATE_PATH: Certificates.p12
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
     steps:
-      # Build the app and run tests
       - checkout
+      - restore_cache:
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
       - run:
-          name: Tests
-          command: ./Scripts/test
+          name: Bundle Install
+          command: bundle check --path $BUNDLE_PATH || bundle install --path $BUNDLE_PATH
+      - save_cache:
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - $BUNDLE_PATH
+      - run:
+          name: Decode Certficates
+          command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
+      - run:
+          name: Run Tests
+          command: bundle exec fastlane test
+      - store_test_results:
+          path: "./test_output"
+      - store_artifacts:
+          path: "./test_output"
 
 workflows:
   version: 2

@@ -35,7 +35,8 @@ class Fastfile: LaneFile {
             certificatePath: "Certificates.p12",
             certificatePassword: environmentVariable(
                 get: "CERTIFICATE_PASSWORD"
-            )
+            ),
+            logOutput: true
         )
     }
 }

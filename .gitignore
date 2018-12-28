@@ -22,6 +22,4 @@ test_output/*
 Pods
 
 *.env
-#Fastlane
-fastlane/*
 

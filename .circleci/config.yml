@@ -31,9 +31,9 @@ jobs:
           name: Run Tests
           command: bundle exec fastlane test
       - store_test_results:
-        path: "./test_output"
+          path: "./test_output"
       - store_artifacts:
-        path: "./test_output"
+          path: "./test_output"
 
 workflows:
   version: 2

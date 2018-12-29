@@ -5,14 +5,13 @@
 version: 2
 jobs:
   lint:
-    docker:
-      - image: dantoml/swiftlint:latest
     macos:
       xcode: "10.1.0"
     steps:
       - checkout
       - restore_cache:
-          key: 1-gems-{{ checksum "Gemfile.lock" }}
+          keys:
+            - 1-gems-{{ checksum "Gemfile.lock" }}
       - run:
           name: Bundle install
           command: bundle check --path $BUNDLE_PATH || bundle install --path $BUNDLE_PATH
@@ -20,6 +19,16 @@ jobs:
           key: 1-gems-{{ checksum "Gemfile.lock" }}
           paths:
             - $BUNDLE_PATH
+      - restore_cache:
+          keys:
+            - 1-brew-{{ checksum "Brewfile" }}
+      - run:
+          name: Brew install
+          command: bundle exec brew bundle
+      - save_cache:
+          key: 1-brew-{{ checksum "Brewfile" }}
+          paths:
+            - vendor/brew
       - run:
           name: Decode certficates
           command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE

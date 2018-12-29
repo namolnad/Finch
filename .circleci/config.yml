@@ -24,7 +24,7 @@ jobs:
             - 1-brew-{{ checksum "Brewfile" }}
       - run:
           name: Brew install
-          command: brew bundle check --file=$BREW_PATH || bundle exec brew bundle --file=$BREW_PATH
+          command: brew bundle check || bundle exec brew bundle
       - save_cache:
           key: 1-brew-{{ checksum "Brewfile" }}
           paths:

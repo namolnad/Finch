@@ -11,22 +11,22 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - "$CACHE_VERSION-gems-{{ checksum \"Gemfile.lock\" }}"
+            - {{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
       - run:
           name: Bundle install
           command: bundle check --path $BUNDLE_PATH || bundle install --path $BUNDLE_PATH
       - save_cache:
-          key: "$CACHE_VERSION-gems-{{ checksum \"Gemfile.lock\" }}"
+          key: {{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
           paths:
             - $BUNDLE_PATH
       - restore_cache:
           keys:
-            - "$CACHE_VERSION-brew-{{ checksum \"Brewfile\" }}"
+            - {{ .Environment.CACHE_VERSION }}-brew-{{ checksum "Brewfile" }}
       - run:
           name: Brew install
           command: brew bundle check || bundle exec brew bundle
       - save_cache:
-          key: "$CACHE_VERSION-brew-{{ checksum \"Brewfile\" }}"
+          key: {{ .Environment.CACHE_VERSION }}-brew-{{ checksum "Brewfile" }}
           paths:
             - $BREW_PATH
       - run:
@@ -45,12 +45,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: "$CACHE_VERSION-gems-{{ checksum \"Gemfile.lock\" }}"
+          key: {{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
       - run:
           name: Bundle install
           command: bundle check --path $BUNDLE_PATH || bundle install --path $BUNDLE_PATH
       - save_cache:
-          key: "$CACHE_VERSION-gems-{{ checksum \"Gemfile.lock\" }}"
+          key: {{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
           paths:
             - $BUNDLE_PATH
       - run:

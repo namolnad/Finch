@@ -23,7 +23,10 @@ class Fastfile: LaneFile {
     func swiftlintLane() {
         desc("Run linting")
 
-        swiftlint(strict: true)
+        swiftlint(
+            configFile: environmentVariable(get: "SWIFTLINT_CONFIG_PATH"),
+            strict: true
+        )
     }
     
     func setUpKeychain() {

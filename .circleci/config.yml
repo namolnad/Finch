@@ -7,6 +7,8 @@ jobs:
   lint:
     macos:
       xcode: "10.1.0"
+    environment:
+      SWIFTLINT_CONFIG_PATH: .swiftlint.yml
     steps:
       - checkout
       - restore_cache:

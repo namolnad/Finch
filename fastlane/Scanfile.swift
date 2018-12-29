@@ -7,10 +7,11 @@
 private var identifier: String { return appIdentifier }
 
 class Scanfile: ScanfileProtocol {
+    var clean: Bool { return true }
+    var codeCoverage: Bool? { return true }
+    var openReport: Bool { return true }
     var project: String? { return "\(identifier).xcodeproj" }
     var scheme: String? { return identifier }
-    var openReport: Bool { return true }
-    var clean: Bool { return true }
     var sdk: String? { return "macosx" }
     var skipSlack: Bool { return true }
 }

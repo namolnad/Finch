@@ -17,7 +17,11 @@ class Fastfile: LaneFile {
     func testLane() {
         desc("Run tests")
 
-        scan(codeCoverage: true)
+        scan()
+    }
+
+    func buildLane() {
+        gym()
     }
 
     func swiftlintLane() {

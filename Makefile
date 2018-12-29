@@ -1,13 +1,18 @@
-.PHONY: all
+.PHONY: all build
 
 all: build config_template install lint setup test verify_carthage
 
-install: ## Install DiffFormatter
-	./Scripts/install
+build: ## Install DiffFormatter
+	bundle exec fastlane build
+
 config_template:
 	@echo "\nAdding config template to $$HOME/.diff_formatter.template\n"
 	cp .diff_formatter.template $$HOME/.diff_formatter.template
 
+install:
+	@$(MAKE) build
+	cp $$PWD/build/DiffFormatter /usr/local/bin/DiffFormatter
+	$(MAKE) config_template
 
 lint: ## Swiftlint
 	bundle exec fastlane swiftlint

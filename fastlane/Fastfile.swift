@@ -20,6 +20,10 @@ class Fastfile: LaneFile {
         scan()
     }
 
+    func buildLane() {
+        gym()
+    }
+
     func swiftlintLane() {
         desc("Run linting")
 

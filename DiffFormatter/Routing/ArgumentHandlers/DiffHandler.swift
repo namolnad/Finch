@@ -46,11 +46,11 @@ extension ArgumentRouter {
             let git = Utilities.Git(configuration: context.configuration, projectDir: projectDir)
 
             if !scheme.args.contains(.flag(.noFetch)) {
-                Utilities.log.info("Fetching origin")
+                log.info("Fetching origin")
                 git.fetch()
             }
 
-            Utilities.log.info("Generating diff")
+            log.info("Generating diff")
 
             rawDiff = git.diff(oldVersion: oldVersion, newVersion: newVersion)
         }
@@ -62,7 +62,7 @@ extension ArgumentRouter {
             releaseManager: releaseManager
         )
 
-        Utilities.log.info("Output copied to pasteboard:")
+        log.info("Output copied to pasteboard:")
 
         context.output(output(generator: outputGenerator))
 

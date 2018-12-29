@@ -67,7 +67,7 @@ struct Configurator {
         do {
             return try decoder.decode(Configuration.self, from: data)
         } catch {
-            print("Error parsing configuration at path: \(filePath). \n\nError details: \n\(error)")
+            log.error("Error parsing configuration at path: \(filePath). \n\nError details: \n\(error)")
             return nil
         }
     }

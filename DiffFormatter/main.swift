@@ -23,5 +23,5 @@ let configurator = Configurator(processInfo: process, argScheme: scheme)
 let router = ArgumentRouter(app: app, configuration: configurator.configuration)
 
 if case .notHandled = router.route(argScheme: scheme) {
-    print("Unable to handle included arguments")
+    log.error("Unable to handle included arguments")
 }

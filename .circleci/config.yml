@@ -24,11 +24,11 @@ jobs:
             - 1-brew-{{ checksum "Brewfile" }}
       - run:
           name: Brew install
-          command: bundle exec brew bundle
+          command: brew bundle check --file=$BREW_PATH || bundle exec brew bundle --file=$BREW_PATH
       - save_cache:
           key: 1-brew-{{ checksum "Brewfile" }}
           paths:
-            - vendor/brew
+            - $BREW_PATH
       - run:
           name: Decode certficates
           command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE

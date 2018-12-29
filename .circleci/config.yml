@@ -8,9 +8,23 @@ jobs:
     macos:
       xcode: "10.1.0"
     steps:
+      -checkout
+      - restore_cache:
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
       - run:
-        name: Swiftlint
-        command: make lint
+          name: Bundle install
+          command: bundle check --path $BUNDLE_PATH || bundle install --path $BUNDLE_PATH
+      - save_cache:
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - $BUNDLE_PATH
+      - run:
+          name: Swiftlint
+          command: make lint
+      - store_test_results:
+          path: "lint"
+      - store_artifacts:
+          path: "lint"
   test:
     macos:
       xcode: "10.1.0"

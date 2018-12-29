@@ -17,6 +17,10 @@ extension Utilities {
 
 extension Utilities.Git {
     func diff(oldVersion: String, newVersion: String) -> String {
+        guard !Utilities.isTest else {
+            return ""
+        }
+
         return Utilities.shell(
             executablePath: gitExecutablePath,
             arguments: gitDiffArguments(

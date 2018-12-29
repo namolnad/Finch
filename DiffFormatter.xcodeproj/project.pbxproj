@@ -13,6 +13,8 @@
 		220291E821D75BD4009A1F15 /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220291E721D75BD4009A1F15 /* SnapshotTesting.framework */; };
 		220291F021D7F487009A1F15 /* Utilities_Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291EF21D7F487009A1F15 /* Utilities_Git.swift */; };
 		220291F221D7FEB2009A1F15 /* Utilities_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F121D7FEB2009A1F15 /* Utilities_Log.swift */; };
+		220291F321D803AA009A1F15 /* Utilities_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F121D7FEB2009A1F15 /* Utilities_Log.swift */; };
+		220291F421D803BA009A1F15 /* Utilities_Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291EF21D7F487009A1F15 /* Utilities_Git.swift */; };
 		221E3E1C2127E6CB00256B13 /* GitConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */; };
 		221E3E202127F28F00256B13 /* Utilities_Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */; };
 		2221C32621920784008D2AA7 /* ArgumentScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221C32521920784008D2AA7 /* ArgumentScheme.swift */; };
@@ -535,7 +537,9 @@
 			files = (
 				224EE6FA21A919DE008A97CF /* Line.swift in Sources */,
 				220291DF21D7121F009A1F15 /* RoutingTests.swift in Sources */,
+				220291F421D803BA009A1F15 /* Utilities_Git.swift in Sources */,
 				225623D42190FA9600D43338 /* DelimiterPair.swift in Sources */,
+				220291F321D803AA009A1F15 /* Utilities_Log.swift in Sources */,
 				224EE6F721A8EF19008A97CF /* Line_Context.swift in Sources */,
 				225623D12190FA9300D43338 /* Argument.swift in Sources */,
 				225623DF2190FAA600D43338 /* DelimiterConfiguration.swift in Sources */,

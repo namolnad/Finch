@@ -10,15 +10,16 @@ import Foundation
 
 enum Argument: Equatable {
     enum ArgumentType: String {
-        case buildNumber = "--build-number"
-        case gitDiff = "--git-diff"
-        case help = "--help"
-        case helpAbbreviated = "-h"
-        case noShowVersion = "--no-show-version"
-        case projectDir = "--project-dir"
-        case releaseManager = "--release-manager"
-        case version = "--version"
-        case versionAbbreviated = "-v"
+        case buildNumber =          "--build-number"
+        case gitDiff =              "--git-diff"
+        case help =                 "--help"
+        case helpAbbreviated =      "-h"
+        case noFetch =              "--no-fetch"
+        case noShowVersion =        "--no-show-version"
+        case projectDir =           "--project-dir"
+        case releaseManager =       "--release-manager"
+        case version =              "--version"
+        case versionAbbreviated =   "-v"
     }
 
     typealias Value = String

@@ -10,10 +10,8 @@ import Foundation
 
 extension ArgumentRouter {
     struct Context {
-        typealias Output = (String) -> Void
-
         let app: App
         let configuration: Configuration
-        let output: Output
+        let output: (String) -> Void
     }
 }

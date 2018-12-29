@@ -39,11 +39,21 @@ extension ArgumentRouter {
             break
         }
 
-        let rawDiff = manualDiff ??
-            Utilities.GitDiffer(configuration: context.configuration,
-                      projectDir: projectDir,
-                      oldVersion: oldVersion,
-                      newVersion: newVersion).diff
+        let rawDiff: String
+        if let manualDiff = manualDiff {
+            rawDiff = manualDiff
+        } else {
+            let git = Utilities.Git(configuration: context.configuration, projectDir: projectDir)
+
+            if !scheme.args.contains(.flag(.noFetch)) {
+                Utilities.log.info("Fetching origin")
+                git.fetch()
+            }
+
+            Utilities.log.info("Generating diff")
+
+            rawDiff = git.diff(oldVersion: oldVersion, newVersion: newVersion)
+        }
 
         let outputGenerator: Utilities.OutputGenerator = .init(
             configuration: context.configuration,
@@ -51,6 +61,8 @@ extension ArgumentRouter {
             version: versionHeader,
             releaseManager: releaseManager
         )
+
+        Utilities.log.info("Output copied to pasteboard:")
 
         context.output(output(generator: outputGenerator))
 
@@ -62,6 +74,6 @@ extension ArgumentRouter {
 
         Utilities.pbCopy(text: result)
 
-        return "Output copied to pasteboard: \(result)"
+        return result
     }
 }

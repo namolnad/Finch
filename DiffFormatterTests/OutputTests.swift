@@ -32,7 +32,11 @@ final class OutputTests: XCTestCase {
         let fileManagerMock = FileManagerMock(customConfigPath: customPath)
 
         let outputGenerator: Utilities.OutputGenerator = .init(
-            configuration: Configurator(processInfo: processInfoMock, argScheme: .mock, fileManager: fileManagerMock).configuration,
+            configuration: Configurator(
+                processInfo: processInfoMock,
+                argScheme: .mock,
+                fileManager: fileManagerMock
+                ).configuration,
             rawDiff: Utilities.inputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
@@ -45,7 +49,9 @@ final class OutputTests: XCTestCase {
     }
 
     func testLineComponentParsing() {
-        let sample = "&&&5a544059e165f0703843d1c6c509cc853ad6afa4&&& - @@@[tag1][tag2] fixing something somewhere (#1234)@@@###author@email.com###"
+        let sha = "5a544059e165f0703843d1c6c509cc853ad6afa4"
+
+        let sample = "&&&\(sha)&&& - @@@[tag1][tag2] fixing something somewhere (#1234)@@@###author@email.com###"
 
         assertSnapshot(
             matching: Section.Line.Components(
@@ -55,7 +61,7 @@ final class OutputTests: XCTestCase {
             as: .dump
         )
 
-        let sample2 = "&&&5a544059e165f0703843d1c6c509cc853ad6afa4&&& - @@@[tag1]fixing something somewhere@@@###author+1234@email.com###"
+        let sample2 = "&&&\(sha)&&& - @@@[tag1]fixing something somewhere@@@###author+1234@email.com###"
 
         assertSnapshot(
             matching: Section.Line.Components(

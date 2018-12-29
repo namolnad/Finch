@@ -6,9 +6,9 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import XCTest
 @testable import DiffFormatter
 import SnapshotTesting
+import XCTest
 
 final class ConfigurationTests: XCTestCase {
     func testConfigurator() {

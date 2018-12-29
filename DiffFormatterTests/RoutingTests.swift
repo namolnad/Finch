@@ -92,4 +92,3 @@ final class RoutingTests: XCTestCase {
         XCTAssert(output == "\nDiffFormatter Info:\n    -h, --help\n        Displays this dialog\n    -v, --version\n        Displays DiffFormatter version information\n\nDiff Formatting:\n    The first 2 arguments must be (branch or tag) version strings, given as:\n\n    `DiffFormatter OLD_VERSION NEW_VERSION`\n\nDiff-Modifying Arguments:\n    --no-show-version\n        The ability to hide the version header\n    --release-manager\n        The release manager\'s email, e.g. `--release-manager=$(git config --get user.email)`\n    --project-dir\n        Project directory if DiffFormatter is not being called from project directory\n    --git-diff\n        Manually-passed git diff in expected format. See README for format details.\n\nConfiguration:\n    Configuration instructions available in the README.\n\n\nAdditional information available at: https://github.com/namolnad/DiffFormatter\n")
     }
 }
-

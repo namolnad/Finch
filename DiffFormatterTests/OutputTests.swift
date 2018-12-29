@@ -1,6 +1,6 @@
 //
 //  OutputTests.swift
-//  OutputTests
+//  DiffFormatterTests
 //
 //  Created by Dan Loman on 8/16/18.
 //  Copyright © 2018 DHL. All rights reserved.

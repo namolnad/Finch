@@ -13,7 +13,7 @@ protocol Logger {
     func info(_ message: String)
 }
 
-let log: Logger = Utilities.log
+let log: Logger = Utilities.Log.instance
 
 extension Utilities {
     struct Log: Logger {
@@ -43,6 +43,4 @@ extension Utilities {
             print("[\(timeStamp)]: \(message)")
         }
     }
-
-    static let log: Logger = Log.instance
 }

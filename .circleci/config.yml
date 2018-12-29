@@ -27,7 +27,7 @@ jobs:
             - v{{ .Environment.CACHE_VERSION }}-brew-{{ checksum "Brewfile" }}
       - run:
           name: Brew install
-          command: brew bundle check || bundle exec brew bundle install
+          command: brew bundle check --no-upgrade || bundle exec brew bundle install
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-brew-{{ checksum "Brewfile" }}
           paths:

@@ -35,9 +35,14 @@ jobs:
       - run:
           name: Decode certficates
           command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
+      - restore_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-carthage-{{ checksum "Cartfile.resolved" }}
       - run:
           name: Install dependencies
-          command: carthage bootstrap --platform macos
+          command: carthage bootstrap --platform macos --cache-builds
+      - save_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-carthage-{{ checksum "Cartfile.resolved" }}
+          path: Carthage
       - run:
           name: Run tests
           command: make test

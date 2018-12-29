@@ -35,17 +35,11 @@ final class FileManagerMock: FileManager {
         case currentDirectoryPath:
             return nil
         case homeDirectoryForCurrentUser.path:
-            return data(for: "default_config")
+            return TestHelper.data(for: "default_config")
         case customConfigPath:
-            return data(for: firstPathComponent)
+            return TestHelper.data(for: firstPathComponent)
         default:
             fatalError()
         }
-    }
-
-    private func data(for path: String) -> Data {
-        let resource = Bundle(for: type(of: self)).path(forResource: path, ofType: "json")!
-
-        return try! Data(contentsOf: URL(fileURLWithPath: resource))
     }
 }

@@ -16,8 +16,8 @@ class Fastfile: LaneFile {
     
     func testLane() {
         desc("Run tests")
-        
-        scan()
+
+        scan(codeCoverage: true)
     }
 
     func swiftlintLane() {

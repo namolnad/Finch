@@ -42,7 +42,7 @@ jobs:
           command: carthage bootstrap --platform macos --cache-builds
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-carthage-{{ checksum "Cartfile.resolved" }}
-          path: Carthage
+          paths: Carthage
       - run:
           name: Run tests
           command: make test

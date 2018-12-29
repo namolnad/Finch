@@ -91,6 +91,16 @@
 		22FAE6A821277DC60097A0A5 /* ContributorsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE6A721277DC60097A0A5 /* ContributorsConfiguration.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		220291ED21D7CEFD009A1F15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22AACD5920EEAAAC00806FF3;
+			remoteInfo = DiffFormatter;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		22AACD5820EEAAAC00806FF3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -382,6 +392,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				220291EE21D7CEFD009A1F15 /* PBXTargetDependency */,
 			);
 			name = DiffFormatterTests;
 			productName = DiffFormatterTests;
@@ -610,6 +621,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		220291EE21D7CEFD009A1F15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22AACD5920EEAAAC00806FF3 /* DiffFormatter */;
+			targetProxy = 220291ED21D7CEFD009A1F15 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		226433642126421100B46082 /* Debug */ = {

@@ -9,43 +9,12 @@ jobs:
       - image: dantoml/swiftlint:latest
     steps:
       - checkout
-      - run: swiftlint lint --reporter junit | tee result.xml
+      - run: mkdir lint
+      - run: swiftlint lint --strict --reporter junit | tee lint/result.xml
       - store_artifacts:
-          path: result.xml
+          path: lint
       - store_test_results:
-          path: result.xml
-          # steps:
-          #- ch# stepeckout
-          #- re#- ch# stepstore_cache:
-          #- ch# stepkeys:
-          #- ch# step  - v{{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
-          #- ru#- ch# stepn:
-          #- ch# stepname: Bundle install
-          #- ch# stepcommand: bundle check --path vendor/bundle || bundle install --path vendor/bundle
-          #- sa#- ch# stepve_cache:
-          #- ch# stepkey: v{{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
-          #- ch# steppaths:
-          #- ch# step  - vendor/bundle
-          #- re#- ch# stepstore_cache:
-          #- ch# stepkeys:
-          #- ch# step  - v{{ .Environment.CACHE_VERSION }}-brew-{{ checksum "Brewfile" }}
-          #- ru#- ch# stepn:
-          #- ch# stepname: Brew install
-          #- ch# stepcommand: brew bundle check --no-upgrade --verbose || bundle exec brew bundle install
-          #- sa#- ch# stepve_cache:
-          #- ch# stepkey: v{{ .Environment.CACHE_VERSION }}-brew-{{ checksum "Brewfile" }}
-          #- ch# steppaths:
-          #- ch# step  - /usr/local/Homebrew
-          #- ru#- ch# stepn:
-          #- ch# stepname: Decode certficates
-          #- ch# stepcommand: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
-          #- ru#- ch# stepn:
-          #- ch# stepname: Swiftlint
-          #- ch# stepcommand: make lint
-          #- st#- ch# stepore_test_results:
-          #- ch# steppath: "lint"
-          #- st#- ch# stepore_artifacts:
-          #- ch# steppath: "lint"
+          path: lint
   test:
     macos:
       xcode: "10.1.0"

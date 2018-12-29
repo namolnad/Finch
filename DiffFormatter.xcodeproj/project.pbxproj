@@ -396,6 +396,7 @@
 				22AACD5720EEAAAC00806FF3 /* Frameworks */,
 				22AACD5820EEAAAC00806FF3 /* CopyFiles */,
 				220291E521D723FE009A1F15 /* Swiftlint */,
+				220291EA21D7CAA5009A1F15 /* Verify Carthage */,
 			);
 			buildRules = (
 			);
@@ -493,6 +494,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		220291EA21D7CAA5009A1F15 /* Verify Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Verify Carthage";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make verify-carthage\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

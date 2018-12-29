@@ -59,6 +59,9 @@ jobs:
           name: Decode certficates
           command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
       - run:
+          name: Install dependencies
+          command: carthage bootstrap --platform macos
+      - run:
           name: Run tests
           command: make test
       - store_test_results:

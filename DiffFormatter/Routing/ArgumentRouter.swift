@@ -37,7 +37,12 @@ extension ArgumentRouter {
             case .notHandled:
                 continue
             case .partiallyHandled(unprocessedArgs: let unprocessedArgs):
-                let unprocessed = ArgumentScheme(oldVersion: argScheme.oldVersion, newVersion: argScheme.newVersion, args: unprocessedArgs)
+                let unprocessed = ArgumentScheme(
+                    oldVersion: argScheme.oldVersion,
+                    newVersion: argScheme.newVersion,
+                    args: unprocessedArgs
+                )
+
                 return route(argScheme: unprocessed)
             }
         }

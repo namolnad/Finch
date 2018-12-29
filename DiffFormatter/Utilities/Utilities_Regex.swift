@@ -17,11 +17,19 @@ extension Utilities {
         guard !pattern.isEmpty || !body.isEmpty else {
             return body
         }
-        guard let expression = try? NSRegularExpression(pattern: pattern, options: [.anchorsMatchLines, .useUnixLineSeparators]) else {
-            return body
+        guard let expression = try? NSRegularExpression(
+            pattern: pattern,
+            options: [.anchorsMatchLines, .useUnixLineSeparators]
+            ) else {
+                return body
         }
 
-        return expression.stringByReplacingMatches(in: body, options: [], range: .init(location: 0, length: body.count), withTemplate: replacement)
+        return expression.stringByReplacingMatches(
+            in: body,
+            options: [],
+            range: .init(location: 0, length: body.count),
+            withTemplate: replacement
+        )
     }
 
     static func matches(pattern: Regex.Pattern, body: String) -> [NSTextCheckingResult] {

@@ -33,12 +33,12 @@ extension Utilities.OutputGenerator {
         let tagToIndex: [String: Int] = sections
             .enumerated()
             .reduce([:]) { partial, next in
-            var map = partial
-            next.element.info.tags.forEach { tag in
-                map.updateValue(next.offset, forKey: tag)
+                var map = partial
+                next.element.info.tags.forEach { tag in
+                    map.updateValue(next.offset, forKey: tag)
+                }
+                return map
             }
-            return map
-        }
 
         for components in linesComponents {
             let tag = components.tags.first(where: tagToIndex.keys.contains) ?? "*"
@@ -92,7 +92,7 @@ extension Utilities.OutputGenerator {
         return """
 
         # \(version)
-        
+
         """
     }
 

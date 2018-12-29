@@ -21,9 +21,12 @@ struct Section {
 extension Section {
     var lines: [Line] {
         return linesComponents.map { components -> Section.Line in
-            return .from(components: components, context: .init(
-                configuration: configuration,
-                sectionInfo: info)
+            .from(
+                components: components,
+                context: .init(
+                    configuration: configuration,
+                    sectionInfo: info
+                )
             )
         }
     }

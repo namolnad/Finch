@@ -34,4 +34,3 @@ extension Regex.Pattern {
         return "\(leftDelim)(.*?)\(rightDelim)"
     }
 }
-

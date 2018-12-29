@@ -26,7 +26,11 @@ struct ArgumentRouter {
 
 extension ArgumentRouter {
     private var routingContext: Context {
-        return .init(app: app, configuration: configuration, output: { print($0) })
+        return .init(
+            app: app,
+            configuration: configuration,
+            output: { print($0) }
+        )
     }
 
     func route(argScheme: ArgumentScheme) -> HandleResult {

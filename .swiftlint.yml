@@ -27,4 +27,4 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
 
 nesting:
   type_level: 3
-  
+

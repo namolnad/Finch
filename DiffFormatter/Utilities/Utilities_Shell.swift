@@ -14,12 +14,12 @@ extension Utilities {
         task.executableURL = URL(fileURLWithPath: executablePath)
         task.currentDirectoryURL = URL(fileURLWithPath: currentDirectoryPath)
         task.arguments = arguments
-        
+
         let pipe = Pipe()
         task.standardOutput = pipe
         task.standardError = pipe
         try? task.run()
-        
+
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         return String(data: data, encoding: .utf8)
     }

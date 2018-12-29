@@ -30,15 +30,22 @@ extension Utilities.GitDiffer {
             return ""
         }
 
-        return Utilities.shell(executablePath: gitExecutablePath, arguments: gitArguments, currentDirectoryPath: projectDir) ??
-        ""
+        return Utilities.shell(
+            executablePath: gitExecutablePath,
+            arguments: gitArguments,
+            currentDirectoryPath: projectDir
+        ) ?? ""
     }
 
     private var gitExecutablePath: String {
         if let path = configuration.gitExecutablePath {
             return path
         }
-        guard let path = Utilities.shell(executablePath: "/bin/bash", arguments: ["-c", "which git"], currentDirectoryPath: projectDir) else {
+        guard let path = Utilities.shell(
+            executablePath: "/bin/bash",
+            arguments: ["-c", "which git"],
+            currentDirectoryPath: projectDir
+        ) else {
             return ""
         }
 
@@ -46,6 +53,15 @@ extension Utilities.GitDiffer {
     }
 
     private var gitArguments: [String] {
-        return ["log", "--left-right", "--graph", "--cherry-pick", "--oneline", "--format=format:&&&%H&&& - @@@%s@@@###%ae###", "--date=short", "\(configuration.gitBranchPrefix)\(oldVersion)...\(configuration.gitBranchPrefix)\(newVersion)"]
+        return [
+            "log",
+            "--left-right",
+            "--graph",
+            "--cherry-pick",
+            "--oneline",
+            "--format=format:&&&%H&&& - @@@%s@@@###%ae###",
+            "--date=short",
+            "\(configuration.gitBranchPrefix)\(oldVersion)...\(configuration.gitBranchPrefix)\(newVersion)"
+        ]
     }
 }

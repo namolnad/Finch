@@ -34,7 +34,12 @@ struct Configuration: Decodable {
         sectionInfos = container.decode(forKey: .sectionInfos, default: [])
     }
 
-    init(contributorsConfig: ContributorsConfiguration = .blank, sectionInfos: [Section.Info] = [], footer: String? = nil, delimiterConfig: DelimiterConfiguration = .blank, gitConfig: GitConfiguration = .blank) {
+    init(
+        contributorsConfig: ContributorsConfiguration = .blank,
+        sectionInfos: [Section.Info] = [],
+        footer: String? = nil,
+        delimiterConfig: DelimiterConfiguration = .blank,
+        gitConfig: GitConfiguration = .blank) {
         self.contributorsConfig = contributorsConfig
         self.delimiterConfig = delimiterConfig
         self.footer = footer
@@ -74,33 +79,57 @@ extension Configuration {
 
         // Contributors configuration
         if !otherConfig.contributors.isEmpty {
-            self.contributorsConfig = ContributorsConfiguration(contributors: otherConfig.contributors, contributorHandlePrefix: self.contributorsConfig.contributorHandlePrefix)
+            self.contributorsConfig = .init(
+                contributors: otherConfig.contributors,
+                contributorHandlePrefix: self.contributorsConfig.contributorHandlePrefix
+            )
         }
 
         if let value = otherConfig.contributorsConfig.contributorHandlePrefix {
-            self.contributorsConfig = ContributorsConfiguration(contributors: self.contributorsConfig.contributors, contributorHandlePrefix: value)
+            self.contributorsConfig = .init(
+                contributors: self.contributorsConfig.contributors,
+                contributorHandlePrefix: value
+            )
         }
 
         // Delimiter configuration
         if !otherConfig.delimiterConfig.input.isBlank {
-            self.delimiterConfig = DelimiterConfiguration(input: otherConfig.delimiterConfig.input, output: self.delimiterConfig.output)
+            self.delimiterConfig = .init(
+                input: otherConfig.delimiterConfig.input,
+                output: self.delimiterConfig.output
+            )
         }
 
         if !otherConfig.delimiterConfig.output.isBlank {
-            self.delimiterConfig = DelimiterConfiguration(input: self.delimiterConfig.input, output: otherConfig.delimiterConfig.output)
+            self.delimiterConfig = .init(
+                input: self.delimiterConfig.input,
+                output: otherConfig.delimiterConfig.output
+            )
         }
 
         // Git configuration
         if let value = otherConfig.gitConfig.branchPrefix {
-            self.gitConfig = GitConfiguration(branchPrefix: value, executablePath: self.gitConfig.executablePath, repoBaseUrl: self.gitConfig.repoBaseUrl)
+            self.gitConfig = .init(
+                branchPrefix: value,
+                executablePath: self.gitConfig.executablePath,
+                repoBaseUrl: self.gitConfig.repoBaseUrl
+            )
         }
 
         if let value = otherConfig.gitConfig.executablePath {
-            self.gitConfig = GitConfiguration(branchPrefix: self.gitConfig.branchPrefix, executablePath: value, repoBaseUrl: self.gitConfig.repoBaseUrl)
+            self.gitConfig = .init(
+                branchPrefix: self.gitConfig.branchPrefix,
+                executablePath: value,
+                repoBaseUrl: self.gitConfig.repoBaseUrl
+            )
         }
 
         if case let value = otherConfig.gitConfig.repoBaseUrl, !value.isEmpty {
-            self.gitConfig = GitConfiguration(branchPrefix: self.gitConfig.branchPrefix, executablePath: self.gitConfig.executablePath, repoBaseUrl: value)
+            self.gitConfig = .init(
+                branchPrefix: self.gitConfig.branchPrefix,
+                executablePath: self.gitConfig.executablePath,
+                repoBaseUrl: value
+            )
         }
     }
 }

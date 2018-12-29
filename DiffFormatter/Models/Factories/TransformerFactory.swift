@@ -26,9 +26,18 @@ struct TransformerFactory {
         let inputDelimiters = configuration.delimiterConfig.input
 
         let patterns: [Regex.Replacement] = [
-            .init(matching: "^(.*)(@@@(.*)@@@)(.*)(\n(.*)\\2(.*))+$", replacement: ""),
-            .init(matching: "^<(.*)$", replacement: ""),
-            .init(matching: "^(.*)@@@\(inputDelimiters.left.escaped)version\(inputDelimiters.right.escaped)(.*)$", replacement: "")
+            .init(
+                matching: "^(.*)(@@@(.*)@@@)(.*)(\n(.*)\\2(.*))+$",
+                replacement: ""
+            ),
+            .init(
+                matching: "^<(.*)$",
+                replacement: ""
+            ),
+            .init(
+                matching: "^(.*)@@@\(inputDelimiters.left.escaped)version\(inputDelimiters.right.escaped)(.*)$",
+                replacement: ""
+            )
         ]
 
         return patterns.map(Transformer.init)
@@ -36,10 +45,9 @@ struct TransformerFactory {
 
     private var formattingTransformers: [Transformer] {
         let patterns: [Regex.Replacement] = [
-            .init(matching: "^>", replacement: " -"),
+            .init(matching: "^>", replacement: " -")
         ]
 
         return patterns.map(Transformer.init)
     }
 }
-

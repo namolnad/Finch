@@ -35,7 +35,9 @@ extension Section.Line.FormatComponent: LineOutputtable {
         case .contributorEmail:
             return components.contributorEmail
         case .contributorHandle:
-            guard let contributor = context.configuration.contributors.first(where: { $0.email == components.contributorEmail }) else {
+            guard let contributor = context.configuration.contributors.first(where: { contributor in
+                contributor.email == components.contributorEmail
+            }) else {
                 return components.contributorEmail
             }
 
@@ -49,8 +51,10 @@ extension Section.Line.FormatComponent: LineOutputtable {
         case .sha:
             return components.sha
         case .tags:
+            let outputDelims = context.configuration.delimiterConfig.output
+
             return components.tags
-                .reduce("") { $0 + "\(context.configuration.delimiterConfig.output.left)\($1)\(context.configuration.delimiterConfig.output.right)" }
+                .reduce("") { $0 + "\(outputDelims.left)\($1)\(outputDelims.right)" }
         }
     }
 }

@@ -25,14 +25,21 @@ extension Section.Line {
 
         init(rawLine: String, configuration: Configuration) {
             let componentString: (Kind) -> String = { kind in
-                return rawLine.component(kind: kind, configuration: configuration)
+                rawLine.component(kind: kind, configuration: configuration)
             }
 
             self.contributorEmail = componentString(.contributorEmail)
-            self.message = (Utilities.firstMatch(pattern: .filteredMessagePattern(from: configuration), body: rawLine) ?? componentString(.message)).trimmingCharacters(in: .whitespacesAndNewlines)
+            self.message = (Utilities.firstMatch(
+                pattern: .filteredMessagePattern(from: configuration),
+                body: rawLine
+                ) ??
+                componentString(.message)).trimmingCharacters(in: .whitespacesAndNewlines)
             self.pullRequestNumber = Int(componentString(.pullRequestNumber))
             self.sha = componentString(.sha)
-            self.tags = Utilities.matches(pattern: .tagPattern(from: configuration), body: rawLine).compactMap { $0.firstMatch(in: rawLine) }
+            self.tags = Utilities.matches(
+                pattern: .tagPattern(from: configuration),
+                body: rawLine
+            ).compactMap { $0.firstMatch(in: rawLine) }
         }
     }
 }

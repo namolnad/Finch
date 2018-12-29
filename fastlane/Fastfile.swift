@@ -19,6 +19,12 @@ class Fastfile: LaneFile {
         
         scan()
     }
+
+    func swiftlintLane() {
+        desc("Run linting")
+
+        swiftlint(strict: true)
+    }
     
     func setUpKeychain() {
         desc("Set up keychain for CircleCI")

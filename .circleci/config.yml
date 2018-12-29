@@ -8,7 +8,7 @@ jobs:
     macos:
       xcode: "10.1.0"
     steps:
-      -checkout
+      - checkout
       - restore_cache:
           key: 1-gems-{{ checksum "Gemfile.lock" }}
       - run:

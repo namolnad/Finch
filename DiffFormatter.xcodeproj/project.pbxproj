@@ -10,6 +10,7 @@
 		220291DF21D7121F009A1F15 /* RoutingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291DE21D7121F009A1F15 /* RoutingTests.swift */; };
 		220291E121D7129C009A1F15 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E021D7129C009A1F15 /* Mocks.swift */; };
 		220291E421D716ED009A1F15 /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E321D716ED009A1F15 /* ConfigurationTests.swift */; };
+		220291E821D75BD4009A1F15 /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220291E721D75BD4009A1F15 /* SnapshotTesting.framework */; };
 		221E3E1A2127E36800256B13 /* Utilities_GitDiffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E192127E36800256B13 /* Utilities_GitDiffer.swift */; };
 		221E3E1C2127E6CB00256B13 /* GitConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */; };
 		221E3E202127F28F00256B13 /* Utilities_Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */; };
@@ -106,6 +107,7 @@
 		220291DE21D7121F009A1F15 /* RoutingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingTests.swift; sourceTree = "<group>"; };
 		220291E021D7129C009A1F15 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		220291E321D716ED009A1F15 /* ConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTests.swift; sourceTree = "<group>"; };
+		220291E721D75BD4009A1F15 /* SnapshotTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapshotTesting.framework; path = Carthage/Build/Mac/SnapshotTesting.framework; sourceTree = "<group>"; };
 		221E3E192127E36800256B13 /* Utilities_GitDiffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_GitDiffer.swift; sourceTree = "<group>"; };
 		221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitConfiguration.swift; sourceTree = "<group>"; };
 		221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_Shell.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				220291E821D75BD4009A1F15 /* SnapshotTesting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +183,14 @@
 				22FAE691212718660097A0A5 /* ProcessInfoMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		220291E621D75BD3009A1F15 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				220291E721D75BD4009A1F15 /* SnapshotTesting.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		224EE6F021A8DD5B008A97CF /* Routing */ = {
@@ -298,6 +309,7 @@
 				22AACD5C20EEAAAC00806FF3 /* DiffFormatter */,
 				226433602126421100B46082 /* DiffFormatterTests */,
 				22AACD5B20EEAAAC00806FF3 /* Products */,
+				220291E621D75BD3009A1F15 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -365,6 +377,7 @@
 				2264335B2126421100B46082 /* Sources */,
 				2264335C2126421100B46082 /* Frameworks */,
 				2264335D2126421100B46082 /* Resources */,
+				220291E921D76379009A1F15 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -460,6 +473,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		220291E921D76379009A1F15 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/SnapshotTesting.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapshotTesting.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -566,6 +599,10 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = DiffFormatterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -585,6 +622,10 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = DiffFormatterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import DiffFormatter
+import SnapshotTesting
 
 final class OutputTests: XCTestCase {
     func testOutputGenerator() {
@@ -18,7 +19,10 @@ final class OutputTests: XCTestCase {
             releaseManager: Configuration.mock.contributors.first
         )
 
-        XCTAssertEqual(outputGenerator.generateOutput(), Utilities.mockOutput)
+        assertSnapshot(
+            matching: outputGenerator.generateOutput(),
+            as: .dump
+        )
     }
 
     func testCustomDelimiterOutput() {
@@ -34,28 +38,31 @@ final class OutputTests: XCTestCase {
             releaseManager: Configuration.mock.contributors.first
         )
 
-        XCTAssertEqual(outputGenerator.generateOutput(), Utilities.mockCustomDelimiterOutput)
+        assertSnapshot(
+            matching: outputGenerator.generateOutput(),
+            as: .dump
+        )
     }
 
     func testLineComponentParsing() {
         let sample = "&&&5a544059e165f0703843d1c6c509cc853ad6afa4&&& - @@@[tag1][tag2] fixing something somewhere (#1234)@@@###author@email.com###"
 
-        let component = Section.Line.Components(rawLine: sample, configuration: .mock)
-
-        XCTAssert(component.contributorEmail == "author@email.com")
-        XCTAssert(component.sha == "5a544059e165f0703843d1c6c509cc853ad6afa4")
-        XCTAssert(component.message == "fixing something somewhere")
-        XCTAssert(component.pullRequestNumber == 1234)
-        XCTAssert(component.tags == ["tag1", "tag2"])
+        assertSnapshot(
+            matching: Section.Line.Components(
+                rawLine: sample,
+                configuration: .mock
+            ),
+            as: .dump
+        )
 
         let sample2 = "&&&5a544059e165f0703843d1c6c509cc853ad6afa4&&& - @@@[tag1]fixing something somewhere@@@###author+1234@email.com###"
 
-        let component2 = Section.Line.Components(rawLine: sample2, configuration: .mock)
-
-        XCTAssert(component2.contributorEmail == "author+1234@email.com")
-        XCTAssert(component2.sha == "5a544059e165f0703843d1c6c509cc853ad6afa4")
-        XCTAssert(component2.message == "fixing something somewhere")
-        XCTAssertNil(component2.pullRequestNumber)
-        XCTAssert(component2.tags == ["tag1"])
+        assertSnapshot(
+            matching: Section.Line.Components(
+                rawLine: sample2,
+                configuration: .mock
+            ),
+            as: .dump
+        )
     }
 }

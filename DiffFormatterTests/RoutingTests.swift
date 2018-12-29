@@ -6,8 +6,9 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import XCTest
 @testable import DiffFormatter
+import SnapshotTesting
+import XCTest
 
 final class RoutingTests: XCTestCase {
     func testArgumentRouter() {
@@ -45,7 +46,7 @@ final class RoutingTests: XCTestCase {
 
         _ = ArgumentRouter.diffHandler.handle(context, scheme)
 
-        XCTAssert(output == "Output copied to pasteboard: \n# 6.19.1 (56789)\n\n### Features\n\n\n### Bug Fixes\n\n\n### Platform Improvements\n\n\n### Timeline\n- Begin development:\n- Feature cut-off / Start of bake / dogfooding:\n- Submission:\n- Release (expected):\n- Release (actual):\n")
+        assertSnapshot(matching: output, as: .dump)
     }
 
     func testVersionHandler() {
@@ -67,7 +68,7 @@ final class RoutingTests: XCTestCase {
 
         _ = ArgumentRouter.versionHandler.handle(context, scheme)
 
-        XCTAssert(output == "DiffFormatter 1.0.1 (12345)")
+        assertSnapshot(matching: output, as: .dump)
     }
 
     func testUsageHandler() {
@@ -89,6 +90,6 @@ final class RoutingTests: XCTestCase {
 
         _ = ArgumentRouter.usageHandler.handle(context, scheme)
 
-        XCTAssert(output == "\nDiffFormatter Info:\n    -h, --help\n        Displays this dialog\n    -v, --version\n        Displays DiffFormatter version information\n\nDiff Formatting:\n    The first 2 arguments must be (branch or tag) version strings, given as:\n\n    `DiffFormatter OLD_VERSION NEW_VERSION`\n\nDiff-Modifying Arguments:\n    --no-show-version\n        The ability to hide the version header\n    --release-manager\n        The release manager\'s email, e.g. `--release-manager=$(git config --get user.email)`\n    --project-dir\n        Project directory if DiffFormatter is not being called from project directory\n    --git-diff\n        Manually-passed git diff in expected format. See README for format details.\n\nConfiguration:\n    Configuration instructions available in the README.\n\n\nAdditional information available at: https://github.com/namolnad/DiffFormatter\n")
+        assertSnapshot(matching: output, as: .dump)
     }
 }

@@ -1,0 +1,2 @@
+▿ Optional<String>
+  - some: "DiffFormatter 1.0.1 (12345)"

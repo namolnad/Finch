@@ -19,6 +19,9 @@ jobs:
           paths:
             - $BUNDLE_PATH
       - run:
+          name: Decode certficates
+          command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
+      - run:
           name: Swiftlint
           command: make lint
       - store_test_results:
@@ -28,9 +31,6 @@ jobs:
   test:
     macos:
       xcode: "10.1.0"
-    environment:
-      BUNDLE_PATH: vendor/bundle
-      CERTIFICATE_PATH: Certificates.p12
     steps:
       - checkout
       - restore_cache:

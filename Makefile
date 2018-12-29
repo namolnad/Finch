@@ -4,6 +4,10 @@ all: build config_template install lint setup test verify_carthage
 
 install: ## Install DiffFormatter
 	./Scripts/install
+config_template:
+	@echo "\nAdding config template to $$HOME/.diff_formatter.template\n"
+	cp .diff_formatter.template $$HOME/.diff_formatter.template
+
 
 lint: ## Swiftlint
 	bundle exec fastlane swiftlint

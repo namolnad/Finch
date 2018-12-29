@@ -5,11 +5,15 @@
 version: 2
 jobs:
   lint:
+    macos:
+      xcode: "10.1.0"
     steps:
       - run:
         name: Swiftlint
         command: make lint
   test:
+    macos:
+      xcode: "10.1.0"
     environment:
       BUNDLE_PATH: vendor/bundle
       CERTIFICATE_PATH: Certificates.p12
@@ -37,12 +41,6 @@ jobs:
 
 workflows:
   version: 2
-  macos:
-    xcode: "10.1.0"
-  environment:
-    LC_ALL: en_US.UTF-8
-    LANG: en_US.UTF-8
-    LANGUAGE: en_US.UTF-8
   build:
     jobs:
       - lint

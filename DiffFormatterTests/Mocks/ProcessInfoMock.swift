@@ -19,7 +19,7 @@ final class ProcessInfoMock: ProcessInfo {
 
     private var _arguments: [String]
 
-    override var environment: [String : String] {
+    override var environment: [String: String] {
         return _environment
     }
 

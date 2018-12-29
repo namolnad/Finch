@@ -14,17 +14,7 @@ opt_in_rules:
   - private_over_fileprivate
   - sorted_imports
 
-included:
-  - DiffFormatter
-  - DiffFormatterTests
-
-excluded: # paths to ignore during linting. Takes precedence over `included`.
-  - Carthage
-  - fastlane
-  - Pods
-  - Vendor
-  - build
-
-nesting:
-  type_level: 3
-
+disabled_rules:
+  - force_try
+  - line_length
+  - todo

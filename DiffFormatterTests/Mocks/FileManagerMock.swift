@@ -44,7 +44,7 @@ final class FileManagerMock: FileManager {
     }
 
     private func data(for path: String) -> Data {
-        let resource = Bundle(for: type(of:self)).path(forResource: path, ofType: "json")!
+        let resource = Bundle(for: type(of: self)).path(forResource: path, ofType: "json")!
 
         return try! Data(contentsOf: URL(fileURLWithPath: resource))
     }

@@ -10,7 +10,11 @@ import Foundation
 
 extension Configuration {
     // TODO: - Shouldn't rely on configurator for mock
-    static let mock: Configuration = Configurator(processInfo: .mock, argScheme: .mock, fileManager: .mock).configuration
+    static let mock: Configuration = Configurator(
+        processInfo: .mock,
+        argScheme: .mock,
+        fileManager: .mock
+    ).configuration
 }
 
 extension ArgumentScheme {
@@ -42,87 +46,5 @@ extension Utilities {
 > &&&d157b78a5f440654ee243c676642466ff72912a6&&& - @@@[rollbar] update to v1.0.0 final (#1007)@@@###elvis1935+still-alive@theking.com###
 > &&&a7586919f6b096d884958e3386e535ecc986cd57&&& - @@@Autocomplete V3 (#1004)@@@###elvis1935+still-alive@theking.com###
 > &&&1c659ebb3dfde5b078894741a75eb0e3387656f2&&& - @@@[version] 6.13.0@@@###elvis1935+still-alive@theking.com###
-"""
-
-    static let mockOutput: String = """
-
-# 6.13.0
-
-### Release Manager
-
- - @Jony.Ive
-
-### Features
- - |tests| fix order snapshots — [PR #1018](https://github.com/citadel-of-ricks/C-137/pull/1018) — @Rick.Sanchez
- - |search| consolidate searchBar cornerRadius to 4, increase autocomplete-v3 term height — [PR #1011](https://github.com/citadel-of-ricks/C-137/pull/1011) — @Elvis.Presley
- - |rollbar| update to v1.0.0 final — [PR #1007](https://github.com/citadel-of-ricks/C-137/pull/1007) — @Elvis.Presley
- - |push-notificatons| Request for permission after user places an order with 90 day re-prompt — [PR #1024](https://github.com/citadel-of-ricks/C-137/pull/1024) — @Jony.Ive
- - |express-placement| build error fix — [PR #1025](https://github.com/citadel-of-ricks/C-137/pull/1025) — @Jony.Ive
- - |express-placement| additional clean-up for analytics and bugs — [PR #1021](https://github.com/citadel-of-ricks/C-137/pull/1021) — @Jony.Ive
- - |codable| better supported for AnyEncodables — [PR #1022](https://github.com/citadel-of-ricks/C-137/pull/1022) — @Elvis.Presley
- - |carthage| move google places to internal carthage — [PR #1008](https://github.com/citadel-of-ricks/C-137/pull/1008) — @Elvis.Presley
- - |autocomplete-v3| add analytics — [PR #1030](https://github.com/citadel-of-ricks/C-137/pull/1030) — @Elvis.Presley
- - |analytics| Current production express placements are missing subscription_id in express_start.purchase tracking events — [PR #1020](https://github.com/citadel-of-ricks/C-137/pull/1020) — @Jony.Ive
- - Update all express placements to one screen — [PR #975](https://github.com/citadel-of-ricks/C-137/pull/975) — @Jony.Ive
- - Syncing express params across checkout modules — [PR #1016](https://github.com/citadel-of-ricks/C-137/pull/1016) — @Rick.Sanchez
- - Order status V2.5 — [PR #988](https://github.com/citadel-of-ricks/C-137/pull/988) — @Elvis.Presley
- - Autocomplete V3 — [PR #1004](https://github.com/citadel-of-ricks/C-137/pull/1004) — @Elvis.Presley
-
-### Bug Fixes
- - |bug| Don't show express placement every cold start — [PR #1019](https://github.com/citadel-of-ricks/C-137/pull/1019) — @Jony.Ive
- - |bug fix| minor bug fixes for cubs/pbi — [PR #1010](https://github.com/citadel-of-ricks/C-137/pull/1010) — @Elvis.Presley
- - |bug fix| fix LossyCodableArray — [PR #1017](https://github.com/citadel-of-ricks/C-137/pull/1017) — @Rick.Sanchez
-
-### Platform Improvements
- - background actions — [PR #955](https://github.com/citadel-of-ricks/C-137/pull/955)
-
-### Timeline
-- Begin development:
-- Feature cut-off / Start of bake / dogfooding:
-- Submission:
-- Release (expected):
-- Release (actual):
-
-"""
-
-    static let mockCustomDelimiterOutput: String = """
-
-# 6.13.0
-
-### Release Manager
-
- - @Jony.Ive
-
-### Features
- - **❲**tests**❳** fix order snapshots — [PR #1018](https://github.com/citadel-of-ricks/C-137/pull/1018) — @Rick.Sanchez
- - **❲**search**❳** consolidate searchBar cornerRadius to 4, increase autocomplete-v3 term height — [PR #1011](https://github.com/citadel-of-ricks/C-137/pull/1011) — @Elvis.Presley
- - **❲**rollbar**❳** update to v1.0.0 final — [PR #1007](https://github.com/citadel-of-ricks/C-137/pull/1007) — @Elvis.Presley
- - **❲**push-notificatons**❳** Request for permission after user places an order with 90 day re-prompt — [PR #1024](https://github.com/citadel-of-ricks/C-137/pull/1024) — @Jony.Ive
- - **❲**express-placement**❳** build error fix — [PR #1025](https://github.com/citadel-of-ricks/C-137/pull/1025) — @Jony.Ive
- - **❲**express-placement**❳** additional clean-up for analytics and bugs — [PR #1021](https://github.com/citadel-of-ricks/C-137/pull/1021) — @Jony.Ive
- - **❲**codable**❳** better supported for AnyEncodables — [PR #1022](https://github.com/citadel-of-ricks/C-137/pull/1022) — @Elvis.Presley
- - **❲**carthage**❳** move google places to internal carthage — [PR #1008](https://github.com/citadel-of-ricks/C-137/pull/1008) — @Elvis.Presley
- - **❲**autocomplete-v3**❳** add analytics — [PR #1030](https://github.com/citadel-of-ricks/C-137/pull/1030) — @Elvis.Presley
- - **❲**analytics**❳** Current production express placements are missing subscription_id in express_start.purchase tracking events — [PR #1020](https://github.com/citadel-of-ricks/C-137/pull/1020) — @Jony.Ive
- - Update all express placements to one screen — [PR #975](https://github.com/citadel-of-ricks/C-137/pull/975) — @Jony.Ive
- - Syncing express params across checkout modules — [PR #1016](https://github.com/citadel-of-ricks/C-137/pull/1016) — @Rick.Sanchez
- - Order status V2.5 — [PR #988](https://github.com/citadel-of-ricks/C-137/pull/988) — @Elvis.Presley
- - Autocomplete V3 — [PR #1004](https://github.com/citadel-of-ricks/C-137/pull/1004) — @Elvis.Presley
-
-### Bug Fixes
- - **❲**bug**❳** Don't show express placement every cold start — [PR #1019](https://github.com/citadel-of-ricks/C-137/pull/1019) — @Jony.Ive
- - **❲**bug fix**❳** minor bug fixes for cubs/pbi — [PR #1010](https://github.com/citadel-of-ricks/C-137/pull/1010) — @Elvis.Presley
- - **❲**bug fix**❳** fix LossyCodableArray — [PR #1017](https://github.com/citadel-of-ricks/C-137/pull/1017) — @Rick.Sanchez
-
-### Platform Improvements
- - **❲**platform**❳** background actions — [PR #955](https://github.com/citadel-of-ricks/C-137/pull/955) — @Elvis.Presley
-
-### Timeline
-- Begin development:
-- Feature cut-off / Start of bake / dogfooding:
-- Submission:
-- Release (expected):
-- Release (actual):
-
 """
 }

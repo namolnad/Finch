@@ -39,7 +39,7 @@ jobs:
           key: v{{ .Environment.CACHE_VERSION }}-carthage-{{ checksum "Cartfile.resolved" }}
       - run:
           name: Install dependencies
-          command: carthage bootstrap --platform macos --cache-builds
+          command: make verify-carthage || carthage bootstrap --platform macos --cache-builds
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-carthage-{{ checksum "Cartfile.resolved" }}
           paths: Carthage

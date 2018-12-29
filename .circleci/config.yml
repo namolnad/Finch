@@ -17,11 +17,11 @@ jobs:
             - v{{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
       - run:
           name: Bundle install
-          command: bundle check --path \{{ .Environment.BUNDLE_PATH }} || bundle install --path \{{ .Environment.BUNDLE_PATH }}
+          command: bundle check --path vender/bundle || bundle install --path vendor/bundle
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
           paths:
-            - \{{ .Environment.BUNDLE_PATH }}
+            - vendor/bundle
       - restore_cache:
           keys:
             - v{{ .Environment.CACHE_VERSION }}-brew-{{ checksum "Brewfile" }}
@@ -31,7 +31,7 @@ jobs:
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-brew-{{ checksum "Brewfile" }}
           paths:
-            - \{{ .Environment.BREW_PATH }}
+            - usr/local/Homebrew
       - run:
           name: Decode certficates
           command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE

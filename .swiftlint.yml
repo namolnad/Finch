@@ -13,6 +13,8 @@ opt_in_rules:
   - unneeded_parentheses_in_closure_argument
   - private_over_fileprivate
   - sorted_imports
+included:
+  - DiffFormatter
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
   - DiffFormatterTests

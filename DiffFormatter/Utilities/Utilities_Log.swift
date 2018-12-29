@@ -8,8 +8,15 @@
 
 import Foundation
 
+protocol Logger {
+    func error(_ message: String)
+    func info(_ message: String)
+}
+
+let log: Logger = Utilities.log
+
 extension Utilities {
-    struct Log {
+    struct Log: Logger {
         fileprivate static let instance: Log = .init()
 
         private let formatter: DateFormatter = {
@@ -24,6 +31,10 @@ extension Utilities {
 
         private init() {}
 
+        func error(_ message: String) {
+            log(message: "🚨 \(message)")
+        }
+
         func info(_ message: String) {
             log(message: message)
         }
@@ -33,5 +44,5 @@ extension Utilities {
         }
     }
 
-    static let log: Log = .instance
+    static let log: Logger = Log.instance
 }

@@ -522,7 +522,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "make verify-carthage\n";
+			shellScript = "make verify_carthage\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

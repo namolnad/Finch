@@ -1,6 +1,6 @@
 .PHONY: all
 
-all: install setup test verify-carthage
+all: build config_template install lint setup test verify_carthage
 
 install: ## Install DiffFormatter
 	./Scripts/install
@@ -14,5 +14,5 @@ setup: ## Setup project
 test: ## Run tests
 	bundle exec fastlane test
 
-verify-carthage: ## Ensure carthage dependencies are in check with resolved file
+verify_carthage: ## Ensure carthage dependencies are in check with resolved file
 	./Scripts/carthage-verify

@@ -31,7 +31,7 @@ jobs:
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-brew-{{ checksum "Brewfile" }}
           paths:
-            - usr/local/Homebrew
+            - /usr/local/Homebrew
       - run:
           name: Decode certficates
           command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE

@@ -11,7 +11,8 @@
 		220291E121D7129C009A1F15 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E021D7129C009A1F15 /* Mocks.swift */; };
 		220291E421D716ED009A1F15 /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E321D716ED009A1F15 /* ConfigurationTests.swift */; };
 		220291E821D75BD4009A1F15 /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220291E721D75BD4009A1F15 /* SnapshotTesting.framework */; };
-		221E3E1A2127E36800256B13 /* Utilities_GitDiffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E192127E36800256B13 /* Utilities_GitDiffer.swift */; };
+		220291F021D7F487009A1F15 /* Utilities_Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291EF21D7F487009A1F15 /* Utilities_Git.swift */; };
+		220291F221D7FEB2009A1F15 /* Utilities_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F121D7FEB2009A1F15 /* Utilities_Log.swift */; };
 		221E3E1C2127E6CB00256B13 /* GitConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */; };
 		221E3E202127F28F00256B13 /* Utilities_Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */; };
 		2221C32621920784008D2AA7 /* ArgumentScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221C32521920784008D2AA7 /* ArgumentScheme.swift */; };
@@ -38,7 +39,6 @@
 		225623D52190FA9B00D43338 /* Section_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226433512123E0BD00B46082 /* Section_Info.swift */; };
 		225623D62190FA9B00D43338 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264335321240C0C00B46082 /* Section.swift */; };
 		225623D72190FA9B00D43338 /* Line_Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226433592125037E00B46082 /* Line_Components.swift */; };
-		225623D82190FAA000D43338 /* Utilities_GitDiffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E192127E36800256B13 /* Utilities_GitDiffer.swift */; };
 		225623D92190FAA000D43338 /* Utilities_OutputGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6A20EED12500806FF3 /* Utilities_OutputGenerator.swift */; };
 		225623DA2190FAA000D43338 /* Utilities_Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6820EED11800806FF3 /* Utilities_Pasteboard.swift */; };
 		225623DB2190FAA000D43338 /* Utilities_Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6420EEAAE200806FF3 /* Utilities_Regex.swift */; };
@@ -118,7 +118,8 @@
 		220291E021D7129C009A1F15 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		220291E321D716ED009A1F15 /* ConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTests.swift; sourceTree = "<group>"; };
 		220291E721D75BD4009A1F15 /* SnapshotTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapshotTesting.framework; path = Carthage/Build/Mac/SnapshotTesting.framework; sourceTree = "<group>"; };
-		221E3E192127E36800256B13 /* Utilities_GitDiffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_GitDiffer.swift; sourceTree = "<group>"; };
+		220291EF21D7F487009A1F15 /* Utilities_Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_Git.swift; sourceTree = "<group>"; };
+		220291F121D7FEB2009A1F15 /* Utilities_Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_Log.swift; sourceTree = "<group>"; };
 		221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitConfiguration.swift; sourceTree = "<group>"; };
 		221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_Shell.swift; sourceTree = "<group>"; };
 		2221C32521920784008D2AA7 /* ArgumentScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentScheme.swift; sourceTree = "<group>"; };
@@ -265,11 +266,12 @@
 			isa = PBXGroup;
 			children = (
 				225623E3219100F500D43338 /* Utilities.swift */,
-				221E3E192127E36800256B13 /* Utilities_GitDiffer.swift */,
+				220291EF21D7F487009A1F15 /* Utilities_Git.swift */,
 				22AACD6A20EED12500806FF3 /* Utilities_OutputGenerator.swift */,
 				22AACD6820EED11800806FF3 /* Utilities_Pasteboard.swift */,
 				22AACD6420EEAAE200806FF3 /* Utilities_Regex.swift */,
 				221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */,
+				220291F121D7FEB2009A1F15 /* Utilities_Log.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -540,7 +542,6 @@
 				2274E0DA21A8A2A400707869 /* Transformer.swift in Sources */,
 				225623DC2190FAA000D43338 /* Utilities_Shell.swift in Sources */,
 				225623CB2190FA8000D43338 /* HandleResult.swift in Sources */,
-				225623D82190FAA000D43338 /* Utilities_GitDiffer.swift in Sources */,
 				220291E121D7129C009A1F15 /* Mocks.swift in Sources */,
 				22FAE692212718660097A0A5 /* ProcessInfoMock.swift in Sources */,
 				22B7B58621A8A8B7005F43F1 /* Line_FormatComponent.swift in Sources */,
@@ -592,10 +593,10 @@
 				22AACD7120EF24CC00806FF3 /* Contributor.swift in Sources */,
 				221E3E1C2127E6CB00256B13 /* GitConfiguration.swift in Sources */,
 				22AACD6B20EED12500806FF3 /* Utilities_OutputGenerator.swift in Sources */,
-				221E3E1A2127E36800256B13 /* Utilities_GitDiffer.swift in Sources */,
 				2264334F2123DD3100B46082 /* Configuration.swift in Sources */,
 				22AACD6920EED11800806FF3 /* Utilities_Pasteboard.swift in Sources */,
 				224EE6F921A917B7008A97CF /* Line.swift in Sources */,
+				220291F221D7FEB2009A1F15 /* Utilities_Log.swift in Sources */,
 				22AB23632190C2EC000BAD64 /* RoutingContext.swift in Sources */,
 				223745BE20F3220D0002AD6F /* String+DiffFormatter.swift in Sources */,
 				22AACD5E20EEAAAC00806FF3 /* main.swift in Sources */,
@@ -617,6 +618,7 @@
 				22AB235A2190BBC4000BAD64 /* ArgumentHandler.swift in Sources */,
 				2274E0D721A8A1E000707869 /* Transformer.swift in Sources */,
 				22B7B58821A8B247005F43F1 /* Codable+DiffFormatter.swift in Sources */,
+				220291F021D7F487009A1F15 /* Utilities_Git.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

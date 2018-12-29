@@ -15,6 +15,8 @@
 		220291F221D7FEB2009A1F15 /* Utilities_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F121D7FEB2009A1F15 /* Utilities_Log.swift */; };
 		220291F321D803AA009A1F15 /* Utilities_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F121D7FEB2009A1F15 /* Utilities_Log.swift */; };
 		220291F421D803BA009A1F15 /* Utilities_Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291EF21D7F487009A1F15 /* Utilities_Git.swift */; };
+		220291F621D80DEC009A1F15 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F521D80DEC009A1F15 /* TestHelper.swift */; };
+		220291F821D8171E009A1F15 /* excluded_section_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F721D8171E009A1F15 /* excluded_section_config.json */; };
 		221E3E1C2127E6CB00256B13 /* GitConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */; };
 		221E3E202127F28F00256B13 /* Utilities_Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */; };
 		2221C32621920784008D2AA7 /* ArgumentScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221C32521920784008D2AA7 /* ArgumentScheme.swift */; };
@@ -122,6 +124,8 @@
 		220291E721D75BD4009A1F15 /* SnapshotTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapshotTesting.framework; path = Carthage/Build/Mac/SnapshotTesting.framework; sourceTree = "<group>"; };
 		220291EF21D7F487009A1F15 /* Utilities_Git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_Git.swift; sourceTree = "<group>"; };
 		220291F121D7FEB2009A1F15 /* Utilities_Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_Log.swift; sourceTree = "<group>"; };
+		220291F521D80DEC009A1F15 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
+		220291F721D8171E009A1F15 /* excluded_section_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = excluded_section_config.json; sourceTree = "<group>"; };
 		221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitConfiguration.swift; sourceTree = "<group>"; };
 		221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_Shell.swift; sourceTree = "<group>"; };
 		2221C32521920784008D2AA7 /* ArgumentScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentScheme.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 				220291E321D716ED009A1F15 /* ConfigurationTests.swift */,
 				226433612126421100B46082 /* OutputTests.swift */,
 				220291DE21D7121F009A1F15 /* RoutingTests.swift */,
+				220291F521D80DEC009A1F15 /* TestHelper.swift */,
 			);
 			path = DiffFormatterTests;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 			children = (
 				22FAE69A21272AD60097A0A5 /* default_config.json */,
 				22FAE6A521274F4C0097A0A5 /* custom_delimiter_config.json */,
+				220291F721D8171E009A1F15 /* excluded_section_config.json */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -465,6 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22FAE6A621274F4C0097A0A5 /* custom_delimiter_config.json in Resources */,
+				220291F821D8171E009A1F15 /* excluded_section_config.json in Resources */,
 				22FAE69B21272AD60097A0A5 /* default_config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,6 +557,7 @@
 				22FAE692212718660097A0A5 /* ProcessInfoMock.swift in Sources */,
 				22B7B58621A8A8B7005F43F1 /* Line_FormatComponent.swift in Sources */,
 				22B7B58521A8A87F005F43F1 /* LineOutputtable.swift in Sources */,
+				220291F621D80DEC009A1F15 /* TestHelper.swift in Sources */,
 				225623D32190FA9600D43338 /* Contributor.swift in Sources */,
 				225623D62190FA9B00D43338 /* Section.swift in Sources */,
 				226433622126421100B46082 /* OutputTests.swift in Sources */,

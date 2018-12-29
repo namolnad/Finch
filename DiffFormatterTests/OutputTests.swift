@@ -11,9 +11,23 @@ import SnapshotTesting
 import XCTest
 
 final class OutputTests: XCTestCase {
-    func testOutputGenerator() {
+    func testDefaultOutput() {
         let outputGenerator: Utilities.OutputGenerator = .init(
             configuration: .mock,
+            rawDiff: Utilities.inputMock,
+            version: "6.13.0",
+            releaseManager: Configuration.mock.contributors.first
+        )
+
+        assertSnapshot(
+            matching: outputGenerator.generateOutput(),
+            as: .dump
+        )
+    }
+
+    func testExcludedSectionOutput() {
+        let outputGenerator: Utilities.OutputGenerator = .init(
+            configuration: .mockExcludedSection,
             rawDiff: Utilities.inputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first

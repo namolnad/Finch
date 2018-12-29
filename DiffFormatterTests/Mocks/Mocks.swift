@@ -9,12 +9,19 @@
 import Foundation
 
 extension Configuration {
-    // TODO: - Shouldn't rely on configurator for mock
-    static let mock: Configuration = Configurator(
-        processInfo: .mock,
-        argScheme: .mock,
-        fileManager: .mock
-    ).configuration
+    static let mock: Configuration = {
+        var config: Configuration = .default(currentDirectory: "")
+        config.update(with: TestHelper.model(for: "default_config"))
+
+        return config
+    }()
+
+    static let mockExcludedSection: Configuration = {
+        var config: Configuration = .mock
+        config.update(with: TestHelper.model(for: "excluded_section_config"))
+
+        return config
+    }()
 }
 
 extension ArgumentScheme {

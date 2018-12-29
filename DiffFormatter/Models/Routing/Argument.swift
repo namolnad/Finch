@@ -10,6 +10,7 @@ import Foundation
 
 enum Argument: Equatable {
     enum ArgumentType: String {
+        case buildNumber = "--build-number"
         case gitDiff = "--git-diff"
         case help = "--help"
         case helpAbbreviated = "-h"

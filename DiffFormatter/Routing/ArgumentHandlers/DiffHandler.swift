@@ -14,7 +14,12 @@ extension ArgumentRouter {
             return .notHandled
         }
 
-        let versionHeader: String? = scheme.args.contains(.flag(.noShowVersion)) ? nil : scheme.newVersion
+        let hideHeader = scheme.args.contains(.flag(.noShowVersion))
+        var versionHeader: String? = hideHeader ? nil : scheme.newVersion
+        for case let .actionable(.buildNumber, buildNumber) in scheme.args where !hideHeader {
+            versionHeader?.append(" (\(buildNumber))")
+            break
+        }
 
         var releaseManager: Contributor?
         for case let .actionable(.releaseManager, email) in scheme.args {

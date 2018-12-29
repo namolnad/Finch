@@ -7,6 +7,9 @@ jobs:
   lint:
     macos:
       xcode: "10.1.0"
+    environment:
+      BREW_PATH: /usr/local/Homebrew
+      BUNDLE_PATH: vendor/bundle
     steps:
       - checkout
       - restore_cache:
@@ -42,6 +45,9 @@ jobs:
   test:
     macos:
       xcode: "10.1.0"
+    environment:
+      BREW_PATH: /usr/local/Homebrew
+      BUNDLE_PATH: vendor/bundle
     steps:
       - checkout
       - restore_cache:

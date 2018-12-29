@@ -16,7 +16,7 @@ extension ArgumentRouter {
             return .notHandled
         }
 
-        print("\(context.app.name) \(context.app.version) (\(context.app.buildNumber))")
+        context.output("\(context.app.name) \(context.app.version) (\(context.app.buildNumber))")
 
         return .handled
     }

@@ -47,20 +47,16 @@ extension ArgumentRouter {
             releaseManager: releaseManager
         )
 
-        output(generator: outputGenerator)
+        context.output(output(generator: outputGenerator))
 
         return .handled
     }
 
-    private static func output(generator: Utilities.OutputGenerator) {
-        guard !Utilities.isTest else {
-            return
-        }
-
-        let result = generator.generatedOutput()
+    private static func output(generator: Utilities.OutputGenerator) -> String {
+        let result = generator.generateOutput()
 
         Utilities.pbCopy(text: result)
 
-        print("Output copied to pasteboard: \(result)")
+        return "Output copied to pasteboard: \(result)"
     }
 }

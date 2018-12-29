@@ -18,12 +18,12 @@ extension ArgumentRouter {
 
         // NOTE: - Long term, this should defer to sub-handlers for command-specific usage
 
-        print(usageInformation(context: context))
+        context.output(usageInformation(context: context))
 
         return .handled
     }
 
-    private static func usageInformation(context: Context)-> String {
+    private static func usageInformation(context: Context) -> String {
         return """
 
         \(context.app.name) Info:

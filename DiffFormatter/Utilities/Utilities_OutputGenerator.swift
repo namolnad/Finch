@@ -57,7 +57,7 @@ extension Utilities.OutputGenerator {
         self.contributorHandlePrefix = configuration.contributorHandlePrefix
     }
 
-    func generatedOutput() -> String {
+    func generateOutput() -> String {
         var output = ""
 
         if let value = version {

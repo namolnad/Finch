@@ -12,6 +12,6 @@ extension ArgumentRouter {
     typealias RouterArgumentHandling = ArgumentHandling<ArgumentScheme>
 
     struct ArgumentHandling<Arguments> {
-        var handle: (Context, Arguments) -> HandleResult
+        let handle: (Context, Arguments) -> HandleResult
     }
 }

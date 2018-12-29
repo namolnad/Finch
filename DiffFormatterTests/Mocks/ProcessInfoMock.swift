@@ -8,6 +8,10 @@
 
 import Foundation
 
+extension ProcessInfo {
+    static let mock: ProcessInfo = ProcessInfoMock(arguments: [], environment: [:])
+}
+
 final class ProcessInfoMock: ProcessInfo {
     override var arguments: [String] {
         return _arguments

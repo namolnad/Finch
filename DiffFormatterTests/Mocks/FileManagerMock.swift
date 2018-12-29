@@ -8,6 +8,10 @@
 
 import Foundation
 
+extension FileManager {
+    static let mock: FileManager = FileManagerMock()
+}
+
 final class FileManagerMock: FileManager {
 
     override var currentDirectoryPath: String {

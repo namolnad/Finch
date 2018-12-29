@@ -52,7 +52,7 @@ extension Utilities.OutputGenerator {
 
         self.version = version
         self.releaseManager = releaseManager
-        self.sections = sections
+        self.sections = sections.filter { !$0.info.excluded }
         self.footer = configuration.footer
         self.contributorHandlePrefix = configuration.contributorHandlePrefix
     }

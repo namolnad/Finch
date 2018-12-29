@@ -12,18 +12,21 @@ extension Section {
     struct Info {
         enum CodingKeys: String, CodingKey {
             case capitalizesMessage
+            case excluded
             case formatString
             case tags
             case title
         }
 
         let capitalizesMessage: Bool
+        let excluded: Bool
         private let formatString: String
         let tags: Set<String>
         let title: String
 
-        init(capitalizesMessage: Bool, formatString: String, tags: [String], title: String) {
+        init(capitalizesMessage: Bool, excluded: Bool = false, formatString: String, tags: [String], title: String) {
             self.capitalizesMessage = capitalizesMessage
+            self.excluded = excluded
             self.formatString = formatString
             self.tags = Set(tags)
             self.title = title
@@ -42,8 +45,9 @@ extension Section.Info: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.formatString = container.decode(forKey: .formatString, default: .defaultFormatString)
         self.capitalizesMessage = container.decode(forKey: .capitalizesMessage, default: false)
+        self.excluded = container.decode(forKey: .excluded, default: false)
+        self.formatString = container.decode(forKey: .formatString, default: .defaultFormatString)
         self.tags = try container.decode(forKey: .tags)
         self.title = try container.decode(forKey: .title)
     }

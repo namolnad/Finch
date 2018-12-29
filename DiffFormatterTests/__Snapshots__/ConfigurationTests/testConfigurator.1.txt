@@ -30,12 +30,14 @@
   ▿ sectionInfos: 3 elements
     ▿ Info
       - capitalizesMessage: false
+      - excluded: false
       - formatString: " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>"
       ▿ tags: 1 member
         - "*"
       - title: "Features"
     ▿ Info
       - capitalizesMessage: false
+      - excluded: false
       - formatString: " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>"
       ▿ tags: 3 members
         - "bug fix"
@@ -44,6 +46,7 @@
       - title: "Bug Fixes"
     ▿ Info
       - capitalizesMessage: false
+      - excluded: false
       - formatString: " - <<message>> — <<commit_type_hyperlink>>"
       ▿ tags: 4 members
         - "cleanup"

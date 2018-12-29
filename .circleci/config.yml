@@ -5,6 +5,8 @@
 version: 2
 jobs:
   lint:
+    docker:
+      - image: dantoml/swiftlint:latest
     macos:
       xcode: "10.1.0"
     steps:

@@ -9,6 +9,6 @@
 class Gymfile: GymfileProtocol {
     var includeSymbols: Bool? { return false }
     var outputDirectory: String { return "./build" }
-    var sdk: String { return "macos" }
     var scheme: String { return "\(appIdentifier)" }
+    var sdk: String { return "macos" }
 }

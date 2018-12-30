@@ -1,5 +1,5 @@
 ▿ Configuration
-  - buildNumberCommand: Optional<String>.none
+  - buildNumberCommandArgs: Optional<Array<String>>.none
   ▿ contributorsConfig: ContributorsConfiguration
     ▿ contributorHandlePrefix: Optional<String>
       - some: "@"

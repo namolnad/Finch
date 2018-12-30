@@ -58,14 +58,15 @@ extension ArgumentRouter {
             return versionHeader
         }
 
-        if let command = context.configuration.buildNumberCommand,
-            case var commandArgs = command.components(separatedBy: " "),
+        if var commandArgs = context.configuration.buildNumberCommandArgs,
             !commandArgs.isEmpty,
             case let exec = commandArgs.removeFirst(),
+            let newVersion = scheme.newVersion,
             let buildNumber = Utilities.shell(
                 executablePath: exec,
-                arguments: command.components(separatedBy: " "),
-                currentDirectoryPath: context.configuration.currentDirectory
+                arguments: commandArgs,
+                currentDirectoryPath: context.configuration.currentDirectory,
+                environment: ["NEW_VERSION": "\(newVersion)"]
             ) {
             versionHeader?.append(" (\(buildNumber.trimmingCharacters(in: .whitespacesAndNewlines)))")
         }

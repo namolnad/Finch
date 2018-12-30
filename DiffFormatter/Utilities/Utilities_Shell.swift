@@ -9,11 +9,19 @@
 import Foundation
 
 extension Utilities {
-    static func shell(executablePath: String, arguments: [String], currentDirectoryPath: String) -> String? {
+    static func shell(
+        executablePath: String,
+        arguments: [String],
+        currentDirectoryPath: String,
+        environment: [String: String]? = nil) -> String? {
         let task = Process()
         task.executableURL = URL(fileURLWithPath: executablePath)
         task.currentDirectoryURL = URL(fileURLWithPath: currentDirectoryPath)
         task.arguments = arguments
+
+        if let environment = environment, case let env = task.environment ?? [:] {
+            task.environment = env.merging(environment) { _, new in new }
+        }
 
         let pipe = Pipe()
         task.standardOutput = pipe

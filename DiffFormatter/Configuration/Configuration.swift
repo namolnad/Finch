@@ -10,7 +10,7 @@ import Foundation
 
 struct Configuration: Decodable {
     enum CodingKeys: String, CodingKey {
-        case buildNumberCommand
+        case buildNumberCommandArguments
         case contributorsConfig
         case delimiterConfig
         case footer
@@ -19,7 +19,7 @@ struct Configuration: Decodable {
         case sectionInfos
     }
 
-    private(set) var buildNumberCommand: String?
+    private(set) var buildNumberCommandArgs: [String]?
     private(set) var contributorsConfig: ContributorsConfiguration
     private(set) var currentDirectory: String = ""
     private(set) var delimiterConfig: DelimiterConfiguration
@@ -31,7 +31,7 @@ struct Configuration: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        buildNumberCommand = container.optionalDecode(forKey: .buildNumberCommand)
+        buildNumberCommandArgs = container.optionalDecode(forKey: .buildNumberCommandArguments)
         contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
         delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
         footer = container.optionalDecode(forKey: .footer)
@@ -41,14 +41,14 @@ struct Configuration: Decodable {
     }
 
     init(
-        buildNumberCommand: String? = nil,
+        buildNumberCommandArgs: [String]? = nil,
         contributorsConfig: ContributorsConfiguration = .blank,
         sectionInfos: [Section.Info] = [],
         footer: String? = nil,
         delimiterConfig: DelimiterConfiguration = .blank,
         gitConfig: GitConfiguration = .blank,
         header: String? = nil) {
-        self.buildNumberCommand = buildNumberCommand
+        self.buildNumberCommandArgs = buildNumberCommandArgs
         self.contributorsConfig = contributorsConfig
         self.delimiterConfig = delimiterConfig
         self.footer = footer
@@ -79,8 +79,8 @@ extension Configuration {
 extension Configuration {
     mutating func update(with otherConfig: Configuration) {
         // Commands
-        if let value = otherConfig.buildNumberCommand {
-            self.buildNumberCommand = value
+        if let value = otherConfig.buildNumberCommandArgs {
+            self.buildNumberCommandArgs = value
         }
 
         // Sections
@@ -174,7 +174,7 @@ extension Configuration {
 
 extension Configuration {
     var isBlank: Bool {
-        return (buildNumberCommand?.isEmpty == true) &&
+        return (buildNumberCommandArgs?.isEmpty == true) &&
             delimiterConfig.isBlank &&
             sectionInfos.isEmpty &&
             (footer?.isEmpty == true) &&

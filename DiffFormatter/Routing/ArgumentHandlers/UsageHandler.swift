@@ -37,15 +37,19 @@ extension ArgumentRouter {
 
             `\(context.app.name) OLD_VERSION NEW_VERSION`
 
-        Diff-Modifying Arguments:
+        Other Arguments:
             --no-show-version
                 The ability to hide the version header
             --release-manager
-                The release manager's email, e.g. `--release-manager=$(git config --get user.email)`
+                The release manager's email. e.g. `--release-manager=$(git config --get user.email)`
             --project-dir
                 Project directory if \(context.app.name) is not being called from project directory
             --git-diff
                 Manually-passed git diff in expected format. See README for format details.
+            --no-fetch
+                Don't fetch origin before auto-generating diff
+            --build-number
+                Build number string to be included in version header. Takes precedence over build number command in config. e.g. `6.19.1 (6258)`
 
         Configuration:
             Configuration instructions available in the README.

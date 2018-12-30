@@ -8,6 +8,8 @@ The first two arguments received must be the version strings, in order of: OLD_V
 2. Release manager (`--release-manager`)
 3. Project directory (`--project-dir`) if DiffFormatter is not called from project directory
 4. Manual git diff (`--git-diff`). Must be received in format: git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_VERSION...NEW_VERSION
+5. Don't fetch origin before auto-generating diff (`--no-fetch`).
+6. Build number string to be included in version header (`--build-number`) Takes precedence over build number command in config. Example output: `6.19.1 (6258)`
 
 In many cases it may be easiest to create a new shell function when your shell startup files are sourced, such as the following:
 
@@ -31,6 +33,7 @@ The following portions of DiffFormatter are configurable:
 - Git executable path
 - Git branch (or tag) prefix
 - Git repo base url
+- Build number generation command
 
 To function properly, DiffFormatter requires at least a contributors list.
 
@@ -75,7 +78,8 @@ Any non-empty configuration variables included in the config file found in each 
         "tag 2"
       ],
       "format_string": " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>",
-      "capitalizes_message": true
+      "capitalizes_message": true,
+      "excluded": true
     }
   ],
   "footer": "Custom footer here",
@@ -88,7 +92,13 @@ Any non-empty configuration variables included in the config file found in each 
   "git_config": {
     "branch_prefix": "origin/releases/",
     "repo_base_url": "https://github.com/org/repo"
-  }
+  },
+  "build_number_command_arguments": [
+    "/usr/bin/env",
+    "bash",
+    "-c",
+    "git rev-list --count origin/releases/$NEW_VERSION"
+  ]
 }
 ```
 
@@ -97,10 +107,11 @@ Any non-empty configuration variables included in the config file found in each 
   - If included sections have duplicative tags, the last section with a given tag wins. Each matching commit will be placed into it's owning section.
   - One wildcard section can be included. Do so by including a * in the section's tag config.
   - Commits will only appear in a single section. Searches first for a section matching the first commit tag, then the second and so on.
+  - Sections may be excluded by passing `excluded: true` in section config
 
 # Example output
 ```
-# 6.13.0
+# 6.13.0 (3242)
 
 ### Release Manager
 

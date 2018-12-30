@@ -9,57 +9,26 @@
 import Foundation
 
 extension ArgumentRouter {
+    private typealias Versions = (old: String, new: String)
+
     static let diffHandler: RouterArgumentHandling = .init { context, scheme in
-        guard let oldVersion = scheme.oldVersion, let newVersion = scheme.newVersion else {
-            return .notHandled
-        }
-
-        let hideHeader = scheme.args.contains(.flag(.noShowVersion))
-        var versionHeader: String? = hideHeader ? nil : scheme.newVersion
-        for case let .actionable(.buildNumber, buildNumber) in scheme.args where !hideHeader {
-            versionHeader?.append(" (\(buildNumber))")
-            break
-        }
-
-        var releaseManager: Contributor?
-        for case let .actionable(.releaseManager, email) in scheme.args {
-            releaseManager = context.configuration.contributors.first { $0.email == email }
-            break
-        }
-
-        var projectDir: String = context.configuration.currentDirectory
-        for case let .actionable(.projectDir, dir) in scheme.args {
-            projectDir = dir
-            break
-        }
-
-        var manualDiff: String?
-        for case let .actionable(.gitDiff, diff) in scheme.args {
-            manualDiff = diff
-            break
-        }
-
-        let rawDiff: String
-        if let manualDiff = manualDiff {
-            rawDiff = manualDiff
-        } else {
-            let git = Utilities.Git(configuration: context.configuration, projectDir: projectDir)
-
-            if !scheme.args.contains(.flag(.noFetch)) {
-                log.info("Fetching origin")
-                git.fetch()
-            }
-
-            log.info("Generating diff")
-
-            rawDiff = git.diff(oldVersion: oldVersion, newVersion: newVersion)
+        guard
+            let oldVersion = scheme.oldVersion,
+            let newVersion = scheme.newVersion,
+            case let versions = (oldVersion, newVersion) else {
+                return .notHandled
         }
 
         let outputGenerator: Utilities.OutputGenerator = .init(
             configuration: context.configuration,
-            rawDiff: rawDiff,
-            version: versionHeader,
-            releaseManager: releaseManager
+            rawDiff: diff(
+                versions: versions,
+                context: context,
+                scheme: scheme,
+                projectDir: projectDir(context: context, scheme: scheme)
+            ),
+            version: versionHeader(context: context, scheme: scheme),
+            releaseManager: releaseManager(context: context, scheme: scheme)
         )
 
         log.info("Output copied to pasteboard:")
@@ -75,5 +44,71 @@ extension ArgumentRouter {
         Utilities.pbCopy(text: result)
 
         return result
+    }
+
+    private static func versionHeader(context: Context, scheme: ArgumentScheme) -> String? {
+        guard !scheme.args.contains(.flag(.noShowVersion)) else {
+            return nil
+        }
+
+        var versionHeader: String? = scheme.newVersion
+        if let command = context.configuration.buildNumberCommand,
+            case var commandArgs = command.components(separatedBy: " "),
+            !commandArgs.isEmpty,
+            case let exec = commandArgs.removeFirst(),
+            let buildNumber = Utilities.shell(
+                executablePath: exec,
+                arguments: command.components(separatedBy: " "),
+                currentDirectoryPath: context.configuration.currentDirectory
+            ) {
+            versionHeader?.append(" (\(buildNumber.trimmingCharacters(in: .whitespacesAndNewlines)))")
+        } else {
+            for case let .actionable(.buildNumber, buildNumber) in scheme.args {
+                versionHeader?.append(" (\(buildNumber))")
+                break
+            }
+        }
+
+        return versionHeader
+    }
+
+    private static func diff(
+        versions: Versions,
+        context: Context,
+        scheme: ArgumentScheme,
+        projectDir: String) -> String {
+        for case let .actionable(.gitDiff, diff) in scheme.args {
+            return diff
+        }
+
+        let git = Utilities.Git(
+            configuration: context.configuration,
+            projectDir: projectDir
+        )
+
+        if !scheme.args.contains(.flag(.noFetch)) {
+            log.info("Fetching origin")
+            git.fetch()
+        }
+
+        log.info("Generating diff")
+
+        return git.diff(oldVersion: versions.old, newVersion: versions.new)
+    }
+
+    private static func projectDir(context: Context, scheme: ArgumentScheme) -> String {
+        for case let .actionable(.projectDir, dir) in scheme.args {
+            return dir
+        }
+
+        return context.configuration.currentDirectory
+    }
+
+    private static func releaseManager(context: Context, scheme: ArgumentScheme) -> Contributor? {
+        for case let .actionable(.releaseManager, email) in scheme.args {
+            return context.configuration.contributors.first { $0.email == email }
+        }
+
+        return nil
     }
 }

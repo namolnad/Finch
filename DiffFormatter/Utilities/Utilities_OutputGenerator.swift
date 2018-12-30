@@ -14,6 +14,7 @@ extension Utilities {
         private let releaseManager: Contributor?
         private let sections: [Section]
         private let footer: String?
+        private let header: String?
         private let contributorHandlePrefix: String
     }
 }
@@ -54,14 +55,19 @@ extension Utilities.OutputGenerator {
         self.releaseManager = releaseManager
         self.sections = sections.filter { !$0.info.excluded }
         self.footer = configuration.footer
+        self.header = configuration.header
         self.contributorHandlePrefix = configuration.contributorHandlePrefix
     }
 
     func generateOutput() -> String {
         var output = ""
 
+        if let value = header {
+            output.append(value)
+        }
+
         if let value = version {
-            output.append(header(version: value))
+            output.append(version(value))
         }
 
         if let value = releaseManager {
@@ -88,7 +94,7 @@ extension Utilities.OutputGenerator {
             .filter { !$0.isEmpty }
     }
 
-    private func header(version: String) -> String {
+    private func version(_ version: String) -> String {
         return """
 
         # \(version)

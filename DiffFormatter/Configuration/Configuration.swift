@@ -14,6 +14,7 @@ struct Configuration: Decodable {
         case delimiterConfig
         case footer
         case gitConfig
+        case header
         case sectionInfos
     }
 
@@ -22,6 +23,7 @@ struct Configuration: Decodable {
     private(set) var delimiterConfig: DelimiterConfiguration
     private(set) var footer: String?
     private(set) var gitConfig: GitConfiguration
+    private(set) var header: String?
     private(set) var sectionInfos: [Section.Info]
 
     init(from decoder: Decoder) throws {
@@ -31,6 +33,7 @@ struct Configuration: Decodable {
         delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
         footer = container.optionalDecode(forKey: .footer)
         gitConfig = container.decode(forKey: .gitConfig, default: .default)
+        header = container.optionalDecode(forKey: .header)
         sectionInfos = container.decode(forKey: .sectionInfos, default: [])
     }
 
@@ -39,11 +42,13 @@ struct Configuration: Decodable {
         sectionInfos: [Section.Info] = [],
         footer: String? = nil,
         delimiterConfig: DelimiterConfiguration = .blank,
-        gitConfig: GitConfiguration = .blank) {
+        gitConfig: GitConfiguration = .blank,
+        header: String? = nil) {
         self.contributorsConfig = contributorsConfig
         self.delimiterConfig = delimiterConfig
         self.footer = footer
         self.gitConfig = gitConfig
+        self.header = header
         self.sectionInfos = sectionInfos
     }
 }
@@ -68,9 +73,14 @@ extension Configuration {
 
 extension Configuration {
     mutating func update(with otherConfig: Configuration) {
-        // Sections & Footer
+        // Sections
         if !otherConfig.sectionInfos.isEmpty {
             self.sectionInfos = otherConfig.sectionInfos
+        }
+
+        // Header & Footer
+        if let value = otherConfig.header {
+            self.header = value
         }
 
         if let value = otherConfig.footer {
@@ -154,6 +164,7 @@ extension Configuration {
             sectionInfos.isEmpty &&
             (footer?.isEmpty == true) &&
             gitConfig.isBlank &&
+            (header?.isEmpty == true) &&
             contributorsConfig.isBlank &&
             currentDirectory.isEmpty
     }

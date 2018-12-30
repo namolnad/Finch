@@ -23,6 +23,7 @@ extension ArgumentRouter {
         return .handled
     }
 
+    // swiftlint:disable line_length
     private static func usageInformation(context: Context) -> String {
         return """
 
@@ -59,4 +60,5 @@ extension ArgumentRouter {
 
         """
     }
+    // swiftlint:enable line_length
 }

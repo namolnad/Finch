@@ -52,6 +52,12 @@ extension ArgumentRouter {
         }
 
         var versionHeader: String? = scheme.newVersion
+
+        for case let .actionable(.buildNumber, buildNumber) in scheme.args {
+            versionHeader?.append(" (\(buildNumber))")
+            return versionHeader
+        }
+
         if let command = context.configuration.buildNumberCommand,
             case var commandArgs = command.components(separatedBy: " "),
             !commandArgs.isEmpty,
@@ -62,11 +68,6 @@ extension ArgumentRouter {
                 currentDirectoryPath: context.configuration.currentDirectory
             ) {
             versionHeader?.append(" (\(buildNumber.trimmingCharacters(in: .whitespacesAndNewlines)))")
-        } else {
-            for case let .actionable(.buildNumber, buildNumber) in scheme.args {
-                versionHeader?.append(" (\(buildNumber))")
-                break
-            }
         }
 
         return versionHeader

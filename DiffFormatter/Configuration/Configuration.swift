@@ -10,6 +10,7 @@ import Foundation
 
 struct Configuration: Decodable {
     enum CodingKeys: String, CodingKey {
+        case buildNumberCommand
         case contributorsConfig
         case delimiterConfig
         case footer
@@ -18,6 +19,7 @@ struct Configuration: Decodable {
         case sectionInfos
     }
 
+    private(set) var buildNumberCommand: String?
     private(set) var contributorsConfig: ContributorsConfiguration
     private(set) var currentDirectory: String = ""
     private(set) var delimiterConfig: DelimiterConfiguration
@@ -29,6 +31,7 @@ struct Configuration: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
+        buildNumberCommand = container.optionalDecode(forKey: .buildNumberCommand)
         contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
         delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
         footer = container.optionalDecode(forKey: .footer)
@@ -38,12 +41,14 @@ struct Configuration: Decodable {
     }
 
     init(
+        buildNumberCommand: String? = nil,
         contributorsConfig: ContributorsConfiguration = .blank,
         sectionInfos: [Section.Info] = [],
         footer: String? = nil,
         delimiterConfig: DelimiterConfiguration = .blank,
         gitConfig: GitConfiguration = .blank,
         header: String? = nil) {
+        self.buildNumberCommand = buildNumberCommand
         self.contributorsConfig = contributorsConfig
         self.delimiterConfig = delimiterConfig
         self.footer = footer
@@ -73,19 +78,18 @@ extension Configuration {
 
 extension Configuration {
     mutating func update(with otherConfig: Configuration) {
+        // Commands
+        if let value = otherConfig.buildNumberCommand {
+            self.buildNumberCommand = value
+        }
+
         // Sections
         if !otherConfig.sectionInfos.isEmpty {
             self.sectionInfos = otherConfig.sectionInfos
         }
 
         // Header & Footer
-        if let value = otherConfig.header {
-            self.header = value
-        }
-
-        if let value = otherConfig.footer {
-            self.footer = value
-        }
+        updateHeaderFooter(otherConfig: otherConfig)
 
         // Contributors configuration
         if !otherConfig.contributors.isEmpty {
@@ -142,6 +146,16 @@ extension Configuration {
             )
         }
     }
+
+    mutating private func updateHeaderFooter(otherConfig: Configuration) {
+        if let value = otherConfig.header {
+            self.header = value
+        }
+
+        if let value = otherConfig.footer {
+            self.footer = value
+        }
+    }
 }
 
 extension Configuration {
@@ -160,7 +174,8 @@ extension Configuration {
 
 extension Configuration {
     var isBlank: Bool {
-        return delimiterConfig.isBlank &&
+        return (buildNumberCommand?.isEmpty == true) &&
+            delimiterConfig.isBlank &&
             sectionInfos.isEmpty &&
             (footer?.isEmpty == true) &&
             gitConfig.isBlank &&

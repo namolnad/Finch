@@ -61,7 +61,7 @@ final class RoutingTests: XCTestCase {
         let scheme: ArgumentScheme = .init(
             oldVersion: "6.19.0",
             newVersion: "6.19.1",
-            args: [.actionable(.buildNumber, "56789"), .flag(.noFetch)]
+            args: [.flag(.noFetch)]
         )
 
         XCTAssert(output.isEmpty)

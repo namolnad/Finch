@@ -1,0 +1,3 @@
+{
+    "build_number_command": "/usr/bin/env echo 1986"
+}

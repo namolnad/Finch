@@ -22,6 +22,13 @@ extension Configuration {
 
         return config
     }()
+
+    static let mockBuildNumberCommand: Configuration = {
+        var config: Configuration = .mock
+        config.update(with: TestHelper.model(for: "build_number_command_config"))
+
+        return config
+    }()
 }
 
 extension ArgumentScheme {

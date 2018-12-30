@@ -49,6 +49,28 @@ final class RoutingTests: XCTestCase {
         assertSnapshot(matching: output, as: .dump)
     }
 
+    func testDiffHandlerBuildNumberCommand() {
+        var output: String! = ""
+
+        let context: ArgumentRouter.Context = .init(
+            app: .mock,
+            configuration: .mockBuildNumberCommand,
+            output: { output = $0 }
+        )
+
+        let scheme: ArgumentScheme = .init(
+            oldVersion: "6.19.0",
+            newVersion: "6.19.1",
+            args: [.actionable(.buildNumber, "56789"), .flag(.noFetch)]
+        )
+
+        XCTAssert(output.isEmpty)
+
+        _ = ArgumentRouter.diffHandler.handle(context, scheme)
+
+        assertSnapshot(matching: output, as: .dump)
+    }
+
     func testVersionHandler() {
         var output: String! = ""
 

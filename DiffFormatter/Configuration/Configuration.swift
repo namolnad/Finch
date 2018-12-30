@@ -10,40 +10,50 @@ import Foundation
 
 struct Configuration: Decodable {
     enum CodingKeys: String, CodingKey {
+        case buildNumberCommand
         case contributorsConfig
         case delimiterConfig
         case footer
         case gitConfig
+        case header
         case sectionInfos
     }
 
+    private(set) var buildNumberCommand: String?
     private(set) var contributorsConfig: ContributorsConfiguration
     private(set) var currentDirectory: String = ""
     private(set) var delimiterConfig: DelimiterConfiguration
     private(set) var footer: String?
     private(set) var gitConfig: GitConfiguration
+    private(set) var header: String?
     private(set) var sectionInfos: [Section.Info]
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
+        buildNumberCommand = container.optionalDecode(forKey: .buildNumberCommand)
         contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
         delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
         footer = container.optionalDecode(forKey: .footer)
         gitConfig = container.decode(forKey: .gitConfig, default: .default)
+        header = container.optionalDecode(forKey: .header)
         sectionInfos = container.decode(forKey: .sectionInfos, default: [])
     }
 
     init(
+        buildNumberCommand: String? = nil,
         contributorsConfig: ContributorsConfiguration = .blank,
         sectionInfos: [Section.Info] = [],
         footer: String? = nil,
         delimiterConfig: DelimiterConfiguration = .blank,
-        gitConfig: GitConfiguration = .blank) {
+        gitConfig: GitConfiguration = .blank,
+        header: String? = nil) {
+        self.buildNumberCommand = buildNumberCommand
         self.contributorsConfig = contributorsConfig
         self.delimiterConfig = delimiterConfig
         self.footer = footer
         self.gitConfig = gitConfig
+        self.header = header
         self.sectionInfos = sectionInfos
     }
 }
@@ -68,14 +78,18 @@ extension Configuration {
 
 extension Configuration {
     mutating func update(with otherConfig: Configuration) {
-        // Sections & Footer
+        // Commands
+        if let value = otherConfig.buildNumberCommand {
+            self.buildNumberCommand = value
+        }
+
+        // Sections
         if !otherConfig.sectionInfos.isEmpty {
             self.sectionInfos = otherConfig.sectionInfos
         }
 
-        if let value = otherConfig.footer {
-            self.footer = value
-        }
+        // Header & Footer
+        updateHeaderFooter(otherConfig: otherConfig)
 
         // Contributors configuration
         if !otherConfig.contributors.isEmpty {
@@ -132,6 +146,16 @@ extension Configuration {
             )
         }
     }
+
+    mutating private func updateHeaderFooter(otherConfig: Configuration) {
+        if let value = otherConfig.header {
+            self.header = value
+        }
+
+        if let value = otherConfig.footer {
+            self.footer = value
+        }
+    }
 }
 
 extension Configuration {
@@ -150,10 +174,12 @@ extension Configuration {
 
 extension Configuration {
     var isBlank: Bool {
-        return delimiterConfig.isBlank &&
+        return (buildNumberCommand?.isEmpty == true) &&
+            delimiterConfig.isBlank &&
             sectionInfos.isEmpty &&
             (footer?.isEmpty == true) &&
             gitConfig.isBlank &&
+            (header?.isEmpty == true) &&
             contributorsConfig.isBlank &&
             currentDirectory.isEmpty
     }

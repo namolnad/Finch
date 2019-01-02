@@ -9,66 +9,55 @@
 import Foundation
 
 struct Configurator {
-    private static let configFilePathComponent: String = "/.diff_formatter"
+    var configuration: Configuration {
+        return getConfiguration()
+    }
 
-    private(set) var configuration: Configuration
+    // Paths for which the configurator should continue to modify the existing config with the next found config
+    private let cascadingPaths: [String]
 
-    private let fileManager: FileManager
+    private let configResolver: Utilities.FileResolver<Configuration>
+
+    private let defaultConfig: Configuration
+
+    // Paths for which the configurator should return the first valid configuration
+    private let immediateReturnPaths: [String]
 
     init(processInfo: ProcessInfo, argScheme: ArgumentScheme, fileManager: FileManager = .default) {
-        self.fileManager = fileManager
+        self.configResolver = .init(fileManager: fileManager, pathComponent: "/.diffformatter/config")
+        self.defaultConfig = .default(currentDirectory: fileManager.currentDirectoryPath)
 
+        self.immediateReturnPaths = [
+            processInfo.environment["DIFFFORMATTER_CONFIG"]
+        ].compactMap { $0 }
+
+        var cascadingPaths = [
+            fileManager.homeDirectoryForCurrentUser.path,
+            fileManager.currentDirectoryPath
+        ]
+
+        // Append project dir if passed in as argument
+        for case let .actionable(.projectDir, value) in argScheme.args {
+            cascadingPaths.append(value)
+            break
+        }
+
+        self.cascadingPaths = cascadingPaths
+    }
+
+    private func getConfiguration() -> Configuration {
         // Start with default configuration
-        self.configuration = .default(currentDirectory: fileManager.currentDirectoryPath)
+        var configuration = defaultConfig
 
-        // Return early if env var config is passed in
-        if let value = processInfo.environment["DIFF_FORMATTER_CONFIG"], !value.isEmpty {
-            if let config = configuration(forPath: value), !config.isBlank {
-                configuration.update(with: config)
-                return
-            }
+        if let config = immediateReturnPaths.firstMap(configResolver.resolve) {
+            configuration.update(with: config)
+            return configuration
         }
 
-        guard case let home = fileManager.homeDirectoryForCurrentUser.path, !home.isEmpty else {
-            return
-        }
-
-        // Load initial config from home directory if available
-        if let config = configuration(forPath: home), !config.isBlank {
+        for config in cascadingPaths.compactMap(configResolver.resolve) where !config.isBlank {
             configuration.update(with: config)
         }
 
-        // Load config overrides from current directory if available
-        if case let value = fileManager.currentDirectoryPath, !value.isEmpty {
-            if let config = configuration(forPath: value), !config.isBlank {
-                configuration.update(with: config)
-            }
-        }
-
-        // Load config from project dir if passed in as argument
-        for case let .actionable(.projectDir, value) in argScheme.args {
-            if let config = configuration(forPath: value), !config.isBlank {
-                configuration.update(with: config)
-            }
-            break
-        }
-    }
-
-    private func configuration(forPath path: String) -> Configuration? {
-        let filePath = path + type(of: self).configFilePathComponent
-
-        guard let data = fileManager.contents(atPath: filePath) else {
-            return nil
-        }
-
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-
-        do {
-            return try decoder.decode(Configuration.self, from: data)
-        } catch {
-            log.error("Error parsing configuration at path: \(filePath). \n\nError details: \n\(error)")
-            return nil
-        }
+        return configuration
     }
 }

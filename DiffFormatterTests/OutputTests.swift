@@ -42,7 +42,7 @@ final class OutputTests: XCTestCase {
     func testCustomDelimiterOutput() {
         let customPath = "custom_delimiter_config"
 
-        let processInfoMock = ProcessInfoMock(arguments: [], environment: ["DIFF_FORMATTER_CONFIG": customPath])
+        let processInfoMock = ProcessInfoMock(arguments: [], environment: ["DIFFFORMATTER_CONFIG": customPath])
         let fileManagerMock = FileManagerMock(customConfigPath: customPath)
 
         let outputGenerator: Utilities.OutputGenerator = .init(

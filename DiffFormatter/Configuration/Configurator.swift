@@ -27,9 +27,13 @@ struct Configurator {
         self.configResolver = .init(fileManager: fileManager, pathComponent: "/.diffformatter/config")
         self.defaultConfig = .default(currentDirectory: fileManager.currentDirectoryPath)
 
-        self.immediateReturnPaths = [
+        let immediateReturnPaths = [
             processInfo.environment["DIFFFORMATTER_CONFIG"]
-        ].compactMap { $0 }
+        ]
+
+        self.immediateReturnPaths = immediateReturnPaths
+            .compactMap { $0 }
+            .filter { !$0.isEmpty }
 
         var cascadingPaths = [
             fileManager.homeDirectoryForCurrentUser.path,
@@ -42,7 +46,7 @@ struct Configurator {
             break
         }
 
-        self.cascadingPaths = cascadingPaths
+        self.cascadingPaths = cascadingPaths.filter { !$0.isEmpty }
     }
 
     private func getConfiguration() -> Configuration {

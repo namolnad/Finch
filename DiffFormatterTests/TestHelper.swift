@@ -9,10 +9,18 @@
 import Foundation
 
 final class TestHelper {
-    static func model<T: Decodable>(for path: String) -> T {
+    private let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try! decoder.decode(T.self, from: data(for: path))
+        return decoder
+    }()
+
+    static let instance: TestHelper = .init()
+
+    private init() {}
+
+    static func model<T: Decodable>(for path: String) -> T {
+        return try! instance.decoder.decode(T.self, from: data(for: path))
     }
 
     static func data(for path: String) -> Data {

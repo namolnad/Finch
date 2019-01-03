@@ -18,6 +18,10 @@
 		220291F621D80DEC009A1F15 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F521D80DEC009A1F15 /* TestHelper.swift */; };
 		220291F821D8171E009A1F15 /* excluded_section_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F721D8171E009A1F15 /* excluded_section_config.json */; };
 		220291FA21D8471D009A1F15 /* build_number_command_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F921D8471D009A1F15 /* build_number_command_config.json */; };
+		220291FC21DD794D009A1F15 /* Sequence+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FB21DD794D009A1F15 /* Sequence+DiffFormatter.swift */; };
+		220291FE21DD7998009A1F15 /* Utilities_FileResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FD21DD7998009A1F15 /* Utilities_FileResolver.swift */; };
+		220291FF21DD7AB3009A1F15 /* Utilities_FileResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FD21DD7998009A1F15 /* Utilities_FileResolver.swift */; };
+		2202920021DD7AC0009A1F15 /* Sequence+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FB21DD794D009A1F15 /* Sequence+DiffFormatter.swift */; };
 		221E3E1C2127E6CB00256B13 /* GitConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */; };
 		221E3E202127F28F00256B13 /* Utilities_Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */; };
 		2221C32621920784008D2AA7 /* ArgumentScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221C32521920784008D2AA7 /* ArgumentScheme.swift */; };
@@ -128,6 +132,8 @@
 		220291F521D80DEC009A1F15 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		220291F721D8171E009A1F15 /* excluded_section_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = excluded_section_config.json; sourceTree = "<group>"; };
 		220291F921D8471D009A1F15 /* build_number_command_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = build_number_command_config.json; sourceTree = "<group>"; };
+		220291FB21DD794D009A1F15 /* Sequence+DiffFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+DiffFormatter.swift"; sourceTree = "<group>"; };
+		220291FD21DD7998009A1F15 /* Utilities_FileResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_FileResolver.swift; sourceTree = "<group>"; };
 		221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitConfiguration.swift; sourceTree = "<group>"; };
 		221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_Shell.swift; sourceTree = "<group>"; };
 		2221C32521920784008D2AA7 /* ArgumentScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentScheme.swift; sourceTree = "<group>"; };
@@ -274,12 +280,13 @@
 			isa = PBXGroup;
 			children = (
 				225623E3219100F500D43338 /* Utilities.swift */,
+				220291FD21DD7998009A1F15 /* Utilities_FileResolver.swift */,
 				220291EF21D7F487009A1F15 /* Utilities_Git.swift */,
+				220291F121D7FEB2009A1F15 /* Utilities_Log.swift */,
 				22AACD6A20EED12500806FF3 /* Utilities_OutputGenerator.swift */,
 				22AACD6820EED11800806FF3 /* Utilities_Pasteboard.swift */,
 				22AACD6420EEAAE200806FF3 /* Utilities_Regex.swift */,
 				221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */,
-				220291F121D7FEB2009A1F15 /* Utilities_Log.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -287,8 +294,9 @@
 		226433582124A3F400B46082 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */,
 				22B7B58721A8B247005F43F1 /* Codable+DiffFormatter.swift */,
+				220291FB21DD794D009A1F15 /* Sequence+DiffFormatter.swift */,
+				223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -556,11 +564,13 @@
 				225623DF2190FAA600D43338 /* DelimiterConfiguration.swift in Sources */,
 				2274E0DA21A8A2A400707869 /* Transformer.swift in Sources */,
 				225623DC2190FAA000D43338 /* Utilities_Shell.swift in Sources */,
+				220291FF21DD7AB3009A1F15 /* Utilities_FileResolver.swift in Sources */,
 				225623CB2190FA8000D43338 /* HandleResult.swift in Sources */,
 				220291E121D7129C009A1F15 /* Mocks.swift in Sources */,
 				22FAE692212718660097A0A5 /* ProcessInfoMock.swift in Sources */,
 				22B7B58621A8A8B7005F43F1 /* Line_FormatComponent.swift in Sources */,
 				22B7B58521A8A87F005F43F1 /* LineOutputtable.swift in Sources */,
+				2202920021DD7AC0009A1F15 /* Sequence+DiffFormatter.swift in Sources */,
 				220291F621D80DEC009A1F15 /* TestHelper.swift in Sources */,
 				225623D32190FA9600D43338 /* Contributor.swift in Sources */,
 				225623D62190FA9B00D43338 /* Section.swift in Sources */,
@@ -601,6 +611,7 @@
 				224EE6F321A8E1C9008A97CF /* Outputtable.swift in Sources */,
 				2264335421240C0C00B46082 /* Section.swift in Sources */,
 				22FAE6A32127492F0097A0A5 /* DelimiterConfiguration.swift in Sources */,
+				220291FC21DD794D009A1F15 /* Sequence+DiffFormatter.swift in Sources */,
 				2274E0DE21A8A5CE00707869 /* LineOutputtable.swift in Sources */,
 				2274E0D521A8A14A00707869 /* Regex.swift in Sources */,
 				224EE6F621A8EE82008A97CF /* Line_Context.swift in Sources */,
@@ -616,6 +627,7 @@
 				22AB23632190C2EC000BAD64 /* RoutingContext.swift in Sources */,
 				223745BE20F3220D0002AD6F /* String+DiffFormatter.swift in Sources */,
 				22AACD5E20EEAAAC00806FF3 /* main.swift in Sources */,
+				220291FE21DD7998009A1F15 /* Utilities_FileResolver.swift in Sources */,
 				22AB23612190C1F1000BAD64 /* VersionHandler.swift in Sources */,
 				2221C32621920784008D2AA7 /* ArgumentScheme.swift in Sources */,
 				22AACD6520EEAAE200806FF3 /* Utilities_Regex.swift in Sources */,

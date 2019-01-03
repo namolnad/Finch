@@ -1,27 +1,28 @@
 APP_NAME=DiffFormatter
-BIN_PATH=/usr/local/var/diffformatter
-EXEC_PATH=$(BIN_PATH)/$(APP_NAME)
 BUILT_PRODUCT_PATH=$(PWD)/build/Release/$(APP_NAME)
+INSTALL_ROOT=$(HOME)
+INSTALL_PATH=/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
+INSTALL_DIR=$(INSTALL_ROOT)$(INSTALL_PATH)
+BIN_DIR=$(INSTALL_DIR)/bin
+CONFIG_TEMPLATE=config.json.template
 
-.PHONY: all build
+.PHONY: all build install
 
 all: build config_template install symlink lint setup test verify_carthage
 
 build: ## Install DiffFormatter
 	./Scripts/build
-	@echo "\nAdding execution permissions to $(APP_NAME)"
-	chmod 755 $(BUILT_PRODUCT_PATH)
-	@echo "\nCopying executable to $(EXEC_PATH)"
-	mkdir -p $(BIN_PATH) && cp $(BUILT_PRODUCT_PATH) $(EXEC_PATH)
+	@echo "\nCopying executable to $(BIN_DIR)"
+	mkdir -p $(BIN_DIR) && cp -L $(BUILT_PRODUCT_PATH) $(BIN_DIR)/$(APP_NAME)
 
 config_template:
-	@echo "\nAdding config template to $(HOME)/.diff_formatter.template"
-	cp .diff_formatter.template $(HOME)/.diff_formatter.template
+	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
+	cp $(CONFIG_TEMPLATE) $(INSTALL_DIR)/$(CONFIG_TEMPLATE)
 
 install:
 	@$(MAKE) build
 	@$(MAKE) symlink
-	$(MAKE) config_template
+	@$(MAKE) config_template
 
 lint: ## Swiftlint
 	bundle exec fastlane swiftlint
@@ -31,7 +32,7 @@ setup: ## Setup project
 
 symlink:
 	@echo "\nSymlinking $(APP_NAME)"
-	ln -fs $(EXEC_PATH) /usr/local/bin/$(APP_NAME)
+	ln -fs $(BIN_DIR)/$(APP_NAME) /usr/local/bin/$(APP_NAME)
 
 test: ## Run tests
 	bundle exec fastlane test

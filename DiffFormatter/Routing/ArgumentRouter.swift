@@ -41,11 +41,14 @@ extension ArgumentRouter {
             case .notHandled:
                 continue
             case .partiallyHandled(unprocessedArgs: let unprocessedArgs):
-                let unprocessed = ArgumentScheme(
-                    oldVersion: argScheme.oldVersion,
-                    newVersion: argScheme.newVersion,
-                    args: unprocessedArgs
-                )
+                let unprocessed: ArgumentScheme
+
+                switch argScheme {
+                case .diffable(let versions, _):
+                    unprocessed = .diffable(versions: versions, args: unprocessedArgs)
+                case .nonDiffable:
+                    unprocessed = .nonDiffable(args: unprocessedArgs)
+                }
 
                 return route(argScheme: unprocessed)
             }

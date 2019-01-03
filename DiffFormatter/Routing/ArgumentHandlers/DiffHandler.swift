@@ -9,22 +9,17 @@
 import Foundation
 
 extension ArgumentRouter {
-    private typealias Versions = (old: String, new: String)
-
     static let diffHandler: RouterArgumentHandling = .init { context, scheme in
-        guard
-            let oldVersion = scheme.oldVersion,
-            let newVersion = scheme.newVersion,
-            case let versions = (oldVersion, newVersion) else {
-                return .notHandled
+        guard case let .diffable(versions, args) = scheme else {
+            return .notHandled
         }
 
         let outputGenerator: Utilities.OutputGenerator = .init(
             configuration: context.configuration,
             rawDiff: diff(
-                versions: versions,
                 context: context,
                 scheme: scheme,
+                versions: versions,
                 projectDir: projectDir(context: context, scheme: scheme)
             ),
             version: versionHeader(context: context, scheme: scheme),
@@ -47,37 +42,35 @@ extension ArgumentRouter {
     }
 
     private static func versionHeader(context: Context, scheme: ArgumentScheme) -> String? {
-        guard !scheme.args.contains(.flag(.noShowVersion)) else {
+        guard case let .diffable(versions, args) = scheme, !args.contains(.flag(.noShowVersion)) else {
             return nil
         }
 
-        var versionHeader: String? = scheme.newVersion
+        var versionHeader: String = versions.new
 
-        for case let .actionable(.buildNumber, buildNumber) in scheme.args {
-            versionHeader?.append(" (\(buildNumber))")
-            return versionHeader
+        for case let .actionable(.buildNumber, buildNumber) in args {
+            return versionHeader + " (\(buildNumber))"
         }
 
         if var commandArgs = context.configuration.buildNumberCommandArgs,
             !commandArgs.isEmpty,
             case let exec = commandArgs.removeFirst(),
-            let newVersion = scheme.newVersion,
             let buildNumber = Utilities.shell(
                 executablePath: exec,
                 arguments: commandArgs,
                 currentDirectoryPath: context.configuration.currentDirectory,
-                environment: ["NEW_VERSION": "\(newVersion)"]
+                environment: ["NEW_VERSION": "\(versions.new)"]
             ) {
-            versionHeader?.append(" (\(buildNumber.trimmingCharacters(in: .whitespacesAndNewlines)))")
+            versionHeader.append(" (\(buildNumber.trimmingCharacters(in: .whitespacesAndNewlines)))")
         }
 
         return versionHeader
     }
 
     private static func diff(
-        versions: Versions,
         context: Context,
         scheme: ArgumentScheme,
+        versions: Versions,
         projectDir: String) -> String {
         for case let .actionable(.gitDiff, diff) in scheme.args {
             return diff

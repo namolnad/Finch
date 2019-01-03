@@ -36,9 +36,8 @@ final class RoutingTests: XCTestCase {
             output: { output = $0 }
         )
 
-        let scheme: ArgumentScheme = .init(
-            oldVersion: "6.19.0",
-            newVersion: "6.19.1",
+        let scheme: ArgumentScheme = .diffable(
+            versions: ("6.19.0", "6.19.1"),
             args: [.actionable(.buildNumber, "56789"), .flag(.noFetch)]
         )
 
@@ -58,9 +57,8 @@ final class RoutingTests: XCTestCase {
             output: { output = $0 }
         )
 
-        let scheme: ArgumentScheme = .init(
-            oldVersion: "6.19.0",
-            newVersion: "6.19.1",
+        let scheme: ArgumentScheme = .diffable(
+            versions: ("6.19.0", "6.19.1"),
             args: [.flag(.noFetch)]
         )
 
@@ -80,9 +78,8 @@ final class RoutingTests: XCTestCase {
             output: { output = $0 }
         )
 
-        let scheme: ArgumentScheme = .init(
-            oldVersion: "6.19.0",
-            newVersion: "6.19.1",
+        let scheme: ArgumentScheme = .diffable(
+            versions: ("6.19.0", "6.19.1"),
             args: [.flag(.version)]
         )
 
@@ -102,9 +99,8 @@ final class RoutingTests: XCTestCase {
             output: { output = $0 }
         )
 
-        let scheme: ArgumentScheme = .init(
-            oldVersion: "6.19.0",
-            newVersion: "6.19.1",
+        let scheme: ArgumentScheme = .diffable(
+            versions: ("6.19.0", "6.19.1"),
             args: [.flag(.help)]
         )
 

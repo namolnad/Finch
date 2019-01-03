@@ -48,13 +48,13 @@ extension Section.Line.Components.Kind {
     var regEx: String {
         switch self {
         case .sha:
-            return "(?:&&&)(.*?)(?:&&&)"
+            return "(?:\(border))(.*?)(?:\(border))"
         case .message:
-            return "@@@(.*?)\\(?:#(.*?)\\)@@@"
+            return "\(border)(.*?)\\(?:#(.*?)\\)\(border)"
         case .pullRequestNumber:
-            return "\\d+?\\)@@@"
+            return "\\d+?\\\(border)"
         case .contributorEmail:
-            return "###(.*?)###"
+            return "\(border)(.*?)\(border)"
         }
     }
 

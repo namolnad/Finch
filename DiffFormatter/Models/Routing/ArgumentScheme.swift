@@ -8,19 +8,32 @@
 
 import Foundation
 
-struct ArgumentScheme {
-    let oldVersion: String?
-    let newVersion: String?
-    let args: [Argument]
+typealias Versions = (old: String, new: String)
+
+enum ArgumentScheme {
+    case diffable(versions: Versions, args: [Argument])
+    case nonDiffable(args: [Argument])
+
+    var args: [Argument] {
+        switch self {
+        case .diffable(_, let args), .nonDiffable(let args):
+            return args
+        }
+    }
 }
 
 extension ArgumentScheme {
     init(arguments: [String]) {
-        let versions = arguments.prefix(while: { !$0.hasPrefix("-") })
+        guard case let versions = arguments.prefix(while: { !$0.hasPrefix("-") }),
+            versions.count == 2,
+            let old = versions.first,
+            let new = versions.last else {
+                self = .nonDiffable(args: arguments.compactMap(Argument.init))
+                return
+        }
 
-        self.init(
-            oldVersion: versions.count == 2 ? versions.first : nil,
-            newVersion: versions.count == 2 ? versions.last : nil,
+        self = .diffable(
+            versions: (old: old, new: new),
             args: arguments.compactMap(Argument.init)
         )
     }

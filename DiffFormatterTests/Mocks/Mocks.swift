@@ -32,7 +32,7 @@ extension Configuration {
 }
 
 extension ArgumentScheme {
-    static let mock: ArgumentScheme = ArgumentScheme(oldVersion: nil, newVersion: nil, args: [])
+    static let mock: ArgumentScheme = .nonDiffable(args: [])
 }
 
 extension App {

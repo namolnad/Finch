@@ -10,15 +10,16 @@ import Foundation
 
 extension Utilities {
     final class FileResolver<FileType: Decodable> {
-        private let fileManager: FileManager
-
-        private let pathComponent: String
 
         private lazy var decoder: JSONDecoder = {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return decoder
         }()
+
+        private let fileManager: FileManager
+
+        private let pathComponent: String
 
         init(fileManager: FileManager, pathComponent: String) {
             self.fileManager = fileManager

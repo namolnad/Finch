@@ -14,15 +14,17 @@ extension ArgumentRouter {
             return .notHandled
         }
 
+        let projDir = projectDir(context: context, scheme: scheme)
+
         let outputGenerator: Utilities.OutputGenerator = .init(
             configuration: context.configuration,
             rawDiff: diff(
                 context: context,
                 scheme: scheme,
                 versions: versions,
-                projectDir: projectDir(context: context, scheme: scheme)
+                projectDir: projDir
             ),
-            version: versionHeader(context: context, scheme: scheme),
+            version: versionHeader(context: context, scheme: scheme, projectDir: projDir),
             releaseManager: releaseManager(context: context, scheme: scheme)
         )
 
@@ -41,7 +43,7 @@ extension ArgumentRouter {
         return result
     }
 
-    private static func versionHeader(context: Context, scheme: ArgumentScheme) -> String? {
+    private static func versionHeader(context: Context, scheme: ArgumentScheme, projectDir: String) -> String? {
         guard case let .diffable(versions, args) = scheme, !args.contains(.flag(.noShowVersion)) else {
             return nil
         }
@@ -59,7 +61,7 @@ extension ArgumentRouter {
                 executablePath: exec,
                 arguments: commandArgs,
                 currentDirectoryPath: context.configuration.currentDirectory,
-                environment: ["NEW_VERSION": "\(versions.new)"]
+                environment: ["NEW_VERSION": "\(versions.new)", "PROJECT_DIR": "\(projectDir)"]
             ) {
             versionHeader.append(" (\(buildNumber.trimmingCharacters(in: .whitespacesAndNewlines)))")
         }

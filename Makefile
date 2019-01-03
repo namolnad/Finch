@@ -4,6 +4,7 @@ INSTALL_ROOT=$(HOME)
 INSTALL_PATH=/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 INSTALL_DIR=$(INSTALL_ROOT)$(INSTALL_PATH)
 BIN_DIR=$(INSTALL_DIR)/bin
+CONFIG_TEMPLATE=config.json.template
 
 .PHONY: all build install
 
@@ -15,8 +16,8 @@ build: ## Install DiffFormatter
 	mkdir -p $(BIN_DIR) && cp -L $(BUILT_PRODUCT_PATH) $(BIN_DIR)/$(APP_NAME)
 
 config_template:
-	@echo "\nAdding config template to $(INSTALL_DIR)/config.template"
-	cp config.template $(INSTALL_DIR)/config.template
+	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
+	cp $(CONFIG_TEMPLATE) $(INSTALL_DIR)/$(CONFIG_TEMPLATE)
 
 install:
 	@$(MAKE) build

@@ -1,8 +1,9 @@
 APP_NAME=DiffFormatter
 BUILT_PRODUCT_PATH=$(PWD)/build/Release/$(APP_NAME)
 INSTALL_ROOT=$(HOME)
-INSTALL_PATH=/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')/bin
+INSTALL_PATH=/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 INSTALL_DIR=$(INSTALL_ROOT)$(INSTALL_PATH)
+BIN_PATH=$(INSTALL_DIR)/bin
 
 .PHONY: all build install
 
@@ -10,12 +11,12 @@ all: build config_template install symlink lint setup test verify_carthage
 
 build: ## Install DiffFormatter
 	./Scripts/build
-	@echo "\nCopying executable to $(INSTALL_DIR)"
-	mkdir -p $(INSTALL_DIR) && cp -L $(BUILT_PRODUCT_PATH) $(INSTALL_DIR)/$(APP_NAME)
+	@echo "\nCopying executable to $(BIN_PATH)"
+	mkdir -p $(BIN_PATH) && cp -L $(BUILT_PRODUCT_PATH) $(BIN_PATH)/$(APP_NAME)
 
 config_template:
-	@echo "\nAdding config template to $(HOME)/.diff_formatter.template"
-	cp .diff_formatter.template $(HOME)/.diff_formatter.template
+	@echo "\nAdding config template to $(INSTALL_DIR)/config.template"
+	cp config.template $(INSTALL_DIR)/config.template
 
 install:
 	@$(MAKE) build
@@ -30,7 +31,7 @@ setup: ## Setup project
 
 symlink:
 	@echo "\nSymlinking $(APP_NAME)"
-	ln -fs $(INSTALL_DIR)/$(APP_NAME) /usr/local/bin/$(APP_NAME)
+	ln -fs $(BIN_PATH)/$(APP_NAME) /usr/local/bin/$(APP_NAME)
 
 test: ## Run tests
 	bundle exec fastlane test

@@ -2,6 +2,10 @@
 
 DiffFormatter is a configurable way to output version-to-version diffs for Markdown-formatted release documentation. The utility makes several assumptions about the desired format, and utilizes commit "tag" formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
 
+# Installation
+
+DiffFormatter is currently only available by cloning this repository and running the command `make install` from the root of the cloned directory. This will install and link the DiffFormatter binary and will place a template config file at the following location `$HOME/.diffformatter/config.template`
+
 # Usage
 The first two arguments received must be the version strings, in order of: OLD_VERSION NEW_VERSION (branch or tag). Other accepted argurments are:
 1. The ability to hide the version header (`--no-show-version`)
@@ -38,7 +42,7 @@ The following portions of DiffFormatter are configurable:
 To function properly, DiffFormatter requires at least a contributors list.
 
 ## File Type & Search Behavior
-DiffFormatter will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.diff_formatter` file with no extension, placed in either the home, current or a custom directory. For instance, if you provide a custom path through an env variable, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diff_formatter`.
+DiffFormatter will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.diffformatter` directory which contains a `config` file (no extension) placed in either the home, current or a custom directory. For instance, if you provide a custom path through an env variable, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diffformatter/config`.
 
 The config search paths will be executed in the following mannger:
 - Env var
@@ -52,7 +56,7 @@ __OR__
 Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or omitted config file components will be ignored. Configuration customization is not additive to the existing configuration.
 
 ## Configuration file formatting expectations
-`.diff_formatter` should be a valid JSON file with the following format. Top level keys may be ommitted if a previous configuration has fully configured the setting as desired.
+`config` should be a valid JSON file with the following format. Top level keys may be ommitted if a previous configuration has fully configured the setting as desired.
 
 ```
 {

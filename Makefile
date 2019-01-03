@@ -21,7 +21,7 @@ config_template:
 install:
 	@$(MAKE) build
 	@$(MAKE) symlink
-	$(MAKE) config_template
+	@$(MAKE) config_template
 
 lint: ## Swiftlint
 	bundle exec fastlane swiftlint

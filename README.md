@@ -51,7 +51,7 @@ __OR__
 - Built in defaults overridden w/ waterfall technique
   - Home directory
   - DiffFormatter's current directory
-  - --proj-dir argument
+  - --project-dir argument
 
 Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or omitted config file components will be ignored. Configuration customization is not additive to the existing configuration.
 

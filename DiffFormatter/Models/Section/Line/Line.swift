@@ -16,7 +16,11 @@ extension Section.Line: Outputtable {
 
 extension Section.Line {
     static func from(components: Section.Line.Components, context: Section.Line.Context) -> Section.Line {
-        let value = context.sectionInfo.format.reduce("") { partial, next in
+        let template: FormatTemplate = context.sectionInfo.formatTemplate ??
+            context.configuration.formatTemplate ??
+            .default
+
+        let value = template.outputtables.reduce("") { partial, next in
             let nextOut = next.output(components: components, context: context)
             if partial.hasSuffix(" ") && nextOut.hasPrefix(" ") {
                 return partial + String(nextOut.dropFirst())

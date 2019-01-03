@@ -23,6 +23,7 @@
       - right: "|"
   ▿ footer: Optional<String>
     - some: "\n### Timeline\n- Begin development:\n- Feature cut-off / Start of bake / dogfooding:\n- Submission:\n- Release (expected):\n- Release (actual):\n"
+  - formatTemplate: Optional<FormatTemplate>.none
   ▿ gitConfig: GitConfiguration
     ▿ branchPrefix: Optional<String>
       - some: ""
@@ -33,14 +34,14 @@
     ▿ Info
       - capitalizesMessage: false
       - excluded: false
-      - formatString: " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>"
+      - formatTemplate: Optional<FormatTemplate>.none
       ▿ tags: 1 member
         - "*"
       - title: "Features"
     ▿ Info
       - capitalizesMessage: false
       - excluded: false
-      - formatString: " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>"
+      - formatTemplate: Optional<FormatTemplate>.none
       ▿ tags: 3 members
         - "bug fix"
         - "bug"
@@ -49,7 +50,13 @@
     ▿ Info
       - capitalizesMessage: false
       - excluded: false
-      - formatString: " - <<message>> — <<commit_type_hyperlink>>"
+      ▿ formatTemplate: Optional<FormatTemplate>
+        ▿ some: FormatTemplate
+          ▿ outputtables: 4 elements
+            - " - "
+            - FormatComponent.message
+            - " — "
+            - FormatComponent.commitTypeHyperlink
       ▿ tags: 4 members
         - "cleanup"
         - "platform"

@@ -22,6 +22,8 @@
 		220291FE21DD7998009A1F15 /* Utilities_FileResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FD21DD7998009A1F15 /* Utilities_FileResolver.swift */; };
 		220291FF21DD7AB3009A1F15 /* Utilities_FileResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FD21DD7998009A1F15 /* Utilities_FileResolver.swift */; };
 		2202920021DD7AC0009A1F15 /* Sequence+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FB21DD794D009A1F15 /* Sequence+DiffFormatter.swift */; };
+		2202920221DDC62F009A1F15 /* Line_FormatTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2202920121DDC62F009A1F15 /* Line_FormatTemplate.swift */; };
+		2202920321DDCDD8009A1F15 /* Line_FormatTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2202920121DDC62F009A1F15 /* Line_FormatTemplate.swift */; };
 		221E3E1C2127E6CB00256B13 /* GitConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */; };
 		221E3E202127F28F00256B13 /* Utilities_Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */; };
 		2221C32621920784008D2AA7 /* ArgumentScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221C32521920784008D2AA7 /* ArgumentScheme.swift */; };
@@ -134,6 +136,7 @@
 		220291F921D8471D009A1F15 /* build_number_command_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = build_number_command_config.json; sourceTree = "<group>"; };
 		220291FB21DD794D009A1F15 /* Sequence+DiffFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+DiffFormatter.swift"; sourceTree = "<group>"; };
 		220291FD21DD7998009A1F15 /* Utilities_FileResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_FileResolver.swift; sourceTree = "<group>"; };
+		2202920121DDC62F009A1F15 /* Line_FormatTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line_FormatTemplate.swift; sourceTree = "<group>"; };
 		221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitConfiguration.swift; sourceTree = "<group>"; };
 		221E3E1F2127F28F00256B13 /* Utilities_Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities_Shell.swift; sourceTree = "<group>"; };
 		2221C32521920784008D2AA7 /* ArgumentScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentScheme.swift; sourceTree = "<group>"; };
@@ -234,6 +237,7 @@
 				226433592125037E00B46082 /* Line_Components.swift */,
 				224EE6F521A8EE82008A97CF /* Line_Context.swift */,
 				2274E0DB21A8A56B00707869 /* Line_FormatComponent.swift */,
+				2202920121DDC62F009A1F15 /* Line_FormatTemplate.swift */,
 				2274E0DD21A8A5CE00707869 /* LineOutputtable.swift */,
 			);
 			path = Line;
@@ -585,6 +589,7 @@
 				225623CA2190FA8000D43338 /* RoutingContext.swift in Sources */,
 				225623C92190FA8000D43338 /* ArgumentHandler.swift in Sources */,
 				225623CD2190FA8A00D43338 /* VersionHandler.swift in Sources */,
+				2202920321DDCDD8009A1F15 /* Line_FormatTemplate.swift in Sources */,
 				225623E22190FAAA00D43338 /* String+DiffFormatter.swift in Sources */,
 				2274E0D921A8A28D00707869 /* Regex.swift in Sources */,
 				225623DB2190FAA000D43338 /* Utilities_Regex.swift in Sources */,
@@ -638,6 +643,7 @@
 				22FAE6A821277DC60097A0A5 /* ContributorsConfiguration.swift in Sources */,
 				225623E4219100F500D43338 /* Utilities.swift in Sources */,
 				22AACD6D20EEE33500806FF3 /* ArgumentRouter.swift in Sources */,
+				2202920221DDC62F009A1F15 /* Line_FormatTemplate.swift in Sources */,
 				22AB235E2190BCAC000BAD64 /* UsageHandler.swift in Sources */,
 				22AACD7520EF30B400806FF3 /* Argument.swift in Sources */,
 				2274E0DC21A8A56B00707869 /* Line_FormatComponent.swift in Sources */,

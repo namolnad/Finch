@@ -14,6 +14,7 @@ struct Configuration: Decodable {
         case contributorsConfig
         case delimiterConfig
         case footer
+        case formatString
         case gitConfig
         case header
         case sectionInfos
@@ -24,6 +25,7 @@ struct Configuration: Decodable {
     private(set) var currentDirectory: String = ""
     private(set) var delimiterConfig: DelimiterConfiguration
     private(set) var footer: String?
+    private(set) var formatTemplate: Section.Line.FormatTemplate?
     private(set) var gitConfig: GitConfiguration
     private(set) var header: String?
     private(set) var sectionInfos: [Section.Info]
@@ -31,13 +33,15 @@ struct Configuration: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        buildNumberCommandArgs = container.optionalDecode(forKey: .buildNumberCommandArguments)
-        contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
-        delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
-        footer = container.optionalDecode(forKey: .footer)
-        gitConfig = container.decode(forKey: .gitConfig, default: .default)
-        header = container.optionalDecode(forKey: .header)
-        sectionInfos = container.decode(forKey: .sectionInfos, default: [])
+        let formatString: String? = container.optionalDecode(forKey: .formatString)
+        self.buildNumberCommandArgs = container.optionalDecode(forKey: .buildNumberCommandArguments)
+        self.contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
+        self.delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
+        self.footer = container.optionalDecode(forKey: .footer)
+        self.formatTemplate = Section.Line.FormatTemplate(formatString: formatString)
+        self.gitConfig = container.decode(forKey: .gitConfig, default: .default)
+        self.header = container.optionalDecode(forKey: .header)
+        self.sectionInfos = container.decode(forKey: .sectionInfos, default: [])
     }
 
     init(
@@ -45,6 +49,7 @@ struct Configuration: Decodable {
         contributorsConfig: ContributorsConfiguration = .blank,
         sectionInfos: [Section.Info] = [],
         footer: String? = nil,
+        formatTemplate: Section.Line.FormatTemplate? = nil,
         delimiterConfig: DelimiterConfiguration = .blank,
         gitConfig: GitConfiguration = .blank,
         header: String? = nil) {
@@ -52,6 +57,7 @@ struct Configuration: Decodable {
         self.contributorsConfig = contributorsConfig
         self.delimiterConfig = delimiterConfig
         self.footer = footer
+        self.formatTemplate = formatTemplate
         self.gitConfig = gitConfig
         self.header = header
         self.sectionInfos = sectionInfos
@@ -86,6 +92,10 @@ extension Configuration {
         // Sections
         if !otherConfig.sectionInfos.isEmpty {
             self.sectionInfos = otherConfig.sectionInfos
+        }
+
+        if let value = otherConfig.formatTemplate {
+            self.formatTemplate = value
         }
 
         // Header & Footer
@@ -178,6 +188,7 @@ extension Configuration {
             delimiterConfig.isBlank &&
             sectionInfos.isEmpty &&
             (footer?.isEmpty == true) &&
+            (formatTemplate?.outputtables.isEmpty == true) &&
             gitConfig.isBlank &&
             (header?.isEmpty == true) &&
             contributorsConfig.isBlank &&

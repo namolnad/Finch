@@ -24,15 +24,16 @@ extension Section.Line.FormatTemplate {
     }
 
     // Equivalent to formatString: " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>"
-    static let `default`: Section.Line.FormatTemplate = .init(outputtables:[
-        " - ",
-        Section.Line.FormatComponent.tags,
-        " ",
-        Section.Line.FormatComponent.message,
-        " — ",
-        Section.Line.FormatComponent.commitTypeHyperlink,
-        " — ",
-        Section.Line.FormatComponent.contributorHandle
+    static let `default`: Section.Line.FormatTemplate = .init(
+        outputtables: [
+            " - ",
+            Section.Line.FormatComponent.tags,
+            " ",
+            Section.Line.FormatComponent.message,
+            " — ",
+            Section.Line.FormatComponent.commitTypeHyperlink,
+            " — ",
+            Section.Line.FormatComponent.contributorHandle
         ]
     )
 }

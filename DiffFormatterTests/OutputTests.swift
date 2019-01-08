@@ -6,13 +6,13 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-@testable import DiffFormatter
+@testable import DiffFormatterApp
 import SnapshotTesting
 import XCTest
 
 final class OutputTests: XCTestCase {
     func testDefaultOutput() {
-        let outputGenerator: Utilities.OutputGenerator = .init(
+        let outputGenerator: OutputGenerator = .init(
             configuration: .mock,
             rawDiff: Utilities.inputMock,
             version: "6.13.0",
@@ -26,7 +26,7 @@ final class OutputTests: XCTestCase {
     }
 
     func testExcludedSectionOutput() {
-        let outputGenerator: Utilities.OutputGenerator = .init(
+        let outputGenerator: OutputGenerator = .init(
             configuration: .mockExcludedSection,
             rawDiff: Utilities.inputMock,
             version: "6.13.0",
@@ -45,7 +45,7 @@ final class OutputTests: XCTestCase {
         let processInfoMock = ProcessInfoMock(arguments: [], environment: ["DIFFFORMATTER_CONFIG": customPath])
         let fileManagerMock = FileManagerMock(customConfigPath: customPath)
 
-        let outputGenerator: Utilities.OutputGenerator = .init(
+        let outputGenerator: OutputGenerator = .init(
             configuration: Configurator(
                 processInfo: processInfoMock,
                 argScheme: .mock,
@@ -68,7 +68,7 @@ final class OutputTests: XCTestCase {
         let sample = "&&&\(sha)&&& - @@@[tag1][tag2] fixing something somewhere (#1234)@@@###author@email.com###"
 
         assertSnapshot(
-            matching: Section.Line.Components(
+            matching: LineComponents(
                 rawLine: sample,
                 configuration: .mock
             ),
@@ -78,7 +78,7 @@ final class OutputTests: XCTestCase {
         let sample2 = "&&&\(sha)&&& - @@@[tag1]fixing something somewhere@@@###author+1234@email.com###"
 
         assertSnapshot(
-            matching: Section.Line.Components(
+            matching: LineComponents(
                 rawLine: sample2,
                 configuration: .mock
             ),

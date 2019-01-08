@@ -6,7 +6,10 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
+import DiffFormatterApp
+import DiffFormatterCore
+import DiffFormatterRouting
+import DiffFormatterTelemetry
 
 let process = ProcessInfo.processInfo
 
@@ -20,7 +23,15 @@ let scheme = ArgumentScheme(arguments: args)
 
 let configurator = Configurator(processInfo: process, argScheme: scheme)
 
-let router = ArgumentRouter(app: app, configuration: configurator.configuration)
+let router = ArgumentRouter(
+    app: app,
+    configuration: configurator.configuration,
+    handlers: [
+        ArgumentRouter.usageHandler,
+        ArgumentRouter.versionHandler,
+        ArgumentRouter.diffHandler
+    ]
+)
 
 if case .notHandled = router.route(argScheme: scheme) {
     log.error("Unable to handle included arguments")

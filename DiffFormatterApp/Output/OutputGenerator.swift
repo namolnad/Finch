@@ -105,7 +105,7 @@ extension OutputGenerator {
 
         ### Release Manager
 
-        - \(contributorHandlePrefix)\(releaseManager.handle)
+         - \(contributorHandlePrefix)\(releaseManager.handle)
 
         """
     }

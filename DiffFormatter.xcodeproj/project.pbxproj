@@ -493,9 +493,9 @@
 			isa = PBXGroup;
 			children = (
 				22AACD5C20EEAAAC00806FF3 /* DiffFormatter */,
+				226433602126421100B46082 /* DiffFormatterTests */,
 				22F4B3FB21E3DFF00017D2D1 /* DiffFormatterApp */,
 				22F4B40621E3DFF00017D2D1 /* DiffFormatterAppTests */,
-				226433602126421100B46082 /* DiffFormatterTests */,
 				22F4B32321E327BA0017D2D1 /* DiffFormatterUtilities */,
 				22F4B32E21E327BA0017D2D1 /* DiffFormatterUtilitiesTests */,
 				22F4B34721E32B320017D2D1 /* DiffFormatterTelemetry */,

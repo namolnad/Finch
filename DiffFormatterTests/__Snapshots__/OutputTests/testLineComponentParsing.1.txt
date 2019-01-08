@@ -1,4 +1,4 @@
-▿ Components
+▿ LineComponents
   - contributorEmail: "author@email.com"
   - message: "fixing something somewhere"
   ▿ pullRequestNumber: Optional<Int>

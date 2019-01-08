@@ -7,6 +7,7 @@
 //
 
 @testable import DiffFormatterApp
+import DiffFormatterCore
 import SnapshotTesting
 import XCTest
 
@@ -14,7 +15,7 @@ final class OutputTests: XCTestCase {
     func testDefaultOutput() {
         let outputGenerator: OutputGenerator = .init(
             configuration: .mock,
-            rawDiff: Utilities.inputMock,
+            rawDiff: inputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
         )
@@ -28,7 +29,7 @@ final class OutputTests: XCTestCase {
     func testExcludedSectionOutput() {
         let outputGenerator: OutputGenerator = .init(
             configuration: .mockExcludedSection,
-            rawDiff: Utilities.inputMock,
+            rawDiff: inputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
         )
@@ -51,7 +52,7 @@ final class OutputTests: XCTestCase {
                 argScheme: .mock,
                 fileManager: fileManagerMock
                 ).configuration,
-            rawDiff: Utilities.inputMock,
+            rawDiff: inputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
         )

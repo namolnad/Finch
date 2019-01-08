@@ -31,14 +31,14 @@
     - repoBaseUrl: "https://github.com/citadel-of-ricks/C-137"
   - header: Optional<String>.none
   ▿ sectionInfos: 3 elements
-    ▿ Info
+    ▿ SectionInfo
       - capitalizesMessage: false
       - excluded: false
       - formatTemplate: Optional<FormatTemplate>.none
       ▿ tags: 1 member
         - "*"
       - title: "Features"
-    ▿ Info
+    ▿ SectionInfo
       - capitalizesMessage: false
       - excluded: false
       - formatTemplate: Optional<FormatTemplate>.none
@@ -47,7 +47,7 @@
         - "bug"
         - "bugfix"
       - title: "Bug Fixes"
-    ▿ Info
+    ▿ SectionInfo
       - capitalizesMessage: false
       - excluded: false
       ▿ formatTemplate: Optional<FormatTemplate>

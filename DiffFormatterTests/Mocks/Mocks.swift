@@ -6,7 +6,8 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
+@testable import DiffFormatterCore
+import DiffFormatterRouting
 
 extension Configuration {
     static let mock: Configuration = {
@@ -39,8 +40,7 @@ extension App {
     static let mock: App = .init(buildNumber: "12345", name: "DiffFormatter", version: "1.0.1")
 }
 
-extension Utilities {
-    static let inputMock = """
+let inputMock = """
 > &&&fce9cb800905de678a99577a64c8230e63f1cc37&&& - @@@[autocomplete-v3] add analytics (#1030)@@@###elvis1935+still-alive@theking.com###
 > &&&2236c36e40c4409927fdcd2b6ebd29b18aa03e36&&& - @@@[express-placement] build error fix (#1025)@@@###jony.ive@apple.com###
 > &&&9a33ff13804bcce98a4c81279cc1254e499e4932&&& - @@@[push-notificatons] Request for permission after user places an order with 90 day re-prompt (#1024)@@@###jony.ive@apple.com###
@@ -61,4 +61,3 @@ extension Utilities {
 > &&&a7586919f6b096d884958e3386e535ecc986cd57&&& - @@@Autocomplete V3 (#1004)@@@###elvis1935+still-alive@theking.com###
 > &&&1c659ebb3dfde5b078894741a75eb0e3387656f2&&& - @@@[version] 6.13.0@@@###elvis1935+still-alive@theking.com###
 """
-}

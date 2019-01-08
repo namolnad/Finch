@@ -6,18 +6,27 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-@testable import DiffFormatter
+@testable import DiffFormatterApp
+@testable import DiffFormatterRouting
 import SnapshotTesting
 import XCTest
 
 final class RoutingTests: XCTestCase {
     func testArgumentRouter() {
-        let router: ArgumentRouter = .init(app: .mock, configuration: .mock)
+        let router: ArgumentRouter = .init(
+            app: .mock,
+            configuration: .mock,
+            handlers: [
+                ArgumentRouter.usageHandler,
+                ArgumentRouter.versionHandler,
+                ArgumentRouter.diffHandler
+            ]
+        )
 
         let routableArgs: [String] = [
             "6.12.1",
             "6.13.0",
-            "--git-diff=\(Utilities.inputMock)"
+            "--git-diff=\(inputMock)"
         ]
 
         let scheme: ArgumentScheme = .init(arguments: routableArgs)
@@ -30,7 +39,7 @@ final class RoutingTests: XCTestCase {
     func testDiffHandler() {
         var output: String! = ""
 
-        let context: ArgumentRouter.Context = .init(
+        let context: RoutingContext = .init(
             app: .mock,
             configuration: .mock,
             output: { output = $0 }
@@ -51,7 +60,7 @@ final class RoutingTests: XCTestCase {
     func testDiffHandlerBuildNumberCommand() {
         var output: String! = ""
 
-        let context: ArgumentRouter.Context = .init(
+        let context: RoutingContext = .init(
             app: .mock,
             configuration: .mockBuildNumberCommand,
             output: { output = $0 }
@@ -72,7 +81,7 @@ final class RoutingTests: XCTestCase {
     func testVersionHandler() {
         var output: String! = ""
 
-        let context: ArgumentRouter.Context = .init(
+        let context: RoutingContext = .init(
             app: .mock,
             configuration: .mock,
             output: { output = $0 }
@@ -93,7 +102,7 @@ final class RoutingTests: XCTestCase {
     func testUsageHandler() {
         var output: String! = ""
 
-        let context: ArgumentRouter.Context = .init(
+        let context: RoutingContext = .init(
             app: .mock,
             configuration: .mock,
             output: { output = $0 }

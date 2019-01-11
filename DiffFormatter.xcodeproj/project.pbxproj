@@ -7,19 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		220291DF21D7121F009A1F15 /* RoutingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291DE21D7121F009A1F15 /* RoutingTests.swift */; };
-		220291E121D7129C009A1F15 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E021D7129C009A1F15 /* Mocks.swift */; };
-		220291E421D716ED009A1F15 /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E321D716ED009A1F15 /* ConfigurationTests.swift */; };
-		220291E821D75BD4009A1F15 /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220291E721D75BD4009A1F15 /* SnapshotTesting.framework */; };
-		220291F621D80DEC009A1F15 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F521D80DEC009A1F15 /* TestHelper.swift */; };
-		220291F821D8171E009A1F15 /* excluded_section_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F721D8171E009A1F15 /* excluded_section_config.json */; };
-		220291FA21D8471D009A1F15 /* build_number_command_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F921D8471D009A1F15 /* build_number_command_config.json */; };
 		223FF74521E4231C004F4EF4 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FF74421E4231C004F4EF4 /* Section.swift */; };
 		223FF74621E4497A004F4EF4 /* DiffHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23642190C65D000BAD64 /* DiffHandler.swift */; };
 		223FF74721E4497F004F4EF4 /* VersionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23602190C1F1000BAD64 /* VersionHandler.swift */; };
 		223FF74821E44982004F4EF4 /* UsageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB235D2190BCAC000BAD64 /* UsageHandler.swift */; };
-		226433622126421100B46082 /* OutputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226433612126421100B46082 /* OutputTests.swift */; };
-		22821C4921E9018D00C2250A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22821C4721E9018D00C2250A /* MainMenu.xib */; };
 		22821C5521E9018E00C2250A /* DiffFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22821C5421E9018E00C2250A /* DiffFormatterTests.swift */; };
 		22821C5D21E904D300C2250A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD5D20EEAAAC00806FF3 /* main.swift */; };
 		22821C6821E906A400C2250A /* DiffFormatterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B3FA21E3DFF00017D2D1 /* DiffFormatterApp.framework */; };
@@ -27,21 +18,19 @@
 		22821C6A21E906A400C2250A /* DiffFormatterRouting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B38621E32DA70017D2D1 /* DiffFormatterRouting.framework */; };
 		22821C6B21E906A400C2250A /* DiffFormatterTelemetry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B34621E32B320017D2D1 /* DiffFormatterTelemetry.framework */; };
 		22821C6C21E906A400C2250A /* DiffFormatterUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B32221E327BA0017D2D1 /* DiffFormatterUtilities.framework */; };
+		22821C6D21E9080C00C2250A /* OutputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226433612126421100B46082 /* OutputTests.swift */; };
+		22821C6E21E9080C00C2250A /* RoutingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291DE21D7121F009A1F15 /* RoutingTests.swift */; };
+		22821C6F21E9080C00C2250A /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F521D80DEC009A1F15 /* TestHelper.swift */; };
+		22821C7021E9080C00C2250A /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E321D716ED009A1F15 /* ConfigurationTests.swift */; };
 		2291863D21E4204800033974 /* OutputGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6A20EED12500806FF3 /* OutputGenerator.swift */; };
-		22F4B32B21E327BA0017D2D1 /* DiffFormatterUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B32221E327BA0017D2D1 /* DiffFormatterUtilities.framework */; };
-		22F4B33021E327BA0017D2D1 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4B32F21E327BA0017D2D1 /* UtilitiesTests.swift */; };
 		22F4B33221E327BA0017D2D1 /* Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F4B32421E327BA0017D2D1 /* Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F4B33921E327DE0017D2D1 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Shell.swift */; };
 		22F4B33A21E327DE0017D2D1 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6820EED11800806FF3 /* Pasteboard.swift */; };
 		22F4B33B21E327DE0017D2D1 /* FileResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FD21DD7998009A1F15 /* FileResolver.swift */; };
 		22F4B33D21E327DE0017D2D1 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6420EEAAE200806FF3 /* Regex.swift */; };
 		22F4B33E21E327DE0017D2D1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225623E3219100F500D43338 /* Utilities.swift */; };
-		22F4B34F21E32B320017D2D1 /* DiffFormatterTelemetry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B34621E32B320017D2D1 /* DiffFormatterTelemetry.framework */; };
-		22F4B35421E32B320017D2D1 /* TelemetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4B35321E32B320017D2D1 /* TelemetryTests.swift */; };
 		22F4B35621E32B320017D2D1 /* Telemetry.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F4B34821E32B320017D2D1 /* Telemetry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F4B35D21E32B3E0017D2D1 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F121D7FEB2009A1F15 /* Log.swift */; };
-		22F4B38F21E32DA70017D2D1 /* DiffFormatterRouting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B38621E32DA70017D2D1 /* DiffFormatterRouting.framework */; };
-		22F4B39421E32DA70017D2D1 /* RoutingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4B39321E32DA70017D2D1 /* RoutingTests.swift */; };
 		22F4B39621E32DA70017D2D1 /* Routing.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F4B38821E32DA70017D2D1 /* Routing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F4B39D21E32DB30017D2D1 /* HandleResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23672190E130000BAD64 /* HandleResult.swift */; };
 		22F4B39E21E32DB30017D2D1 /* ArgumentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23592190BBC4000BAD64 /* ArgumentHandler.swift */; };
@@ -49,8 +38,6 @@
 		22F4B3A021E32DB30017D2D1 /* ArgumentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6C20EEE33500806FF3 /* ArgumentRouter.swift */; };
 		22F4B3A121E32DBF0017D2D1 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD7420EF30B400806FF3 /* Argument.swift */; };
 		22F4B3A221E32DBF0017D2D1 /* ArgumentScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221C32521920784008D2AA7 /* ArgumentScheme.swift */; };
-		22F4B3B921E3BE5C0017D2D1 /* DiffFormatterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */; };
-		22F4B3BE21E3BE5C0017D2D1 /* CoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4B3BD21E3BE5C0017D2D1 /* CoreTests.swift */; };
 		22F4B3C021E3BE5C0017D2D1 /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F4B3B221E3BE5C0017D2D1 /* Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F4B3C721E3BE7B0017D2D1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264334E2123DD3100B46082 /* Configuration.swift */; };
 		22F4B3C821E3BE7B0017D2D1 /* DelimiterConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE6A22127492F0097A0A5 /* DelimiterConfiguration.swift */; };
@@ -69,8 +56,6 @@
 		22F4B3E721E3C3570017D2D1 /* FormatTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2202920121DDC62F009A1F15 /* FormatTemplate.swift */; };
 		22F4B3E821E3C3570017D2D1 /* LineOutputtable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274E0DD21A8A5CE00707869 /* LineOutputtable.swift */; };
 		22F4B3EF21E3C7840017D2D1 /* Codable+DiffFormatterUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7B58721A8B247005F43F1 /* Codable+DiffFormatterUtilities.swift */; };
-		22F4B40321E3DFF00017D2D1 /* DiffFormatterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B3FA21E3DFF00017D2D1 /* DiffFormatterApp.framework */; };
-		22F4B40821E3DFF00017D2D1 /* DiffFormatterAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4B40721E3DFF00017D2D1 /* DiffFormatterAppTests.swift */; };
 		22F4B40A21E3DFF00017D2D1 /* DiffFormatterApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F4B3FC21E3DFF00017D2D1 /* DiffFormatterApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F4B41121E3E0100017D2D1 /* TransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6620EED11200806FF3 /* TransformerFactory.swift */; };
 		22F4B41221E3E0100017D2D1 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274E0D621A8A1E000707869 /* Transformer.swift */; };
@@ -80,55 +65,9 @@
 		22F4B41921E3E3130017D2D1 /* Sequence+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FB21DD794D009A1F15 /* Sequence+DiffFormatter.swift */; };
 		22F4B41A21E3E45F0017D2D1 /* String+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223745BD20F3220D0002AD6F /* String+DiffFormatter.swift */; };
 		22F4B41C21E3E68F0017D2D1 /* String+DiffFormatterUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4B41B21E3E68F0017D2D1 /* String+DiffFormatterUtilities.swift */; };
-		22FAE692212718660097A0A5 /* ProcessInfoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE691212718660097A0A5 /* ProcessInfoMock.swift */; };
-		22FAE69421271B4E0097A0A5 /* FileManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE69321271B4E0097A0A5 /* FileManagerMock.swift */; };
-		22FAE69B21272AD60097A0A5 /* default_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE69A21272AD60097A0A5 /* default_config.json */; };
-		22FAE6A621274F4C0097A0A5 /* custom_delimiter_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE6A521274F4C0097A0A5 /* custom_delimiter_config.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		220291ED21D7CEFD009A1F15 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22AACD5920EEAAAC00806FF3;
-			remoteInfo = DiffFormatter;
-		};
-		223FF74921E44AA4004F4EF4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B3AF21E3BE5B0017D2D1;
-			remoteInfo = DiffFormatterCore;
-		};
-		223FF74B21E44AA4004F4EF4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B38521E32DA70017D2D1;
-			remoteInfo = DiffFormatterRouting;
-		};
-		223FF74D21E44AA4004F4EF4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B34521E32B320017D2D1;
-			remoteInfo = DiffFormatterTelemetry;
-		};
-		223FF74F21E44AA4004F4EF4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B32121E327BA0017D2D1;
-			remoteInfo = DiffFormatterUtilities;
-		};
-		223FF75121E44AA4004F4EF4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B3F921E3DFF00017D2D1;
-			remoteInfo = DiffFormatterApp;
-		};
 		223FF75321E44ABE004F4EF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
@@ -220,54 +159,7 @@
 			remoteGlobalIDString = 22F4B3F921E3DFF00017D2D1;
 			remoteInfo = DiffFormatterApp;
 		};
-		22F4B32C21E327BA0017D2D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B32121E327BA0017D2D1;
-			remoteInfo = Utilities;
-		};
-		22F4B35021E32B320017D2D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B34521E32B320017D2D1;
-			remoteInfo = Telemetry;
-		};
-		22F4B39021E32DA70017D2D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B38521E32DA70017D2D1;
-			remoteInfo = Routing;
-		};
-		22F4B3BA21E3BE5C0017D2D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B3AF21E3BE5B0017D2D1;
-			remoteInfo = Core;
-		};
-		22F4B40421E3DFF00017D2D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B3F921E3DFF00017D2D1;
-			remoteInfo = DiffFormatterApp;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		22AACD5820EEAAAC00806FF3 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		220291DE21D7121F009A1F15 /* RoutingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingTests.swift; sourceTree = "<group>"; };
@@ -295,7 +187,6 @@
 		2264334E2123DD3100B46082 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		226433512123E0BD00B46082 /* SectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfo.swift; sourceTree = "<group>"; };
 		226433592125037E00B46082 /* LineComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineComponents.swift; sourceTree = "<group>"; };
-		2264335F2126421100B46082 /* DiffFormatterCLITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterCLITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		226433612126421100B46082 /* OutputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTests.swift; sourceTree = "<group>"; };
 		226433632126421100B46082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2274E0D421A8A14A00707869 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
@@ -303,15 +194,11 @@
 		2274E0DB21A8A56B00707869 /* FormatComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatComponent.swift; sourceTree = "<group>"; };
 		2274E0DD21A8A5CE00707869 /* LineOutputtable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineOutputtable.swift; sourceTree = "<group>"; };
 		22821C4121E9018D00C2250A /* DiffFormatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiffFormatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		22821C4821E9018D00C2250A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		22821C4A21E9018D00C2250A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22821C4B21E9018D00C2250A /* DiffFormatter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DiffFormatter.entitlements; sourceTree = "<group>"; };
 		22821C5021E9018E00C2250A /* DiffFormatterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22821C5421E9018E00C2250A /* DiffFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffFormatterTests.swift; sourceTree = "<group>"; };
 		22821C5621E9018E00C2250A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		228D0DFC214ED03400D808F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228D0DFD214ED79100D808F7 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		22AACD5A20EEAAAC00806FF3 /* DiffFormatterCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DiffFormatterCLI; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AACD5D20EEAAAC00806FF3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		22AACD6420EEAAE200806FF3 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		22AACD6620EED11200806FF3 /* TransformerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerFactory.swift; sourceTree = "<group>"; };
@@ -330,34 +217,19 @@
 		22F4B32221E327BA0017D2D1 /* DiffFormatterUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiffFormatterUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F4B32421E327BA0017D2D1 /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		22F4B32521E327BA0017D2D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22F4B32A21E327BA0017D2D1 /* DiffFormatterUtilitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterUtilitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22F4B32F21E327BA0017D2D1 /* UtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
-		22F4B33121E327BA0017D2D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F4B34621E32B320017D2D1 /* DiffFormatterTelemetry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiffFormatterTelemetry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F4B34821E32B320017D2D1 /* Telemetry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Telemetry.h; sourceTree = "<group>"; };
 		22F4B34921E32B320017D2D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22F4B34E21E32B320017D2D1 /* DiffFormatterTelemetryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterTelemetryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22F4B35321E32B320017D2D1 /* TelemetryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryTests.swift; sourceTree = "<group>"; };
-		22F4B35521E32B320017D2D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F4B38621E32DA70017D2D1 /* DiffFormatterRouting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiffFormatterRouting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F4B38821E32DA70017D2D1 /* Routing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Routing.h; sourceTree = "<group>"; };
 		22F4B38921E32DA70017D2D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22F4B38E21E32DA70017D2D1 /* DiffFormatterRoutingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterRoutingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22F4B39321E32DA70017D2D1 /* RoutingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingTests.swift; sourceTree = "<group>"; };
-		22F4B39521E32DA70017D2D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiffFormatterCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F4B3B221E3BE5C0017D2D1 /* Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
 		22F4B3B321E3BE5C0017D2D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22F4B3B821E3BE5C0017D2D1 /* DiffFormatterCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22F4B3BD21E3BE5C0017D2D1 /* CoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTests.swift; sourceTree = "<group>"; };
-		22F4B3BF21E3BE5C0017D2D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F4B3DF21E3C1430017D2D1 /* String+DiffFormatterCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DiffFormatterCore.swift"; sourceTree = "<group>"; };
 		22F4B3FA21E3DFF00017D2D1 /* DiffFormatterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiffFormatterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F4B3FC21E3DFF00017D2D1 /* DiffFormatterApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiffFormatterApp.h; sourceTree = "<group>"; };
 		22F4B3FD21E3DFF00017D2D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22F4B40221E3DFF00017D2D1 /* DiffFormatterAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22F4B40721E3DFF00017D2D1 /* DiffFormatterAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffFormatterAppTests.swift; sourceTree = "<group>"; };
-		22F4B40921E3DFF00017D2D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F4B41B21E3E68F0017D2D1 /* String+DiffFormatterUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DiffFormatterUtilities.swift"; sourceTree = "<group>"; };
 		22FAE691212718660097A0A5 /* ProcessInfoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessInfoMock.swift; sourceTree = "<group>"; };
 		22FAE69321271B4E0097A0A5 /* FileManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerMock.swift; sourceTree = "<group>"; };
@@ -369,14 +241,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2264335C2126421100B46082 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				220291E821D75BD4009A1F15 /* SnapshotTesting.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22821C3E21E9018D00C2250A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -396,25 +260,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22AACD5720EEAAAC00806FF3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22F4B31F21E327BA0017D2D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F4B32721E327BA0017D2D1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F4B32B21E327BA0017D2D1 /* DiffFormatterUtilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,26 +274,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F4B34B21E32B320017D2D1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F4B34F21E32B320017D2D1 /* DiffFormatterTelemetry.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22F4B38321E32DA70017D2D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F4B38B21E32DA70017D2D1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F4B38F21E32DA70017D2D1 /* DiffFormatterRouting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,26 +288,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F4B3B521E3BE5C0017D2D1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F4B3B921E3BE5C0017D2D1 /* DiffFormatterCore.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22F4B3F721E3DFF00017D2D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F4B3FF21E3DFF00017D2D1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F4B40321E3DFF00017D2D1 /* DiffFormatterApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,7 +359,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		226433602126421100B46082 /* DiffFormatterTests */ = {
+		22821C4221E9018D00C2250A /* DiffFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				22AACD5D20EEAAAC00806FF3 /* main.swift */,
+				22821C4A21E9018D00C2250A /* Info.plist */,
+			);
+			path = DiffFormatter;
+			sourceTree = "<group>";
+		};
+		22821C5321E9018E00C2250A /* DiffFormatterTests */ = {
 			isa = PBXGroup;
 			children = (
 				22FAE69521271DE00097A0A5 /* Config */,
@@ -552,24 +378,6 @@
 				226433612126421100B46082 /* OutputTests.swift */,
 				220291DE21D7121F009A1F15 /* RoutingTests.swift */,
 				220291F521D80DEC009A1F15 /* TestHelper.swift */,
-			);
-			path = DiffFormatterTests;
-			sourceTree = "<group>";
-		};
-		22821C4221E9018D00C2250A /* DiffFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				22AACD5D20EEAAAC00806FF3 /* main.swift */,
-				22821C4721E9018D00C2250A /* MainMenu.xib */,
-				22821C4A21E9018D00C2250A /* Info.plist */,
-				22821C4B21E9018D00C2250A /* DiffFormatter.entitlements */,
-			);
-			path = DiffFormatter;
-			sourceTree = "<group>";
-		};
-		22821C5321E9018E00C2250A /* DiffFormatterTests */ = {
-			isa = PBXGroup;
-			children = (
 				22821C5421E9018E00C2250A /* DiffFormatterTests.swift */,
 				22821C5621E9018E00C2250A /* Info.plist */,
 			);
@@ -587,20 +395,13 @@
 		22AACD5120EEAAAC00806FF3 = {
 			isa = PBXGroup;
 			children = (
-				22AACD5C20EEAAAC00806FF3 /* DiffFormatterCLI */,
-				226433602126421100B46082 /* DiffFormatterTests */,
-				22F4B3FB21E3DFF00017D2D1 /* DiffFormatterApp */,
-				22F4B40621E3DFF00017D2D1 /* DiffFormatterAppTests */,
-				22F4B32321E327BA0017D2D1 /* DiffFormatterUtilities */,
-				22F4B32E21E327BA0017D2D1 /* DiffFormatterUtilitiesTests */,
-				22F4B34721E32B320017D2D1 /* DiffFormatterTelemetry */,
-				22F4B35221E32B320017D2D1 /* DiffFormatterTelemetryTests */,
-				22F4B38721E32DA70017D2D1 /* DiffFormatterRouting */,
-				22F4B39221E32DA70017D2D1 /* DiffFormatterRoutingTests */,
-				22F4B3B121E3BE5C0017D2D1 /* DiffFormatterCore */,
-				22F4B3BC21E3BE5C0017D2D1 /* DiffFormatterCoreTests */,
 				22821C4221E9018D00C2250A /* DiffFormatter */,
 				22821C5321E9018E00C2250A /* DiffFormatterTests */,
+				22F4B3FB21E3DFF00017D2D1 /* DiffFormatterApp */,
+				22F4B32321E327BA0017D2D1 /* DiffFormatterUtilities */,
+				22F4B34721E32B320017D2D1 /* DiffFormatterTelemetry */,
+				22F4B38721E32DA70017D2D1 /* DiffFormatterRouting */,
+				22F4B3B121E3BE5C0017D2D1 /* DiffFormatterCore */,
 				22AACD5B20EEAAAC00806FF3 /* Products */,
 				220291E621D75BD3009A1F15 /* Frameworks */,
 			);
@@ -609,30 +410,15 @@
 		22AACD5B20EEAAAC00806FF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22AACD5A20EEAAAC00806FF3 /* DiffFormatterCLI */,
-				2264335F2126421100B46082 /* DiffFormatterCLITests.xctest */,
 				22F4B32221E327BA0017D2D1 /* DiffFormatterUtilities.framework */,
-				22F4B32A21E327BA0017D2D1 /* DiffFormatterUtilitiesTests.xctest */,
 				22F4B34621E32B320017D2D1 /* DiffFormatterTelemetry.framework */,
-				22F4B34E21E32B320017D2D1 /* DiffFormatterTelemetryTests.xctest */,
 				22F4B38621E32DA70017D2D1 /* DiffFormatterRouting.framework */,
-				22F4B38E21E32DA70017D2D1 /* DiffFormatterRoutingTests.xctest */,
 				22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */,
-				22F4B3B821E3BE5C0017D2D1 /* DiffFormatterCoreTests.xctest */,
 				22F4B3FA21E3DFF00017D2D1 /* DiffFormatterApp.framework */,
-				22F4B40221E3DFF00017D2D1 /* DiffFormatterAppTests.xctest */,
 				22821C4121E9018D00C2250A /* DiffFormatter.app */,
 				22821C5021E9018E00C2250A /* DiffFormatterTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		22AACD5C20EEAAAC00806FF3 /* DiffFormatterCLI */ = {
-			isa = PBXGroup;
-			children = (
-				228D0DFC214ED03400D808F7 /* Info.plist */,
-			);
-			path = DiffFormatterCLI;
 			sourceTree = "<group>";
 		};
 		22AB235C2190BBD8000BAD64 /* ArgumentHandlers */ = {
@@ -660,15 +446,6 @@
 			path = DiffFormatterUtilities;
 			sourceTree = "<group>";
 		};
-		22F4B32E21E327BA0017D2D1 /* DiffFormatterUtilitiesTests */ = {
-			isa = PBXGroup;
-			children = (
-				22F4B32F21E327BA0017D2D1 /* UtilitiesTests.swift */,
-				22F4B33121E327BA0017D2D1 /* Info.plist */,
-			);
-			path = DiffFormatterUtilitiesTests;
-			sourceTree = "<group>";
-		};
 		22F4B34721E32B320017D2D1 /* DiffFormatterTelemetry */ = {
 			isa = PBXGroup;
 			children = (
@@ -677,15 +454,6 @@
 				22F4B34921E32B320017D2D1 /* Info.plist */,
 			);
 			path = DiffFormatterTelemetry;
-			sourceTree = "<group>";
-		};
-		22F4B35221E32B320017D2D1 /* DiffFormatterTelemetryTests */ = {
-			isa = PBXGroup;
-			children = (
-				22F4B35321E32B320017D2D1 /* TelemetryTests.swift */,
-				22F4B35521E32B320017D2D1 /* Info.plist */,
-			);
-			path = DiffFormatterTelemetryTests;
 			sourceTree = "<group>";
 		};
 		22F4B38721E32DA70017D2D1 /* DiffFormatterRouting */ = {
@@ -703,15 +471,6 @@
 			path = DiffFormatterRouting;
 			sourceTree = "<group>";
 		};
-		22F4B39221E32DA70017D2D1 /* DiffFormatterRoutingTests */ = {
-			isa = PBXGroup;
-			children = (
-				22F4B39321E32DA70017D2D1 /* RoutingTests.swift */,
-				22F4B39521E32DA70017D2D1 /* Info.plist */,
-			);
-			path = DiffFormatterRoutingTests;
-			sourceTree = "<group>";
-		};
 		22F4B3B121E3BE5C0017D2D1 /* DiffFormatterCore */ = {
 			isa = PBXGroup;
 			children = (
@@ -727,15 +486,6 @@
 				22F4B3B321E3BE5C0017D2D1 /* Info.plist */,
 			);
 			path = DiffFormatterCore;
-			sourceTree = "<group>";
-		};
-		22F4B3BC21E3BE5C0017D2D1 /* DiffFormatterCoreTests */ = {
-			isa = PBXGroup;
-			children = (
-				22F4B3BD21E3BE5C0017D2D1 /* CoreTests.swift */,
-				22F4B3BF21E3BE5C0017D2D1 /* Info.plist */,
-			);
-			path = DiffFormatterCoreTests;
 			sourceTree = "<group>";
 		};
 		22F4B3DE21E3C12F0017D2D1 /* Extensions */ = {
@@ -777,15 +527,6 @@
 				22F4B3FD21E3DFF00017D2D1 /* Info.plist */,
 			);
 			path = DiffFormatterApp;
-			sourceTree = "<group>";
-		};
-		22F4B40621E3DFF00017D2D1 /* DiffFormatterAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				22F4B40721E3DFF00017D2D1 /* DiffFormatterAppTests.swift */,
-				22F4B40921E3DFF00017D2D1 /* Info.plist */,
-			);
-			path = DiffFormatterAppTests;
 			sourceTree = "<group>";
 		};
 		22F4B41621E3E0AD0017D2D1 /* Output */ = {
@@ -853,25 +594,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		2264335E2126421100B46082 /* DiffFormatterCLITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 226433662126421100B46082 /* Build configuration list for PBXNativeTarget "DiffFormatterCLITests" */;
-			buildPhases = (
-				2264335B2126421100B46082 /* Sources */,
-				2264335C2126421100B46082 /* Frameworks */,
-				2264335D2126421100B46082 /* Resources */,
-				220291E921D76379009A1F15 /* Carthage */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				220291EE21D7CEFD009A1F15 /* PBXTargetDependency */,
-			);
-			name = DiffFormatterCLITests;
-			productName = DiffFormatterTests;
-			productReference = 2264335F2126421100B46082 /* DiffFormatterCLITests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		22821C4021E9018D00C2250A /* DiffFormatter */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22821C5721E9018E00C2250A /* Build configuration list for PBXNativeTarget "DiffFormatter" */;
@@ -912,30 +634,6 @@
 			productReference = 22821C5021E9018E00C2250A /* DiffFormatterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		22AACD5920EEAAAC00806FF3 /* DiffFormatterCLI */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22AACD6120EEAAAC00806FF3 /* Build configuration list for PBXNativeTarget "DiffFormatterCLI" */;
-			buildPhases = (
-				22AACD5620EEAAAC00806FF3 /* Sources */,
-				22AACD5720EEAAAC00806FF3 /* Frameworks */,
-				22AACD5820EEAAAC00806FF3 /* CopyFiles */,
-				220291E521D723FE009A1F15 /* Swiftlint */,
-				220291EA21D7CAA5009A1F15 /* Verify Carthage */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				223FF74A21E44AA4004F4EF4 /* PBXTargetDependency */,
-				223FF74C21E44AA4004F4EF4 /* PBXTargetDependency */,
-				223FF74E21E44AA4004F4EF4 /* PBXTargetDependency */,
-				223FF75021E44AA4004F4EF4 /* PBXTargetDependency */,
-				223FF75221E44AA4004F4EF4 /* PBXTargetDependency */,
-			);
-			name = DiffFormatterCLI;
-			productName = TextTransformer;
-			productReference = 22AACD5A20EEAAAC00806FF3 /* DiffFormatterCLI */;
-			productType = "com.apple.product-type.tool";
-		};
 		22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22F4B33721E327BA0017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterUtilities" */;
@@ -954,24 +652,6 @@
 			productReference = 22F4B32221E327BA0017D2D1 /* DiffFormatterUtilities.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		22F4B32921E327BA0017D2D1 /* DiffFormatterUtilitiesTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22F4B33821E327BA0017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterUtilitiesTests" */;
-			buildPhases = (
-				22F4B32621E327BA0017D2D1 /* Sources */,
-				22F4B32721E327BA0017D2D1 /* Frameworks */,
-				22F4B32821E327BA0017D2D1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				22F4B32D21E327BA0017D2D1 /* PBXTargetDependency */,
-			);
-			name = DiffFormatterUtilitiesTests;
-			productName = UtilitiesTests;
-			productReference = 22F4B32A21E327BA0017D2D1 /* DiffFormatterUtilitiesTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		22F4B34521E32B320017D2D1 /* DiffFormatterTelemetry */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22F4B35721E32B320017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterTelemetry" */;
@@ -989,24 +669,6 @@
 			productName = Telemetry;
 			productReference = 22F4B34621E32B320017D2D1 /* DiffFormatterTelemetry.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		22F4B34D21E32B320017D2D1 /* DiffFormatterTelemetryTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22F4B35A21E32B320017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterTelemetryTests" */;
-			buildPhases = (
-				22F4B34A21E32B320017D2D1 /* Sources */,
-				22F4B34B21E32B320017D2D1 /* Frameworks */,
-				22F4B34C21E32B320017D2D1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				22F4B35121E32B320017D2D1 /* PBXTargetDependency */,
-			);
-			name = DiffFormatterTelemetryTests;
-			productName = TelemetryTests;
-			productReference = 22F4B34E21E32B320017D2D1 /* DiffFormatterTelemetryTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		22F4B38521E32DA70017D2D1 /* DiffFormatterRouting */ = {
 			isa = PBXNativeTarget;
@@ -1028,24 +690,6 @@
 			productReference = 22F4B38621E32DA70017D2D1 /* DiffFormatterRouting.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		22F4B38D21E32DA70017D2D1 /* DiffFormatterRoutingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22F4B39A21E32DA70017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterRoutingTests" */;
-			buildPhases = (
-				22F4B38A21E32DA70017D2D1 /* Sources */,
-				22F4B38B21E32DA70017D2D1 /* Frameworks */,
-				22F4B38C21E32DA70017D2D1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				22F4B39121E32DA70017D2D1 /* PBXTargetDependency */,
-			);
-			name = DiffFormatterRoutingTests;
-			productName = RoutingTests;
-			productReference = 22F4B38E21E32DA70017D2D1 /* DiffFormatterRoutingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22F4B3C121E3BE5C0017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterCore" */;
@@ -1064,24 +708,6 @@
 			productName = Core;
 			productReference = 22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		22F4B3B721E3BE5C0017D2D1 /* DiffFormatterCoreTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22F4B3C421E3BE5C0017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterCoreTests" */;
-			buildPhases = (
-				22F4B3B421E3BE5C0017D2D1 /* Sources */,
-				22F4B3B521E3BE5C0017D2D1 /* Frameworks */,
-				22F4B3B621E3BE5C0017D2D1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				22F4B3BB21E3BE5C0017D2D1 /* PBXTargetDependency */,
-			);
-			name = DiffFormatterCoreTests;
-			productName = CoreTests;
-			productReference = 22F4B3B821E3BE5C0017D2D1 /* DiffFormatterCoreTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		22F4B3F921E3DFF00017D2D1 /* DiffFormatterApp */ = {
 			isa = PBXNativeTarget;
@@ -1105,24 +731,6 @@
 			productReference = 22F4B3FA21E3DFF00017D2D1 /* DiffFormatterApp.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		22F4B40121E3DFF00017D2D1 /* DiffFormatterAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22F4B40E21E3DFF00017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterAppTests" */;
-			buildPhases = (
-				22F4B3FE21E3DFF00017D2D1 /* Sources */,
-				22F4B3FF21E3DFF00017D2D1 /* Frameworks */,
-				22F4B40021E3DFF00017D2D1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				22F4B40521E3DFF00017D2D1 /* PBXTargetDependency */,
-			);
-			name = DiffFormatterAppTests;
-			productName = DiffFormatterAppTests;
-			productReference = 22F4B40221E3DFF00017D2D1 /* DiffFormatterAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1133,9 +741,6 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = DHL;
 				TargetAttributes = {
-					2264335E2126421100B46082 = {
-						CreatedOnToolsVersion = 9.4.1;
-					};
 					22821C4021E9018D00C2250A = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -1143,38 +748,19 @@
 						CreatedOnToolsVersion = 10.1;
 						TestTargetID = 22821C4021E9018D00C2250A;
 					};
-					22AACD5920EEAAAC00806FF3 = {
-						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
-					};
 					22F4B32121E327BA0017D2D1 = {
-						CreatedOnToolsVersion = 10.1;
-					};
-					22F4B32921E327BA0017D2D1 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 					22F4B34521E32B320017D2D1 = {
 						CreatedOnToolsVersion = 10.1;
 					};
-					22F4B34D21E32B320017D2D1 = {
-						CreatedOnToolsVersion = 10.1;
-					};
 					22F4B38521E32DA70017D2D1 = {
-						CreatedOnToolsVersion = 10.1;
-					};
-					22F4B38D21E32DA70017D2D1 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 					22F4B3AF21E3BE5B0017D2D1 = {
 						CreatedOnToolsVersion = 10.1;
 					};
-					22F4B3B721E3BE5C0017D2D1 = {
-						CreatedOnToolsVersion = 10.1;
-					};
 					22F4B3F921E3DFF00017D2D1 = {
-						CreatedOnToolsVersion = 10.1;
-					};
-					22F4B40121E3DFF00017D2D1 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
@@ -1194,39 +780,20 @@
 			targets = (
 				22821C4021E9018D00C2250A /* DiffFormatter */,
 				22821C4F21E9018E00C2250A /* DiffFormatterTests */,
-				22AACD5920EEAAAC00806FF3 /* DiffFormatterCLI */,
-				2264335E2126421100B46082 /* DiffFormatterCLITests */,
 				22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */,
-				22F4B3B721E3BE5C0017D2D1 /* DiffFormatterCoreTests */,
 				22F4B38521E32DA70017D2D1 /* DiffFormatterRouting */,
-				22F4B38D21E32DA70017D2D1 /* DiffFormatterRoutingTests */,
 				22F4B34521E32B320017D2D1 /* DiffFormatterTelemetry */,
-				22F4B34D21E32B320017D2D1 /* DiffFormatterTelemetryTests */,
 				22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */,
-				22F4B32921E327BA0017D2D1 /* DiffFormatterUtilitiesTests */,
 				22F4B3F921E3DFF00017D2D1 /* DiffFormatterApp */,
-				22F4B40121E3DFF00017D2D1 /* DiffFormatterAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2264335D2126421100B46082 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22FAE6A621274F4C0097A0A5 /* custom_delimiter_config.json in Resources */,
-				220291F821D8171E009A1F15 /* excluded_section_config.json in Resources */,
-				220291FA21D8471D009A1F15 /* build_number_command_config.json in Resources */,
-				22FAE69B21272AD60097A0A5 /* default_config.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22821C3F21E9018D00C2250A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22821C4921E9018D00C2250A /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1244,21 +811,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F4B32821E327BA0017D2D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22F4B34421E32B320017D2D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F4B34C21E32B320017D2D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1272,21 +825,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F4B38C21E32DA70017D2D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22F4B3AE21E3BE5B0017D2D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F4B3B621E3BE5C0017D2D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1300,89 +839,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F4B40021E3DFF00017D2D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		220291E521D723FE009A1F15 /* Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Swiftlint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		220291E921D76379009A1F15 /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/SnapshotTesting.framework",
-			);
-			name = Carthage;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapshotTesting.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		220291EA21D7CAA5009A1F15 /* Verify Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Verify Carthage";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "make verify_carthage\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		2264335B2126421100B46082 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				220291DF21D7121F009A1F15 /* RoutingTests.swift in Sources */,
-				220291E121D7129C009A1F15 /* Mocks.swift in Sources */,
-				22FAE692212718660097A0A5 /* ProcessInfoMock.swift in Sources */,
-				220291F621D80DEC009A1F15 /* TestHelper.swift in Sources */,
-				226433622126421100B46082 /* OutputTests.swift in Sources */,
-				220291E421D716ED009A1F15 /* ConfigurationTests.swift in Sources */,
-				22FAE69421271B4E0097A0A5 /* FileManagerMock.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22821C3D21E9018D00C2250A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1395,14 +854,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22821C6E21E9080C00C2250A /* RoutingTests.swift in Sources */,
+				22821C6D21E9080C00C2250A /* OutputTests.swift in Sources */,
 				22821C5521E9018E00C2250A /* DiffFormatterTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22AACD5620EEAAAC00806FF3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				22821C6F21E9080C00C2250A /* TestHelper.swift in Sources */,
+				22821C7021E9080C00C2250A /* ConfigurationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1420,27 +876,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F4B32621E327BA0017D2D1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F4B33021E327BA0017D2D1 /* UtilitiesTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22F4B34221E32B320017D2D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				22F4B35D21E32B3E0017D2D1 /* Log.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F4B34A21E32B320017D2D1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F4B35421E32B320017D2D1 /* TelemetryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1454,14 +894,6 @@
 				22F4B3A221E32DBF0017D2D1 /* ArgumentScheme.swift in Sources */,
 				22F4B3A121E32DBF0017D2D1 /* Argument.swift in Sources */,
 				22F4B3A021E32DB30017D2D1 /* ArgumentRouter.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F4B38A21E32DA70017D2D1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F4B39421E32DA70017D2D1 /* RoutingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1490,14 +922,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F4B3B421E3BE5C0017D2D1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F4B3BE21E3BE5C0017D2D1 /* CoreTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22F4B3F621E3DFF00017D2D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1515,47 +939,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F4B3FE21E3DFF00017D2D1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F4B40821E3DFF00017D2D1 /* DiffFormatterAppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		220291EE21D7CEFD009A1F15 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22AACD5920EEAAAC00806FF3 /* DiffFormatterCLI */;
-			targetProxy = 220291ED21D7CEFD009A1F15 /* PBXContainerItemProxy */;
-		};
-		223FF74A21E44AA4004F4EF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */;
-			targetProxy = 223FF74921E44AA4004F4EF4 /* PBXContainerItemProxy */;
-		};
-		223FF74C21E44AA4004F4EF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B38521E32DA70017D2D1 /* DiffFormatterRouting */;
-			targetProxy = 223FF74B21E44AA4004F4EF4 /* PBXContainerItemProxy */;
-		};
-		223FF74E21E44AA4004F4EF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B34521E32B320017D2D1 /* DiffFormatterTelemetry */;
-			targetProxy = 223FF74D21E44AA4004F4EF4 /* PBXContainerItemProxy */;
-		};
-		223FF75021E44AA4004F4EF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */;
-			targetProxy = 223FF74F21E44AA4004F4EF4 /* PBXContainerItemProxy */;
-		};
-		223FF75221E44AA4004F4EF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B3F921E3DFF00017D2D1 /* DiffFormatterApp */;
-			targetProxy = 223FF75121E44AA4004F4EF4 /* PBXContainerItemProxy */;
-		};
 		223FF75421E44ABE004F4EF4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */;
@@ -1621,100 +1007,17 @@
 			target = 22F4B3F921E3DFF00017D2D1 /* DiffFormatterApp */;
 			targetProxy = 22821C6621E905D100C2250A /* PBXContainerItemProxy */;
 		};
-		22F4B32D21E327BA0017D2D1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */;
-			targetProxy = 22F4B32C21E327BA0017D2D1 /* PBXContainerItemProxy */;
-		};
-		22F4B35121E32B320017D2D1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B34521E32B320017D2D1 /* DiffFormatterTelemetry */;
-			targetProxy = 22F4B35021E32B320017D2D1 /* PBXContainerItemProxy */;
-		};
-		22F4B39121E32DA70017D2D1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B38521E32DA70017D2D1 /* DiffFormatterRouting */;
-			targetProxy = 22F4B39021E32DA70017D2D1 /* PBXContainerItemProxy */;
-		};
-		22F4B3BB21E3BE5C0017D2D1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */;
-			targetProxy = 22F4B3BA21E3BE5C0017D2D1 /* PBXContainerItemProxy */;
-		};
-		22F4B40521E3DFF00017D2D1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B3F921E3DFF00017D2D1 /* DiffFormatterApp */;
-			targetProxy = 22F4B40421E3DFF00017D2D1 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		22821C4721E9018D00C2250A /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				22821C4821E9018D00C2250A /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		226433642126421100B46082 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Manual;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
-				INFOPLIST_FILE = DiffFormatterTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		226433652126421100B46082 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Manual;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
-				INFOPLIST_FILE = DiffFormatterTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
 		22821C5821E9018E00C2250A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DiffFormatter/DiffFormatter.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DiffFormatter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1725,6 +1028,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -1733,11 +1037,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DiffFormatter/DiffFormatter.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DiffFormatter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1747,6 +1050,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
@@ -1911,39 +1215,6 @@
 			};
 			name = Release;
 		};
-		22AACD6220EEAAAC00806FF3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Manual;
-				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = "$(SRCROOT)/DiffFormatter/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		22AACD6320EEAAAC00806FF3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Manual;
-				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				DSTROOT = /tmp/DiffFormatter.dst;
-				INFOPLIST_FILE = "$(SRCROOT)/DiffFormatter/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
 		22F4B33321E327BA0017D2D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2004,49 +1275,6 @@
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		22F4B33521E327BA0017D2D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = UtilitiesTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.UtilitiesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		22F4B33621E327BA0017D2D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = UtilitiesTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.UtilitiesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -2113,49 +1341,6 @@
 			};
 			name = Release;
 		};
-		22F4B35B21E32B320017D2D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = TelemetryTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.TelemetryTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		22F4B35C21E32B320017D2D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = TelemetryTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.TelemetryTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
 		22F4B39821E32DA70017D2D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2216,49 +1401,6 @@
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		22F4B39B21E32DA70017D2D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = RoutingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.RoutingTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		22F4B39C21E32DA70017D2D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = RoutingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.RoutingTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -2325,49 +1467,6 @@
 			};
 			name = Release;
 		};
-		22F4B3C521E3BE5C0017D2D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = CoreTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.CoreTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		22F4B3C621E3BE5C0017D2D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = CoreTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.CoreTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
 		22F4B40C21E3DFF00017D2D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2431,61 +1530,9 @@
 			};
 			name = Release;
 		};
-		22F4B40F21E3DFF00017D2D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = DiffFormatterAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		22F4B41021E3DFF00017D2D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				INFOPLIST_FILE = DiffFormatterAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		226433662126421100B46082 /* Build configuration list for PBXNativeTarget "DiffFormatterCLITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				226433642126421100B46082 /* Debug */,
-				226433652126421100B46082 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		22821C5721E9018E00C2250A /* Build configuration list for PBXNativeTarget "DiffFormatter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2513,29 +1560,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22AACD6120EEAAAC00806FF3 /* Build configuration list for PBXNativeTarget "DiffFormatterCLI" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22AACD6220EEAAAC00806FF3 /* Debug */,
-				22AACD6320EEAAAC00806FF3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		22F4B33721E327BA0017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterUtilities" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22F4B33321E327BA0017D2D1 /* Debug */,
 				22F4B33421E327BA0017D2D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		22F4B33821E327BA0017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterUtilitiesTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22F4B33521E327BA0017D2D1 /* Debug */,
-				22F4B33621E327BA0017D2D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2549,29 +1578,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22F4B35A21E32B320017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterTelemetryTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22F4B35B21E32B320017D2D1 /* Debug */,
-				22F4B35C21E32B320017D2D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		22F4B39721E32DA70017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterRouting" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22F4B39821E32DA70017D2D1 /* Debug */,
 				22F4B39921E32DA70017D2D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		22F4B39A21E32DA70017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterRoutingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22F4B39B21E32DA70017D2D1 /* Debug */,
-				22F4B39C21E32DA70017D2D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2585,29 +1596,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22F4B3C421E3BE5C0017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterCoreTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22F4B3C521E3BE5C0017D2D1 /* Debug */,
-				22F4B3C621E3BE5C0017D2D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		22F4B40B21E3DFF00017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22F4B40C21E3DFF00017D2D1 /* Debug */,
 				22F4B40D21E3DFF00017D2D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		22F4B40E21E3DFF00017D2D1 /* Build configuration list for PBXNativeTarget "DiffFormatterAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22F4B40F21E3DFF00017D2D1 /* Debug */,
-				22F4B41021E3DFF00017D2D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

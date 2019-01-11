@@ -19,8 +19,15 @@
 		223FF74721E4497F004F4EF4 /* VersionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23602190C1F1000BAD64 /* VersionHandler.swift */; };
 		223FF74821E44982004F4EF4 /* UsageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB235D2190BCAC000BAD64 /* UsageHandler.swift */; };
 		226433622126421100B46082 /* OutputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226433612126421100B46082 /* OutputTests.swift */; };
+		22821C4921E9018D00C2250A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22821C4721E9018D00C2250A /* MainMenu.xib */; };
+		22821C5521E9018E00C2250A /* DiffFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22821C5421E9018E00C2250A /* DiffFormatterTests.swift */; };
+		22821C5D21E904D300C2250A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD5D20EEAAAC00806FF3 /* main.swift */; };
+		22821C6821E906A400C2250A /* DiffFormatterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B3FA21E3DFF00017D2D1 /* DiffFormatterApp.framework */; };
+		22821C6921E906A400C2250A /* DiffFormatterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */; };
+		22821C6A21E906A400C2250A /* DiffFormatterRouting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B38621E32DA70017D2D1 /* DiffFormatterRouting.framework */; };
+		22821C6B21E906A400C2250A /* DiffFormatterTelemetry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B34621E32B320017D2D1 /* DiffFormatterTelemetry.framework */; };
+		22821C6C21E906A400C2250A /* DiffFormatterUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B32221E327BA0017D2D1 /* DiffFormatterUtilities.framework */; };
 		2291863D21E4204800033974 /* OutputGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6A20EED12500806FF3 /* OutputGenerator.swift */; };
-		22AACD5E20EEAAAC00806FF3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD5D20EEAAAC00806FF3 /* main.swift */; };
 		22F4B32B21E327BA0017D2D1 /* DiffFormatterUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B32221E327BA0017D2D1 /* DiffFormatterUtilities.framework */; };
 		22F4B33021E327BA0017D2D1 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4B32F21E327BA0017D2D1 /* UtilitiesTests.swift */; };
 		22F4B33221E327BA0017D2D1 /* Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F4B32421E327BA0017D2D1 /* Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -171,6 +178,48 @@
 			remoteGlobalIDString = 22F4B3AF21E3BE5B0017D2D1;
 			remoteInfo = DiffFormatterCore;
 		};
+		22821C5121E9018E00C2250A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22821C4021E9018D00C2250A;
+			remoteInfo = DiffFormatter;
+		};
+		22821C5E21E905D100C2250A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F4B3AF21E3BE5B0017D2D1;
+			remoteInfo = DiffFormatterCore;
+		};
+		22821C6021E905D100C2250A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F4B38521E32DA70017D2D1;
+			remoteInfo = DiffFormatterRouting;
+		};
+		22821C6221E905D100C2250A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F4B34521E32B320017D2D1;
+			remoteInfo = DiffFormatterTelemetry;
+		};
+		22821C6421E905D100C2250A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F4B32121E327BA0017D2D1;
+			remoteInfo = DiffFormatterUtilities;
+		};
+		22821C6621E905D100C2250A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F4B3F921E3DFF00017D2D1;
+			remoteInfo = DiffFormatterApp;
+		};
 		22F4B32C21E327BA0017D2D1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
@@ -246,16 +295,23 @@
 		2264334E2123DD3100B46082 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		226433512123E0BD00B46082 /* SectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfo.swift; sourceTree = "<group>"; };
 		226433592125037E00B46082 /* LineComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineComponents.swift; sourceTree = "<group>"; };
-		2264335F2126421100B46082 /* DiffFormatterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2264335F2126421100B46082 /* DiffFormatterCLITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterCLITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		226433612126421100B46082 /* OutputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTests.swift; sourceTree = "<group>"; };
 		226433632126421100B46082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2274E0D421A8A14A00707869 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		2274E0D621A8A1E000707869 /* Transformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		2274E0DB21A8A56B00707869 /* FormatComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatComponent.swift; sourceTree = "<group>"; };
 		2274E0DD21A8A5CE00707869 /* LineOutputtable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineOutputtable.swift; sourceTree = "<group>"; };
+		22821C4121E9018D00C2250A /* DiffFormatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiffFormatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22821C4821E9018D00C2250A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		22821C4A21E9018D00C2250A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22821C4B21E9018D00C2250A /* DiffFormatter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DiffFormatter.entitlements; sourceTree = "<group>"; };
+		22821C5021E9018E00C2250A /* DiffFormatterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22821C5421E9018E00C2250A /* DiffFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffFormatterTests.swift; sourceTree = "<group>"; };
+		22821C5621E9018E00C2250A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228D0DFC214ED03400D808F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228D0DFD214ED79100D808F7 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		22AACD5A20EEAAAC00806FF3 /* DiffFormatter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DiffFormatter; sourceTree = BUILT_PRODUCTS_DIR; };
+		22AACD5A20EEAAAC00806FF3 /* DiffFormatterCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DiffFormatterCLI; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AACD5D20EEAAAC00806FF3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		22AACD6420EEAAE200806FF3 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		22AACD6620EED11200806FF3 /* TransformerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerFactory.swift; sourceTree = "<group>"; };
@@ -318,6 +374,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				220291E821D75BD4009A1F15 /* SnapshotTesting.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22821C3E21E9018D00C2250A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22821C6821E906A400C2250A /* DiffFormatterApp.framework in Frameworks */,
+				22821C6921E906A400C2250A /* DiffFormatterCore.framework in Frameworks */,
+				22821C6A21E906A400C2250A /* DiffFormatterRouting.framework in Frameworks */,
+				22821C6B21E906A400C2250A /* DiffFormatterTelemetry.framework in Frameworks */,
+				22821C6C21E906A400C2250A /* DiffFormatterUtilities.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22821C4D21E9018E00C2250A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +556,26 @@
 			path = DiffFormatterTests;
 			sourceTree = "<group>";
 		};
+		22821C4221E9018D00C2250A /* DiffFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				22AACD5D20EEAAAC00806FF3 /* main.swift */,
+				22821C4721E9018D00C2250A /* MainMenu.xib */,
+				22821C4A21E9018D00C2250A /* Info.plist */,
+				22821C4B21E9018D00C2250A /* DiffFormatter.entitlements */,
+			);
+			path = DiffFormatter;
+			sourceTree = "<group>";
+		};
+		22821C5321E9018E00C2250A /* DiffFormatterTests */ = {
+			isa = PBXGroup;
+			children = (
+				22821C5421E9018E00C2250A /* DiffFormatterTests.swift */,
+				22821C5621E9018E00C2250A /* Info.plist */,
+			);
+			path = DiffFormatterTests;
+			sourceTree = "<group>";
+		};
 		228D0DFB214ED01100D808F7 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,7 +587,7 @@
 		22AACD5120EEAAAC00806FF3 = {
 			isa = PBXGroup;
 			children = (
-				22AACD5C20EEAAAC00806FF3 /* DiffFormatter */,
+				22AACD5C20EEAAAC00806FF3 /* DiffFormatterCLI */,
 				226433602126421100B46082 /* DiffFormatterTests */,
 				22F4B3FB21E3DFF00017D2D1 /* DiffFormatterApp */,
 				22F4B40621E3DFF00017D2D1 /* DiffFormatterAppTests */,
@@ -504,6 +599,8 @@
 				22F4B39221E32DA70017D2D1 /* DiffFormatterRoutingTests */,
 				22F4B3B121E3BE5C0017D2D1 /* DiffFormatterCore */,
 				22F4B3BC21E3BE5C0017D2D1 /* DiffFormatterCoreTests */,
+				22821C4221E9018D00C2250A /* DiffFormatter */,
+				22821C5321E9018E00C2250A /* DiffFormatterTests */,
 				22AACD5B20EEAAAC00806FF3 /* Products */,
 				220291E621D75BD3009A1F15 /* Frameworks */,
 			);
@@ -512,8 +609,8 @@
 		22AACD5B20EEAAAC00806FF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22AACD5A20EEAAAC00806FF3 /* DiffFormatter */,
-				2264335F2126421100B46082 /* DiffFormatterTests.xctest */,
+				22AACD5A20EEAAAC00806FF3 /* DiffFormatterCLI */,
+				2264335F2126421100B46082 /* DiffFormatterCLITests.xctest */,
 				22F4B32221E327BA0017D2D1 /* DiffFormatterUtilities.framework */,
 				22F4B32A21E327BA0017D2D1 /* DiffFormatterUtilitiesTests.xctest */,
 				22F4B34621E32B320017D2D1 /* DiffFormatterTelemetry.framework */,
@@ -524,17 +621,18 @@
 				22F4B3B821E3BE5C0017D2D1 /* DiffFormatterCoreTests.xctest */,
 				22F4B3FA21E3DFF00017D2D1 /* DiffFormatterApp.framework */,
 				22F4B40221E3DFF00017D2D1 /* DiffFormatterAppTests.xctest */,
+				22821C4121E9018D00C2250A /* DiffFormatter.app */,
+				22821C5021E9018E00C2250A /* DiffFormatterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		22AACD5C20EEAAAC00806FF3 /* DiffFormatter */ = {
+		22AACD5C20EEAAAC00806FF3 /* DiffFormatterCLI */ = {
 			isa = PBXGroup;
 			children = (
-				22AACD5D20EEAAAC00806FF3 /* main.swift */,
 				228D0DFC214ED03400D808F7 /* Info.plist */,
 			);
-			path = DiffFormatter;
+			path = DiffFormatterCLI;
 			sourceTree = "<group>";
 		};
 		22AB235C2190BBD8000BAD64 /* ArgumentHandlers */ = {
@@ -755,9 +853,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		2264335E2126421100B46082 /* DiffFormatterTests */ = {
+		2264335E2126421100B46082 /* DiffFormatterCLITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 226433662126421100B46082 /* Build configuration list for PBXNativeTarget "DiffFormatterTests" */;
+			buildConfigurationList = 226433662126421100B46082 /* Build configuration list for PBXNativeTarget "DiffFormatterCLITests" */;
 			buildPhases = (
 				2264335B2126421100B46082 /* Sources */,
 				2264335C2126421100B46082 /* Frameworks */,
@@ -769,14 +867,54 @@
 			dependencies = (
 				220291EE21D7CEFD009A1F15 /* PBXTargetDependency */,
 			);
-			name = DiffFormatterTests;
+			name = DiffFormatterCLITests;
 			productName = DiffFormatterTests;
-			productReference = 2264335F2126421100B46082 /* DiffFormatterTests.xctest */;
+			productReference = 2264335F2126421100B46082 /* DiffFormatterCLITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		22AACD5920EEAAAC00806FF3 /* DiffFormatter */ = {
+		22821C4021E9018D00C2250A /* DiffFormatter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22AACD6120EEAAAC00806FF3 /* Build configuration list for PBXNativeTarget "DiffFormatter" */;
+			buildConfigurationList = 22821C5721E9018E00C2250A /* Build configuration list for PBXNativeTarget "DiffFormatter" */;
+			buildPhases = (
+				22821C3D21E9018D00C2250A /* Sources */,
+				22821C3E21E9018D00C2250A /* Frameworks */,
+				22821C3F21E9018D00C2250A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22821C5F21E905D100C2250A /* PBXTargetDependency */,
+				22821C6121E905D100C2250A /* PBXTargetDependency */,
+				22821C6321E905D100C2250A /* PBXTargetDependency */,
+				22821C6521E905D100C2250A /* PBXTargetDependency */,
+				22821C6721E905D100C2250A /* PBXTargetDependency */,
+			);
+			name = DiffFormatter;
+			productName = DiffFormatter;
+			productReference = 22821C4121E9018D00C2250A /* DiffFormatter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22821C4F21E9018E00C2250A /* DiffFormatterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22821C5A21E9018E00C2250A /* Build configuration list for PBXNativeTarget "DiffFormatterTests" */;
+			buildPhases = (
+				22821C4C21E9018E00C2250A /* Sources */,
+				22821C4D21E9018E00C2250A /* Frameworks */,
+				22821C4E21E9018E00C2250A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22821C5221E9018E00C2250A /* PBXTargetDependency */,
+			);
+			name = DiffFormatterTests;
+			productName = DiffFormatterTests;
+			productReference = 22821C5021E9018E00C2250A /* DiffFormatterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		22AACD5920EEAAAC00806FF3 /* DiffFormatterCLI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22AACD6120EEAAAC00806FF3 /* Build configuration list for PBXNativeTarget "DiffFormatterCLI" */;
 			buildPhases = (
 				22AACD5620EEAAAC00806FF3 /* Sources */,
 				22AACD5720EEAAAC00806FF3 /* Frameworks */,
@@ -793,9 +931,9 @@
 				223FF75021E44AA4004F4EF4 /* PBXTargetDependency */,
 				223FF75221E44AA4004F4EF4 /* PBXTargetDependency */,
 			);
-			name = DiffFormatter;
+			name = DiffFormatterCLI;
 			productName = TextTransformer;
-			productReference = 22AACD5A20EEAAAC00806FF3 /* DiffFormatter */;
+			productReference = 22AACD5A20EEAAAC00806FF3 /* DiffFormatterCLI */;
 			productType = "com.apple.product-type.tool";
 		};
 		22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */ = {
@@ -998,6 +1136,13 @@
 					2264335E2126421100B46082 = {
 						CreatedOnToolsVersion = 9.4.1;
 					};
+					22821C4021E9018D00C2250A = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					22821C4F21E9018E00C2250A = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 22821C4021E9018D00C2250A;
+					};
 					22AACD5920EEAAAC00806FF3 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
@@ -1040,14 +1185,17 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 22AACD5120EEAAAC00806FF3;
 			productRefGroup = 22AACD5B20EEAAAC00806FF3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				22AACD5920EEAAAC00806FF3 /* DiffFormatter */,
-				2264335E2126421100B46082 /* DiffFormatterTests */,
+				22821C4021E9018D00C2250A /* DiffFormatter */,
+				22821C4F21E9018E00C2250A /* DiffFormatterTests */,
+				22AACD5920EEAAAC00806FF3 /* DiffFormatterCLI */,
+				2264335E2126421100B46082 /* DiffFormatterCLITests */,
 				22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */,
 				22F4B3B721E3BE5C0017D2D1 /* DiffFormatterCoreTests */,
 				22F4B38521E32DA70017D2D1 /* DiffFormatterRouting */,
@@ -1071,6 +1219,21 @@
 				220291F821D8171E009A1F15 /* excluded_section_config.json in Resources */,
 				220291FA21D8471D009A1F15 /* build_number_command_config.json in Resources */,
 				22FAE69B21272AD60097A0A5 /* default_config.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22821C3F21E9018D00C2250A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22821C4921E9018D00C2250A /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22821C4E21E9018E00C2250A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1220,11 +1383,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22821C3D21E9018D00C2250A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22821C5D21E904D300C2250A /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22821C4C21E9018E00C2250A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22821C5521E9018E00C2250A /* DiffFormatterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22AACD5620EEAAAC00806FF3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22AACD5E20EEAAAC00806FF3 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1350,7 +1528,7 @@
 /* Begin PBXTargetDependency section */
 		220291EE21D7CEFD009A1F15 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 22AACD5920EEAAAC00806FF3 /* DiffFormatter */;
+			target = 22AACD5920EEAAAC00806FF3 /* DiffFormatterCLI */;
 			targetProxy = 220291ED21D7CEFD009A1F15 /* PBXContainerItemProxy */;
 		};
 		223FF74A21E44AA4004F4EF4 /* PBXTargetDependency */ = {
@@ -1413,6 +1591,36 @@
 			target = 22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */;
 			targetProxy = 223FF75F21E44B5F004F4EF4 /* PBXContainerItemProxy */;
 		};
+		22821C5221E9018E00C2250A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22821C4021E9018D00C2250A /* DiffFormatter */;
+			targetProxy = 22821C5121E9018E00C2250A /* PBXContainerItemProxy */;
+		};
+		22821C5F21E905D100C2250A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */;
+			targetProxy = 22821C5E21E905D100C2250A /* PBXContainerItemProxy */;
+		};
+		22821C6121E905D100C2250A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F4B38521E32DA70017D2D1 /* DiffFormatterRouting */;
+			targetProxy = 22821C6021E905D100C2250A /* PBXContainerItemProxy */;
+		};
+		22821C6321E905D100C2250A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F4B34521E32B320017D2D1 /* DiffFormatterTelemetry */;
+			targetProxy = 22821C6221E905D100C2250A /* PBXContainerItemProxy */;
+		};
+		22821C6521E905D100C2250A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */;
+			targetProxy = 22821C6421E905D100C2250A /* PBXContainerItemProxy */;
+		};
+		22821C6721E905D100C2250A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F4B3F921E3DFF00017D2D1 /* DiffFormatterApp */;
+			targetProxy = 22821C6621E905D100C2250A /* PBXContainerItemProxy */;
+		};
 		22F4B32D21E327BA0017D2D1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */;
@@ -1439,6 +1647,17 @@
 			targetProxy = 22F4B40421E3DFF00017D2D1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		22821C4721E9018D00C2250A /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22821C4821E9018D00C2250A /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		226433642126421100B46082 /* Debug */ = {
@@ -1484,6 +1703,98 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		22821C5821E9018E00C2250A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DiffFormatter/DiffFormatter.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				INFOPLIST_FILE = DiffFormatter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		22821C5921E9018E00C2250A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DiffFormatter/DiffFormatter.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				INFOPLIST_FILE = DiffFormatter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		22821C5B21E9018E00C2250A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				INFOPLIST_FILE = DiffFormatterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiffFormatter.app/Contents/MacOS/DiffFormatter";
+			};
+			name = Debug;
+		};
+		22821C5C21E9018E00C2250A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				INFOPLIST_FILE = DiffFormatterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiffFormatter.app/Contents/MacOS/DiffFormatter";
 			};
 			name = Release;
 		};
@@ -2166,11 +2477,29 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		226433662126421100B46082 /* Build configuration list for PBXNativeTarget "DiffFormatterTests" */ = {
+		226433662126421100B46082 /* Build configuration list for PBXNativeTarget "DiffFormatterCLITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				226433642126421100B46082 /* Debug */,
 				226433652126421100B46082 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22821C5721E9018E00C2250A /* Build configuration list for PBXNativeTarget "DiffFormatter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22821C5821E9018E00C2250A /* Debug */,
+				22821C5921E9018E00C2250A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22821C5A21E9018E00C2250A /* Build configuration list for PBXNativeTarget "DiffFormatterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22821C5B21E9018E00C2250A /* Debug */,
+				22821C5C21E9018E00C2250A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2184,7 +2513,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22AACD6120EEAAAC00806FF3 /* Build configuration list for PBXNativeTarget "DiffFormatter" */ = {
+		22AACD6120EEAAAC00806FF3 /* Build configuration list for PBXNativeTarget "DiffFormatterCLI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22AACD6220EEAAAC00806FF3 /* Debug */,

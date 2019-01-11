@@ -12,7 +12,7 @@ import DiffFormatterTelemetry
 import DiffFormatterUtilities
 
 extension ArgumentRouter {
-    public static let diffHandler: RouterArgumentHandling = .init { context, scheme in
+    static let diffHandler: RouterArgumentHandling = .init { context, scheme in
         guard case let .diffable(versions, args) = scheme else {
             return .notHandled
         }

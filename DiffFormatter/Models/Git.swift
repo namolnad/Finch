@@ -9,13 +9,13 @@
 import DiffFormatterCore
 import DiffFormatterUtilities
 
-public struct Git {
-    public let configuration: Configuration
-    public let projectDir: String
+struct Git {
+    let configuration: Configuration
+    let projectDir: String
 }
 
 extension Git {
-    public func diff(oldVersion: String, newVersion: String) -> String {
+    func diff(oldVersion: String, newVersion: String) -> String {
         guard !isTest else {
             return ""
         }
@@ -30,7 +30,7 @@ extension Git {
         ) ?? ""
     }
 
-    public func fetch() {
+    func fetch() {
         _ = shell(
             executablePath: gitExecutablePath,
             arguments: ["fetch"],

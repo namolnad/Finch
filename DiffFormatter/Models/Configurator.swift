@@ -10,9 +10,10 @@ import DiffFormatterCore
 import DiffFormatterRouting
 import DiffFormatterTelemetry
 import DiffFormatterUtilities
+import Foundation
 
-public struct Configurator {
-    public var configuration: Configuration {
+struct Configurator {
+    var configuration: Configuration {
         return getConfiguration()
     }
 
@@ -26,7 +27,7 @@ public struct Configurator {
     // Paths for which the configurator should return the first valid configuration
     private let immediateReturnPaths: [String]
 
-    public init(processInfo: ProcessInfo, argScheme: ArgumentScheme, fileManager: FileManager = .default) {
+    init(processInfo: ProcessInfo, argScheme: ArgumentScheme, fileManager: FileManager = .default) {
         self.configResolver = .init(fileManager: fileManager, pathComponent: "/.diffformatter/config.json", logError: log.error)
         self.defaultConfig = .default(currentDirectory: fileManager.currentDirectoryPath)
 

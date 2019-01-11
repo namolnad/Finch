@@ -6,10 +6,10 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import DiffFormatterApp
 import DiffFormatterCore
 import DiffFormatterRouting
 import DiffFormatterTelemetry
+import Foundation
 
 let process = ProcessInfo.processInfo
 

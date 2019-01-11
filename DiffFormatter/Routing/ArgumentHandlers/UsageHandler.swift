@@ -11,7 +11,7 @@ import DiffFormatterRouting
 extension ArgumentRouter {
     private static let usageArguments: [Argument] = [.flag(.help), .flag(.helpAbbreviated)]
 
-    public static let usageHandler: RouterArgumentHandling = .init { context, scheme in
+    static let usageHandler: RouterArgumentHandling = .init { context, scheme in
         guard scheme.args.contains(where: usageArguments.contains) else {
             return .notHandled
         }

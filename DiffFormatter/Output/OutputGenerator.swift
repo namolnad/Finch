@@ -8,7 +8,7 @@
 
 import DiffFormatterCore
 
-public struct OutputGenerator {
+struct OutputGenerator {
     private let version: String?
     private let releaseManager: Contributor?
     private let sections: [Section]
@@ -18,7 +18,7 @@ public struct OutputGenerator {
 }
 
 extension OutputGenerator {
-    public init(configuration: Configuration, rawDiff: String, version: String?, releaseManager: Contributor?) {
+    init(configuration: Configuration, rawDiff: String, version: String?, releaseManager: Contributor?) {
         let transformerFactory = TransformerFactory(configuration: configuration)
 
         let linesComponents = type(of: self)
@@ -57,7 +57,7 @@ extension OutputGenerator {
         self.contributorHandlePrefix = configuration.contributorHandlePrefix
     }
 
-    public func generateOutput() -> String {
+    func generateOutput() -> String {
         var output = ""
 
         if let value = header {

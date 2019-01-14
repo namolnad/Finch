@@ -1,0 +1,7 @@
+▿ LineComponents
+  - contributorEmail: "author+1234@email.com"
+  - message: "fixing something somewhere"
+  - pullRequestNumber: Optional<Int>.none
+  - sha: "5a544059e165f0703843d1c6c509cc853ad6afa4"
+  ▿ tags: 1 element
+    - "tag1"

@@ -9,47 +9,22 @@ jobs:
       - image: dantoml/swiftlint:latest
     steps:
       - checkout
-      - run: mkdir lint
-      - run: swiftlint lint --strict --reporter junit | tee lint/result.xml
-      - store_artifacts:
-          path: lint
+      - run: mkdir -p build/reports/lint
+      - run: swiftlint lint --strict --reporter junit | tee build/reports/lint/junit.xml
       - store_test_results:
-          path: lint
+          path: build/reports/lint
   test:
     macos:
       xcode: "10.1.0"
     environment:
-      BREW_PATH: /usr/local/Homebrew
-      BUNDLE_PATH: vendor/bundle
     steps:
       - checkout
-      - restore_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: Bundle install
-          command: bundle check --path vendor/bundle || bundle install --path vendor/bundle
-      - save_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - run:
-          name: Decode certficates
-          command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
-      - restore_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-carthage-{{ checksum "Cartfile.resolved" }}
-      - run:
-          name: Install dependencies
-          command: make verify-carthage || carthage bootstrap --platform macos --cache-builds
-      - save_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-carthage-{{ checksum "Cartfile.resolved" }}
-          paths: Carthage
+      - run: mkdir -p build/reports/test
       - run:
           name: Run tests
           command: make test
       - store_test_results:
-          path: "./test_output"
-      - store_artifacts:
-          path: "./test_output"
+          path: build/reports/test
 
 workflows:
   version: 2

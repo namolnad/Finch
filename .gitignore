@@ -23,8 +23,11 @@ Pods
 
 *.env
 
-# Fastlane
-fastlane/*
-
 # Carthage
 Carthage
+
+# SPM
+.build/
+DiffFormatter.xcodeproj/
+
+Sources/DiffFormatter/App/BuildNumber.swift

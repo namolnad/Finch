@@ -15,7 +15,7 @@ BUILD_NUM=$(shell git rev-list @ --count)
 
 .PHONY: all build install config_template symlink lint setup test verify_carthage
 
-all: build
+all: install
 
 ## Install DiffFormatter
 build: update_build_number

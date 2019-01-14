@@ -10,9 +10,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir lint
-      - run: swiftlint lint --strict --reporter junit | tee lint/result.xml
-      - store_artifacts:
-          path: lint
+      - run: swiftlint lint --strict --reporter junit | tee lint/result.junit
       - store_test_results:
           path: lint
   test:
@@ -21,11 +19,12 @@ jobs:
     environment:
     steps:
       - checkout
+      - run: mkdir test_output
       - run:
           name: Run tests
           command: make test
       - store_test_results:
-          path: "./test_output"
+          path: test_output
 
 workflows:
   version: 2

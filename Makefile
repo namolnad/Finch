@@ -21,7 +21,7 @@ build: update_build_number
 
 config_template:
 	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
-	cp $(CONFIG_TEMPLATE) $(INSTALL_DIR)/$(CONFIG_TEMPLATE)
+	cp Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/$(CONFIG_TEMPLATE)
 
 copy_build: build
 	@echo "\nCopying executable to $(BIN_DIR)"

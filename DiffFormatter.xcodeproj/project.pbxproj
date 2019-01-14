@@ -1079,7 +1079,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterAppTests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/DiffFormatterAppTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1104,7 +1104,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterAppTests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/DiffFormatterAppTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

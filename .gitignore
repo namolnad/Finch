@@ -31,3 +31,4 @@ Carthage
 
 # SPM
 .build/
+DiffFormatter.xcodeproj/

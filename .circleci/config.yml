@@ -22,14 +22,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Decode certficates
-          command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
-      - run:
           name: Run tests
           command: make test
       - store_test_results:
-          path: "./test_output"
-      - store_artifacts:
           path: "./test_output"
 
 workflows:

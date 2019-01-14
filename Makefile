@@ -41,7 +41,7 @@ symlink:
 
 test: ## Run tests
 	$(RM_SAFELY) ./.build/debug/DiffFormatterPackageTests.xctest
-	swift test
+	swift test 2>&1 | xcpretty
 
 verify_carthage: ## Ensure carthage dependencies are in check with resolved file
 	./Scripts/carthage-verify

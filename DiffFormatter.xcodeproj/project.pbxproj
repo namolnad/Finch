@@ -20,6 +20,10 @@
 		2202FC2621EC4A9B00B20C5F /* custom_delimiter_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE6A521274F4C0097A0A5 /* custom_delimiter_config.json */; };
 		2202FC2721EC4A9B00B20C5F /* excluded_section_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F721D8171E009A1F15 /* excluded_section_config.json */; };
 		2202FC2821EC4A9B00B20C5F /* build_number_command_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F921D8471D009A1F15 /* build_number_command_config.json */; };
+		2202FC3521EC618300B20C5F /* DiffFormatterUtilities.framework in Embed Frameworks into DiffFormatterApp.Framework */ = {isa = PBXBuildFile; fileRef = 22F4B32221E327BA0017D2D1 /* DiffFormatterUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2202FC3621EC618300B20C5F /* DiffFormatterTelemetry.framework in Embed Frameworks into DiffFormatterApp.Framework */ = {isa = PBXBuildFile; fileRef = 22F4B34621E32B320017D2D1 /* DiffFormatterTelemetry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2202FC3721EC618300B20C5F /* DiffFormatterRouting.framework in Embed Frameworks into DiffFormatterApp.Framework */ = {isa = PBXBuildFile; fileRef = 22F4B38621E32DA70017D2D1 /* DiffFormatterRouting.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2202FC3821EC618300B20C5F /* DiffFormatterCore.framework in Embed Frameworks into DiffFormatterApp.Framework */ = {isa = PBXBuildFile; fileRef = 22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		223FF74521E4231C004F4EF4 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FF74421E4231C004F4EF4 /* Section.swift */; };
 		22821C5D21E904D300C2250A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD5D20EEAAAC00806FF3 /* main.swift */; };
 		22821C6921E906A400C2250A /* DiffFormatterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */; };
@@ -133,34 +137,6 @@
 			remoteGlobalIDString = 22F4B3AF21E3BE5B0017D2D1;
 			remoteInfo = DiffFormatterCore;
 		};
-		22821C5E21E905D100C2250A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B3AF21E3BE5B0017D2D1;
-			remoteInfo = DiffFormatterCore;
-		};
-		22821C6021E905D100C2250A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B38521E32DA70017D2D1;
-			remoteInfo = DiffFormatterRouting;
-		};
-		22821C6221E905D100C2250A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B34521E32B320017D2D1;
-			remoteInfo = DiffFormatterTelemetry;
-		};
-		22821C6421E905D100C2250A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F4B32121E327BA0017D2D1;
-			remoteInfo = DiffFormatterUtilities;
-		};
 		22821CB221EC3DC700C2250A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
@@ -171,9 +147,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		22821CB921EC3DC700C2250A /* Embed Frameworks */ = {
+		2202FC3421EC613200B20C5F /* Embed Frameworks into DiffFormatterApp.Framework */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
+			dstPath = DiffFormatterApp.framework/Versions/Current/Frameworks;
+			dstSubfolderSpec = 10;
+			files = (
+				2202FC3521EC618300B20C5F /* DiffFormatterUtilities.framework in Embed Frameworks into DiffFormatterApp.Framework */,
+				2202FC3621EC618300B20C5F /* DiffFormatterTelemetry.framework in Embed Frameworks into DiffFormatterApp.Framework */,
+				2202FC3721EC618300B20C5F /* DiffFormatterRouting.framework in Embed Frameworks into DiffFormatterApp.Framework */,
+				2202FC3821EC618300B20C5F /* DiffFormatterCore.framework in Embed Frameworks into DiffFormatterApp.Framework */,
+			);
+			name = "Embed Frameworks into DiffFormatterApp.Framework";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22821CB921EC3DC700C2250A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -649,16 +639,13 @@
 				22821C3D21E9018D00C2250A /* Sources */,
 				22821C3E21E9018D00C2250A /* Frameworks */,
 				22821C3F21E9018D00C2250A /* Resources */,
-				22821CB921EC3DC700C2250A /* Embed Frameworks */,
 				2202FC2A21EC4FD300B20C5F /* Extract CLI Tool */,
+				22821CB921EC3DC700C2250A /* Embed Frameworks */,
+				2202FC3421EC613200B20C5F /* Embed Frameworks into DiffFormatterApp.Framework */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				22821C5F21E905D100C2250A /* PBXTargetDependency */,
-				22821C6121E905D100C2250A /* PBXTargetDependency */,
-				22821C6321E905D100C2250A /* PBXTargetDependency */,
-				22821C6521E905D100C2250A /* PBXTargetDependency */,
 				22821CB321EC3DC700C2250A /* PBXTargetDependency */,
 			);
 			name = DiffFormatter;
@@ -812,11 +799,11 @@
 			targets = (
 				22821C4021E9018D00C2250A /* DiffFormatter */,
 				22821C9E21EC3DC600C2250A /* DiffFormatterApp */,
-				2202FC1021EC48F400B20C5F /* DiffFormatterAppTests */,
 				22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */,
 				22F4B38521E32DA70017D2D1 /* DiffFormatterRouting */,
 				22F4B34521E32B320017D2D1 /* DiffFormatterTelemetry */,
 				22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */,
+				2202FC1021EC48F400B20C5F /* DiffFormatterAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1063,26 +1050,6 @@
 			target = 22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */;
 			targetProxy = 223FF75F21E44B5F004F4EF4 /* PBXContainerItemProxy */;
 		};
-		22821C5F21E905D100C2250A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */;
-			targetProxy = 22821C5E21E905D100C2250A /* PBXContainerItemProxy */;
-		};
-		22821C6121E905D100C2250A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B38521E32DA70017D2D1 /* DiffFormatterRouting */;
-			targetProxy = 22821C6021E905D100C2250A /* PBXContainerItemProxy */;
-		};
-		22821C6321E905D100C2250A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B34521E32B320017D2D1 /* DiffFormatterTelemetry */;
-			targetProxy = 22821C6221E905D100C2250A /* PBXContainerItemProxy */;
-		};
-		22821C6521E905D100C2250A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */;
-			targetProxy = 22821C6421E905D100C2250A /* PBXContainerItemProxy */;
-		};
 		22821CB321EC3DC700C2250A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 22821C9E21EC3DC600C2250A /* DiffFormatterApp */;
@@ -1152,7 +1119,10 @@
 				INFOPLIST_FILE = DiffFormatter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
+					"@executable_path/../Frameworks/DiffFormatterApp.framework/Versions/Current/Frameworks",
 					"@executable_path/../Frameworks",
+					/Library/Frameworks/DiffFormatterApp.framework/Versions/Current/Frameworks,
+					/Library/Frameworks,
 				);
 				MACH_O_TYPE = mh_execute;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -1177,7 +1147,10 @@
 				INFOPLIST_FILE = DiffFormatter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
+					"@executable_path/../Frameworks/DiffFormatterApp.framework/Versions/Current/Frameworks",
 					"@executable_path/../Frameworks",
+					/Library/Frameworks/DiffFormatterApp.framework/Versions/Current/Frameworks,
+					/Library/Frameworks,
 				);
 				MACH_O_TYPE = mh_execute;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -1209,6 +1182,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
+					/Library/Frameworks/DiffFormatterApp.framework/Versions/Current/Frameworks,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1243,6 +1217,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
+					/Library/Frameworks/DiffFormatterApp.framework/Versions/Current/Frameworks,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;

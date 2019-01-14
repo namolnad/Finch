@@ -19,20 +19,11 @@ jobs:
     macos:
       xcode: "10.1.0"
     environment:
-      BREW_PATH: /usr/local/Homebrew
     steps:
       - checkout
       - run:
           name: Decode certficates
           command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE
-      - restore_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-carthage-{{ checksum "Cartfile.resolved" }}
-      - run:
-          name: Install dependencies
-          command: make verify-carthage || carthage bootstrap --platform macos --cache-builds
-      - save_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-carthage-{{ checksum "Cartfile.resolved" }}
-          paths: Carthage
       - run:
           name: Run tests
           command: make test

@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-## Extracts the DiffFormatter CLI tool from its application bundle. Meant to be run
-## as part of an Xcode Run Script build phase. 
-#
-
-cp -v "${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}" "${BUILT_PRODUCTS_DIR}/${EXECUTABLE_NAME}"

@@ -24,6 +24,7 @@
 		2202FC3621EC618300B20C5F /* DiffFormatterTelemetry.framework in Embed Frameworks into DiffFormatterApp.Framework */ = {isa = PBXBuildFile; fileRef = 22F4B34621E32B320017D2D1 /* DiffFormatterTelemetry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2202FC3721EC618300B20C5F /* DiffFormatterRouting.framework in Embed Frameworks into DiffFormatterApp.Framework */ = {isa = PBXBuildFile; fileRef = 22F4B38621E32DA70017D2D1 /* DiffFormatterRouting.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2202FC3821EC618300B20C5F /* DiffFormatterCore.framework in Embed Frameworks into DiffFormatterApp.Framework */ = {isa = PBXBuildFile; fileRef = 22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2202FC6721EC7C4D00B20C5F /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2202FC6521EC7BC700B20C5F /* Resource.swift */; };
 		223FF74521E4231C004F4EF4 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FF74421E4231C004F4EF4 /* Section.swift */; };
 		22821C5D21E904D300C2250A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD5D20EEAAAC00806FF3 /* main.swift */; };
 		22821C6921E906A400C2250A /* DiffFormatterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */; };
@@ -189,6 +190,7 @@
 		2202920121DDC62F009A1F15 /* FormatTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatTemplate.swift; sourceTree = "<group>"; };
 		2202FC1121EC48F400B20C5F /* DiffFormatterAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2202FC1521EC48F400B20C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2202FC6521EC7BC700B20C5F /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitConfiguration.swift; sourceTree = "<group>"; };
 		221E3E1F2127F28F00256B13 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		2221C32521920784008D2AA7 /* ArgumentScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentScheme.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				220291E221D71374009A1F15 /* Mocks */,
 				220291E321D716ED009A1F15 /* ConfigurationTests.swift */,
 				226433612126421100B46082 /* OutputTests.swift */,
+				2202FC6521EC7BC700B20C5F /* Resource.swift */,
 				220291DE21D7121F009A1F15 /* RoutingTests.swift */,
 				220291F521D80DEC009A1F15 /* TestHelper.swift */,
 				2202FC1521EC48F400B20C5F /* Info.plist */,
@@ -410,11 +413,11 @@
 		22821CA021EC3DC700C2250A /* DiffFormatterApp */ = {
 			isa = PBXGroup;
 			children = (
-				22821CC121EC3E8A00C2250A /* App.swift */,
 				22821C8B21E919FF00C2250A /* Models */,
 				22F4B3F121E3DE8F0017D2D1 /* Routing */,
 				22F4B41621E3E0AD0017D2D1 /* Output */,
 				226433582124A3F400B46082 /* Extensions */,
+				22821CC121EC3E8A00C2250A /* App.swift */,
 				22821CA121EC3DC700C2250A /* DiffFormatterApp.h */,
 				22821CA221EC3DC700C2250A /* Info.plist */,
 			);
@@ -920,6 +923,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2202FC2121EC496B00B20C5F /* OutputTests.swift in Sources */,
+				2202FC6721EC7C4D00B20C5F /* Resource.swift in Sources */,
 				2202FC2021EC496B00B20C5F /* RoutingTests.swift in Sources */,
 				2202FC2321EC496B00B20C5F /* TestHelper.swift in Sources */,
 				2202FC2221EC496B00B20C5F /* ProcessInfoMock.swift in Sources */,
@@ -1075,7 +1079,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = DiffFormatterAppTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterAppTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1100,7 +1104,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = DiffFormatterAppTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterAppTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

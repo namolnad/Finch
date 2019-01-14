@@ -24,9 +24,8 @@ final class TestHelper {
     }
 
     static func data(for path: String) -> Data {
-        let resource = Bundle(for: TestHelper.self)
-            .path(forResource: path, ofType: "json")!
+        let resource = Resource(name: path, type: "json")
 
-        return try! Data(contentsOf: URL(fileURLWithPath: resource))
+        return try! Data(contentsOf: URL(fileURLWithPath: resource.path))
     }
 }

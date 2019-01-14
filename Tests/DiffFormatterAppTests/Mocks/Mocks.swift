@@ -37,7 +37,11 @@ extension ArgumentScheme {
 }
 
 extension App {
-    static let mock: App = .init(buildNumber: "12345", name: "DiffFormatter", version: "1.0.1")
+    static let mock: App = .init(
+        buildNumber: 12345,
+        name: "DiffFormatter",
+        version: .init([1, 0, 1])
+    )
 }
 
 let inputMock = """

@@ -20,18 +20,8 @@ jobs:
       xcode: "10.1.0"
     environment:
       BREW_PATH: /usr/local/Homebrew
-      BUNDLE_PATH: vendor/bundle
     steps:
       - checkout
-      - restore_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: Bundle install
-          command: bundle check --path vendor/bundle || bundle install --path vendor/bundle
-      - save_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-gems-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
       - run:
           name: Decode certficates
           command: base64 -D -o $CERTIFICATE_PATH <<< $CERTIFICATE

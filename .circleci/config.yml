@@ -9,22 +9,22 @@ jobs:
       - image: dantoml/swiftlint:latest
     steps:
       - checkout
-      - run: mkdir lint
-      - run: swiftlint lint --strict --reporter junit | tee lint/result.junit
+      - run: mkdir -p build/reports/lint
+      - run: swiftlint lint --strict --reporter junit | tee build/reports/lint/junit.xml
       - store_test_results:
-          path: lint
+          path: build/reports/lint
   test:
     macos:
       xcode: "10.1.0"
     environment:
     steps:
       - checkout
-      - run: mkdir test_output
+      - run: mkdir -p build/reports
       - run:
           name: Run tests
           command: make test
       - store_test_results:
-          path: test_output
+          path: build/reports
 
 workflows:
   version: 2

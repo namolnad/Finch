@@ -85,10 +85,15 @@ extension OutputGenerator {
 
     // Normalizes input/removes
     private static func filteredLines(input: String, using transformers: [Transformer]) -> [String] {
-        return transformers
-            .reduce(input) { $1.transform(text: $0) }
+        // Input must be sorted for regex to remove consecutive matching lines (cherry-picks)
+        let sortedInput = input
             .components(separatedBy: "\n")
             .sorted(by: "@@@(.*)@@@")
+            .joined(separator: "\n")
+
+        return transformers
+            .reduce(sortedInput) { $1.transform(text: $0) }
+            .components(separatedBy: "\n")
             .filter { !$0.isEmpty }
     }
 

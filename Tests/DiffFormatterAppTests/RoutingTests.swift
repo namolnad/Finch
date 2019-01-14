@@ -26,7 +26,7 @@ final class RoutingTests: XCTestCase {
         let routableArgs: [String] = [
             "6.12.1",
             "6.13.0",
-            "--git-diff=\(inputMock)"
+            "--git-diff=\(defaultInputMock)"
         ]
 
         let scheme: ArgumentScheme = .init(arguments: routableArgs)

@@ -11,9 +11,7 @@ ZSH_COMMAND := ZDOTDIR='/var/empty' zsh -o NO_GLOBAL_RCS -c
 # RM_SAFELY · `rm -rf` ensuring first and only parameter is non-null, contains more than whitespace, non-root if resolving absolutely.
 RM_SAFELY := $(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && noglob rm -rf $${1:A}' --
 
-BUILD_NUM=$(shell git rev-list @ --count)
-
-.PHONY: all build install config_template symlink lint setup test verify_carthage
+.PHONY: all build install config_template symlink lint setup test
 
 all: install
 
@@ -49,8 +47,5 @@ test: update_build_number
 	swift test 2>&1 | xcpretty
 
 update_build_number:
-	@echo "let appBuildNumber: Int = $(BUILD_NUM)" > $(PWD)/Sources/$(APP_NAME)/App/BuildNumber.swift
+	./Scripts/update-build-number
 
-## Ensure carthage dependencies are in check with resolved file
-verify_carthage:
-	./Scripts/carthage-verify

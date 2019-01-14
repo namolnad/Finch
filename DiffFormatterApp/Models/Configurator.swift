@@ -1,6 +1,6 @@
 //
 //  Configurator.swift
-//  DiffFormatter
+//  DiffFormatterApp.swift
 //
 //  Created by Dan Loman on 8/14/18.
 //  Copyright © 2018 DHL. All rights reserved.

@@ -7,6 +7,11 @@
 //
 
 import DiffFormatterApp
+import DiffFormatterCore
 import Foundation
 
-app.run(processInfo: ProcessInfo.processInfo)
+App(
+    buildNumber: appBuildNumber,
+    name: appName,
+    version: appVersion
+).run(processInfo: ProcessInfo.processInfo)

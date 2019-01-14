@@ -332,7 +332,7 @@
 		2202FC1221EC48F400B20C5F /* DiffFormatterAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				22FAE69521271DE00097A0A5 /* Config */,
+				22FAE69521271DE00097A0A5 /* Resources */,
 				220291E221D71374009A1F15 /* Mocks */,
 				220291E321D716ED009A1F15 /* ConfigurationTests.swift */,
 				226433612126421100B46082 /* OutputTests.swift */,
@@ -563,7 +563,7 @@
 			path = Output;
 			sourceTree = "<group>";
 		};
-		22FAE69521271DE00097A0A5 /* Config */ = {
+		22FAE69521271DE00097A0A5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				22FAE69A21272AD60097A0A5 /* default_config.json */,
@@ -571,7 +571,7 @@
 				220291F721D8171E009A1F15 /* excluded_section_config.json */,
 				220291F921D8471D009A1F15 /* build_number_command_config.json */,
 			);
-			path = Config;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -11,11 +11,14 @@ ZSH_COMMAND := ZDOTDIR='/var/empty' zsh -o NO_GLOBAL_RCS -c
 # RM_SAFELY · `rm -rf` ensuring first and only parameter is non-null, contains more than whitespace, non-root if resolving absolutely.
 RM_SAFELY := $(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && noglob rm -rf $${1:A}' --
 
+BUILD_NUM=$(shell git rev-list @ --count)
+
 .PHONY: all build install config_template symlink lint setup test verify_carthage
 
 all: build
 
-build: ## Install DiffFormatter
+## Install DiffFormatter
+build: update_build_number
 	swift build --configuration release -Xswiftc -static-stdlib
 	@echo "\nCopying executable to $(BIN_DIR)"
 	mkdir -p $(BIN_DIR) && cp -L $(BUILT_PRODUCT_PATH) $(BIN_DIR)/$(APP_NAME)
@@ -25,20 +28,27 @@ config_template:
 	cp $(CONFIG_TEMPLATE) $(INSTALL_DIR)/$(CONFIG_TEMPLATE)
 
 install: build symlink config_template
-
-lint: ## Swiftlint
+ 
+## Swiftlint
+lint:
 	swiftlint --strict
 
-setup: ## Setup project
+## Setup project
+setup:
 	./Scripts/setup
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
 	ln -fs $(BIN_DIR)/$(APP_NAME) /usr/local/bin/$(APP_NAME)
 
-test: ## Run tests
+## Run tests
+test:
 	@$(RM_SAFELY) ./.build/debug/DiffFormatterPackageTests.xctest
 	swift test 2>&1 | xcpretty
 
-verify_carthage: ## Ensure carthage dependencies are in check with resolved file
+update_build_number:
+	@echo "let appBuildNumber: Int = $(BUILD_NUM)" > $(PWD)/Sources/$(APP_NAME)/App/BuildNumber.swift
+
+## Ensure carthage dependencies are in check with resolved file
+verify_carthage:
 	./Scripts/carthage-verify

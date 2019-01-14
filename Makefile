@@ -44,7 +44,7 @@ symlink: build
 ## Run tests
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/DiffFormatterPackageTests.xctest
-	swift test 2>&1 | xcpretty -r junit
+	swift test 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
 
 update_build_number:
 	./Scripts/update-build-number

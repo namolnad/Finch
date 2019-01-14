@@ -19,12 +19,12 @@ jobs:
     environment:
     steps:
       - checkout
-      - run: mkdir -p build/reports
+      - run: mkdir -p build/reports/test
       - run:
           name: Run tests
           command: make test
       - store_test_results:
-          path: build/reports
+          path: build/reports/test
 
 workflows:
   version: 2

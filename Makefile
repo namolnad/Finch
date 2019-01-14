@@ -37,7 +37,7 @@ symlink: build
 	ln -fs $(BIN_DIR)/$(APP_NAME) /usr/local/bin/$(APP_NAME)
 
 test: ## Run tests
-	$(RM_SAFELY) ./.build/debug/DiffFormatterPackageTests.xctest
+	@$(RM_SAFELY) ./.build/debug/DiffFormatterPackageTests.xctest
 	swift test 2>&1 | xcpretty
 
 verify_carthage: ## Ensure carthage dependencies are in check with resolved file

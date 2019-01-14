@@ -39,8 +39,15 @@ struct Configurator {
             .compactMap { $0 }
             .filter { !$0.isEmpty }
 
+        let homeDirectoryPath: String
+        if #available(OSX 10.12, *) {
+            homeDirectoryPath = fileManager.homeDirectoryForCurrentUser.path
+        } else {
+            homeDirectoryPath = NSHomeDirectory()
+        }
+
         var cascadingPaths = [
-            fileManager.homeDirectoryForCurrentUser.path,
+            homeDirectoryPath,
             fileManager.currentDirectoryPath
         ]
 

@@ -6,7 +6,7 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-@testable import DiffFormatter
+@testable import DiffFormatterApp
 @testable import DiffFormatterRouting
 import SnapshotTesting
 import XCTest

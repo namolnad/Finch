@@ -7,33 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2202FC1621EC48F400B20C5F /* DiffFormatterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22821C9F21EC3DC600C2250A /* DiffFormatterApp.framework */; };
+		2202FC1D21EC496B00B20C5F /* FileManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE69321271B4E0097A0A5 /* FileManagerMock.swift */; };
+		2202FC1E21EC496B00B20C5F /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E321D716ED009A1F15 /* ConfigurationTests.swift */; };
+		2202FC1F21EC496B00B20C5F /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E021D7129C009A1F15 /* Mocks.swift */; };
+		2202FC2021EC496B00B20C5F /* RoutingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291DE21D7121F009A1F15 /* RoutingTests.swift */; };
+		2202FC2121EC496B00B20C5F /* OutputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226433612126421100B46082 /* OutputTests.swift */; };
+		2202FC2221EC496B00B20C5F /* ProcessInfoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE691212718660097A0A5 /* ProcessInfoMock.swift */; };
+		2202FC2321EC496B00B20C5F /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F521D80DEC009A1F15 /* TestHelper.swift */; };
+		2202FC2421EC49CF00B20C5F /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220291E721D75BD4009A1F15 /* SnapshotTesting.framework */; };
+		2202FC2521EC4A9B00B20C5F /* default_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE69A21272AD60097A0A5 /* default_config.json */; };
+		2202FC2621EC4A9B00B20C5F /* custom_delimiter_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE6A521274F4C0097A0A5 /* custom_delimiter_config.json */; };
+		2202FC2721EC4A9B00B20C5F /* excluded_section_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F721D8171E009A1F15 /* excluded_section_config.json */; };
+		2202FC2821EC4A9B00B20C5F /* build_number_command_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F921D8471D009A1F15 /* build_number_command_config.json */; };
 		223FF74521E4231C004F4EF4 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FF74421E4231C004F4EF4 /* Section.swift */; };
 		22821C5D21E904D300C2250A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD5D20EEAAAC00806FF3 /* main.swift */; };
 		22821C6921E906A400C2250A /* DiffFormatterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */; };
 		22821C6A21E906A400C2250A /* DiffFormatterRouting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B38621E32DA70017D2D1 /* DiffFormatterRouting.framework */; };
 		22821C6B21E906A400C2250A /* DiffFormatterTelemetry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B34621E32B320017D2D1 /* DiffFormatterTelemetry.framework */; };
 		22821C6C21E906A400C2250A /* DiffFormatterUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4B32221E327BA0017D2D1 /* DiffFormatterUtilities.framework */; };
-		22821C7321E912F400C2250A /* TransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6620EED11200806FF3 /* TransformerFactory.swift */; };
-		22821C7421E912F400C2250A /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291EF21D7F487009A1F15 /* Git.swift */; };
-		22821C7521E912F400C2250A /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274E0D621A8A1E000707869 /* Transformer.swift */; };
-		22821C7721E9130F00C2250A /* DiffHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23642190C65D000BAD64 /* DiffHandler.swift */; };
-		22821C7821E9132900C2250A /* OutputGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6A20EED12500806FF3 /* OutputGenerator.swift */; };
-		22821C7921E9134A00C2250A /* Sequence+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FB21DD794D009A1F15 /* Sequence+DiffFormatter.swift */; };
-		22821C7A21E9135A00C2250A /* UsageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB235D2190BCAC000BAD64 /* UsageHandler.swift */; };
-		22821C7B21E9135A00C2250A /* VersionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23602190C1F1000BAD64 /* VersionHandler.swift */; };
-		22821C7E21E9184700C2250A /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220291E721D75BD4009A1F15 /* SnapshotTesting.framework */; };
-		22821C7F21E9187D00C2250A /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E021D7129C009A1F15 /* Mocks.swift */; };
-		22821C8021E9187D00C2250A /* FileManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE69321271B4E0097A0A5 /* FileManagerMock.swift */; };
-		22821C8121E9187D00C2250A /* ProcessInfoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FAE691212718660097A0A5 /* ProcessInfoMock.swift */; };
-		22821C8221E9188600C2250A /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291E321D716ED009A1F15 /* ConfigurationTests.swift */; };
-		22821C8321E9188600C2250A /* OutputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226433612126421100B46082 /* OutputTests.swift */; };
-		22821C8421E9188600C2250A /* RoutingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291DE21D7121F009A1F15 /* RoutingTests.swift */; };
-		22821C8521E9188600C2250A /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291F521D80DEC009A1F15 /* TestHelper.swift */; };
-		22821C8721E9198E00C2250A /* default_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE69A21272AD60097A0A5 /* default_config.json */; };
-		22821C8821E9198E00C2250A /* custom_delimiter_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 22FAE6A521274F4C0097A0A5 /* custom_delimiter_config.json */; };
-		22821C8921E9198E00C2250A /* excluded_section_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F721D8171E009A1F15 /* excluded_section_config.json */; };
-		22821C8A21E9198E00C2250A /* build_number_command_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 220291F921D8471D009A1F15 /* build_number_command_config.json */; };
-		22821C8C21E91E2B00C2250A /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264334C2123DC9700B46082 /* Configurator.swift */; };
+		22821CB121EC3DC700C2250A /* DiffFormatterApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 22821CA121EC3DC700C2250A /* DiffFormatterApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22821CB421EC3DC700C2250A /* DiffFormatterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22821C9F21EC3DC600C2250A /* DiffFormatterApp.framework */; };
+		22821CB521EC3DC700C2250A /* DiffFormatterApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22821C9F21EC3DC600C2250A /* DiffFormatterApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22821CC221EC3E8A00C2250A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22821CC121EC3E8A00C2250A /* App.swift */; };
+		22821CC321EC3EFA00C2250A /* TransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6620EED11200806FF3 /* TransformerFactory.swift */; };
+		22821CC421EC3EFA00C2250A /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264334C2123DC9700B46082 /* Configurator.swift */; };
+		22821CC521EC3EFA00C2250A /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274E0D621A8A1E000707869 /* Transformer.swift */; };
+		22821CC621EC3EFA00C2250A /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291EF21D7F487009A1F15 /* Git.swift */; };
+		22821CC721EC3F0300C2250A /* UsageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB235D2190BCAC000BAD64 /* UsageHandler.swift */; };
+		22821CC821EC3F0300C2250A /* VersionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23602190C1F1000BAD64 /* VersionHandler.swift */; };
+		22821CC921EC3F0300C2250A /* DiffHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB23642190C65D000BAD64 /* DiffHandler.swift */; };
+		22821CCA21EC3F0800C2250A /* OutputGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6A20EED12500806FF3 /* OutputGenerator.swift */; };
+		22821CCB21EC3F0E00C2250A /* Sequence+DiffFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220291FB21DD794D009A1F15 /* Sequence+DiffFormatter.swift */; };
 		22F4B33221E327BA0017D2D1 /* Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F4B32421E327BA0017D2D1 /* Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F4B33921E327DE0017D2D1 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E3E1F2127F28F00256B13 /* Shell.swift */; };
 		22F4B33A21E327DE0017D2D1 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AACD6820EED11800806FF3 /* Pasteboard.swift */; };
@@ -72,6 +77,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2202FC0121EC455900B20C5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F4B3AF21E3BE5B0017D2D1;
+			remoteInfo = DiffFormatterCore;
+		};
+		2202FC0321EC455900B20C5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F4B38521E32DA70017D2D1;
+			remoteInfo = DiffFormatterRouting;
+		};
+		2202FC0521EC455900B20C5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F4B34521E32B320017D2D1;
+			remoteInfo = DiffFormatterTelemetry;
+		};
+		2202FC0721EC455900B20C5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22F4B32121E327BA0017D2D1;
+			remoteInfo = DiffFormatterUtilities;
+		};
+		2202FC1721EC48F400B20C5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22821C9E21EC3DC600C2250A;
+			remoteInfo = DiffFormatterApp;
+		};
 		223FF75B21E44AD2004F4EF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
@@ -92,13 +132,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 22F4B3AF21E3BE5B0017D2D1;
 			remoteInfo = DiffFormatterCore;
-		};
-		22821C5121E9018E00C2250A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22821C4021E9018D00C2250A;
-			remoteInfo = DiffFormatter;
 		};
 		22821C5E21E905D100C2250A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -128,7 +161,28 @@
 			remoteGlobalIDString = 22F4B32121E327BA0017D2D1;
 			remoteInfo = DiffFormatterUtilities;
 		};
+		22821CB221EC3DC700C2250A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AACD5220EEAAAC00806FF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22821C9E21EC3DC600C2250A;
+			remoteInfo = DiffFormatterApp;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22821CB921EC3DC700C2250A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				22821CB521EC3DC700C2250A /* DiffFormatterApp.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		220291DE21D7121F009A1F15 /* RoutingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingTests.swift; sourceTree = "<group>"; };
@@ -143,6 +197,8 @@
 		220291FB21DD794D009A1F15 /* Sequence+DiffFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+DiffFormatter.swift"; sourceTree = "<group>"; };
 		220291FD21DD7998009A1F15 /* FileResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileResolver.swift; sourceTree = "<group>"; };
 		2202920121DDC62F009A1F15 /* FormatTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatTemplate.swift; sourceTree = "<group>"; };
+		2202FC1121EC48F400B20C5F /* DiffFormatterAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2202FC1521EC48F400B20C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		221E3E1B2127E6CB00256B13 /* GitConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitConfiguration.swift; sourceTree = "<group>"; };
 		221E3E1F2127F28F00256B13 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		2221C32521920784008D2AA7 /* ArgumentScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentScheme.swift; sourceTree = "<group>"; };
@@ -162,8 +218,10 @@
 		2274E0DD21A8A5CE00707869 /* LineOutputtable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineOutputtable.swift; sourceTree = "<group>"; };
 		22821C4121E9018D00C2250A /* DiffFormatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiffFormatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22821C4A21E9018D00C2250A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22821C5021E9018E00C2250A /* DiffFormatterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiffFormatterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22821C5621E9018E00C2250A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22821C9F21EC3DC600C2250A /* DiffFormatterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiffFormatterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22821CA121EC3DC700C2250A /* DiffFormatterApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiffFormatterApp.h; sourceTree = "<group>"; };
+		22821CA221EC3DC700C2250A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22821CC121EC3E8A00C2250A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		228D0DFD214ED79100D808F7 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		22AACD5D20EEAAAC00806FF3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		22AACD6420EEAAE200806FF3 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
@@ -204,22 +262,31 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2202FC0E21EC48F400B20C5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2202FC2421EC49CF00B20C5F /* SnapshotTesting.framework in Frameworks */,
+				2202FC1621EC48F400B20C5F /* DiffFormatterApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22821C3E21E9018D00C2250A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				22821C6921E906A400C2250A /* DiffFormatterCore.framework in Frameworks */,
 				22821C6A21E906A400C2250A /* DiffFormatterRouting.framework in Frameworks */,
+				22821CB421EC3DC700C2250A /* DiffFormatterApp.framework in Frameworks */,
 				22821C6B21E906A400C2250A /* DiffFormatterTelemetry.framework in Frameworks */,
 				22821C6C21E906A400C2250A /* DiffFormatterUtilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22821C4D21E9018E00C2250A /* Frameworks */ = {
+		22821C9C21EC3DC600C2250A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22821C7E21E9184700C2250A /* SnapshotTesting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +339,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2202FC1221EC48F400B20C5F /* DiffFormatterAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				22FAE69521271DE00097A0A5 /* Config */,
+				220291E221D71374009A1F15 /* Mocks */,
+				220291E321D716ED009A1F15 /* ConfigurationTests.swift */,
+				226433612126421100B46082 /* OutputTests.swift */,
+				220291DE21D7121F009A1F15 /* RoutingTests.swift */,
+				220291F521D80DEC009A1F15 /* TestHelper.swift */,
+				2202FC1521EC48F400B20C5F /* Info.plist */,
+			);
+			path = DiffFormatterAppTests;
+			sourceTree = "<group>";
+		};
 		224EE6F121A8E093008A97CF /* Line */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,26 +400,8 @@
 			children = (
 				22AACD5D20EEAAAC00806FF3 /* main.swift */,
 				22821C4A21E9018D00C2250A /* Info.plist */,
-				22821C8B21E919FF00C2250A /* Models */,
-				22F4B3F121E3DE8F0017D2D1 /* Routing */,
-				22F4B41621E3E0AD0017D2D1 /* Output */,
-				226433582124A3F400B46082 /* Extensions */,
 			);
 			path = DiffFormatter;
-			sourceTree = "<group>";
-		};
-		22821C5321E9018E00C2250A /* DiffFormatterTests */ = {
-			isa = PBXGroup;
-			children = (
-				22FAE69521271DE00097A0A5 /* Config */,
-				220291E221D71374009A1F15 /* Mocks */,
-				220291E321D716ED009A1F15 /* ConfigurationTests.swift */,
-				226433612126421100B46082 /* OutputTests.swift */,
-				220291DE21D7121F009A1F15 /* RoutingTests.swift */,
-				220291F521D80DEC009A1F15 /* TestHelper.swift */,
-				22821C5621E9018E00C2250A /* Info.plist */,
-			);
-			path = DiffFormatterTests;
 			sourceTree = "<group>";
 		};
 		22821C8B21E919FF00C2250A /* Models */ = {
@@ -350,6 +413,20 @@
 				220291EF21D7F487009A1F15 /* Git.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		22821CA021EC3DC700C2250A /* DiffFormatterApp */ = {
+			isa = PBXGroup;
+			children = (
+				22821CC121EC3E8A00C2250A /* App.swift */,
+				22821C8B21E919FF00C2250A /* Models */,
+				22F4B3F121E3DE8F0017D2D1 /* Routing */,
+				22F4B41621E3E0AD0017D2D1 /* Output */,
+				226433582124A3F400B46082 /* Extensions */,
+				22821CA121EC3DC700C2250A /* DiffFormatterApp.h */,
+				22821CA221EC3DC700C2250A /* Info.plist */,
+			);
+			path = DiffFormatterApp;
 			sourceTree = "<group>";
 		};
 		228D0DFB214ED01100D808F7 /* App */ = {
@@ -364,11 +441,12 @@
 			isa = PBXGroup;
 			children = (
 				22821C4221E9018D00C2250A /* DiffFormatter */,
+				22821CA021EC3DC700C2250A /* DiffFormatterApp */,
+				2202FC1221EC48F400B20C5F /* DiffFormatterAppTests */,
 				22F4B32321E327BA0017D2D1 /* DiffFormatterUtilities */,
 				22F4B34721E32B320017D2D1 /* DiffFormatterTelemetry */,
 				22F4B38721E32DA70017D2D1 /* DiffFormatterRouting */,
 				22F4B3B121E3BE5C0017D2D1 /* DiffFormatterCore */,
-				22821C5321E9018E00C2250A /* DiffFormatterTests */,
 				22AACD5B20EEAAAC00806FF3 /* Products */,
 				220291E621D75BD3009A1F15 /* Frameworks */,
 			);
@@ -382,7 +460,8 @@
 				22F4B38621E32DA70017D2D1 /* DiffFormatterRouting.framework */,
 				22F4B3B021E3BE5B0017D2D1 /* DiffFormatterCore.framework */,
 				22821C4121E9018D00C2250A /* DiffFormatter.app */,
-				22821C5021E9018E00C2250A /* DiffFormatterTests.xctest */,
+				22821C9F21EC3DC600C2250A /* DiffFormatterApp.framework */,
+				2202FC1121EC48F400B20C5F /* DiffFormatterAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -501,6 +580,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		22821C9A21EC3DC600C2250A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22821CB121EC3DC700C2250A /* DiffFormatterApp.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22F4B31D21E327BA0017D2D1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -536,6 +623,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		2202FC1021EC48F400B20C5F /* DiffFormatterAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2202FC1921EC48F400B20C5F /* Build configuration list for PBXNativeTarget "DiffFormatterAppTests" */;
+			buildPhases = (
+				2202FC0D21EC48F400B20C5F /* Sources */,
+				2202FC0E21EC48F400B20C5F /* Frameworks */,
+				2202FC0F21EC48F400B20C5F /* Resources */,
+				2202FC1C21EC490900B20C5F /* Carthage */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2202FC1821EC48F400B20C5F /* PBXTargetDependency */,
+			);
+			name = DiffFormatterAppTests;
+			productName = DiffFormatterAppTests;
+			productReference = 2202FC1121EC48F400B20C5F /* DiffFormatterAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		22821C4021E9018D00C2250A /* DiffFormatter */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22821C5721E9018E00C2250A /* Build configuration list for PBXNativeTarget "DiffFormatter" */;
@@ -543,6 +649,7 @@
 				22821C3D21E9018D00C2250A /* Sources */,
 				22821C3E21E9018D00C2250A /* Frameworks */,
 				22821C3F21E9018D00C2250A /* Resources */,
+				22821CB921EC3DC700C2250A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -551,30 +658,34 @@
 				22821C6121E905D100C2250A /* PBXTargetDependency */,
 				22821C6321E905D100C2250A /* PBXTargetDependency */,
 				22821C6521E905D100C2250A /* PBXTargetDependency */,
+				22821CB321EC3DC700C2250A /* PBXTargetDependency */,
 			);
 			name = DiffFormatter;
 			productName = DiffFormatter;
 			productReference = 22821C4121E9018D00C2250A /* DiffFormatter.app */;
 			productType = "com.apple.product-type.application";
 		};
-		22821C4F21E9018E00C2250A /* DiffFormatterTests */ = {
+		22821C9E21EC3DC600C2250A /* DiffFormatterApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22821C5A21E9018E00C2250A /* Build configuration list for PBXNativeTarget "DiffFormatterTests" */;
+			buildConfigurationList = 22821CB621EC3DC700C2250A /* Build configuration list for PBXNativeTarget "DiffFormatterApp" */;
 			buildPhases = (
-				22821C4C21E9018E00C2250A /* Sources */,
-				22821C4D21E9018E00C2250A /* Frameworks */,
-				22821C4E21E9018E00C2250A /* Resources */,
-				22821C7D21E9175F00C2250A /* Carthage */,
+				22821C9A21EC3DC600C2250A /* Headers */,
+				22821C9B21EC3DC600C2250A /* Sources */,
+				22821C9C21EC3DC600C2250A /* Frameworks */,
+				22821C9D21EC3DC600C2250A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				22821C5221E9018E00C2250A /* PBXTargetDependency */,
+				2202FC0221EC455900B20C5F /* PBXTargetDependency */,
+				2202FC0421EC455900B20C5F /* PBXTargetDependency */,
+				2202FC0621EC455900B20C5F /* PBXTargetDependency */,
+				2202FC0821EC455900B20C5F /* PBXTargetDependency */,
 			);
-			name = DiffFormatterTests;
-			productName = DiffFormatterTests;
-			productReference = 22821C5021E9018E00C2250A /* DiffFormatterTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			name = DiffFormatterApp;
+			productName = DiffFormatterApp;
+			productReference = 22821C9F21EC3DC600C2250A /* DiffFormatterApp.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */ = {
 			isa = PBXNativeTarget;
@@ -661,12 +772,15 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = DHL;
 				TargetAttributes = {
+					2202FC1021EC48F400B20C5F = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					22821C4021E9018D00C2250A = {
 						CreatedOnToolsVersion = 10.1;
 					};
-					22821C4F21E9018E00C2250A = {
+					22821C9E21EC3DC600C2250A = {
 						CreatedOnToolsVersion = 10.1;
-						TestTargetID = 22821C4021E9018D00C2250A;
+						LastSwiftMigration = 1010;
 					};
 					22F4B32121E327BA0017D2D1 = {
 						CreatedOnToolsVersion = 10.1;
@@ -696,7 +810,8 @@
 			projectRoot = "";
 			targets = (
 				22821C4021E9018D00C2250A /* DiffFormatter */,
-				22821C4F21E9018E00C2250A /* DiffFormatterTests */,
+				22821C9E21EC3DC600C2250A /* DiffFormatterApp */,
+				2202FC1021EC48F400B20C5F /* DiffFormatterAppTests */,
 				22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */,
 				22F4B38521E32DA70017D2D1 /* DiffFormatterRouting */,
 				22F4B34521E32B320017D2D1 /* DiffFormatterTelemetry */,
@@ -706,6 +821,17 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2202FC0F21EC48F400B20C5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2202FC2621EC4A9B00B20C5F /* custom_delimiter_config.json in Resources */,
+				2202FC2721EC4A9B00B20C5F /* excluded_section_config.json in Resources */,
+				2202FC2821EC4A9B00B20C5F /* build_number_command_config.json in Resources */,
+				2202FC2521EC4A9B00B20C5F /* default_config.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22821C3F21E9018D00C2250A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -713,14 +839,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22821C4E21E9018E00C2250A /* Resources */ = {
+		22821C9D21EC3DC600C2250A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22821C8821E9198E00C2250A /* custom_delimiter_config.json in Resources */,
-				22821C8921E9198E00C2250A /* excluded_section_config.json in Resources */,
-				22821C8A21E9198E00C2250A /* build_number_command_config.json in Resources */,
-				22821C8721E9198E00C2250A /* default_config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,7 +877,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		22821C7D21E9175F00C2250A /* Carthage */ = {
+		2202FC1C21EC490900B20C5F /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -769,6 +891,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapshotTesting.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -777,34 +900,42 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2202FC0D21EC48F400B20C5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2202FC2121EC496B00B20C5F /* OutputTests.swift in Sources */,
+				2202FC2021EC496B00B20C5F /* RoutingTests.swift in Sources */,
+				2202FC2321EC496B00B20C5F /* TestHelper.swift in Sources */,
+				2202FC2221EC496B00B20C5F /* ProcessInfoMock.swift in Sources */,
+				2202FC1D21EC496B00B20C5F /* FileManagerMock.swift in Sources */,
+				2202FC1E21EC496B00B20C5F /* ConfigurationTests.swift in Sources */,
+				2202FC1F21EC496B00B20C5F /* Mocks.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22821C3D21E9018D00C2250A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22821C7921E9134A00C2250A /* Sequence+DiffFormatter.swift in Sources */,
-				22821C7321E912F400C2250A /* TransformerFactory.swift in Sources */,
-				22821C7721E9130F00C2250A /* DiffHandler.swift in Sources */,
 				22821C5D21E904D300C2250A /* main.swift in Sources */,
-				22821C7A21E9135A00C2250A /* UsageHandler.swift in Sources */,
-				22821C7421E912F400C2250A /* Git.swift in Sources */,
-				22821C7B21E9135A00C2250A /* VersionHandler.swift in Sources */,
-				22821C7521E912F400C2250A /* Transformer.swift in Sources */,
-				22821C8C21E91E2B00C2250A /* Configurator.swift in Sources */,
-				22821C7821E9132900C2250A /* OutputGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22821C4C21E9018E00C2250A /* Sources */ = {
+		22821C9B21EC3DC600C2250A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22821C8421E9188600C2250A /* RoutingTests.swift in Sources */,
-				22821C8021E9187D00C2250A /* FileManagerMock.swift in Sources */,
-				22821C8521E9188600C2250A /* TestHelper.swift in Sources */,
-				22821C8121E9187D00C2250A /* ProcessInfoMock.swift in Sources */,
-				22821C8321E9188600C2250A /* OutputTests.swift in Sources */,
-				22821C8221E9188600C2250A /* ConfigurationTests.swift in Sources */,
-				22821C7F21E9187D00C2250A /* Mocks.swift in Sources */,
+				22821CCB21EC3F0E00C2250A /* Sequence+DiffFormatter.swift in Sources */,
+				22821CC321EC3EFA00C2250A /* TransformerFactory.swift in Sources */,
+				22821CC421EC3EFA00C2250A /* Configurator.swift in Sources */,
+				22821CC221EC3E8A00C2250A /* App.swift in Sources */,
+				22821CCA21EC3F0800C2250A /* OutputGenerator.swift in Sources */,
+				22821CC921EC3F0300C2250A /* DiffHandler.swift in Sources */,
+				22821CC521EC3EFA00C2250A /* Transformer.swift in Sources */,
+				22821CC721EC3F0300C2250A /* UsageHandler.swift in Sources */,
+				22821CC621EC3EFA00C2250A /* Git.swift in Sources */,
+				22821CC821EC3F0300C2250A /* VersionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -871,6 +1002,31 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2202FC0221EC455900B20C5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */;
+			targetProxy = 2202FC0121EC455900B20C5F /* PBXContainerItemProxy */;
+		};
+		2202FC0421EC455900B20C5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F4B38521E32DA70017D2D1 /* DiffFormatterRouting */;
+			targetProxy = 2202FC0321EC455900B20C5F /* PBXContainerItemProxy */;
+		};
+		2202FC0621EC455900B20C5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F4B34521E32B320017D2D1 /* DiffFormatterTelemetry */;
+			targetProxy = 2202FC0521EC455900B20C5F /* PBXContainerItemProxy */;
+		};
+		2202FC0821EC455900B20C5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */;
+			targetProxy = 2202FC0721EC455900B20C5F /* PBXContainerItemProxy */;
+		};
+		2202FC1821EC48F400B20C5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22821C9E21EC3DC600C2250A /* DiffFormatterApp */;
+			targetProxy = 2202FC1721EC48F400B20C5F /* PBXContainerItemProxy */;
+		};
 		223FF75C21E44AD2004F4EF4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */;
@@ -885,11 +1041,6 @@
 			isa = PBXTargetDependency;
 			target = 22F4B3AF21E3BE5B0017D2D1 /* DiffFormatterCore */;
 			targetProxy = 223FF75F21E44B5F004F4EF4 /* PBXContainerItemProxy */;
-		};
-		22821C5221E9018E00C2250A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22821C4021E9018D00C2250A /* DiffFormatter */;
-			targetProxy = 22821C5121E9018E00C2250A /* PBXContainerItemProxy */;
 		};
 		22821C5F21E905D100C2250A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -911,23 +1062,79 @@
 			target = 22F4B32121E327BA0017D2D1 /* DiffFormatterUtilities */;
 			targetProxy = 22821C6421E905D100C2250A /* PBXContainerItemProxy */;
 		};
+		22821CB321EC3DC700C2250A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22821C9E21EC3DC600C2250A /* DiffFormatterApp */;
+			targetProxy = 22821CB221EC3DC700C2250A /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		2202FC1A21EC48F400B20C5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = DiffFormatterAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		2202FC1B21EC48F400B20C5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = DiffFormatterAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 		22821C5821E9018E00C2250A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DiffFormatter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACH_O_TYPE = mh_execute;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
@@ -940,17 +1147,19 @@
 		22821C5921E9018E00C2250A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DiffFormatter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACH_O_TYPE = mh_execute;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -959,58 +1168,69 @@
 			};
 			name = Release;
 		};
-		22821C5B21E9018E00C2250A /* Debug */ = {
+		22821CB721EC3DC700C2250A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Manual;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
-				INFOPLIST_FILE = DiffFormatterTests/Info.plist;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = DiffFormatterApp/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
+					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterApp;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiffFormatter.app/Contents/MacOS/DiffFormatter";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		22821C5C21E9018E00C2250A /* Release */ = {
+		22821CB821EC3DC700C2250A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Manual;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 92AC5VS8HG;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
-				INFOPLIST_FILE = DiffFormatterTests/Info.plist;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = DiffFormatterApp/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
+					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterApp;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiffFormatter.app/Contents/MacOS/DiffFormatter";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1147,7 +1367,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Utilities;
@@ -1179,7 +1399,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Utilities;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1210,7 +1430,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Telemetry;
@@ -1242,7 +1462,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Telemetry;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1273,7 +1493,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Routing;
@@ -1305,7 +1525,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Routing;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1336,7 +1556,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Core;
@@ -1368,7 +1588,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Core;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1382,6 +1602,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2202FC1921EC48F400B20C5F /* Build configuration list for PBXNativeTarget "DiffFormatterAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2202FC1A21EC48F400B20C5F /* Debug */,
+				2202FC1B21EC48F400B20C5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		22821C5721E9018E00C2250A /* Build configuration list for PBXNativeTarget "DiffFormatter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1391,11 +1620,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22821C5A21E9018E00C2250A /* Build configuration list for PBXNativeTarget "DiffFormatterTests" */ = {
+		22821CB621EC3DC700C2250A /* Build configuration list for PBXNativeTarget "DiffFormatterApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22821C5B21E9018E00C2250A /* Debug */,
-				22821C5C21E9018E00C2250A /* Release */,
+				22821CB721EC3DC700C2250A /* Debug */,
+				22821CB821EC3DC700C2250A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

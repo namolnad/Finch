@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22821C4021E9018D00C2250A"
-               BuildableName = "DiffFormatter.app"
-               BlueprintName = "DiffFormatter"
+               BlueprintIdentifier = "22821C9E21EC3DC600C2250A"
+               BuildableName = "DiffFormatterApp.framework"
+               BlueprintName = "DiffFormatterApp"
                ReferencedContainer = "container:DiffFormatter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,13 +29,23 @@
       codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "22821CA621EC3DC700C2250A"
+               BuildableName = "DiffFormatterAppTests.xctest"
+               BlueprintName = "DiffFormatterAppTests"
+               ReferencedContainer = "container:DiffFormatter.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "22821C4021E9018D00C2250A"
-            BuildableName = "DiffFormatter.app"
-            BlueprintName = "DiffFormatter"
+            BlueprintIdentifier = "22821C9E21EC3DC600C2250A"
+            BuildableName = "DiffFormatterApp.framework"
+            BlueprintName = "DiffFormatterApp"
             ReferencedContainer = "container:DiffFormatter.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,16 +62,15 @@
       debugDocumentVersioning = "NO"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "22821C4021E9018D00C2250A"
-            BuildableName = "DiffFormatter.app"
-            BlueprintName = "DiffFormatter"
+            BlueprintIdentifier = "22821C9E21EC3DC600C2250A"
+            BuildableName = "DiffFormatterApp.framework"
+            BlueprintName = "DiffFormatterApp"
             ReferencedContainer = "container:DiffFormatter.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -71,16 +80,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "22821C4021E9018D00C2250A"
-            BuildableName = "DiffFormatter.app"
-            BlueprintName = "DiffFormatter"
+            BlueprintIdentifier = "22821C9E21EC3DC600C2250A"
+            BuildableName = "DiffFormatterApp.framework"
+            BlueprintName = "DiffFormatterApp"
             ReferencedContainer = "container:DiffFormatter.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

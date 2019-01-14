@@ -14,18 +14,30 @@ public func shell(
     currentDirectoryPath: String,
     environment: [String: String]? = nil) -> String? {
     let task = Process()
-    task.executableURL = URL(fileURLWithPath: executablePath)
-    task.currentDirectoryURL = URL(fileURLWithPath: currentDirectoryPath)
+
+    if #available(OSX 10.13, *) {
+        task.executableURL = URL(fileURLWithPath: executablePath)
+        task.currentDirectoryURL = URL(fileURLWithPath: currentDirectoryPath)
+    } else {
+        task.launchPath = executablePath
+        task.currentDirectoryPath = currentDirectoryPath
+    }
+
     task.arguments = arguments
 
     if let environment = environment, case let env = task.environment ?? [:] {
-        task.environment = env.merging(environment) { _, new in new }
+        task.environment = env.merging(environment) { $1 }
     }
 
     let pipe = Pipe()
     task.standardOutput = pipe
     task.standardError = pipe
-    try? task.run()
+
+    if #available(OSX 10.13, *) {
+        try? task.run()
+    } else {
+        task.launch()
+    }
 
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
     return String(data: data, encoding: .utf8)

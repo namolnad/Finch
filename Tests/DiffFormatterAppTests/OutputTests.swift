@@ -15,7 +15,21 @@ final class OutputTests: XCTestCase {
     func testDefaultOutput() {
         let outputGenerator: OutputGenerator = .init(
             configuration: .mock,
-            rawDiff: inputMock,
+            rawDiff: defaultInputMock,
+            version: "6.13.0",
+            releaseManager: Configuration.mock.contributors.first
+        )
+
+        assertSnapshot(
+            matching: outputGenerator.generateOutput(),
+            as: .dump
+        )
+    }
+
+    func testCherryPickedSectionOutput() {
+        let outputGenerator: OutputGenerator = .init(
+            configuration: .mock,
+            rawDiff: cherryPickedInputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
         )
@@ -29,7 +43,7 @@ final class OutputTests: XCTestCase {
     func testExcludedSectionOutput() {
         let outputGenerator: OutputGenerator = .init(
             configuration: .mockExcludedSection,
-            rawDiff: inputMock,
+            rawDiff: defaultInputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
         )
@@ -52,7 +66,7 @@ final class OutputTests: XCTestCase {
                 argScheme: .mock,
                 fileManager: fileManagerMock
                 ).configuration,
-            rawDiff: inputMock,
+            rawDiff: defaultInputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
         )

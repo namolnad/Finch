@@ -23,9 +23,6 @@ Pods
 
 *.env
 
-# Fastlane
-fastlane/*
-
 # Carthage
 Carthage
 

@@ -650,6 +650,7 @@
 				22821C3E21E9018D00C2250A /* Frameworks */,
 				22821C3F21E9018D00C2250A /* Resources */,
 				22821CB921EC3DC700C2250A /* Embed Frameworks */,
+				2202FC2A21EC4FD300B20C5F /* Extract CLI Tool */,
 			);
 			buildRules = (
 			);
@@ -896,6 +897,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		2202FC2A21EC4FD300B20C5F /* Extract CLI Tool */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(EXECUTABLE_PATH)",
+			);
+			name = "Extract CLI Tool";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(EXECUTABLE_NAME)",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Scripts/extract-tool\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

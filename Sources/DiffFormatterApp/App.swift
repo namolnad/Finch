@@ -9,6 +9,7 @@
 import DiffFormatterCore
 import DiffFormatterRouting
 import DiffFormatterTelemetry
+import Foundation
 
 extension App {
     public func run(processInfo: ProcessInfo) {

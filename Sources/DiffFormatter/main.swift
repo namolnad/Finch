@@ -8,5 +8,6 @@
 
 import DiffFormatterApp
 import DiffFormatterCore
+import Foundation
 
 App().run(processInfo: ProcessInfo.processInfo)

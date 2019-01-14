@@ -340,7 +340,8 @@
 				220291F521D80DEC009A1F15 /* TestHelper.swift */,
 				2202FC1521EC48F400B20C5F /* Info.plist */,
 			);
-			path = DiffFormatterAppTests;
+			name = DiffFormatterAppTests;
+			path = Tests/DiffFormatterAppTests;
 			sourceTree = "<group>";
 		};
 		224EE6F121A8E093008A97CF /* Line */ = {
@@ -391,7 +392,8 @@
 				22AACD5D20EEAAAC00806FF3 /* main.swift */,
 				22821C4A21E9018D00C2250A /* Info.plist */,
 			);
-			path = DiffFormatter;
+			name = DiffFormatter;
+			path = Sources/DiffFormatter;
 			sourceTree = "<group>";
 		};
 		22821C8B21E919FF00C2250A /* Models */ = {
@@ -416,7 +418,8 @@
 				22821CA121EC3DC700C2250A /* DiffFormatterApp.h */,
 				22821CA221EC3DC700C2250A /* Info.plist */,
 			);
-			path = DiffFormatterApp;
+			name = DiffFormatterApp;
+			path = Sources/DiffFormatterApp;
 			sourceTree = "<group>";
 		};
 		228D0DFB214ED01100D808F7 /* App */ = {
@@ -478,7 +481,8 @@
 				22F4B32421E327BA0017D2D1 /* Utilities.h */,
 				22F4B32521E327BA0017D2D1 /* Info.plist */,
 			);
-			path = DiffFormatterUtilities;
+			name = DiffFormatterUtilities;
+			path = Sources/DiffFormatterUtilities;
 			sourceTree = "<group>";
 		};
 		22F4B34721E32B320017D2D1 /* DiffFormatterTelemetry */ = {
@@ -488,7 +492,8 @@
 				22F4B34821E32B320017D2D1 /* Telemetry.h */,
 				22F4B34921E32B320017D2D1 /* Info.plist */,
 			);
-			path = DiffFormatterTelemetry;
+			name = DiffFormatterTelemetry;
+			path = Sources/DiffFormatterTelemetry;
 			sourceTree = "<group>";
 		};
 		22F4B38721E32DA70017D2D1 /* DiffFormatterRouting */ = {
@@ -503,7 +508,8 @@
 				22F4B38821E32DA70017D2D1 /* Routing.h */,
 				22F4B38921E32DA70017D2D1 /* Info.plist */,
 			);
-			path = DiffFormatterRouting;
+			name = DiffFormatterRouting;
+			path = Sources/DiffFormatterRouting;
 			sourceTree = "<group>";
 		};
 		22F4B3B121E3BE5C0017D2D1 /* DiffFormatterCore */ = {
@@ -520,7 +526,8 @@
 				22F4B3B221E3BE5C0017D2D1 /* Core.h */,
 				22F4B3B321E3BE5C0017D2D1 /* Info.plist */,
 			);
-			path = DiffFormatterCore;
+			name = DiffFormatterCore;
+			path = Sources/DiffFormatterCore;
 			sourceTree = "<group>";
 		};
 		22F4B3DE21E3C12F0017D2D1 /* Extensions */ = {
@@ -1116,7 +1123,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = DiffFormatter/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks/DiffFormatterApp.framework/Versions/Current/Frameworks",
@@ -1144,7 +1151,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = DiffFormatter/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks/DiffFormatterApp.framework/Versions/Current/Frameworks",
@@ -1176,7 +1183,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = DiffFormatterApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterApp/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1211,7 +1218,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = DiffFormatterApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterApp/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1356,7 +1363,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/DiffFormatterUtilities/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterUtilities/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1366,7 +1373,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Utilities;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterUtilities;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -1388,7 +1395,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/DiffFormatterUtilities/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterUtilities/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1397,7 +1404,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Utilities;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterUtilities;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -1419,7 +1426,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/DiffFormatterTelemetry/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterTelemetry/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1429,7 +1436,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Telemetry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterTelemetry;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -1451,7 +1458,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/DiffFormatterTelemetry/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterTelemetry/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1460,7 +1467,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Telemetry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterTelemetry;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -1482,7 +1489,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/DiffFormatterRouting/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterRouting/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1492,7 +1499,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Routing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterRouting;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -1514,7 +1521,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/DiffFormatterRouting/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterRouting/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1523,7 +1530,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Routing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterRouting;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -1545,7 +1552,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/DiffFormatterCore/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterCore/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1555,7 +1562,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Core;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -1577,7 +1584,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/DiffFormatterCore/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/DiffFormatterCore/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1586,7 +1593,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.Core;
+				PRODUCT_BUNDLE_IDENTIFIER = com.namolnad.DiffFormatterCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;

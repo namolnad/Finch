@@ -36,9 +36,7 @@ public final class FileResolver<FileType: Decodable> {
         do {
             return try decoder.decode(FileType.self, from: data)
         } catch {
-            // swiftlint:disable line_length
             logError("Error parsing file of type \(FileType.self) at path: \(filePath). \n\nError details: \n\(error)")
-            // swiftlint:enable line_length
             return nil
         }
     }

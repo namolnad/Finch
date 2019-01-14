@@ -28,7 +28,11 @@ struct Configurator {
     private let immediateReturnPaths: [String]
 
     init(processInfo: ProcessInfo, argScheme: ArgumentScheme, fileManager: FileManager = .default) {
-        self.configResolver = .init(fileManager: fileManager, pathComponent: "/.diffformatter/config.json", logError: log.error)
+        self.configResolver = .init(
+            fileManager: fileManager,
+            pathComponent: "/.diffformatter/config.json",
+            logError: log.error
+        )
         self.defaultConfig = .default(currentDirectory: fileManager.currentDirectoryPath)
 
         let immediateReturnPaths = [

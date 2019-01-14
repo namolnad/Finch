@@ -32,7 +32,9 @@ public struct LineComponents {
             componentString(.message)).trimmingCharacters(in: .whitespacesAndNewlines)
         self.pullRequestNumber = Int(componentString(.pullRequestNumber))
         self.sha = componentString(.sha)
-        self.tags = Regex.Pattern.tagPattern(from: configuration).matches(in: rawLine).compactMap { $0.firstMatch(in: rawLine) }
+        self.tags = Regex.Pattern.tagPattern(from: configuration)
+            .matches(in: rawLine)
+            .compactMap { $0.firstMatch(in: rawLine) }
     }
 }
 

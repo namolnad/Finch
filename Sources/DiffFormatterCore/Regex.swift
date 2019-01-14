@@ -6,8 +6,8 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
 import DiffFormatterUtilities
+import Foundation
 
 public enum Regex {
     public typealias Pattern = String

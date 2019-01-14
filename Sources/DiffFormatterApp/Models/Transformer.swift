@@ -6,8 +6,8 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
 import DiffFormatterCore
+import Foundation
 
 struct Transformer {
     let pattern: Regex.Replacement

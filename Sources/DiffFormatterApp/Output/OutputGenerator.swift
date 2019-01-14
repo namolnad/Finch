@@ -24,7 +24,7 @@ extension OutputGenerator {
         let linesComponents = type(of: self)
             .filteredLines(input: rawDiff, using: transformerFactory.initialTransformers)
             .compactMap { LineComponents(rawLine: $0, configuration: configuration) }
-        
+
         var sections: [Section] = configuration
             .sectionInfos
             .map { Section(configuration: configuration, info: $0, linesComponents: []) }
@@ -37,7 +37,7 @@ extension OutputGenerator {
                     map.updateValue(next.offset, forKey: tag)
                 }
                 return map
-        }
+            }
 
         for components in linesComponents {
             let tag = components.tags.first(where: tagToIndex.keys.contains) ?? "*"

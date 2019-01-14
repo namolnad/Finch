@@ -18,4 +18,3 @@ extension Array: Outputtable where Element: Outputtable {
             .joined(separator: "\n")
     }
 }
-

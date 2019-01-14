@@ -15,8 +15,8 @@ opt_in_rules:
   - sorted_imports
 
 included:
-  - DiffFormatter
-  - DiffFormatterTests
+  - Sources
+  - Tests
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage

@@ -25,7 +25,7 @@ install:
 	@$(MAKE) config_template
 
 lint: ## Swiftlint
-	bundle exec fastlane swiftlint
+	swiftlint --strict
 
 setup: ## Setup project
 	./Scripts/setup

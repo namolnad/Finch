@@ -1,5 +1,5 @@
 APP_NAME=DiffFormatter
-BUILT_PRODUCT_PATH=$(PWD)/.build/x86_64-apple-macosx10.10/release/$(APP_NAME)
+BUILT_PRODUCT_PATH=$(PWD)/.build/release/$(APP_NAME)
 INSTALL_ROOT=$(HOME)
 INSTALL_PATH=/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 INSTALL_DIR=$(INSTALL_ROOT)$(INSTALL_PATH)
@@ -20,14 +20,16 @@ all: build
 ## Install DiffFormatter
 build: update_build_number
 	swift build --configuration release -Xswiftc -static-stdlib
-	@echo "\nCopying executable to $(BIN_DIR)"
-	mkdir -p $(BIN_DIR) && cp -L $(BUILT_PRODUCT_PATH) $(BIN_DIR)/$(APP_NAME)
 
 config_template:
 	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
 	cp $(CONFIG_TEMPLATE) $(INSTALL_DIR)/$(CONFIG_TEMPLATE)
 
-install: build symlink config_template
+copy_build: build
+	@echo "\nCopying executable to $(BIN_DIR)"
+	mkdir -p $(BIN_DIR) && cp -L $(BUILT_PRODUCT_PATH) $(BIN_DIR)/$(APP_NAME)
+
+install: build copy_build symlink config_template
  
 ## Swiftlint
 lint:

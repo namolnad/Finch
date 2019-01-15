@@ -3,6 +3,7 @@ BIN_DIR=$(INSTALL_DIR)/bin
 CONFIG_TEMPLATE=config.json.template
 INSTALL_DIR=$(HOME)/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
+VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
 
 SWIFT_BUILD_FLAGS=--configuration release -Xswiftc -static-stdlib
 APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME)
@@ -16,7 +17,7 @@ BUILD=swift build
 CP=cp
 MKDIR=mkdir -p
 
-.PHONY: all build build_with_disable_sandbox config_template install lint prefix_install publish symlink test update_build_number
+.PHONY: all build build_with_disable_sandbox config_template install lint prefix_install publish symlink test update_build_number update_version
 
 all: install
 
@@ -45,9 +46,11 @@ prefix_install:
 	@$(MAKE) config_template
 
 publish:
-	$(eval NEW_VERSION := $(filter-out $@, $(MAKECMDGOALS)))
+	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
 	git checkout master
 	git checkout -b releases/$(NEW_VERSION)
+	@NEW_VERSION=$(NEW_VERSION) $(MAKE) update_version
+	git add $(VERSION_FILE)
 	git commit -m --allow-empty "[version] Publish version $(NEW_VERSION)"
 	@$(MAKE) update_build_number
 	git add -f $(BUILD_NUMBER_FILE)
@@ -64,5 +67,18 @@ test: update_build_number
 	swift test 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
 
 update_build_number:
-	./Scripts/update-build-number
+ifndef NO_UPDATE_BUILD_NUMBER
+	@echo "let appBuildNumber: Int = $(shell git rev-list @ --count)" > $(BUILD_NUMBER_FILE)
+endif
 
+update_version:
+ifdef NEW_VERSION
+	$(eval VERSION_COMPONENTS:=$(subst ., ,$(NEW_VERSION)))
+	$(eval MAJOR:=$(word 1,$(VERSION_COMPONENTS)))
+	$(eval MINOR:=$(word 2,$(VERSION_COMPONENTS)))
+	$(eval PATCH:=$(word 3,$(VERSION_COMPONENTS)))
+	@echo "import $(APP_NAME)Core\n\nlet appVersion: Version = .init(major: $(MAJOR), minor: $(MINOR), patch: $(PATCH))" > $(VERSION_FILE)
+endif
+
+%:
+	@:

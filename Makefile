@@ -11,6 +11,9 @@ ZSH_COMMAND := ZDOTDIR='/var/empty' zsh -o NO_GLOBAL_RCS -c
 # RM_SAFELY · `rm -rf` ensuring first and only parameter is non-null, contains more than whitespace, non-root if resolving absolutely.
 RM_SAFELY := $(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && noglob rm -rf $${1:A}' --
 
+CP=cp
+MKDIR=mkdir -p
+
 .PHONY: all build install config_template symlink lint setup test
 
 all: install
@@ -21,17 +24,22 @@ build: update_build_number
 
 config_template:
 	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
-	cp Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/$(CONFIG_TEMPLATE)
+	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/$(CONFIG_TEMPLATE)
 
 copy_build: build
 	@echo "\nCopying executable to $(BIN_DIR)"
-	mkdir -p $(BIN_DIR) && cp -L $(BUILT_PRODUCT_PATH) $(BIN_DIR)/$(APP_NAME)
+	$(MKDIR) $(BIN_DIR) && $(CP) -L $(BUILT_PRODUCT_PATH) $(BIN_DIR)/$(APP_NAME)
 
 install: build copy_build symlink config_template
- 
+
 ## Swiftlint
 lint:
 	swiftlint --strict
+
+## Install command for prefixes, like Homebrew
+prefix_install: build
+	$(MKDIR) "$(PREFIX)/bin"
+	$(CP) -L -f "$(BUILD_PRODUCT_PATH)" "$(PREFIX)/bin/"
 
 ## Setup project
 setup:

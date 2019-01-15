@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+APP_NAME=DiffFormatter
+BUILD_NUMBER_FILE=$(dirname $0)/../Sources/$APP_NAME/App/BuildNumber.swift
+
+## Create build number file if it does not exist
+if [ ! -f $BUILD_NUMBER_FILE ]; then
+    echo "let appBuildNumber: Int = $(git rev-list @ --count)" > $BUILD_NUMBER_FILE
+fi

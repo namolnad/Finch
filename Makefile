@@ -14,12 +14,12 @@ RM_SAFELY := $(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A}
 CP=cp
 MKDIR=mkdir -p
 
-.PHONY: all build config_template copy_build install lint prefix_install setup symlink test update_build_number
+.PHONY: all build config_template copy_build install lint prefix_install setup symlink test generate_build_number
 
 all: install
 
 ## Install DiffFormatter
-build: update_build_number
+build: generate_build_number
 	swift build $(SWIFT_BUILD_FLAGS)
 
 config_template:
@@ -52,10 +52,10 @@ symlink: build
 	ln -fs $(BIN_DIR)/$(APP_NAME) /usr/local/bin/
 
 ## Run tests
-test: update_build_number
+test: generate_build_number
 	@$(RM_SAFELY) ./.build/debug/DiffFormatterPackageTests.xctest
 	swift test 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
 
-update_build_number:
-	./Scripts/update-build-number
+generate_build_number:
+	./Scripts/generate-build-number
 

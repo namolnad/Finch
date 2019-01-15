@@ -2,6 +2,7 @@ APP_NAME=DiffFormatter
 BIN_DIR=$(INSTALL_DIR)/bin
 CONFIG_TEMPLATE=config.json.template
 INSTALL_DIR=$(HOME)/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
+BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
 
 SWIFT_BUILD_FLAGS=--configuration release -Xswiftc -static-stdlib
 APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME)
@@ -15,7 +16,7 @@ BUILD=swift build
 CP=cp
 MKDIR=mkdir -p
 
-.PHONY: all build build_with_disable_sandbox config_template install lint prefix_install symlink test update_build_number
+.PHONY: all build build_with_disable_sandbox config_template install lint prefix_install publish symlink test update_build_number
 
 all: install
 
@@ -42,12 +43,23 @@ prefix_install: build_with_disable_sandbox
 	install "$(APP_EXECUTABLE)" "$(PREFIX)/bin/"
 	@$(MAKE) config_template
 
+publish:
+	$(eval NEW_VERSION := $(filter-out $@, $(MAKECMDGOALS)))
+	git checkout master
+	git checkout -b releases/$(NEW_VERSION)
+	git commit -m --allow-empty "[version] Publish version $(NEW_VERSION)"
+	@$(MAKE) update_build_number
+	git add -f $(BUILD_NUMBER_FILE)
+	git commit --amend --no-edit
+	git tag $(NEW_VERSION)
+	git push origin $(NEW_VERSION)
+
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
 	ln -fs $(BIN_DIR)/$(APP_NAME) /usr/local/bin/
 
 test: update_build_number
-	@$(RM_SAFELY) ./.build/debug/DiffFormatterPackageTests.xctest
+	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest
 	swift test 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
 
 update_build_number:

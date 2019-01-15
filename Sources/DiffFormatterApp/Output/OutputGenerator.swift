@@ -51,7 +51,7 @@ extension OutputGenerator {
 
         self.version = version
         self.releaseManager = releaseManager
-        self.sections = sections.filter { !$0.info.excluded }
+        self.sections = sections.filter { !$0.info.excluded && !$0.linesComponents.isEmpty }
         self.footer = configuration.footer
         self.header = configuration.header
         self.contributorHandlePrefix = configuration.contributorHandlePrefix

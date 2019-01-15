@@ -1,10 +1,10 @@
 APP_NAME=DiffFormatter
-BUILT_PRODUCT_PATH=$(PWD)/.build/release/$(APP_NAME)
-INSTALL_ROOT=$(HOME)
-INSTALL_PATH=/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
-INSTALL_DIR=$(INSTALL_ROOT)$(INSTALL_PATH)
 BIN_DIR=$(INSTALL_DIR)/bin
 CONFIG_TEMPLATE=config.json.template
+INSTALL_DIR=$(HOME)/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
+
+SWIFT_BUILD_FLAGS=--configuration release -Xswiftc -static-stdlib
+APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME)
 
 # ZSH_COMMAND · run single command in `zsh` shell, ignoring most `zsh` startup files.
 ZSH_COMMAND := ZDOTDIR='/var/empty' zsh -o NO_GLOBAL_RCS -c
@@ -14,13 +14,13 @@ RM_SAFELY := $(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A}
 CP=cp
 MKDIR=mkdir -p
 
-.PHONY: all build install config_template symlink lint setup test
+.PHONY: all build config_template copy_build install lint prefix_install setup symlink test update_build_number
 
 all: install
 
 ## Install DiffFormatter
 build: update_build_number
-	swift build --configuration release -Xswiftc -static-stdlib
+	swift build $(SWIFT_BUILD_FLAGS)
 
 config_template:
 	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
@@ -28,7 +28,7 @@ config_template:
 
 copy_build: build
 	@echo "\nCopying executable to $(BIN_DIR)"
-	$(MKDIR) $(BIN_DIR) && $(CP) -L $(BUILT_PRODUCT_PATH) $(BIN_DIR)/$(APP_NAME)
+	$(MKDIR) $(BIN_DIR) && $(CP) -L $(APP_EXECUTABLE) $(BIN_DIR)/
 
 install: build copy_build symlink config_template
 
@@ -39,7 +39,7 @@ lint:
 ## Install command for prefixes, like Homebrew
 prefix_install: build
 	$(MKDIR) "$(PREFIX)/bin"
-	$(CP) -L -f "$(BUILD_PRODUCT_PATH)" "$(PREFIX)/bin/"
+	$(CP) -L -f "$(APP_EXECUTABLE)" "$(PREFIX)/bin/"
 
 ## Setup project
 setup:
@@ -47,7 +47,7 @@ setup:
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
-	ln -fs $(BIN_DIR)/$(APP_NAME) /usr/local/bin/$(APP_NAME)
+	ln -fs $(BIN_DIR)/$(APP_NAME) /usr/local/bin/
 
 ## Run tests
 test: update_build_number

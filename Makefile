@@ -7,55 +7,49 @@ SWIFT_BUILD_FLAGS=--configuration release -Xswiftc -static-stdlib
 APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME)
 
 # ZSH_COMMAND · run single command in `zsh` shell, ignoring most `zsh` startup files.
-ZSH_COMMAND := ZDOTDIR='/var/empty' zsh -o NO_GLOBAL_RCS -c
+ZSH_COMMAND:=ZDOTDIR='/var/empty' zsh -o NO_GLOBAL_RCS -c
 # RM_SAFELY · `rm -rf` ensuring first and only parameter is non-null, contains more than whitespace, non-root if resolving absolutely.
-RM_SAFELY := $(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && noglob rm -rf $${1:A}' --
+RM_SAFELY:=$(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && noglob rm -rf $${1:A}' --
 
+BUILD=swift build
 CP=cp
 MKDIR=mkdir -p
 
-.PHONY: all build config_template copy_build install lint prefix_install setup symlink test generate_build_number
+.PHONY: all build build_with_disable_sandbox config_template install lint prefix_install symlink test update_build_number
 
 all: install
 
-## Install DiffFormatter
-build: generate_build_number
-	swift build $(SWIFT_BUILD_FLAGS)
+build: update_build_number
+	$(BUILD) $(SWIFT_BUILD_FLAGS)
+
+build_with_disable_sandbox: update_build_number
+	$(BUILD) --disable-sandbox $(SWIFT_BUILD_FLAGS)
 
 config_template:
 	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
 	$(MKDIR) $(INSTALL_DIR)
 	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/
 
-copy_build: build
-	@echo "\nCopying executable to $(BIN_DIR)"
-	$(MKDIR) $(BIN_DIR) && $(CP) -L $(APP_EXECUTABLE) $(BIN_DIR)/
+install: build symlink config_template
+	install -d $(BIN_DIR)
+	install $(APP_EXECUTABLE) $(BIN_DIR)/
 
-install: build copy_build symlink config_template
-
-## Swiftlint
 lint:
 	swiftlint --strict
 
-## Install command for prefixes, like Homebrew
-prefix_install: build
-	$(MKDIR) "$(PREFIX)/bin"
-	$(CP) -L -f "$(APP_EXECUTABLE)" "$(PREFIX)/bin/"
+prefix_install: build_with_disable_sandbox
+	install -d "$(PREFIX)/bin"
+	install "$(APP_EXECUTABLE)" "$(PREFIX)/bin/"
 	@$(MAKE) config_template
-
-## Setup project
-setup:
-	./Scripts/setup
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
 	ln -fs $(BIN_DIR)/$(APP_NAME) /usr/local/bin/
 
-## Run tests
-test: generate_build_number
+test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/DiffFormatterPackageTests.xctest
 	swift test 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
 
-generate_build_number:
-	./Scripts/generate-build-number
+update_build_number:
+	./Scripts/update-build-number
 

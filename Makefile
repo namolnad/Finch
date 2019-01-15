@@ -48,15 +48,17 @@ prefix_install:
 publish:
 	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
 	git checkout master
-	git checkout -b releases/$(NEW_VERSION)
+	git checkout -B releases/$(NEW_VERSION)
 	@NEW_VERSION=$(NEW_VERSION) $(MAKE) update_version
 	git add $(VERSION_FILE)
-	git commit -m --allow-empty "[version] Publish version $(NEW_VERSION)"
+	git commit --allow-empty -m "[version] Publish version $(NEW_VERSION)"
 	@$(MAKE) update_build_number
+	cat $(BUILD_NUMBER_FILE)
 	git add -f $(BUILD_NUMBER_FILE)
 	git commit --amend --no-edit
 	git tag $(NEW_VERSION)
 	git push origin $(NEW_VERSION)
+	git checkout master
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"

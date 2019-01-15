@@ -24,7 +24,8 @@ build: update_build_number
 
 config_template:
 	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
-	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/$(CONFIG_TEMPLATE)
+	$(MKDIR) $(INSTALL_DIR)
+	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/
 
 copy_build: build
 	@echo "\nCopying executable to $(BIN_DIR)"
@@ -40,6 +41,7 @@ lint:
 prefix_install: build
 	$(MKDIR) "$(PREFIX)/bin"
 	$(CP) -L -f "$(APP_EXECUTABLE)" "$(PREFIX)/bin/"
+	@$(MAKE) config_template
 
 ## Setup project
 setup:

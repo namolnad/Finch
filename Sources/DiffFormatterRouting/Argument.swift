@@ -11,7 +11,7 @@ import Foundation
 public enum Argument: Equatable {
     public enum ArgumentType: String {
         case buildNumber =          "--build-number"
-        case gitDiff =              "--git-diff"
+        case gitDiff =              "--git-log"
         case help =                 "--help"
         case helpAbbreviated =      "-h"
         case noFetch =              "--no-fetch"

@@ -91,9 +91,9 @@ extension ArgumentRouter {
             git.fetch()
         }
 
-        log.info("Generating diff")
+        log.info("Generating log")
 
-        return git.diff(oldVersion: versions.old, newVersion: versions.new)
+        return git.log(oldVersion: versions.old, newVersion: versions.new)
     }
 
     private static func projectDir(context: RoutingContext, scheme: ArgumentScheme) -> String {

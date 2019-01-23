@@ -15,7 +15,7 @@ struct Git {
 }
 
 extension Git {
-    func diff(oldVersion: String, newVersion: String) -> String {
+    func log(oldVersion: String, newVersion: String) -> String {
         guard !isTest else {
             return ""
         }

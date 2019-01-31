@@ -14,8 +14,9 @@ final class ConfigurationTests: XCTestCase {
     func testConfigurator() {
         assertSnapshot(
             matching: Configurator(
-                processInfo: .mock,
-                argScheme: .mock,
+                options: .blank,
+                meta: .mock,
+                environment: [:],
                 fileManager: .mock
             ).configuration,
             as: .dump

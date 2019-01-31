@@ -6,12 +6,12 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
+import DiffFormatterApp
 @testable import DiffFormatterCore
-import DiffFormatterRouting
 
 extension Configuration {
     static let mock: Configuration = {
-        var config: Configuration = .default(currentDirectory: "")
+        var config: Configuration = .default(projectDir: "")
         config.update(with: TestHelper.model(for: "default_config"))
 
         return config
@@ -32,15 +32,11 @@ extension Configuration {
     }()
 }
 
-extension ArgumentScheme {
-    static let mock: ArgumentScheme = .nonDiffable(args: [])
-}
-
-extension App {
-    static let mock: App = .init(
+extension App.Meta {
+    static let mock: App.Meta = .init(
         buildNumber: 12345,
         name: "DiffFormatter",
-        version: .init([1, 0, 1])
+        version: .init(1, 0, 1)
     )
 }
 

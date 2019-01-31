@@ -13,7 +13,6 @@
       ▿ Contributor
         - email: "elvis1935+still-alive@theking.com"
         - handle: "Elvis.Presley"
-  - currentDirectory: "current"
   ▿ delimiterConfig: DelimiterConfiguration
     ▿ input: DelimiterPair
       - left: "["
@@ -30,6 +29,7 @@
     - executablePath: Optional<String>.none
     - repoBaseUrl: "https://github.com/citadel-of-ricks/C-137"
   - header: Optional<String>.none
+  - projectDir: "current"
   ▿ sectionInfos: 3 elements
     ▿ SectionInfo
       - capitalizesMessage: false

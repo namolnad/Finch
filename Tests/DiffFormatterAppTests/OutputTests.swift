@@ -15,7 +15,7 @@ final class OutputTests: XCTestCase {
     func testDefaultOutput() {
         let outputGenerator: OutputGenerator = .init(
             configuration: .mock,
-            rawDiff: defaultInputMock,
+            rawGitLog: defaultInputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
         )
@@ -29,7 +29,7 @@ final class OutputTests: XCTestCase {
     func testCherryPickedSectionOutput() {
         let outputGenerator: OutputGenerator = .init(
             configuration: .mock,
-            rawDiff: cherryPickedInputMock,
+            rawGitLog: cherryPickedInputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
         )
@@ -43,7 +43,7 @@ final class OutputTests: XCTestCase {
     func testExcludedSectionOutput() {
         let outputGenerator: OutputGenerator = .init(
             configuration: .mockExcludedSection,
-            rawDiff: defaultInputMock,
+            rawGitLog: defaultInputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
         )
@@ -57,16 +57,16 @@ final class OutputTests: XCTestCase {
     func testCustomDelimiterOutput() {
         let customPath = "custom_delimiter_config"
 
-        let processInfoMock = ProcessInfoMock(arguments: [], environment: ["DIFFFORMATTER_CONFIG": customPath])
         let fileManagerMock = FileManagerMock(customConfigPath: customPath)
 
         let outputGenerator: OutputGenerator = .init(
             configuration: Configurator(
-                processInfo: processInfoMock,
-                argScheme: .mock,
+                options: .blank,
+                meta: .mock,
+                environment: ["DIFFFORMATTER_CONFIG": customPath],
                 fileManager: fileManagerMock
                 ).configuration,
-            rawDiff: defaultInputMock,
+            rawGitLog: defaultInputMock,
             version: "6.13.0",
             releaseManager: Configuration.mock.contributors.first
         )

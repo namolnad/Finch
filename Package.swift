@@ -15,10 +15,10 @@ let package = Package(
     targets: [
         .target(
             name: "DiffFormatter",
-            dependencies: ["DiffFormatterApp", "DiffFormatterUtilities", "SwiftPM"]),
+            dependencies: ["DiffFormatterApp"]),
         .target(
             name: "DiffFormatterApp",
-            dependencies: ["DiffFormatterCore", "DiffFormatterUtilities", "SwiftPM"]),
+            dependencies: ["DiffFormatterCore","SwiftPM"]),
         .target(
             name: "DiffFormatterCore",
             dependencies: ["DiffFormatterUtilities"]),

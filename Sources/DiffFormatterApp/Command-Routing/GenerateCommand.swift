@@ -24,12 +24,15 @@ final class GenerateCommand: Command {
 
     private let binder: Binder = .init()
 
+    private let subparser: ArgumentParser
+
     init(meta: App.Meta, parser: ArgumentParser) {
-        bindOptions(
-            to: binder,
-            using: parser.add(subparser: name, overview: "Generates the changelog"),
-            meta: meta
+        self.subparser = parser.add(
+            subparser: name,
+            overview: "Generates the changelog"
         )
+
+        bindOptions(to: binder, meta: meta)
     }
 
     func run(with result: ParsingResult, app: App, env: Environment) throws {
@@ -40,8 +43,26 @@ final class GenerateCommand: Command {
         try ChangeLogRunner().run(with: options, app: app, env: env)
     }
 
+    @discardableResult
+    func bindingGlobalOptions(to binder: CommandRegistry.Binder) -> GenerateCommand {
+        binder.bind(option: subparser.add(
+            option: "--verbose",
+            shortName: "-v",
+            kind: Bool.self,
+            usage: "Run command with verbose output"
+        )) { $0.verbose = $1 }
+
+        binder.bind(option: subparser.add(
+            option: "--project-dir",
+            kind: PathArgument.self,
+            usage: "Path to project if command is run from separate directory"
+        )) { $0.projectDir = $1.path.asString }
+
+        return self
+    }
+
     // swiftlint:disable function_body_length line_length
-    private func bindOptions(to binder: Binder, using subparser: ArgumentParser, meta: App.Meta) {
+    private func bindOptions(to binder: Binder, meta: App.Meta) {
         binder.bind(positional: subparser.add(
             positional: "generate",
             kind: [Version].self,

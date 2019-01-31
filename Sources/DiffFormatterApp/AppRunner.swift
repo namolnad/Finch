@@ -17,7 +17,9 @@ public class AppRunner {
         self.meta = meta
         self.registry = .init(meta: meta)
 
-        registry.register { GenerateCommand(meta: meta, parser: $0) }
+        registry.register {
+            GenerateCommand(meta: meta, parser: $0).bindingGlobalOptions(to: $1)
+        }
     }
 
     public func run(arguments: [String]) throws {
@@ -46,7 +48,3 @@ public class AppRunner {
         }
     }
 }
-
-import func Darwin.fputs
-import var Darwin.stderr
-import Foundation

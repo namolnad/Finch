@@ -9,9 +9,9 @@
 import Foundation
 
 extension Sequence {
-    func firstMap<T>(_ transform: (Element) -> T?) -> T? {
+    func firstMap<T>(_ transform: (Element) throws -> T?) rethrows -> T? {
         for element in self {
-            if let transformed = transform(element) {
+            if let transformed = try transform(element) {
                 return transformed
             }
         }

@@ -22,7 +22,7 @@ public struct Configuration: Decodable {
 
     public private(set) var buildNumberCommandArgs: [String]?
     public private(set) var contributorsConfig: ContributorsConfiguration
-    public private(set) var currentDirectory: String = ""
+    public private(set) var projectDir: String = ""
     public private(set) var delimiterConfig: DelimiterConfiguration
     public private(set) var footer: String?
     public private(set) var formatTemplate: FormatTemplate?
@@ -169,14 +169,14 @@ extension Configuration {
 }
 
 extension Configuration {
-    public static func `default`(currentDirectory: String) -> Configuration {
+    public static func `default`(projectDir: String) -> Configuration {
         var config = Configuration(
             contributorsConfig: .default,
             sectionInfos: .default,
             delimiterConfig: .default,
             gitConfig: .default
         )
-        config.currentDirectory = currentDirectory
+        config.projectDir = projectDir
 
         return config
     }
@@ -192,6 +192,6 @@ extension Configuration {
             gitConfig.isBlank &&
             (header?.isEmpty == true) &&
             contributorsConfig.isBlank &&
-            currentDirectory.isEmpty
+            projectDir.isEmpty
     }
 }

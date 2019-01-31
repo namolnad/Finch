@@ -27,8 +27,7 @@ struct Configurator {
     // Paths for which the configurator should return the first valid configuration
     private let immediateReturnPaths: [String]
 
-    init(processInfo: ProcessInfo, argScheme: ArgumentScheme, fileManager: FileManager = .default) {
-        self.configResolver = .init(
+    init(options: App.Options, meta: App.Meta, environment: Environment, fileManager: FileManager = .default) {
         self.cascadingResolver = .init(
             fileManager: fileManager,
             pathComponent: "/.\(meta.name.lowercased())/config.json"
@@ -38,12 +37,14 @@ struct Configurator {
         self.immediateResolver = .init(fileManager: fileManager)
 
         let immediateReturnPaths = [
-            processInfo.environment["DIFFFORMATTER_CONFIG"]
+            environment["\(meta.name.uppercased())_CONFIG"]
         ]
 
         self.immediateReturnPaths = immediateReturnPaths
             .compactMap { $0 }
             .filter { !$0.isEmpty }
+
+        self.defaultConfig = .default(projectDir: options.projectDir ?? fileManager.currentDirectoryPath)
 
         let homeDirectoryPath: String
         if #available(OSX 10.12, *) {
@@ -58,9 +59,8 @@ struct Configurator {
         ]
 
         // Append project dir if passed in as argument
-        for case let .actionable(.projectDir, value) in argScheme.args {
+        if let value = options.projectDir {
             cascadingPaths.append(value)
-            break
         }
 
         self.cascadingPaths = cascadingPaths.filter { !$0.isEmpty }

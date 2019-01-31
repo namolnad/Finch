@@ -18,11 +18,11 @@ struct OutputGenerator {
 }
 
 extension OutputGenerator {
-    init(configuration: Configuration, rawDiff: String, version: String?, releaseManager: Contributor?) {
+    init(configuration: Configuration, rawGitLog: String, version: String?, releaseManager: Contributor?) {
         let transformerFactory = TransformerFactory(configuration: configuration)
 
         let linesComponents = type(of: self)
-            .filteredLines(input: rawDiff, using: transformerFactory.initialTransformers)
+            .filteredLines(input: rawGitLog, using: transformerFactory.initialTransformers)
             .compactMap { LineComponents(rawLine: $0, configuration: configuration) }
 
         var sections: [Section] = configuration

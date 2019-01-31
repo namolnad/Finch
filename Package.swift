@@ -9,25 +9,19 @@ let package = Package(
         .library(name: "DiffFormatterApp", targets: ["DiffFormatterApp"])
     ],
     dependencies: [
-        .package(url: "git@github.com/pointfreeco/swift-snapshot-testing", from: "1.1.0"),
+        .package(url: "git@github.com:pointfreeco/swift-snapshot-testing", from: "1.1.0"),
         .package(url: "git@github.com:apple/swift-package-manager.git", from: "0.3.0")
     ],
     targets: [
         .target(
             name: "DiffFormatter",
-            dependencies: ["DiffFormatterApp"]),
+            dependencies: ["DiffFormatterApp", "DiffFormatterUtilities", "SwiftPM"]),
         .target(
             name: "DiffFormatterApp",
-            dependencies: ["DiffFormatterCore", "DiffFormatterRouting", "DiffFormatterTelemetry", "DiffFormatterUtilities", "SwiftPM"]),
+            dependencies: ["DiffFormatterCore", "DiffFormatterUtilities", "SwiftPM"]),
         .target(
             name: "DiffFormatterCore",
             dependencies: ["DiffFormatterUtilities"]),
-        .target(
-            name: "DiffFormatterRouting",
-            dependencies: ["DiffFormatterCore", "DiffFormatterUtilities"]),
-        .target(
-            name: "DiffFormatterTelemetry",
-            dependencies: []),
         .target(
             name: "DiffFormatterUtilities",
             dependencies: []),

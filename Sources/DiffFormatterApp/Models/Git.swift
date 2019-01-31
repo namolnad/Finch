@@ -11,22 +11,21 @@ import DiffFormatterUtilities
 
 struct Git {
     let configuration: Configuration
-    let projectDir: String
 }
 
 extension Git {
-    func log(oldVersion: String, newVersion: String) -> String {
+    func log(oldVersion: Version, newVersion: Version) -> String {
         guard !isTest else {
             return ""
         }
 
         return shell(
             executablePath: gitExecutablePath,
-            arguments: gitDiffArguments(
-                oldVersion: oldVersion,
-                newVersion: newVersion
+            arguments: gitLogArguments(
+                oldVersion: oldVersion.description,
+                newVersion: newVersion.description
             ),
-            currentDirectoryPath: projectDir
+            currentDirectoryPath: configuration.projectDir
         ) ?? ""
     }
 
@@ -34,7 +33,7 @@ extension Git {
         _ = shell(
             executablePath: gitExecutablePath,
             arguments: ["fetch"],
-            currentDirectoryPath: projectDir
+            currentDirectoryPath: configuration.projectDir
         )
     }
 
@@ -45,7 +44,7 @@ extension Git {
         guard let path = shell(
             executablePath: "/bin/bash",
             arguments: ["-c", "which git"],
-            currentDirectoryPath: projectDir
+            currentDirectoryPath: configuration.projectDir
             ) else {
                 return ""
         }
@@ -53,7 +52,7 @@ extension Git {
         return path.trimmingCharacters(in: .newlines)
     }
 
-    private func gitDiffArguments(oldVersion: String, newVersion: String) -> [String] {
+    private func gitLogArguments(oldVersion: String, newVersion: String) -> [String] {
         return [
             "log",
             "--left-right",

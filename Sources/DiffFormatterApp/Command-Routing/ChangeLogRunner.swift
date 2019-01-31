@@ -61,7 +61,7 @@ struct ChangeLogRunner {
             return versionHeader
         }
 
-        return versionHeader.appending(" (\(buildNumber))")
+        return versionHeader + " (\(buildNumber))"
     }
 
     private func getBuildNumber(
@@ -80,8 +80,7 @@ struct ChangeLogRunner {
 
         let process: Process = .init(
             arguments: args,
-            environment: env,
-            redirectOutput: false
+            environment: env
         )
 
         try process.launch()

@@ -19,15 +19,18 @@ final class CommandRegistry {
     private let parser: ArgumentParser
 
     init(meta: App.Meta) {
+        // swiftlint:disable line_length
         self.parser = .init(
             usage: "generate <version1> <version2> [--option]...",
             overview: "\(meta.name) is a flexible tool for generating well-formatted changelogs between application versions",
             seeAlso: "Visit https://github.com/namolnad/\(meta.name) for more information"
         )
+        // swiftlint:enable line_length
 
         bindOptions(to: binder, using: parser, meta: meta)
     }
 
+    // swiftlint:disable large_tuple
     func parse(arguments: [String]) throws -> (String?, App.Options, ParsingResult) {
         let result = try parser.parse(arguments)
 
@@ -35,8 +38,9 @@ final class CommandRegistry {
 
         try binder.fill(parseResult: result, into: &options)
 
-        return (result.subparser(parser), options , result)
+        return (result.subparser(parser), options, result)
     }
+    // swiftlint:enable large_tuple
 
     func printUsage() {
         parser.printUsage(on: stdoutStream)

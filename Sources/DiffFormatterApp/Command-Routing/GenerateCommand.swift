@@ -40,7 +40,7 @@ final class GenerateCommand: Command {
         try ChangeLogRunner().run(with: options, app: app, env: env)
     }
 
-
+    // swiftlint:disable function_body_length line_length
     private func bindOptions(to binder: Binder, using subparser: ArgumentParser, meta: App.Meta) {
         binder.bind(positional: subparser.add(
             positional: "generate",
@@ -48,7 +48,10 @@ final class GenerateCommand: Command {
             usage: "<OLD_VERSION> <NEW_VERSION> must be the first arguments to this command"
         )) { options, versions in
             guard versions.count == 2, let firstVersion = versions.first, let secondVersion = versions.last else {
-                throw ArgumentParserError.invalidValue(argument: "versions", error: .custom("Must receive 2 versions to properly generate changelog"))
+                throw ArgumentParserError.invalidValue(
+                    argument: "versions",
+                    error: .custom("Must receive 2 versions to properly generate changelog")
+                )
             }
             if firstVersion < secondVersion {
                 options.versions = (old: firstVersion, new: secondVersion)
@@ -93,6 +96,7 @@ final class GenerateCommand: Command {
             usage: "Copy output to pasteboard in addition to stdout"
         )) { $0.toPasteBoard = $1 }
     }
+    // swiftlint:enable function_body_length line_length
 }
 
 extension GenerateCommand.Options {

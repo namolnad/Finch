@@ -64,7 +64,11 @@ struct ChangeLogRunner {
         return versionHeader.appending(" (\(buildNumber))")
     }
 
-    private func getBuildNumber(for newVersion: Version, projectDir: String, using args: [String], environment: Environment) throws -> String? {
+    private func getBuildNumber(
+        for newVersion: Version,
+        projectDir: String,
+        using args: [String],
+        environment: Environment) throws -> String? {
         guard !args.isEmpty else {
             return nil
         }

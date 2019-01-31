@@ -79,7 +79,7 @@ ifdef NEW_VERSION
 	$(eval MAJOR:=$(word 1,$(VERSION_COMPONENTS)))
 	$(eval MINOR:=$(word 2,$(VERSION_COMPONENTS)))
 	$(eval PATCH:=$(word 3,$(VERSION_COMPONENTS)))
-	@echo "import $(APP_NAME)Core\n\nlet appVersion: Version = .init(major: $(MAJOR), minor: $(MINOR), patch: $(PATCH))" > $(VERSION_FILE)
+	@echo "import struct Utility.Version\n\nlet appVersion: Version = .init($(MAJOR), $(MINOR), $(PATCH))" > $(VERSION_FILE)
 endif
 
 %:

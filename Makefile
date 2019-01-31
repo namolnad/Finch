@@ -5,7 +5,7 @@ INSTALL_DIR=$(HOME)/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
 
-SWIFT_BUILD_FLAGS=--configuration release -Xswiftc -static-stdlib
+SWIFT_BUILD_FLAGS=--configuration release
 APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME)
 
 # ZSH_COMMAND · run single command in `zsh` shell, ignoring most `zsh` startup files.

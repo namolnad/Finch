@@ -37,7 +37,7 @@ install: build symlink config_template
 	install $(APP_EXECUTABLE) $(BIN_DIR)/
 
 lint:
-	swiftlint --strict
+	swift run swiftlint --strict
 
 prefix_install:
 	@NO_UPDATE_BUILD_NUMBER=1 $(MAKE) build_with_disable_sandbox

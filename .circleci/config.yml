@@ -5,12 +5,29 @@
 version: 2
 jobs:
   swiftlint:
-    docker:
-      - image: dantoml/swiftlint:latest
+    macos:
+      xcode: "10.1.0"
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
+            - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}
+            - v{{ .Environment.CACHE_VERSION }}-build-cache
       - run: mkdir -p build/reports/lint
-      - run: swiftlint lint --strict --reporter junit | tee build/reports/lint/junit.xml
+      - run:
+          command: |-
+            executable=$(swift build --show-bin-path)/swiftlint
+            if ! [ $(command -v $executable) ]; then
+              executable=swift run swiftlint
+            fi
+
+            $executable lint --strict --reporter junit | tee build/reports/lint/junit.xml
+          name: Lint
+      - save_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
+          paths:
+            - $(swift build --show-bin-path)
       - store_test_results:
           path: build/reports/lint
   test:

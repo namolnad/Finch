@@ -10,7 +10,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "git@github.com:pointfreeco/swift-snapshot-testing", from: "1.1.0"),
-        .package(url: "git@github.com:apple/swift-package-manager.git", from: "0.3.0")
+        .package(url: "git@github.com:apple/swift-package-manager.git", from: "0.3.0"),
+        .package(url: "git@github.com:realm/SwiftLint.git", from: "0.30.1")
     ],
     targets: [
         .target(

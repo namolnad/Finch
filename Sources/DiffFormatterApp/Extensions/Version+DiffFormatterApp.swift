@@ -1,6 +1,6 @@
 //
 //  Version+DiffFormatterApp.swift
-//  Basic
+//  DiffFormatterApp
 //
 //  Created by Dan Loman on 1/29/19.
 //

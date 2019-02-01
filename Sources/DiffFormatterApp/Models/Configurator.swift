@@ -29,7 +29,12 @@ struct Configurator {
 
     private let output: OutputType
 
-    init(options: App.Options, meta: App.Meta, environment: Environment, fileManager: FileManager = .default, output: OutputType = Output.instance) {
+    init(
+        options: App.Options,
+        meta: App.Meta,
+        environment: Environment,
+        fileManager: FileManager = .default,
+        output: OutputType = Output.instance) {
         self.cascadingResolver = .init(
             fileManager: fileManager,
             pathComponent: "/.\(meta.name.lowercased())/config.json"

@@ -6,23 +6,29 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
+import class Basic.Process
 import DiffFormatterCore
 
 struct OutputGenerator {
+    typealias Options = GenerateCommand.Options
+
     private let version: String?
     private let releaseManager: Contributor?
     private let sections: [Section]
     private let footer: String?
     private let header: String?
     private let contributorHandlePrefix: String
-}
 
-extension OutputGenerator {
-    init(configuration: Configuration, rawDiff: String, version: String?, releaseManager: Contributor?) {
+    init(options: Options, app: App, env: Environment) throws {
+        let configuration = app.configuration
+        let rawGitLog: String = type(of: self).log(options: options, app: app)
+        let version: String? = try type(of: self).versionHeader(options: options, app: app, env: env)
+        let releaseManager: Contributor? = type(of: self).releaseManager(options: options, configuration: configuration)
+
         let transformerFactory = TransformerFactory(configuration: configuration)
 
         let linesComponents = type(of: self)
-            .filteredLines(input: rawDiff, using: transformerFactory.initialTransformers)
+            .filteredLines(input: rawGitLog, using: transformerFactory.initialTransformers)
             .compactMap { LineComponents(rawLine: $0, configuration: configuration) }
 
         var sections: [Section] = configuration
@@ -113,5 +119,85 @@ extension OutputGenerator {
          - \(contributorHandlePrefix)\(releaseManager.handle)
 
         """
+    }
+
+    private static func versionHeader(options: Options, app: App, env: Environment) throws -> String? {
+        guard !options.noShowVersion else {
+            return nil
+        }
+
+        let versionHeader: String = options.versions.new.description
+
+        if let buildNumber = options.buildNumber {
+            return versionHeader + " (\(buildNumber))"
+        }
+
+        guard
+            let args = app.configuration.buildNumberCommandArgs,
+            !args.isEmpty,
+            let buildNumber = try getBuildNumber(
+                for: options.versions.new,
+                projectDir: app.configuration.projectDir,
+                using: args,
+                environment: env
+                )?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+                    return versionHeader
+        }
+
+        return versionHeader + " (\(buildNumber))"
+    }
+
+    private static func getBuildNumber(
+        for newVersion: Version,
+        projectDir: String,
+        using args: [String],
+        environment: Environment) throws -> String? {
+        guard !args.isEmpty else {
+            return nil
+        }
+
+        let env: Environment = environment.merging([
+            "NEW_VERSION": "\(newVersion)",
+            "PROJECT_DIR": "\(projectDir)"
+        ]) { $1 }
+
+        let process: Process = .init(
+            arguments: args,
+            environment: env
+        )
+
+        try process.launch()
+        try process.waitUntilExit()
+
+        if let result = process.result {
+            return try result.utf8Output()
+        } else {
+            return nil
+        }
+    }
+
+    private static func log(options: Options, app: App) -> String {
+        if let log = options.gitLog {
+            return log
+        }
+
+        let git = Git(configuration: app.configuration)
+
+        if !options.noFetch {
+            app.print("Fetching origin", kind: .info)
+            git.fetch()
+        }
+
+        app.print("Generating log", kind: .info)
+
+        return git.log(oldVersion: options.versions.old, newVersion: options.versions.new)
+    }
+
+    private static func releaseManager(options: Options, configuration: Configuration) -> Contributor? {
+        guard let email = options.releaseManager else {
+            return nil
+        }
+
+        return configuration.contributors.first { $0.email == email }
     }
 }

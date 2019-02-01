@@ -1,3 +1,3 @@
-import DiffFormatterCore
+import struct Utility.Version
 
-let appVersion: Version = .init(major: 0, minor: 0, patch: 17)
+let appVersion: Version = .init(0, 0, 17)

@@ -13,11 +13,10 @@ import XCTest
 
 final class OutputTests: XCTestCase {
     func testDefaultOutput() {
-        let outputGenerator: OutputGenerator = .init(
-            configuration: .mock,
-            rawDiff: defaultInputMock,
-            version: "6.13.0",
-            releaseManager: Configuration.mock.contributors.first
+        let outputGenerator: OutputGenerator = try! .init(
+            options: options(gitLog: defaultInputMock),
+            app: .mock(),
+            env: [:]
         )
 
         assertSnapshot(
@@ -27,11 +26,10 @@ final class OutputTests: XCTestCase {
     }
 
     func testCherryPickedSectionOutput() {
-        let outputGenerator: OutputGenerator = .init(
-            configuration: .mock,
-            rawDiff: cherryPickedInputMock,
-            version: "6.13.0",
-            releaseManager: Configuration.mock.contributors.first
+        let outputGenerator: OutputGenerator = try! .init(
+            options: options(gitLog: cherryPickedInputMock),
+            app: .mock(),
+            env: [:]
         )
 
         assertSnapshot(
@@ -41,11 +39,10 @@ final class OutputTests: XCTestCase {
     }
 
     func testExcludedSectionOutput() {
-        let outputGenerator: OutputGenerator = .init(
-            configuration: .mockExcludedSection,
-            rawDiff: defaultInputMock,
-            version: "6.13.0",
-            releaseManager: Configuration.mock.contributors.first
+        let outputGenerator: OutputGenerator = try! .init(
+            options: options(gitLog: cherryPickedInputMock),
+            app: .mock(configuration: .mockExcludedSection),
+            env: [:]
         )
 
         assertSnapshot(
@@ -57,18 +54,19 @@ final class OutputTests: XCTestCase {
     func testCustomDelimiterOutput() {
         let customPath = "custom_delimiter_config"
 
-        let processInfoMock = ProcessInfoMock(arguments: [], environment: ["DIFFFORMATTER_CONFIG": customPath])
         let fileManagerMock = FileManagerMock(customConfigPath: customPath)
 
-        let outputGenerator: OutputGenerator = .init(
-            configuration: Configurator(
-                processInfo: processInfoMock,
-                argScheme: .mock,
-                fileManager: fileManagerMock
-                ).configuration,
-            rawDiff: defaultInputMock,
-            version: "6.13.0",
-            releaseManager: Configuration.mock.contributors.first
+        let configuration = Configurator(
+            options: .blank,
+            meta: .mock,
+            environment: ["DIFFFORMATTER_CONFIG": customPath],
+            fileManager: fileManagerMock
+        ).configuration
+
+        let outputGenerator: OutputGenerator = try! .init(
+            options: options(gitLog: defaultInputMock),
+            app: .mock(configuration: configuration),
+            env: [:]
         )
 
         assertSnapshot(
@@ -98,6 +96,28 @@ final class OutputTests: XCTestCase {
                 configuration: .mock
             ),
             as: .dump
+        )
+    }
+
+    private func options(gitLog: String) -> GenerateCommand.Options {
+        return .init(
+            versions: (.init(0, 0, 1), .init(6, 13, 0)),
+            buildNumber: nil,
+            gitLog: gitLog,
+            noFetch: true,
+            noShowVersion: false,
+            releaseManager: Configuration.mock.contributors.first?.email,
+            toPasteBoard: false
+        )
+    }
+}
+
+extension App {
+    static func mock(configuration: Configuration = .mock) -> App {
+        return .init(
+            configuration: configuration,
+            meta: .mock,
+            options: .mock
         )
     }
 }

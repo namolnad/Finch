@@ -7,11 +7,24 @@
 //
 
 import DiffFormatterApp
-import DiffFormatterCore
+import DiffFormatterUtilities
 import Foundation
 
-App(
+let processInfo: ProcessInfo = .processInfo
+
+let meta: App.Meta = .init(
     buildNumber: appBuildNumber,
     name: appName,
     version: appVersion
-).run(processInfo: ProcessInfo.processInfo)
+)
+
+let runner = AppRunner(
+    environment: processInfo.environment,
+    meta: meta
+)
+
+do {
+    try runner.run(arguments: processInfo.arguments)
+} catch {
+    Output.instance.print("\(error)", kind: .error)
+}

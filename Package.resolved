@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "SwiftPM",
+        "repositoryURL": "git@github.com:apple/swift-package-manager.git",
+        "state": {
+          "branch": null,
+          "revision": "235aacc514cb81a6881364b0fedcb3dd083228f3",
+          "version": "0.3.0"
+        }
+      },
+      {
         "package": "SnapshotTesting",
         "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing",
         "state": {

@@ -20,24 +20,16 @@ public final class FileResolver<FileType: Decodable> {
 
     private let pathComponent: String
 
-    private let logError: (String) -> Void
-
-    public init(fileManager: FileManager, pathComponent: String, logError: @escaping (String) -> Void) {
+    public init(fileManager: FileManager, pathComponent: String? = nil) {
         self.fileManager = fileManager
-        self.pathComponent = pathComponent
-        self.logError = logError
+        self.pathComponent = pathComponent ?? ""
     }
 
-    public func resolve(path: String) -> FileType? {
+    public func resolve(path: String) throws -> FileType? {
         guard case let filePath = path + pathComponent, let data = fileManager.contents(atPath: filePath) else {
             return nil
         }
 
-        do {
-            return try decoder.decode(FileType.self, from: data)
-        } catch {
-            logError("Error parsing file of type \(FileType.self) at path: \(filePath). \n\nError details: \n\(error)")
-            return nil
-        }
+        return try decoder.decode(FileType.self, from: data)
     }
 }

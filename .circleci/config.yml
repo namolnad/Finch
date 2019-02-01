@@ -15,9 +15,10 @@ jobs:
             - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}
             - v{{ .Environment.CACHE_VERSION }}-build-cache
           name: Restore swiftlint cache
-      - run: mkdir -p build/reports/lint
       - run:
           command: |-
+            mkdir -p build/reports/lint
+
             executable=.build/debug/swiftlint
             if ! [ $(command -v $executable) ]; then
               executable='swift run swiftlint'

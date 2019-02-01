@@ -6,7 +6,7 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import DiffFormatterApp
+@testable import DiffFormatterApp
 @testable import DiffFormatterCore
 
 extension Configuration {
@@ -37,6 +37,14 @@ extension App.Meta {
         buildNumber: 12345,
         name: "DiffFormatter",
         version: .init(1, 0, 1)
+    )
+}
+
+extension App.Options {
+    static let mock: App.Options = .init(
+        projectDir: "home/dir",
+        shouldPrintVersion: false,
+        verbose: false
     )
 }
 

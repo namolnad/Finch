@@ -5,6 +5,7 @@
 //  Created by Dan Loman on 1/29/19.
 //
 
+import DiffFormatterUtilities
 import Utility
 
 final class GenerateCommand: Command {
@@ -40,7 +41,20 @@ final class GenerateCommand: Command {
 
         try binder.fill(parseResult: result, into: &options)
 
-        try ChangeLogRunner().run(with: options, app: app, env: env)
+        let outputGenerator: OutputGenerator = try .init(
+            options: options,
+            app: app,
+            env: env
+        )
+
+        let result = outputGenerator.generateOutput()
+
+        if options.toPasteBoard {
+            app.print("Copying output to pasteboard", kind: .info)
+            pbCopy(text: result)
+        }
+
+        app.print(result)
     }
 
     @discardableResult

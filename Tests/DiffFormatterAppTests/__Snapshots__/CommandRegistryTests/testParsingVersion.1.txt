@@ -1,0 +1,6 @@
+▿ (2 elements)
+  - .0: Optional<String>.none
+  ▿ .1: Options
+    - projectDir: Optional<String>.none
+    - shouldPrintVersion: true
+    - verbose: false

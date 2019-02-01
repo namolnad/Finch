@@ -7,14 +7,18 @@
 
 import Foundation
 
-public struct Output {
+public protocol OutputType {
+    func print(_ value: String, kind: Output.Kind, verbose: Bool)
+}
+
+public struct Output: OutputType {
     public enum Kind {
         case `default`
         case error
         case info
     }
 
-    private static let instance: Output = .init()
+    public static let instance: Output = .init()
 
     private let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -28,7 +32,7 @@ public struct Output {
 
     private init() {}
 
-    public static func print(_ value: String, kind: Kind, verbose: Bool = false) {
+    public func print(_ value: String, kind: Kind, verbose: Bool = false) {
         switch kind {
         case .default:
             Swift.print(value)
@@ -41,7 +45,7 @@ public struct Output {
                 return
             }
 
-            Swift.print("[\(instance.timeStamp)]: \(value)")
+            Swift.print("[\(timeStamp)]: \(value)")
         }
     }
 }

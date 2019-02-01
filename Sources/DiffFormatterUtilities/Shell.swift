@@ -46,7 +46,7 @@ public func shell(
     let taskOutput = String(data: data, encoding: .utf8)
 
     if task.terminationStatus != 0 {
-        Output.print(
+        Output.instance.print(
             taskOutput ??
             "Fatal failure running task: \(executablePath) \(arguments.joined(separator: " "))",
             kind: .error

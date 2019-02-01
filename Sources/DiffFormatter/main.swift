@@ -26,5 +26,5 @@ let runner = AppRunner(
 do {
     try runner.run(arguments: processInfo.arguments)
 } catch {
-    Output.print("\(error)", kind: .error)
+    Output.instance.print("\(error)", kind: .error)
 }

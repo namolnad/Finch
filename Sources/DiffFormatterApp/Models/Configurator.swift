@@ -20,14 +20,16 @@ struct Configurator {
 
     private let cascadingResolver: FileResolver<Configuration>
 
-    private let immediateResolver: FileResolver<Configuration>
-
     private let defaultConfig: Configuration
 
     // Paths for which the configurator should return the first valid configuration
+    private let immediateResolver: FileResolver<Configuration>
+
     private let immediateReturnPaths: [String]
 
-    init(options: App.Options, meta: App.Meta, environment: Environment, fileManager: FileManager = .default) {
+    private let output: OutputType
+
+    init(options: App.Options, meta: App.Meta, environment: Environment, fileManager: FileManager = .default, output: OutputType = Output.instance) {
         self.cascadingResolver = .init(
             fileManager: fileManager,
             pathComponent: "/.\(meta.name.lowercased())/config.json"
@@ -45,6 +47,8 @@ struct Configurator {
             .filter { !$0.isEmpty }
 
         self.defaultConfig = .default(projectDir: options.projectDir ?? fileManager.currentDirectoryPath)
+
+        self.output = output
 
         let homeDirectoryPath: String
         if #available(OSX 10.12, *) {
@@ -80,7 +84,7 @@ struct Configurator {
                 configuration.update(with: config)
             }
         } catch {
-            Output.print("\(error)", kind: .error)
+            output.print("\(error)", kind: .error, verbose: false)
         }
 
         return configuration

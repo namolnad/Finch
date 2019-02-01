@@ -8,7 +8,7 @@
 
 import struct Utility.Version
 import struct DiffFormatterCore.Configuration
-import struct DiffFormatterUtilities.Output
+import DiffFormatterUtilities
 
 typealias Version = Utility.Version
 
@@ -35,9 +35,17 @@ public struct App {
     public let configuration: Configuration
     public let meta: Meta
     public let options: Options
+    private let output: OutputType
+
+    init(configuration: Configuration, meta: Meta, options: Options, output: OutputType = Output.instance) {
+        self.configuration = configuration
+        self.meta = meta
+        self.options = options
+        self.output = output
+    }
 
     func print(_ value: String, kind: Output.Kind = .default) {
-        Output.print(value, kind: kind, verbose: options.verbose)
+        output.print(value, kind: kind, verbose: options.verbose)
     }
 }
 

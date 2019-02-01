@@ -19,10 +19,10 @@ jobs:
           command: |-
             executable=$(swift build --show-bin-path)/swiftlint
             if ! [ $(command -v $executable) ]; then
-              executable=swift run swiftlint
+              executable='swift run swiftlint'
             fi
 
-            $executable lint --strict --reporter junit | tee build/reports/lint/junit.xml
+            eval $executable lint --strict --reporter junit | tee build/reports/lint/junit.xml
           name: Lint
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}

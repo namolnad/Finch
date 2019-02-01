@@ -14,10 +14,11 @@ jobs:
             - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
             - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}
             - v{{ .Environment.CACHE_VERSION }}-build-cache
+          name: Restore swiftlint cache
       - run: mkdir -p build/reports/lint
       - run:
           command: |-
-            executable=$(swift build --show-bin-path)/swiftlint
+            executable=.build/debug/swiftlint
             if ! [ $(command -v $executable) ]; then
               executable='swift run swiftlint'
             fi
@@ -27,7 +28,8 @@ jobs:
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
           paths:
-            - $(swift build --show-bin-path)
+            - .build/debug/swiftlint
+          name: Save swiftlint cache
       - store_test_results:
           path: build/reports/lint
   test:

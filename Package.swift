@@ -18,7 +18,7 @@ let package = Package(
             dependencies: ["DiffFormatterApp"]),
         .target(
             name: "DiffFormatterApp",
-            dependencies: ["DiffFormatterCore", "SwiftPM"]),
+            dependencies: ["DiffFormatterCore", "Utility"]),
         .target(
             name: "DiffFormatterCore",
             dependencies: ["DiffFormatterUtilities"]),

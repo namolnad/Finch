@@ -24,6 +24,7 @@ public class AppRunner {
 
     public func run(arguments: [String]) throws {
         let args = Array(arguments.dropFirst())
+
         let (command, options, result) = try registry.parse(arguments: args)
 
         let config = Configurator(

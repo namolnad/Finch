@@ -181,7 +181,7 @@ struct OutputGenerator {
             return log
         }
 
-        let git = Git(configuration: app.configuration, env: env)
+        let git = Git(app: app, env: env)
 
         if !options.noFetch {
             app.print("Fetching origin", kind: .info)

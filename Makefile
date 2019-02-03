@@ -89,6 +89,8 @@ publish:
 	git commit --amend --no-edit
 	git tag $(NEW_VERSION)
 	git push origin $(NEW_VERSION)
+	git push --tags
+	@$(MAKE) upload_package
 	git checkout master
 
 symlink: build
@@ -112,6 +114,10 @@ ifdef NEW_VERSION
 	$(eval PATCH:=$(word 3,$(VERSION_COMPONENTS)))
 	@echo "import struct Utility.Version\n\nlet appVersion: Version = .init($(MAJOR), $(MINOR), $(PATCH))" > $(VERSION_FILE)
 endif
+
+upload_package: package
+	@echo 'Uploading package'
+	# TODO Upload package
 
 %:
 	@:

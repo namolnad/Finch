@@ -85,20 +85,7 @@ extension Configuration {
 extension Configuration {
     public mutating func update(with otherConfig: Configuration) {
         // Commands
-        if !otherConfig.resolutionCommandsConfig.isBlank {
-            if let value = otherConfig.resolutionCommandsConfig.buildNumber {
-                self.resolutionCommandsConfig = .init(
-                    buildNumber: value,
-                    versions: self.resolutionCommandsConfig.versions
-                )
-            }
-            if let value = otherConfig.resolutionCommandsConfig.versions {
-                self.resolutionCommandsConfig = .init(
-                    buildNumber: self.resolutionCommandsConfig.buildNumber,
-                    versions: value
-                )
-            }
-        }
+        updateResolutionCommands(otherConfig: otherConfig)
 
         // Sections
         if !otherConfig.sectionInfos.isEmpty {
@@ -175,6 +162,23 @@ extension Configuration {
 
         if let value = otherConfig.footer {
             self.footer = value
+        }
+    }
+
+    private mutating func updateResolutionCommands(otherConfig: Configuration) {
+        if !otherConfig.resolutionCommandsConfig.isBlank {
+            if let value = otherConfig.resolutionCommandsConfig.buildNumber {
+                self.resolutionCommandsConfig = .init(
+                    buildNumber: value,
+                    versions: self.resolutionCommandsConfig.versions
+                )
+            }
+            if let value = otherConfig.resolutionCommandsConfig.versions {
+                self.resolutionCommandsConfig = .init(
+                    buildNumber: self.resolutionCommandsConfig.buildNumber,
+                    versions: value
+                )
+            }
         }
     }
 }

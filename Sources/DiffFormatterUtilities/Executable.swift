@@ -9,6 +9,7 @@ import class Basic.Process
 import Foundation
 
 public enum Executable: String {
+    // swiftlint:disable identifier_name
     case git
     case grep
     case sed
@@ -16,6 +17,7 @@ public enum Executable: String {
     case sort
     case tail
     case tr
+    // swiftlint:enable identifier_name
 
     public func getPath() throws -> String {
         guard let path = Process.findExecutable(self.rawValue) else {

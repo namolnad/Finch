@@ -15,14 +15,19 @@ struct VersionResolver {
         var failureReason: String? {
             switch self {
             case .unableToResolveVersion:
-                return NSLocalizedString("Unable to automatically resolve versions. Pass versions in directly through --versions option", comment: "Error message indicating inability to auto-resolve versions")
+                return NSLocalizedString(
+                    "Unable to automatically resolve versions. Pass versions in directly through --versions option",
+                    comment: "Error message indicating inability to auto-resolve versions"
+                )
             }
         }
     }
 
+    // swiftlint:disable line_length
     private var semVerRegex: String {
         return "(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?"
     }
+    // swiftlint:enable line_length
 
     func resolve(app: App, env: Environment) throws -> (old: Version, new: Version) {
         // First try for custom command

@@ -18,7 +18,7 @@ jobs:
       - run:
           command: |
             mkdir -p artifacts
-            mv "{{ Environment.APP_NAME }}.app" artifacts
+            mv "$CIRCLE_PROJECT_REPONAME.pkg" artifacts
           name: Move artifacts
       - persist_to_workspace:
           root: artifacts

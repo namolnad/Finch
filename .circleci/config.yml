@@ -8,10 +8,7 @@ jobs:
     macos:
       xcode: "10.1.0"
     steps:
-      - run:
-          command: |
-            pwd
-            ls
+      - checkout
       - run:
           command: make update_build_number
           name: Update build number

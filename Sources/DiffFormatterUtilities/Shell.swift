@@ -7,30 +7,40 @@
 //
 
 import Basic
+import protocol Foundation.LocalizedError
 
 public struct Shell {
-    public enum Error: Swift.Error {
+    public enum Error: LocalizedError {
         case emptyArguments
         case emptyResult
     }
 
-    public static func run(args: [String], env: [String: String]) throws -> String {
+    private let env: [String: String]
+    private let verbose: Bool
+
+    public init(env: [String: String], verbose: Bool = false) {
+        self.env = env
+        self.verbose = verbose
+    }
+
+    public func run(args: [String]) throws -> String {
         guard !args.isEmpty else {
             throw Error.emptyArguments
         }
 
         let process: Process = .init(
-            arguments: args,
-            environment: env
+            arguments: [try Executable.sh.getPath(), "-c"] + [args.joined(separator: " ")],
+            environment: env,
+            verbose: verbose
         )
 
         try process.launch()
         try process.waitUntilExit()
 
-        if let result = process.result {
-            return try result.utf8Output()
-        } else {
+        guard let result = process.result else {
             throw Error.emptyResult
         }
+
+        return try result.utf8Output()
     }
 }

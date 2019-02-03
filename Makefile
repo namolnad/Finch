@@ -68,6 +68,7 @@ package: build
 	  $(OUTPUT_PACKAGE)
 
 	@$(RM_SAFELY) $(APP_TMP)
+	@$(RM_SAFELY) $(INTERNAL_PACKAGE)
 
 prefix_install:
 	@NO_UPDATE_BUILD_NUMBER=1 $(MAKE) build_with_disable_sandbox

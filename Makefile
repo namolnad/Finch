@@ -76,7 +76,7 @@ prefix_install:
 	install "$(APP_EXECUTABLE)" "$(PREFIX)/bin/"
 	@$(MAKE) config_template
 
-publish:
+publish: test
 	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
 	git checkout master
 	git checkout -B releases/$(NEW_VERSION)
@@ -88,9 +88,7 @@ publish:
 	git add -f $(BUILD_NUMBER_FILE)
 	git commit --amend --no-edit
 	git tag $(NEW_VERSION)
-	git push origin $(NEW_VERSION)
 	git push --tags
-	@$(MAKE) upload_package
 	git checkout master
 
 symlink: build
@@ -114,10 +112,6 @@ ifdef NEW_VERSION
 	$(eval PATCH:=$(word 3,$(VERSION_COMPONENTS)))
 	@echo "import struct Utility.Version\n\nlet appVersion: Version = .init($(MAJOR), $(MINOR), $(PATCH))" > $(VERSION_FILE)
 endif
-
-upload_package: package
-	@echo 'Uploading package'
-	# TODO Upload package
 
 %:
 	@:

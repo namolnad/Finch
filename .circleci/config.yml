@@ -4,6 +4,34 @@
 #
 version: 2
 jobs:
+  build_package:
+    macos:
+      xcode: "10.1.0"
+    steps:
+      - run:
+          command: make update_build_number
+          name: Update build number
+      - run:
+          command: make package
+          name: Build package
+      - persist_to_workspace:
+        root: .
+        paths:
+          - "{{ Environment.CIRCLE_PROJECT_REPONAME }}.pkg"
+  publish_release:
+    docker:
+      - image: circleci/golang:1.8
+    steps:
+      - run:
+          command: mkdir -p ./artifacts
+      - attach_workspace:
+        at: ./artifacts
+      - run:
+          command: |
+            go get github.com/tcnksm/ghr
+            VERSION=$(DiffFormatter --version | awk '{print $2}')
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts
+          name: Publish release to GitHub
   swiftlint:
     macos:
       xcode: "10.1.0"
@@ -36,7 +64,6 @@ jobs:
   test:
     macos:
       xcode: "10.1.0"
-    environment:
     steps:
       - checkout
       - run: mkdir -p build/reports/test
@@ -50,5 +77,23 @@ workflows:
   version: 2
   build:
     jobs:
-      - swiftlint
-      - test
+      - swiftlint:
+          filters:
+            tags:
+              ignore: /.*/
+      - test:
+          filters:
+            tags:
+              ignore: /.*/
+      - build_package:
+          filters:
+            tags:
+              only: /^[0-9]+(\.[0-9]+)$/
+      - publish_release:
+          requires:
+            - build_package
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^[0-9]+(\.[0-9]+)$/

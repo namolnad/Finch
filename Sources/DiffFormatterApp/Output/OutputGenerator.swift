@@ -133,7 +133,7 @@ struct OutputGenerator {
         }
 
         guard
-            let args = app.configuration.buildNumberCommandArgs,
+            let args = app.configuration.resolutionCommandsConfig.buildNumber,
             !args.isEmpty,
             let buildNumber = try getBuildNumber(
                 for: options.versions.new,

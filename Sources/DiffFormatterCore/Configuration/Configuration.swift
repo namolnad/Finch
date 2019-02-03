@@ -10,7 +10,6 @@ import Foundation
 
 public struct Configuration: Decodable {
     enum CodingKeys: String, CodingKey {
-        case buildNumberCommandArguments
         case contributorsConfig
         case delimiterConfig
         case footer
@@ -18,9 +17,9 @@ public struct Configuration: Decodable {
         case gitConfig
         case header
         case sectionInfos
+        case resolutionCommandsConfig
     }
 
-    public private(set) var buildNumberCommandArgs: [String]?
     public private(set) var contributorsConfig: ContributorsConfiguration
     public private(set) var projectDir: String = ""
     public private(set) var delimiterConfig: DelimiterConfiguration
@@ -29,12 +28,12 @@ public struct Configuration: Decodable {
     public private(set) var gitConfig: GitConfiguration
     public private(set) var header: String?
     public private(set) var sectionInfos: [SectionInfo]
+    public private(set) var resolutionCommandsConfig: ResolutionCommandsConfiguration
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         let formatString: String? = container.optionalDecode(forKey: .formatString)
-        self.buildNumberCommandArgs = container.optionalDecode(forKey: .buildNumberCommandArguments)
         self.contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
         self.delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
         self.footer = container.optionalDecode(forKey: .footer)
@@ -42,18 +41,18 @@ public struct Configuration: Decodable {
         self.gitConfig = container.decode(forKey: .gitConfig, default: .default)
         self.header = container.optionalDecode(forKey: .header)
         self.sectionInfos = container.decode(forKey: .sectionInfos, default: [])
+        self.resolutionCommandsConfig = container.decode(forKey: .resolutionCommandsConfig, default: .blank)
     }
 
     public init(
-        buildNumberCommandArgs: [String]? = nil,
         contributorsConfig: ContributorsConfiguration = .blank,
         sectionInfos: [SectionInfo] = [],
         footer: String? = nil,
         formatTemplate: FormatTemplate? = nil,
         delimiterConfig: DelimiterConfiguration = .blank,
         gitConfig: GitConfiguration = .blank,
-        header: String? = nil) {
-        self.buildNumberCommandArgs = buildNumberCommandArgs
+        header: String? = nil,
+        resolutionCommandsConfig: ResolutionCommandsConfiguration = .blank) {
         self.contributorsConfig = contributorsConfig
         self.delimiterConfig = delimiterConfig
         self.footer = footer
@@ -61,6 +60,7 @@ public struct Configuration: Decodable {
         self.gitConfig = gitConfig
         self.header = header
         self.sectionInfos = sectionInfos
+        self.resolutionCommandsConfig = resolutionCommandsConfig
     }
 }
 
@@ -85,8 +85,19 @@ extension Configuration {
 extension Configuration {
     public mutating func update(with otherConfig: Configuration) {
         // Commands
-        if let value = otherConfig.buildNumberCommandArgs {
-            self.buildNumberCommandArgs = value
+        if !otherConfig.resolutionCommandsConfig.isBlank {
+            if let value = otherConfig.resolutionCommandsConfig.buildNumber {
+                self.resolutionCommandsConfig = .init(
+                    buildNumber: value,
+                    versions: self.resolutionCommandsConfig.versions
+                )
+            }
+            if let value = otherConfig.resolutionCommandsConfig.versions {
+                self.resolutionCommandsConfig = .init(
+                    buildNumber: self.resolutionCommandsConfig.buildNumber,
+                    versions: value
+                )
+            }
         }
 
         // Sections
@@ -184,14 +195,14 @@ extension Configuration {
 
 extension Configuration {
     public var isBlank: Bool {
-        return (buildNumberCommandArgs?.isEmpty == true) &&
-            delimiterConfig.isBlank &&
+        return delimiterConfig.isBlank &&
             sectionInfos.isEmpty &&
             (footer?.isEmpty == true) &&
             (formatTemplate?.outputtables.isEmpty == true) &&
             gitConfig.isBlank &&
             (header?.isEmpty == true) &&
             contributorsConfig.isBlank &&
-            projectDir.isEmpty
+            projectDir.isEmpty &&
+            resolutionCommandsConfig.isBlank
     }
 }

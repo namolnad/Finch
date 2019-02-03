@@ -84,7 +84,7 @@ final class GenerateCommand: Command {
         binder.bind(option: subparser.add(
             option: "--versions",
             kind: [Version].self,
-            usage: "<version_1> <version_2>"
+            usage: "<version_1> <version_2> Use explicit versions for the changelog instead of auto-resolving"
         )) { options, versions in
             guard versions.count == 2, let firstVersion = versions.first, let secondVersion = versions.last else {
                 throw ArgumentParserError.invalidValue(

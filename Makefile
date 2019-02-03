@@ -51,11 +51,11 @@ package: build
 	$(CP) $(APP_EXECUTABLE) $(APP_TMP)$(BINARIES_FOLDER)
 
 	pkgbuild \
-	  --identifier "$(ORG_IDENTIFIER)" \
-	  --install-location "/" \
-	  --root "$(APP_TMP)" \
-	  --version "$(VERSION_STRING)" \
-	  "$(INTERNAL_PACKAGE)"
+	  --identifier $(ORG_IDENTIFIER) \
+	  --install-location / \
+	  --root $(APP_TMP) \
+	  --version $(VERSION_STRING) \
+	  $(INTERNAL_PACKAGE)
 
 	productbuild \
 	  --synthesize \
@@ -64,7 +64,7 @@ package: build
 
 	productbuild \
 	  --distribution $(DISTRIBUTION_PLIST) \
-	  --package-path "$(INTERNAL_PACKAGE)" \
+	  --package-path $(INTERNAL_PACKAGE) \
 	  $(OUTPUT_PACKAGE)
 
 	$(RM_SAFELY) $(APP_TMP)

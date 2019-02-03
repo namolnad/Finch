@@ -3,7 +3,7 @@ APP_NAME=DiffFormatter
 APP_NAME_LOWERCASE=$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 APP_TMP=/tmp/$(APP_NAME).dst
 BIN_DIR=$(INSTALL_DIR)/bin
-BINARIES_FOLDER=/usr/local/bin
+BINARIES_DIR=/usr/local/bin
 BUILD=swift build
 BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
 CONFIG_TEMPLATE=config.json.template
@@ -47,12 +47,12 @@ lint:
 	swift run swiftlint --strict
 
 package: build
-	$(MKDIR) $(APP_TMP)$(BINARIES_FOLDER)
-	$(CP) $(APP_EXECUTABLE) $(APP_TMP)$(BINARIES_FOLDER)
+	$(MKDIR) $(APP_TMP)
+	$(CP) $(APP_EXECUTABLE) $(APP_TMP)
 
 	pkgbuild \
 	  --identifier $(ORG_IDENTIFIER) \
-	  --install-location / \
+	  --install-location $(BINARIES_DIR) \
 	  --root $(APP_TMP) \
 	  --version $(VERSION_STRING) \
 	  $(INTERNAL_PACKAGE)
@@ -67,7 +67,7 @@ package: build
 	  --package-path $(INTERNAL_PACKAGE) \
 	  $(OUTPUT_PACKAGE)
 
-	$(RM_SAFELY) $(APP_TMP)
+	@$(RM_SAFELY) $(APP_TMP)
 
 prefix_install:
 	@NO_UPDATE_BUILD_NUMBER=1 $(MAKE) build_with_disable_sandbox
@@ -92,7 +92,7 @@ publish:
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
-	ln -fs $(BIN_DIR)/$(APP_NAME) $(BINARIES_FOLDER)
+	ln -fs $(BIN_DIR)/$(APP_NAME) $(BINARIES_DIR)
 
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest

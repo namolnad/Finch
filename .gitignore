@@ -18,16 +18,12 @@ DerivedData
 *.xccheckout
 test_output/*
 
-# CocoaPods
-Pods
-
 *.env
-
-# Carthage
-Carthage
 
 # SPM
 .build/
 DiffFormatter.xcodeproj/
+*.pkg
 
+# Build number file will be generated on build/release; Don't capture in VCS
 Sources/DiffFormatter/App/BuildNumber.swift

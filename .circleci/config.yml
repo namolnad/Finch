@@ -14,10 +14,15 @@ jobs:
       - run:
           command: make package
           name: Build package
+      - run:
+          command: |
+            mkdir -p artifacts
+            mv "{{ Environment.APP_NAME }}.app" artifacts
+          name: Move artifacts
       - persist_to_workspace:
         root: .
         paths:
-          - "{{ Environment.CIRCLE_PROJECT_REPONAME }}.pkg"
+          - artifacts
   publish_release:
     docker:
       - image: circleci/golang:1.8

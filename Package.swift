@@ -19,13 +19,13 @@ let package = Package(
             dependencies: ["DiffFormatterApp"]),
         .target(
             name: "DiffFormatterApp",
-            dependencies: ["DiffFormatterCore", "Utility"]),
+            dependencies: ["DiffFormatterCore"]),
         .target(
             name: "DiffFormatterCore",
             dependencies: ["DiffFormatterUtilities"]),
         .target(
             name: "DiffFormatterUtilities",
-            dependencies: []),
+            dependencies: ["Utility"]),
         .testTarget(
             name: "DiffFormatterAppTests",
             dependencies: ["DiffFormatterApp", "SnapshotTesting"]),

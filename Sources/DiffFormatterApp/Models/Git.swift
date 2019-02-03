@@ -6,50 +6,56 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
+import Basic
 import DiffFormatterCore
 import DiffFormatterUtilities
 
 struct Git {
     let configuration: Configuration
+    let env: Environment
 }
 
 extension Git {
-    func log(oldVersion: Version, newVersion: Version) -> String {
+    func log(oldVersion: Version, newVersion: Version) throws -> String {
         guard !isTest else {
             return ""
         }
 
-        return shell(
-            executablePath: gitExecutablePath,
-            arguments: gitLogArguments(
+        let executableArgs: [String] = [
+            "\(gitExecutablePath)",
+            "--git-dir",
+            "\(configuration.projectDir)",
+        ]
+
+        return try Shell.run(
+            args: executableArgs + gitLogArguments(
                 oldVersion: oldVersion.description,
                 newVersion: newVersion.description
             ),
-            currentDirectoryPath: configuration.projectDir
-        ) ?? ""
+            env: env
+        )
     }
 
-    func fetch() {
-        _ = shell(
-            executablePath: gitExecutablePath,
-            arguments: ["fetch"],
-            currentDirectoryPath: configuration.projectDir
-        )
+    func fetch() throws {
+        let args: [String] = [
+            "\(gitExecutablePath)",
+            "--git-dir",
+            "\(configuration.projectDir)",
+            "fetch"
+        ]
+
+        _ = try Shell.run(args: args, env: env)
     }
 
     private var gitExecutablePath: String {
         if let path = configuration.gitExecutablePath {
             return path
         }
-        guard let path = shell(
-            executablePath: "/bin/bash",
-            arguments: ["-c", "which git"],
-            currentDirectoryPath: configuration.projectDir
-            ) else {
-                return ""
+        guard let path = Process.findExecutable("git")?.asString else {
+            return ""
         }
 
-        return path.trimmingCharacters(in: .newlines)
+        return path
     }
 
     private func gitLogArguments(oldVersion: String, newVersion: String) -> [String] {

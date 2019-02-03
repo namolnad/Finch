@@ -6,52 +6,31 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
+import Basic
 
-public func shell(
-    executablePath: String,
-    arguments: [String],
-    currentDirectoryPath: String,
-    environment: [String: String]? = nil) -> String? {
-    let task = Process()
-
-    if #available(OSX 10.13, *) {
-        task.executableURL = URL(fileURLWithPath: executablePath)
-        task.currentDirectoryURL = URL(fileURLWithPath: currentDirectoryPath)
-    } else {
-        task.launchPath = executablePath
-        task.currentDirectoryPath = currentDirectoryPath
+public struct Shell {
+    public enum Error: Swift.Error {
+        case emptyArguments
+        case emptyResult
     }
 
-    task.arguments = arguments
+    public static func run(args: [String], env: [String: String]) throws -> String {
+        guard !args.isEmpty else {
+            throw Error.emptyArguments
+        }
 
-    if let environment = environment, case let env = task.environment ?? [:] {
-        task.environment = env.merging(environment) { $1 }
-    }
-
-    let pipe = Pipe()
-    task.standardOutput = pipe
-    task.standardError = pipe
-
-    if #available(OSX 10.13, *) {
-        try? task.run()
-    } else {
-        task.launch()
-    }
-
-    task.waitUntilExit()
-
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
-
-    let taskOutput = String(data: data, encoding: .utf8)
-
-    if task.terminationStatus != 0 {
-        Output.instance.print(
-            taskOutput ??
-            "Fatal failure running task: \(executablePath) \(arguments.joined(separator: " "))",
-            kind: .error
+        let process: Process = .init(
+            arguments: args,
+            environment: env
         )
-    }
 
-    return taskOutput
+        try process.launch()
+        try process.waitUntilExit()
+
+        if let result = process.result {
+            return try result.utf8Output()
+        } else {
+            throw Error.emptyResult
+        }
+    }
 }

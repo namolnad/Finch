@@ -20,9 +20,9 @@ jobs:
             mv "{{ Environment.APP_NAME }}.app" artifacts
           name: Move artifacts
       - persist_to_workspace:
-        root: /
+        root: artifacts
         paths:
-          - artifacts
+          - .
   publish_release:
     docker:
       - image: circleci/golang:1.8

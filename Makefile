@@ -88,7 +88,7 @@ publish: test
 	git add -f $(BUILD_NUMBER_FILE)
 	git commit --amend --no-edit
 	git tag $(NEW_VERSION)
-	git push --tags
+	git push --tags --force
 	git checkout master
 
 symlink: build

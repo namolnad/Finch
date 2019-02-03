@@ -24,7 +24,7 @@ ZSH_COMMAND := ZDOTDIR='/var/empty' zsh -o NO_GLOBAL_RCS -c
 RM_SAFELY := $(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && noglob rm -rf $${1:A}' --
 
 
-.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install publish symlink test update_build_number update_version
+.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install publish symlink test update_build_number update_version upload_package
 
 all: install
 

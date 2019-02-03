@@ -31,7 +31,7 @@ jobs:
       - run:
           command: mkdir -p ./artifacts
       - attach_workspace:
-        at: ./artifacts
+          at: ./artifacts
       - run:
           command: |
             go get github.com/tcnksm/ghr

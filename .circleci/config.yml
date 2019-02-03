@@ -40,9 +40,10 @@ jobs:
               -u ${CIRCLE_PROJECT_USERNAME} \
               -r ${CIRCLE_PROJECT_REPONAME} \
               -c ${CIRCLE_SHA1} \
-              -delete ${CIRCLE_TAG} \
+              -n ${CIRCLE_TAG} \
+              -delete \
               -prerelease \
-              ./artifacts
+              ${CIRCLE_TAG} ./artifacts
           name: Publish release to GitHub
   swiftlint:
     macos:

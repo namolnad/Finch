@@ -20,7 +20,7 @@ jobs:
             mv "{{ Environment.APP_NAME }}.app" artifacts
           name: Move artifacts
       - persist_to_workspace:
-        root: .
+        root: /
         paths:
           - artifacts
   publish_release:

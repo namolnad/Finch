@@ -35,8 +35,7 @@ jobs:
       - run:
           command: |
             go get github.com/tcnksm/ghr
-            VERSION=$(DiffFormatter --version | awk '{print $2}')
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ./artifacts
           name: Publish release to GitHub
   swiftlint:
     macos:

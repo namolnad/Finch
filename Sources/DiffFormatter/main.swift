@@ -26,5 +26,13 @@ let runner = AppRunner(
 do {
     try runner.run(arguments: processInfo.arguments)
 } catch {
-    Output.instance.print("\(error)", kind: .error)
+    let formattedError: String = .localizedStringWithFormat(
+        NSLocalizedString(
+            "Error: %@",
+            comment: "Formatted error message"
+        ),
+        error.localizedDescription
+    )
+
+    Output.instance.print(formattedError, kind: .error)
 }

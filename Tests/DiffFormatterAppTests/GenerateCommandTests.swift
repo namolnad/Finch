@@ -13,6 +13,6 @@ final class GenerateCommandTests: XCTestCase {
     func testCommandName() {
         let command = GenerateCommand(meta: .mock, parser: .init(usage: "blah", overview: ""))
 
-        XCTAssertEqual(command.name, "generate")
+        XCTAssertEqual(command.name, "gen")
     }
 }

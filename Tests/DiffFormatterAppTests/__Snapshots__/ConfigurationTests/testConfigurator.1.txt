@@ -1,5 +1,4 @@
 ▿ Configuration
-  - buildNumberCommandArgs: Optional<Array<String>>.none
   ▿ contributorsConfig: ContributorsConfiguration
     ▿ contributorHandlePrefix: Optional<String>
       - some: "@"
@@ -30,6 +29,9 @@
     - repoBaseUrl: "https://github.com/citadel-of-ricks/C-137"
   - header: Optional<String>.none
   - projectDir: "current"
+  ▿ resolutionCommandsConfig: ResolutionCommandsConfiguration
+    - buildNumber: Optional<Array<String>>.none
+    - versions: Optional<Array<String>>.none
   ▿ sectionInfos: 3 elements
     ▿ SectionInfo
       - capitalizesMessage: false

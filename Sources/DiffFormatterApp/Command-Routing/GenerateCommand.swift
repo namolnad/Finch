@@ -21,7 +21,7 @@ final class GenerateCommand: Command {
 
     private typealias Binder = ArgumentBinder<Options>
 
-    let name: String = "generate"
+    let name: String = "gen"
 
     private let binder: Binder = .init()
 
@@ -40,6 +40,10 @@ final class GenerateCommand: Command {
         var options: Options = .blank
 
         try binder.fill(parseResult: result, into: &options)
+
+        if [options.versions.new, options.versions.old].allSatisfy({ $0 == .init(0, 0, 0) }) {
+            options.versions = try VersionResolver().resolve(app: app, env: env)
+        }
 
         let outputGenerator: OutputGenerator = try .init(
             options: options,
@@ -77,10 +81,10 @@ final class GenerateCommand: Command {
 
     // swiftlint:disable function_body_length line_length
     private func bindOptions(to binder: Binder, meta: App.Meta) {
-        binder.bind(positional: subparser.add(
-            positional: "generate",
+        binder.bind(option: subparser.add(
+            option: "--versions",
             kind: [Version].self,
-            usage: "<OLD_VERSION> <NEW_VERSION> must be the first arguments to this command"
+            usage: "<version_1> <version_2> Use explicit versions for the changelog instead of auto-resolving"
         )) { options, versions in
             guard versions.count == 2, let firstVersion = versions.first, let secondVersion = versions.last else {
                 throw ArgumentParserError.invalidValue(

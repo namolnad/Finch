@@ -21,7 +21,7 @@ struct OutputGenerator {
 
     init(options: Options, app: App, env: Environment) throws {
         let configuration = app.configuration
-        let rawGitLog: String = type(of: self).log(options: options, app: app)
+        let rawGitLog: String = try type(of: self).log(options: options, app: app, env: env)
         let version: String? = try type(of: self).versionHeader(options: options, app: app, env: env)
         let releaseManager: Contributor? = type(of: self).releaseManager(options: options, configuration: configuration)
 
@@ -133,7 +133,7 @@ struct OutputGenerator {
         }
 
         guard
-            let args = app.configuration.buildNumberCommandArgs,
+            let args = app.configuration.resolutionCommandsConfig.buildNumber,
             !args.isEmpty,
             let buildNumber = try getBuildNumber(
                 for: options.versions.new,
@@ -176,21 +176,21 @@ struct OutputGenerator {
         }
     }
 
-    private static func log(options: Options, app: App) -> String {
+    private static func log(options: Options, app: App, env: Environment) throws -> String {
         if let log = options.gitLog {
             return log
         }
 
-        let git = Git(configuration: app.configuration)
+        let git = Git(app: app, env: env)
 
         if !options.noFetch {
             app.print("Fetching origin", kind: .info)
-            git.fetch()
+            try git.fetch()
         }
 
         app.print("Generating log", kind: .info)
 
-        return git.log(oldVersion: options.versions.old, newVersion: options.versions.new)
+        return try git.log(oldVersion: options.versions.old, newVersion: options.versions.new)
     }
 
     private static func releaseManager(options: Options, configuration: Configuration) -> Contributor? {

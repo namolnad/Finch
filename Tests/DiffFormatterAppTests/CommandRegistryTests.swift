@@ -20,7 +20,8 @@ final class CommandRegistryTests: XCTestCase {
 
     func testParsingGenerate() {
         let args: [String] = [
-            "generate",
+            "gen",
+            "--versions",
             "6.12.1",
             "6.13.0",
             "--git-log=\(defaultInputMock)"
@@ -39,7 +40,8 @@ final class CommandRegistryTests: XCTestCase {
 
     func testParsingGenerateManyOptions() {
         let args: [String] = [
-            "generate",
+            "gen",
+            "--versions",
             "6.12.1",
             "6.13.0",
             "--git-log=\(defaultInputMock)",

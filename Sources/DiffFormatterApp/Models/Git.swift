@@ -16,7 +16,7 @@ struct Git {
 }
 
 extension Git {
-    private func executableArgs() throws -> [String] {
+    private func gitExecutableArgs() throws -> [String] {
         return [
             "\(try app.configuration.gitExecutablePath ?? Executable.git.getPath())",
             "--git-dir",
@@ -29,7 +29,7 @@ extension Git {
             return ""
         }
 
-        return try execute(args: [
+        return try git(
             "log",
             "--left-right",
             "--graph",
@@ -38,26 +38,26 @@ extension Git {
             "--format='format:&&&%H&&& - @@@%s@@@###%ae###'",
             "--date=short",
             "\(app.configuration.gitBranchPrefix)\(oldVersion)...\(app.configuration.gitBranchPrefix)\(newVersion)"
-        ])
+        )
     }
 
     @discardableResult
     func fetch() throws -> String {
-        return try execute(args: ["fetch"])
+        return try git("fetch")
     }
 
     func versionsStringUsingTags() throws -> String {
-        return try execute(args: [
+        return try git(
             "tag -l --sort=v:refname",
             "|",
             "\(try Executable.tail.getPath()) -2",
             "|",
             "\(try Executable.tr.getPath()) '\n' ' '"
-        ])
+        )
     }
 
     func versionsStringUsingBranches(semVerRegex: String) throws -> String {
-        return try execute(args: [
+        return try git(
             "branch -r --list",
             "|",
             "\(try Executable.grep.getPath()) -E '\(app.configuration.gitBranchPrefix)\(semVerRegex)'",
@@ -69,10 +69,10 @@ extension Git {
             "\(try Executable.sed.getPath()) 's#\(app.configuration.gitBranchPrefix)##'",
             "|",
             "\(try Executable.tr.getPath()) '\n' ' '"
-        ])
+        )
     }
 
-    private func execute(args: [String]) throws -> String {
-        return try Shell(env: env).run(args: executableArgs() + args)
+    private func git(_ args: String...) throws -> String {
+        return try Shell(env: env).run(args: gitExecutableArgs() + args)
     }
 }

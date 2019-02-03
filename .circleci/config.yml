@@ -31,11 +31,18 @@ jobs:
       - run:
           command: mkdir -p ./artifacts
       - attach_workspace:
-        at: ./artifacts
+          at: ./artifacts
       - run:
           command: |
             go get github.com/tcnksm/ghr
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ./artifacts
+            ghr \
+              -t ${GITHUB_TOKEN} \
+              -u ${CIRCLE_PROJECT_USERNAME} \
+              -r ${CIRCLE_PROJECT_REPONAME} \
+              -c ${CIRCLE_SHA1} \
+              -delete ${CIRCLE_TAG} \
+              -prerelease \
+              ./artifacts
           name: Publish release to GitHub
   swiftlint:
     macos:
@@ -95,7 +102,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^[0-9]+(\.[0-9]+)$/
+              only: /.*/
       - publish_release:
           requires:
             - build_package
@@ -103,4 +110,4 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^[0-9]+(\.[0-9]+)$/
+              only: /.*/

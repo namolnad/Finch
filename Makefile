@@ -2,6 +2,7 @@ APP_NAME=DiffFormatter
 BIN_DIR=$(INSTALL_DIR)/bin
 CONFIG_TEMPLATE=config.json.template
 INSTALL_DIR=$(HOME)/.$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
+BINARIES_FOLDER=/usr/local/bin
 BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
 
@@ -17,7 +18,7 @@ BUILD=swift build
 CP=cp
 MKDIR=mkdir -p
 
-.PHONY: all build build_with_disable_sandbox config_template install lint prefix_install publish symlink test update_build_number update_version
+.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install publish symlink test update_build_number update_version
 
 all: install
 
@@ -38,6 +39,27 @@ install: build symlink config_template
 
 lint:
 	swift run swiftlint --strict
+
+package: build
+	$(eval DISTRIBUTION_PLIST := $(APP_TMP)/Distribution.plist)
+
+	$(MKDIR) $(APP_TMP)$(BINARIES_FOLDER)
+	$(CP) $(APP_EXECUTABLE) $(APP_TMP)$(BINARIES_FOLDER)
+	$(shell ORG_IDENTIFIER=$(ORG_IDENTIFIER) OUTPUT_PACKAGE=$(OUTPUT_PACKAGE) bash Resources/Distribution.plist.template > $(DISTRIBUTION_PLIST))
+
+	pkgbuild \
+	  --identifier "$(ORG_IDENTIFIER)" \
+	  --install-location "/" \
+	  --root "$(APP_TMP)" \
+	  --version "$(VERSION_STRING)" \
+	  "$(INTERNAL_PACKAGE)"
+
+	productbuild \
+	  --distribution "$(DISTRIBUTION_PLIST)" \
+	  --package-path "$(INTERNAL_PACKAGE)" \
+	  $(OUTPUT_PACKAGE)
+
+	$(RM_SAFELY) $(APP_TMP)
 
 prefix_install:
 	@NO_UPDATE_BUILD_NUMBER=1 $(MAKE) build_with_disable_sandbox
@@ -62,7 +84,7 @@ publish:
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
-	ln -fs $(BIN_DIR)/$(APP_NAME) /usr/local/bin/
+	ln -fs $(BIN_DIR)/$(APP_NAME) $(BINARIES_FOLDER)
 
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest

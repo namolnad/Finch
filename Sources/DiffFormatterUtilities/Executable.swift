@@ -20,8 +20,8 @@ public enum Executable: String {
     // swiftlint:enable identifier_name
 
     public func getPath() throws -> String {
-        guard let path = Process.findExecutable(self.rawValue) else {
-            throw Error.notFound(self.rawValue)
+        guard let path = Process.findExecutable(rawValue) else {
+            throw Error.notFound(rawValue)
         }
 
         return path.asString

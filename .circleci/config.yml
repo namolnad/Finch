@@ -92,6 +92,8 @@ workflows:
               ignore: /.*/
       - build_package:
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /.*/
       - publish_release:

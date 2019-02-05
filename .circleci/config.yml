@@ -8,7 +8,7 @@ executors:
     macos:
       xcode: "10.1.0"
   go:
-    - docker:
+    docker:
       - image: circleci/golang:1.8
 jobs:
   build_package:

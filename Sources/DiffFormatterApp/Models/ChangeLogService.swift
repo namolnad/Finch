@@ -1,5 +1,5 @@
 //
-//  OutputGenerator.swift
+//  ChangeLogService.swift
 //  DiffFormatterApp.swift
 //
 //  Created by Dan Loman on 7/5/18.
@@ -9,21 +9,33 @@
 import class Basic.Process
 import DiffFormatterCore
 
-struct OutputGenerator {
+protocol ChangeLogGenerating {
+    func changeLog(options: GenerateCommand.Options, app: App, env: Environment) throws -> String
+}
+
+final class ChangeLogService: ChangeLogGenerating {
     typealias Options = GenerateCommand.Options
 
-    private let version: String?
-    private let releaseManager: Contributor?
-    private let sections: [Section]
-    private let footer: String?
-    private let header: String?
-    private let contributorHandlePrefix: String
+    private var version: String?
+    private var releaseManager: Contributor?
+    private var sections: [Section] = []
+    private var footer: String?
+    private var header: String?
+    private var contributorHandlePrefix: String = ""
 
-    init(options: Options, app: App, env: Environment) throws {
+    private let buildNumberProvider: BuildNumberProviding
+    private let logProvider: LogProviding
+
+    init(buildNumberProvider: BuildNumberProviding = BuildNumberService(), logProvider: LogProviding = LogService()) {
+        self.buildNumberProvider = buildNumberProvider
+        self.logProvider = logProvider
+    }
+
+    private func prepare(options: Options, app: App, env: Environment) throws {
         let configuration = app.configuration
-        let rawGitLog: String = try type(of: self).log(options: options, app: app, env: env)
-        let version: String? = try type(of: self).versionHeader(options: options, app: app, env: env)
-        let releaseManager: Contributor? = type(of: self).releaseManager(options: options, configuration: configuration)
+        let rawGitLog: String = try logProvider.log(options: options, app: app, env: env)
+        let version: String? = try versionHeader(options: options, app: app, env: env)
+        let releaseManager: Contributor? = self.releaseManager(options: options, configuration: configuration)
 
         let transformerFactory = TransformerFactory(configuration: configuration)
 
@@ -63,7 +75,9 @@ struct OutputGenerator {
         self.contributorHandlePrefix = configuration.contributorHandlePrefix
     }
 
-    func generateOutput() -> String {
+    func changeLog(options: Options, app: App, env: Environment) throws -> String {
+        try prepare(options: options, app: app, env: env)
+
         var output = ""
 
         if let value = header {
@@ -121,79 +135,23 @@ struct OutputGenerator {
         """
     }
 
-    private static func versionHeader(options: Options, app: App, env: Environment) throws -> String? {
+    private func versionHeader(options: Options, app: App, env: Environment) throws -> String? {
         guard !options.noShowVersion else {
             return nil
         }
 
         let versionHeader: String = options.versions.new.description
 
-        if let buildNumber = options.buildNumber {
-            return versionHeader + " (\(buildNumber))"
+        guard let buildNumber = try buildNumberProvider.buildNumber(options: options, app: app, env: env) else {
+            return versionHeader
         }
 
-        guard
-            let args = app.configuration.resolutionCommandsConfig.buildNumber,
-            !args.isEmpty,
-            let buildNumber = try getBuildNumber(
-                for: options.versions.new,
-                projectDir: app.configuration.projectDir,
-                using: args,
-                environment: env
-                )?.trimmingCharacters(in: .whitespacesAndNewlines) else {
-                    return versionHeader
-        }
 
         return versionHeader + " (\(buildNumber))"
     }
 
-    private static func getBuildNumber(
-        for newVersion: Version,
-        projectDir: String,
-        using args: [String],
-        environment: Environment) throws -> String? {
-        guard !args.isEmpty else {
-            return nil
-        }
 
-        let env: Environment = environment.merging([
-            "NEW_VERSION": "\(newVersion)",
-            "PROJECT_DIR": "\(projectDir)"
-        ]) { $1 }
-
-        let process: Process = .init(
-            arguments: args,
-            environment: env
-        )
-
-        try process.launch()
-        try process.waitUntilExit()
-
-        if let result = process.result {
-            return try result.utf8Output()
-        } else {
-            return nil
-        }
-    }
-
-    private static func log(options: Options, app: App, env: Environment) throws -> String {
-        if let log = options.gitLog {
-            return log
-        }
-
-        let git = Git(app: app, env: env)
-
-        if !options.noFetch {
-            app.print("Fetching origin", kind: .info)
-            try git.fetch()
-        }
-
-        app.print("Generating log", kind: .info)
-
-        return try git.log(oldVersion: options.versions.old, newVersion: options.versions.new)
-    }
-
-    private static func releaseManager(options: Options, configuration: Configuration) -> Contributor? {
+    private func releaseManager(options: Options, configuration: Configuration) -> Contributor? {
         guard let email = options.releaseManager else {
             return nil
         }

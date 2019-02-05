@@ -11,7 +11,7 @@ import Utility
 final class GenerateCommand: Command {
     struct Options {
         fileprivate(set) var versions: (old: Version, new: Version)
-        fileprivate(set) var buildNumber: Int?
+        fileprivate(set) var buildNumber: String?
         fileprivate(set) var gitLog: String?
         fileprivate(set) var noFetch: Bool
         fileprivate(set) var noShowVersion: Bool
@@ -25,13 +25,24 @@ final class GenerateCommand: Command {
 
     private let binder: Binder = .init()
 
+    private let changeLogGenerating: ChangeLogGenerating
+
     private let subparser: ArgumentParser
 
-    init(meta: App.Meta, parser: ArgumentParser) {
+    private let versionResolving: VersionResolving
+
+    init(
+        meta: App.Meta,
+        parser: ArgumentParser,
+        versionResolving: VersionResolving = VersionsService(),
+        changeLogGenerating: ChangeLogGenerating = ChangeLogService()
+        ) {
+        self.changeLogGenerating = changeLogGenerating
         self.subparser = parser.add(
             subparser: name,
             overview: "Generates the changelog"
         )
+        self.versionResolving = versionResolving
 
         bindOptions(to: binder, meta: meta)
     }
@@ -42,16 +53,14 @@ final class GenerateCommand: Command {
         try binder.fill(parseResult: result, into: &options)
 
         if [options.versions.new, options.versions.old].allSatisfy({ $0 == .init(0, 0, 0) }) {
-            options.versions = try VersionResolver().resolve(app: app, env: env)
+            options.versions = try versionResolving.versions(app: app, env: env)
         }
 
-        let outputGenerator: OutputGenerator = try .init(
+        let result = try changeLogGenerating.changeLog(
             options: options,
             app: app,
             env: env
         )
-
-        let result = outputGenerator.generateOutput()
 
         if options.toPasteBoard {
             app.print("Copying output to pasteboard", kind: .info)
@@ -101,7 +110,7 @@ final class GenerateCommand: Command {
 
         binder.bind(option: subparser.add(
             option: "--build-number",
-            kind: Int.self,
+            kind: String.self,
             usage: "Build number string to be included in version header. Takes precedence over build number command in config. e.g. `6.19.1 (6258)`"
         )) { $0.buildNumber = $1 }
 

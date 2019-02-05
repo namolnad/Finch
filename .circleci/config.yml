@@ -8,8 +8,7 @@ executors:
       - image: circleci/golang:1.8
 jobs:
   build_package:
-    executor:
-      name: mac
+    executor: mac
     steps:
       - checkout
       - run:
@@ -28,8 +27,7 @@ jobs:
           paths:
             - .
   publish_release:
-    executor:
-      name: go
+    executor: go
     steps:
       - run:
           command: mkdir -p ./artifacts
@@ -49,8 +47,7 @@ jobs:
               ${CIRCLE_TAG} ./artifacts
           name: Publish release to GitHub
   swiftlint:
-    executor:
-      name: mac
+    executor: mac
     steps:
       - checkout
       - restore_cache:
@@ -76,8 +73,7 @@ jobs:
       - store_test_results:
           path: build/reports/lint
   test:
-    executor:
-      name: mac
+    executor: mac
     steps:
       - checkout
       - run: mkdir -p build/reports/test

@@ -24,7 +24,7 @@ ZSH_COMMAND := ZDOTDIR='/var/empty' zsh -o NO_GLOBAL_RCS -c
 RM_SAFELY := $(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && noglob rm -rf $${1:A}' --
 
 
-.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install publish symlink test update_build_number update_version
+.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install projfile publish setup symlink test update_build_number update_version
 
 all: install
 
@@ -76,6 +76,9 @@ prefix_install:
 	install "$(APP_EXECUTABLE)" "$(PREFIX)/bin/"
 	@$(MAKE) config_template
 
+projfile:
+	swift package generate-xcodeproj --enable-code-coverage
+
 publish: test
 	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
 	git checkout master
@@ -90,6 +93,10 @@ publish: test
 	git tag $(NEW_VERSION)
 	git push --tags --force
 	git checkout master
+	@echo 'Reminder: Update version in master if needed.
+
+setup:
+	$(CP) Scripts/Hooks/pre-push .git/hooks/pre-push
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"

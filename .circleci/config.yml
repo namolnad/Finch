@@ -1,12 +1,15 @@
-# iOS CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/ios-migrating-from-1-2/ for more details
-#
-version: 2
-jobs:
-  build_package:
+version: 2.1
+executors:
+  mac:
     macos:
       xcode: "10.1.0"
+  go:
+    docker:
+      - image: circleci/golang:1.8
+jobs:
+  build_package:
+    executor:
+      name: mac
     steps:
       - checkout
       - run:
@@ -25,8 +28,8 @@ jobs:
           paths:
             - .
   publish_release:
-    docker:
-      - image: circleci/golang:1.8
+    executor:
+      name: go
     steps:
       - run:
           command: mkdir -p ./artifacts
@@ -46,8 +49,8 @@ jobs:
               ${CIRCLE_TAG} ./artifacts
           name: Publish release to GitHub
   swiftlint:
-    macos:
-      xcode: "10.1.0"
+    executor:
+      name: mac
     steps:
       - checkout
       - restore_cache:
@@ -73,8 +76,8 @@ jobs:
       - store_test_results:
           path: build/reports/lint
   test:
-    macos:
-      xcode: "10.1.0"
+    executor:
+      name: mac
     steps:
       - checkout
       - run: mkdir -p build/reports/test
@@ -85,7 +88,7 @@ jobs:
           path: build/reports/test
 
 workflows:
-  version: 2
+  version: 2.1
   build:
     jobs:
       - swiftlint

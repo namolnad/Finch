@@ -57,7 +57,7 @@ public struct Shell {
         }
 
         let process: Basic.Process = .init(
-            arguments: [try Executable.sh.getPath(), "-c"] + [args.joined(separator: " ")],
+            arguments: [try executable(.sh), "-c"] + [args.joined(separator: " ")],
             environment: env,
             verbose: verbose
         )

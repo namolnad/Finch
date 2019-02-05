@@ -11,6 +11,7 @@ CP=cp
 DISTRIBUTION_PLIST=$(APP_TMP)/Distribution.plist
 INSTALL_DIR=$(HOME)/.$(APP_NAME_LOWERCASE)
 INTERNAL_PACKAGE=$(APP_NAME)App.pkg
+LN=ln -fs
 MKDIR=mkdir -p
 ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
 OUTPUT_PACKAGE=$(APP_NAME).pkg
@@ -96,11 +97,11 @@ publish: test
 	@echo 'Reminder: Update version in master if needed.
 
 setup:
-	$(CP) Scripts/Hooks/pre-push .git/hooks/pre-push
+	$(LN) $(shell git rev-parse --show-toplevel)/Scripts/Hooks/pre-push .git/hooks/pre-push
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
-	ln -fs $(BIN_DIR)/$(APP_NAME) $(BINARIES_DIR)
+	$(LN) $(BIN_DIR)/$(APP_NAME) $(BINARIES_DIR)
 
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest

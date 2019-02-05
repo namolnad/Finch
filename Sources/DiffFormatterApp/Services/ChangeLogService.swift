@@ -146,10 +146,8 @@ final class ChangeLogService: ChangeLogGenerating {
             return versionHeader
         }
 
-
         return versionHeader + " (\(buildNumber))"
     }
-
 
     private func releaseManager(options: Options, configuration: Configuration) -> Contributor? {
         guard let email = options.releaseManager else {

@@ -48,30 +48,43 @@ jobs:
           name: Publish release to GitHub
   swiftlint:
     executor: mac
+    environment:
+      SWIFTLINT_CACHE_PATH: lint/cache
+      SWIFTLINT_OUTPUT_PATH: lint/reports/lint
+      SWIFTLINT_BIN_PATH: ./build/debug/swiftlint
     steps:
       - checkout
       - restore_cache:
           keys:
+            - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
+          name: Restore lint cache
+      - restore_cache:
+          keys:
             - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
-          name: Restore swiftlint cache
+          name: Restore bin cache
       - run:
-          command: |-
-            mkdir -p build/reports/lint
+          command: |
+            mkdir -p $SWIFTLINT_OUTPUT_PATH $SWIFTLINT_CACHE_PATH
 
-            executable=.build/debug/swiftlint
+            executable=$SWIFTLINT_BIN_PATH
             if ! [ $(command -v $executable) ]; then
               executable='swift run swiftlint'
             fi
 
-            eval $executable lint --strict --reporter junit | tee build/reports/lint/junit.xml
+            eval $executable lint --strict --reporter junit --cache-path $SWIFTLINT_CACHE_PATH | tee $SWIFTLINT_OUTPUT_PATH/junit.xml
           name: Lint
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
           paths:
-            - .build/debug/swiftlint
-          name: Save swiftlint cache
+            - {{ .Environment.SWIFTLINT_BIN_PATH }}
+          name: Save bin cache
+      - save_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
+          paths:
+            - {{ .Environment.SWIFTLINT_CACHE_PATH }}
+          name: Save lint cache
       - store_test_results:
-          path: build/reports/lint
+          path: {{ .Environment.SWIFTLINT_OUTPUT_PATH }}
   test:
     executor: mac
     steps:

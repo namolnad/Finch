@@ -18,7 +18,7 @@ struct Git {
 extension Git {
     private func gitExecutableArgs() throws -> [String] {
         return [
-            "\(try app.configuration.gitExecutablePath ?? Executable.git.getPath())",
+            "\(try app.configuration.gitExecutablePath ?? executable(.git))",
             "--git-dir",
             "\(app.configuration.projectDir)/.git"
         ]
@@ -50,9 +50,9 @@ extension Git {
         return try git(
             "tag -l --sort=v:refname",
             "|",
-            "\(try Executable.tail.getPath()) -2",
+            "\(try executable(.tail)) -2",
             "|",
-            "\(try Executable.tr.getPath()) '\n' ' '"
+            "\(try executable(.tr)) '\n' ' '"
         )
     }
 
@@ -60,15 +60,15 @@ extension Git {
         return try git(
             "branch -r --list",
             "|",
-            "\(try Executable.grep.getPath()) -E '\(app.configuration.gitBranchPrefix)\(semVerRegex)'",
+            "\(try executable(.grep)) -E '\(app.configuration.gitBranchPrefix)\(semVerRegex)'",
             "|",
-            "\(try Executable.sort.getPath()) -V",
+            "\(try executable(.sort)) -V",
             "|",
-            "\(try Executable.tail.getPath()) -2",
+            "\(try executable(.tail)) -2",
             "|",
-            "\(try Executable.sed.getPath()) 's#\(app.configuration.gitBranchPrefix)##'",
+            "\(try executable(.sed)) 's#\(app.configuration.gitBranchPrefix)##'",
             "|",
-            "\(try Executable.tr.getPath()) '\n' ' '"
+            "\(try executable(.tr)) '\n' ' '"
         )
     }
 

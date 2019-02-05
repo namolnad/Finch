@@ -8,6 +8,10 @@
 import class Basic.Process
 import Foundation
 
+public func executable(_ executable: Executable) throws -> String {
+    return try executable.getPath()
+}
+
 public enum Executable: String {
     // swiftlint:disable identifier_name
     case git

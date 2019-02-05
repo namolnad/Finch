@@ -1,5 +1,5 @@
 //
-//  OutputTests.swift
+//  ChangeLogServiceTests.swift
 //  DiffFormatterTests
 //
 //  Created by Dan Loman on 8/16/18.
@@ -11,42 +11,50 @@ import DiffFormatterCore
 import SnapshotTesting
 import XCTest
 
-final class OutputTests: XCTestCase {
+final class ChangeLogServiceTests: XCTestCase {
+
+    private var service: ChangeLogService {
+        return ChangeLogService(
+            buildNumberProvider: BuildNumberProvidingMock(),
+            logProvider: LogProvidingMock()
+        )
+    }
+
     func testDefaultOutput() {
-        let outputGenerator: OutputGenerator = try! .init(
+        let output = try! service.changeLog(
             options: options(gitLog: defaultInputMock),
             app: .mock(),
             env: [:]
         )
 
         assertSnapshot(
-            matching: outputGenerator.generateOutput(),
+            matching: output,
             as: .dump
         )
     }
 
     func testCherryPickedSectionOutput() {
-        let outputGenerator: OutputGenerator = try! .init(
+        let output = try! service.changeLog(
             options: options(gitLog: cherryPickedInputMock),
             app: .mock(),
             env: [:]
         )
 
         assertSnapshot(
-            matching: outputGenerator.generateOutput(),
+            matching: output,
             as: .dump
         )
     }
 
     func testExcludedSectionOutput() {
-        let outputGenerator: OutputGenerator = try! .init(
+        let output = try! service.changeLog(
             options: options(gitLog: cherryPickedInputMock),
             app: .mock(configuration: .mockExcludedSection),
             env: [:]
         )
 
         assertSnapshot(
-            matching: outputGenerator.generateOutput(),
+            matching: output,
             as: .dump
         )
     }
@@ -63,14 +71,14 @@ final class OutputTests: XCTestCase {
             fileManager: fileManagerMock
         ).configuration
 
-        let outputGenerator: OutputGenerator = try! .init(
+        let output = try! service.changeLog(
             options: options(gitLog: defaultInputMock),
             app: .mock(configuration: configuration),
             env: [:]
         )
 
         assertSnapshot(
-            matching: outputGenerator.generateOutput(),
+            matching: output,
             as: .dump
         )
     }
@@ -119,5 +127,25 @@ extension App {
             meta: .mock,
             options: .mock
         )
+    }
+}
+
+struct BuildNumberProvidingMock: BuildNumberProviding {
+    func buildNumber(options: GenerateCommand.Options, app: App, env: Environment) throws -> String? {
+        guard let buildNumber = options.buildNumber else {
+            return nil
+        }
+
+        return buildNumber
+    }
+}
+
+struct LogProvidingMock: LogProviding {
+    func log(options: GenerateCommand.Options, app: App, env: Environment) throws -> String {
+        guard let log = options.gitLog else {
+            return defaultInputMock
+        }
+
+        return log
     }
 }

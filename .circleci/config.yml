@@ -53,8 +53,6 @@ jobs:
       - restore_cache:
           keys:
             - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
-            - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}
-            - v{{ .Environment.CACHE_VERSION }}-build-cache
           name: Restore swiftlint cache
       - run:
           command: |-

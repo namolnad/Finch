@@ -25,24 +25,20 @@ final class GenerateCommand: Command {
 
     private let binder: Binder = .init()
 
-    private let changeLogGenerating: ChangeLogGenerating
+    private let model: ChangeLogModelType
 
     private let subparser: ArgumentParser
-
-    private let versionResolving: VersionResolving
 
     init(
         meta: App.Meta,
         parser: ArgumentParser,
-        versionResolving: VersionResolving = VersionsService(),
-        changeLogGenerating: ChangeLogGenerating = ChangeLogService()
+        model: ChangeLogModelType = ChangeLogModel()
         ) {
-        self.changeLogGenerating = changeLogGenerating
+        self.model = model
         self.subparser = parser.add(
             subparser: name,
             overview: "Generates the changelog"
         )
-        self.versionResolving = versionResolving
 
         bindOptions(to: binder, meta: meta)
     }
@@ -53,10 +49,10 @@ final class GenerateCommand: Command {
         try binder.fill(parseResult: result, into: &options)
 
         if [options.versions.new, options.versions.old].allSatisfy({ $0 == .init(0, 0, 0) }) {
-            options.versions = try versionResolving.versions(app: app, env: env)
+            options.versions = try model.versions(app: app, env: env)
         }
 
-        let result = try changeLogGenerating.changeLog(
+        let result = try model.changeLog(
             options: options,
             app: app,
             env: env

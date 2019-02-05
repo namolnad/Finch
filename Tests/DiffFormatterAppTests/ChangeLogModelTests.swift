@@ -1,5 +1,5 @@
 //
-//  ChangeLogServiceTests.swift
+//  ChangeLogModelTests.swift
 //  DiffFormatterTests
 //
 //  Created by Dan Loman on 8/16/18.
@@ -11,17 +11,17 @@ import DiffFormatterCore
 import SnapshotTesting
 import XCTest
 
-final class ChangeLogServiceTests: XCTestCase {
+final class ChangeLogModelTests: XCTestCase {
 
-    private var service: ChangeLogService {
-        return ChangeLogService(
-            buildNumberProvider: BuildNumberProvidingMock(),
-            logProvider: LogProvidingMock()
+    private var model: ChangeLogModel {
+        return ChangeLogModel(
+            resolver: VersionsResolverMock(),
+            service: ChangeLogInfoServiceMock()
         )
     }
 
     func testDefaultOutput() {
-        let output = try! service.changeLog(
+        let output = try! model.changeLog(
             options: options(gitLog: defaultInputMock),
             app: .mock(),
             env: [:]
@@ -34,7 +34,7 @@ final class ChangeLogServiceTests: XCTestCase {
     }
 
     func testCherryPickedSectionOutput() {
-        let output = try! service.changeLog(
+        let output = try! model.changeLog(
             options: options(gitLog: cherryPickedInputMock),
             app: .mock(),
             env: [:]
@@ -47,7 +47,7 @@ final class ChangeLogServiceTests: XCTestCase {
     }
 
     func testExcludedSectionOutput() {
-        let output = try! service.changeLog(
+        let output = try! model.changeLog(
             options: options(gitLog: cherryPickedInputMock),
             app: .mock(configuration: .mockExcludedSection),
             env: [:]
@@ -71,7 +71,7 @@ final class ChangeLogServiceTests: XCTestCase {
             fileManager: fileManagerMock
         ).configuration
 
-        let output = try! service.changeLog(
+        let output = try! model.changeLog(
             options: options(gitLog: defaultInputMock),
             app: .mock(configuration: configuration),
             env: [:]
@@ -130,7 +130,11 @@ extension App {
     }
 }
 
-struct BuildNumberProvidingMock: BuildNumberProviding {
+struct ChangeLogInfoServiceMock: ChangeLogInfoServiceType {
+    func versionsString(app: App, env: Environment) throws -> String {
+        return "0.0.1 6.13.0"
+    }
+
     func buildNumber(options: GenerateCommand.Options, app: App, env: Environment) throws -> String? {
         guard let buildNumber = options.buildNumber else {
             return nil
@@ -138,14 +142,18 @@ struct BuildNumberProvidingMock: BuildNumberProviding {
 
         return buildNumber
     }
-}
 
-struct LogProvidingMock: LogProviding {
-    func log(options: GenerateCommand.Options, app: App, env: Environment) throws -> String {
+    func changeLog(options: GenerateCommand.Options, app: App, env: Environment) throws -> String {
         guard let log = options.gitLog else {
             return defaultInputMock
         }
 
         return log
+    }
+}
+
+struct VersionsResolverMock: VersionResolving {
+    func versions(from versionString: String) throws -> (old: Version, new: Version) {
+        return (.init(0, 0, 13), .init(6, 13, 0))
     }
 }

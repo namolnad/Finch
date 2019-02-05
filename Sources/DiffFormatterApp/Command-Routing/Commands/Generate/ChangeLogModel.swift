@@ -1,5 +1,5 @@
 //
-//  ChangeLogService.swift
+//  ChangeLogModel.swift
 //  DiffFormatterApp.swift
 //
 //  Created by Dan Loman on 7/5/18.
@@ -9,38 +9,75 @@
 import class Basic.Process
 import DiffFormatterCore
 
-protocol ChangeLogGenerating {
+protocol ChangeLogModelType {
+    func versions(app: App, env: Environment) throws -> (old: Version, new: Version)
     func changeLog(options: GenerateCommand.Options, app: App, env: Environment) throws -> String
 }
 
-final class ChangeLogService: ChangeLogGenerating {
+final class ChangeLogModel: ChangeLogModelType {
     typealias Options = GenerateCommand.Options
 
-    private var version: String?
-    private var releaseManager: Contributor?
-    private var sections: [Section] = []
-    private var footer: String?
-    private var header: String?
-    private var contributorHandlePrefix: String = ""
-
-    private let buildNumberProvider: BuildNumberProviding
-    private let logProvider: LogProviding
-
-    init(buildNumberProvider: BuildNumberProviding = BuildNumberService(), logProvider: LogProviding = LogService()) {
-        self.buildNumberProvider = buildNumberProvider
-        self.logProvider = logProvider
+    private struct OutputInfo {
+        fileprivate var version: String?
+        fileprivate var releaseManager: Contributor?
+        fileprivate var sections: [Section] = []
+        fileprivate var footer: String?
+        fileprivate var header: String?
+        fileprivate var contributorHandlePrefix: String = ""
     }
 
-    private func prepare(options: Options, app: App, env: Environment) throws {
+    private let resolver: VersionResolving
+    private let service: ChangeLogInfoServiceType
+
+    init(resolver: VersionResolving = VersionsResolver(), service: ChangeLogInfoServiceType = ChangeLogInfoService()) {
+        self.resolver = resolver
+        self.service = service
+    }
+
+    func changeLog(options: Options, app: App, env: Environment) throws -> String {
+        let outputInfo: OutputInfo = try self.outputInfo(for: options, app: app, env: env)
+
+        var output = ""
+
+        if let value = outputInfo.header {
+            output.append(value)
+        }
+
+        if let value = outputInfo.version {
+            output.append(version(value))
+        }
+
+        if let value = outputInfo.releaseManager {
+            output.append(formatted(contributorHandlePrefix: outputInfo.contributorHandlePrefix, releaseManager: value))
+        }
+
+        outputInfo.sections.forEach {
+            output.append($0.output)
+        }
+
+        if let value = outputInfo.footer {
+            output.append(value)
+        }
+
+        return output
+    }
+
+    func versions(app: App, env: Environment) throws -> (old: Version, new: Version) {
+        return try resolver.versions(
+            from: try service.versionsString(app: app, env: env)
+        )
+    }
+
+    private func outputInfo(for options: Options, app: App, env: Environment) throws -> OutputInfo {
         let configuration = app.configuration
-        let rawGitLog: String = try logProvider.log(options: options, app: app, env: env)
+        let rawChangeLog: String = try service.changeLog(options: options, app: app, env: env)
         let version: String? = try versionHeader(options: options, app: app, env: env)
         let releaseManager: Contributor? = self.releaseManager(options: options, configuration: configuration)
 
         let transformerFactory = TransformerFactory(configuration: configuration)
 
         let linesComponents = type(of: self)
-            .filteredLines(input: rawGitLog, using: transformerFactory.initialTransformers)
+            .filteredLines(input: rawChangeLog, using: transformerFactory.initialTransformers)
             .compactMap { LineComponents(rawLine: $0, configuration: configuration) }
 
         var sections: [Section] = configuration
@@ -67,40 +104,14 @@ final class ChangeLogService: ChangeLogGenerating {
             sections[index] = section.inserting(lineComponents: components)
         }
 
-        self.version = version
-        self.releaseManager = releaseManager
-        self.sections = sections.filter { !$0.info.excluded && !$0.linesComponents.isEmpty }
-        self.footer = configuration.footer
-        self.header = configuration.header
-        self.contributorHandlePrefix = configuration.contributorHandlePrefix
-    }
-
-    func changeLog(options: Options, app: App, env: Environment) throws -> String {
-        try prepare(options: options, app: app, env: env)
-
-        var output = ""
-
-        if let value = header {
-            output.append(value)
-        }
-
-        if let value = version {
-            output.append(version(value))
-        }
-
-        if let value = releaseManager {
-            output.append(formatted(releaseManager: value))
-        }
-
-        sections.forEach {
-            output.append($0.output)
-        }
-
-        if let value = footer {
-            output.append(value)
-        }
-
-        return output
+        return .init(
+            version: version,
+            releaseManager: releaseManager,
+            sections: sections.filter { !$0.info.excluded && !$0.linesComponents.isEmpty },
+            footer: configuration.footer,
+            header: configuration.header,
+            contributorHandlePrefix: configuration.contributorHandlePrefix
+        )
     }
 
     // Normalizes input/removes
@@ -125,7 +136,7 @@ final class ChangeLogService: ChangeLogGenerating {
         """
     }
 
-    private func formatted(releaseManager: Contributor) -> String {
+    private func formatted(contributorHandlePrefix: String, releaseManager: Contributor) -> String {
         return """
 
         ### Release Manager
@@ -142,7 +153,7 @@ final class ChangeLogService: ChangeLogGenerating {
 
         let versionHeader: String = options.versions.new.description
 
-        guard let buildNumber = try buildNumberProvider.buildNumber(options: options, app: app, env: env) else {
+        guard let buildNumber = try service.buildNumber(options: options, app: app, env: env) else {
             return versionHeader
         }
 

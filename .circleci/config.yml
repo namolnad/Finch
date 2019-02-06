@@ -54,6 +54,16 @@ jobs:
       SWIFTLINT_CACHE_PATH: lint/cache
       SWIFTLINT_OUTPUT_PATH: build/reports/lint
       SWIFTLINT_BIN_PATH: .build/debug/swiftlint
+    parameters:
+      swiftlint_cache:
+        default: lint/cache
+        type: string
+      swiftlint_output:
+        default: build/reports/lint
+        type: string
+      swiftlint_bin:
+        default: .build/debug/swiftlint
+        type: string
     steps:
       - checkout
       - restore_cache:
@@ -64,32 +74,32 @@ jobs:
           keys:
             - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
           name: Restore bin cache
-      - run: mkdir -p $SWIFTLINT_OUTPUT_PATH $SWIFTLINT_CACHE_PATH
+      - run: mkdir -p << parameters.swiftlint_cache >> << parameters.swiftlint_output >>
       - run:
           command: |
-            ls -R $SWIFTLINT_CACHE_PATH $SWIFTLINT_OUTPUT_PATH
+            ls -R << parameters.swiftlint_cache >> << parameters.swiftlint_output >>
 
-            executable=$SWIFTLINT_BIN_PATH
+            executable=$(echo '<< parameters.swiftlint_bin >>')
             if ! [ $(command -v $executable) ]; then
               executable='swift run swiftlint'
             fi
 
-            eval $executable lint --strict --reporter junit --cache-path $SWIFTLINT_CACHE_PATH | tee $SWIFTLINT_OUTPUT_PATH/junit.xml
+            eval $executable lint --strict --reporter junit --cache-path << parameters.swiftlint_cache >> | tee << parameters.swiftlint_output >>/junit.xml
 
-            ls -R $SWIFTLINT_CACHE_PATH $SWIFTLINT_OUTPUT_PATH
+            ls -R << parameters.swiftlint_cache >> << parameters.swiftlint_output >>
           name: Lint
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
           paths:
-            - ./{{ .Environment.SWIFTLINT_BIN_PATH }}
+            - << parameters.swiftlint_bin >>
           name: Save bin cache
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
           paths:
-            - ./{{ .Environment.SWIFTLINT_CACHE_PATH }}
+            - << parameters.swiftlint_cache >>
           name: Save lint cache
       - store_test_results:
-          path: ./{{ .Environment.SWIFTLINT_OUTPUT_PATH }}
+          path: << parameters.swiftlint_output >>
   test:
     executor: mac
     environment:

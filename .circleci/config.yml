@@ -9,6 +9,8 @@ executors:
 jobs:
   build_package:
     executor: mac
+    environment:
+      ARTIFACTS_PATH: artifacts
     steps:
       - checkout
       - run:
@@ -17,22 +19,22 @@ jobs:
       - run:
           command: make package
           name: Build package
+      - run: mkdir -p artifacts
       - run:
-          command: |
-            mkdir -p artifacts
-            mv "$CIRCLE_PROJECT_REPONAME.pkg" artifacts
+          command: mv "$CIRCLE_PROJECT_REPONAME.pkg" $ARTIFACTS_PATH
           name: Move artifacts
       - persist_to_workspace:
-          root: artifacts
+          root: ./{{ .Environment.ARTIFACTS_PATH }}
           paths:
             - .
   publish_release:
     executor: go
+    environment:
+      ARTIFACTS_PATH: artifacts
     steps:
-      - run:
-          command: mkdir -p ./artifacts
+      - run: mkdir -p $ARTIFACTS_PATH
       - attach_workspace:
-          at: ./artifacts
+          at: ./{{ .Environment.ARTIFACTS_PATH }}
       - run:
           command: |
             go get github.com/tcnksm/ghr
@@ -44,13 +46,13 @@ jobs:
               -n ${CIRCLE_TAG} \
               -delete \
               -prerelease \
-              ${CIRCLE_TAG} ./artifacts
+              ${CIRCLE_TAG} ${ARTIFACTS_PATH}
           name: Publish release to GitHub
   swiftlint:
     executor: mac
     environment:
       SWIFTLINT_CACHE_PATH: lint/cache
-      SWIFTLINT_OUTPUT_PATH: lint/reports/lint
+      SWIFTLINT_OUTPUT_PATH: build/reports/lint
       SWIFTLINT_BIN_PATH: .build/debug/swiftlint
     steps:
       - checkout
@@ -62,10 +64,9 @@ jobs:
           keys:
             - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
           name: Restore bin cache
+      - run: mkdir -p $SWIFTLINT_OUTPUT_PATH $SWIFTLINT_CACHE_PATH
       - run:
           command: |
-            mkdir -p $SWIFTLINT_OUTPUT_PATH $SWIFTLINT_CACHE_PATH
-
             executable=$SWIFTLINT_BIN_PATH
             if ! [ $(command -v $executable) ]; then
               executable='swift run swiftlint'
@@ -87,14 +88,16 @@ jobs:
           path: ./{{ .Environment.SWIFTLINT_OUTPUT_PATH }}
   test:
     executor: mac
+    environment:
+      TEST_OUTPUT_PATH: build/reports/test
     steps:
       - checkout
-      - run: mkdir -p build/reports/test
+      - run: mkdir -p $TEST_OUTPUT_PATH
       - run:
           name: Run tests
           command: make test
       - store_test_results:
-          path: build/reports/test
+          path: ./{{ .Environment.TEST_OUTPUT_PATH }}
 
 workflows:
   version: 2.1

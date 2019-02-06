@@ -67,12 +67,16 @@ jobs:
       - run: mkdir -p $SWIFTLINT_OUTPUT_PATH $SWIFTLINT_CACHE_PATH
       - run:
           command: |
+            ls -R $SWIFTLINT_CACHE_PATH $SWIFTLINT_OUTPUT_PATH
+
             executable=$SWIFTLINT_BIN_PATH
             if ! [ $(command -v $executable) ]; then
               executable='swift run swiftlint'
             fi
 
             eval $executable lint --strict --reporter junit --cache-path $SWIFTLINT_CACHE_PATH | tee $SWIFTLINT_OUTPUT_PATH/junit.xml
+
+            ls -R $SWIFTLINT_CACHE_PATH $SWIFTLINT_OUTPUT_PATH
           name: Lint
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}

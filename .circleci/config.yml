@@ -68,6 +68,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
+            - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}-{{ .Branch }}
             - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
           name: Restore lint cache
       - restore_cache:
@@ -90,7 +91,7 @@ jobs:
             - << parameters.lint-bin >>
           name: Save bin cache
       - save_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
+          key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}-{{ .Branch }}
           paths:
             - << parameters.lint-cache-dir >>
           name: Save lint cache

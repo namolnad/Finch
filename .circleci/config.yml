@@ -8,8 +8,11 @@ executors:
       - image: circleci/golang:1.8
 jobs:
   build_package:
-    executor:
-      name: mac
+    executor: mac
+    parameters:
+      artifacts-path:
+        default: artifacts
+        type: string
     steps:
       - checkout
       - run:
@@ -18,23 +21,24 @@ jobs:
       - run:
           command: make package
           name: Build package
+      - run: mkdir -p << parameters.artifacts-path >>
       - run:
-          command: |
-            mkdir -p artifacts
-            mv "$CIRCLE_PROJECT_REPONAME.pkg" artifacts
+          command: mv "$CIRCLE_PROJECT_REPONAME.pkg" << parameters.artifacts-path >>
           name: Move artifacts
       - persist_to_workspace:
-          root: artifacts
+          root: << parameters.artifacts-path >>
           paths:
             - .
   publish_release:
-    executor:
-      name: go
+    executor: go
+    parameters:
+      artifacts-path:
+        default: artifacts
+        type: string
     steps:
-      - run:
-          command: mkdir -p ./artifacts
+      - run: mkdir -p << parameters.artifacts-path >>
       - attach_workspace:
-          at: ./artifacts
+          at: << parameters.artifacts-path >>
       - run:
           command: |
             go get github.com/tcnksm/ghr
@@ -46,49 +50,69 @@ jobs:
               -n ${CIRCLE_TAG} \
               -delete \
               -prerelease \
-              ${CIRCLE_TAG} ./artifacts
+              ${CIRCLE_TAG} << parameters.artifacts-path >>
           name: Publish release to GitHub
   swiftlint:
-    executor:
-      name: mac
+    executor: mac
+    parameters:
+      lint-cache-dir:
+        default: lint/cache
+        type: string
+      lint-results-dir:
+        default: build/reports/lint
+        type: string
+      lint-bin:
+        default: .build/debug/swiftlint
+        type: string
     steps:
       - checkout
       - restore_cache:
           keys:
+            - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}-{{ .Branch }}
+            - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
+          name: Restore lint cache
+      - restore_cache:
+          keys:
             - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
-          name: Restore swiftlint cache
+          name: Restore bin cache
+      - run: mkdir -p << parameters.lint-cache-dir >> << parameters.lint-results-dir >>
       - run:
-          command: |-
-            mkdir -p build/reports/lint
-
-            executable=.build/debug/swiftlint
+          command: |
+            executable=$(echo '<< parameters.lint-bin >>')
             if ! [ $(command -v $executable) ]; then
               executable='swift run swiftlint'
             fi
 
-            eval $executable lint --strict --reporter junit | tee build/reports/lint/junit.xml
+            eval $executable lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
           name: Lint
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
           paths:
-            - .build/debug/swiftlint
-          name: Save swiftlint cache
-      - store_test_results:
-          path: build/reports/lint
+            - << parameters.lint-bin >>
+          name: Save bin cache
+      - save_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}-{{ .Branch }}
+          paths:
+            - << parameters.lint-cache-dir >>
+          name: Save lint cache
+      - store_artifacts:
+          path: << parameters.lint-results-dir >>
   test:
-    executor:
-      name: mac
+    executor: mac
+    parameters:
+      test-results-dir:
+        default: build/reports/test
+        type: string
     steps:
       - checkout
-      - run: mkdir -p build/reports/test
+      - run: mkdir -p << parameters.test-results-dir >>
       - run:
           name: Run tests
           command: make test
       - store_test_results:
-          path: build/reports/test
+          path: << parameters.test-results-dir >>
 
 workflows:
-  version: 2.1
   build:
     jobs:
       - swiftlint

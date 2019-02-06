@@ -68,7 +68,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
+            - Xv{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
           name: Restore lint cache
       - restore_cache:
           keys:
@@ -94,7 +94,7 @@ jobs:
             - << parameters.swiftlint_bin >>
           name: Save bin cache
       - save_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
+          key: Xv{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
           paths:
             - << parameters.swiftlint_cache >>
           name: Save lint cache

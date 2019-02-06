@@ -74,7 +74,7 @@ jobs:
           keys:
             - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
           name: Restore bin cache
-      - run: mkdir -p << parameters.lint-cache-dir >> << parameters.lint-results-dir >>
+      - run: mkdir -p << parameters.lint-cache-dir >> << parameters.lint-results-dir >>/lint
       - run:
           command: |
             executable=$(echo '<< parameters.lint-bin >>')

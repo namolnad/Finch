@@ -9,8 +9,10 @@ executors:
 jobs:
   build_package:
     executor: mac
-    environment:
-      ARTIFACTS_PATH: artifacts
+    parameters:
+      artifacts-path:
+        default: artifacts
+        type: string
     steps:
       - checkout
       - run:
@@ -19,22 +21,24 @@ jobs:
       - run:
           command: make package
           name: Build package
-      - run: mkdir -p artifacts
+      - run: mkdir -p << parameters.artifacts-path >>
       - run:
-          command: mv "$CIRCLE_PROJECT_REPONAME.pkg" $ARTIFACTS_PATH
+          command: mv "$CIRCLE_PROJECT_REPONAME.pkg" << parameters.artifacts-path >>
           name: Move artifacts
       - persist_to_workspace:
-          root: ./{{ .Environment.ARTIFACTS_PATH }}
+          root: << parameters.artifacts-path >>
           paths:
             - .
   publish_release:
     executor: go
-    environment:
-      ARTIFACTS_PATH: artifacts
+    parameters:
+      artifacts-path:
+        default: artifacts
+        type: string
     steps:
-      - run: mkdir -p $ARTIFACTS_PATH
+      - run: mkdir -p << parameters.artifacts-path >>
       - attach_workspace:
-          at: ./{{ .Environment.ARTIFACTS_PATH }}
+          at: << parameters.artifacts-path >>
       - run:
           command: |
             go get github.com/tcnksm/ghr
@@ -46,7 +50,7 @@ jobs:
               -n ${CIRCLE_TAG} \
               -delete \
               -prerelease \
-              ${CIRCLE_TAG} ${ARTIFACTS_PATH}
+              ${CIRCLE_TAG} << parameters.artifacts-path >>
           name: Publish release to GitHub
   swiftlint:
     executor: mac
@@ -55,7 +59,7 @@ jobs:
         default: lint/cache
         type: string
       lint-results-dir:
-        default: build/reports/lint
+        default: build/reports
         type: string
       lint-bin:
         default: .build/debug/swiftlint
@@ -78,7 +82,7 @@ jobs:
               executable='swift run swiftlint'
             fi
 
-            eval $executable lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
+            eval $executable lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/lint/results.xml
           name: Lint
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
@@ -94,16 +98,18 @@ jobs:
           path: << parameters.lint-results-dir >>
   test:
     executor: mac
-    environment:
-      TEST_OUTPUT_PATH: build/reports/test
+    parameters:
+      test-results-dir:
+        default: build/reports/test
+        type: string
     steps:
       - checkout
-      - run: mkdir -p $TEST_OUTPUT_PATH
+      - run: mkdir -p << parameters.test-results-dir >>
       - run:
           name: Run tests
           command: make test
       - store_test_results:
-          path: ./{{ .Environment.TEST_OUTPUT_PATH }}
+          path: << parameters.test-results-dir >>
 
 workflows:
   version: 2.1

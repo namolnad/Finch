@@ -112,7 +112,6 @@ jobs:
           path: << parameters.test-results-dir >>
 
 workflows:
-  version: 2.1
   build:
     jobs:
       - swiftlint

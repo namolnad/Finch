@@ -78,7 +78,7 @@ jobs:
               executable='swift run swiftlint'
             fi
 
-            eval $executable lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/junit.xml
+            eval $executable lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
           name: Lint
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
@@ -91,7 +91,7 @@ jobs:
             - << parameters.lint-cache-dir >>
           name: Save lint cache
       - store_test_results:
-          path: << parameters.lint-results-dir >>/junit.xml
+          path: << parameters.lint-results-dir >>
   test:
     executor: mac
     environment:

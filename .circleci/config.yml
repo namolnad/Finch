@@ -76,15 +76,15 @@ jobs:
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
           paths:
-            - {{ .Environment.SWIFTLINT_BIN_PATH }}
+            - .build/../{{ .Environment.SWIFTLINT_BIN_PATH }}
           name: Save bin cache
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
           paths:
-            - {{ .Environment.SWIFTLINT_CACHE_PATH }}
+            - .build/../{{ .Environment.SWIFTLINT_CACHE_PATH }}
           name: Save lint cache
       - store_test_results:
-          path: {{ .Environment.SWIFTLINT_OUTPUT_PATH }}
+          path: .build/../{{ .Environment.SWIFTLINT_OUTPUT_PATH }}
   test:
     executor: mac
     steps:

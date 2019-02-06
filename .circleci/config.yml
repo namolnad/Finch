@@ -51,7 +51,7 @@ jobs:
     environment:
       SWIFTLINT_CACHE_PATH: lint/cache
       SWIFTLINT_OUTPUT_PATH: lint/reports/lint
-      SWIFTLINT_BIN_PATH: ./build/debug/swiftlint
+      SWIFTLINT_BIN_PATH: .build/debug/swiftlint
     steps:
       - checkout
       - restore_cache:

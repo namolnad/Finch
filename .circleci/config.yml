@@ -59,7 +59,7 @@ jobs:
         default: lint/cache
         type: string
       lint-results-dir:
-        default: build/reports
+        default: build/reports/lint
         type: string
       lint-bin:
         default: .build/debug/swiftlint
@@ -74,7 +74,7 @@ jobs:
           keys:
             - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
           name: Restore bin cache
-      - run: mkdir -p << parameters.lint-cache-dir >> << parameters.lint-results-dir >>/lint
+      - run: mkdir -p << parameters.lint-cache-dir >> << parameters.lint-results-dir >>
       - run:
           command: |
             executable=$(echo '<< parameters.lint-bin >>')
@@ -82,7 +82,7 @@ jobs:
               executable='swift run swiftlint'
             fi
 
-            eval $executable lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/lint/results.xml
+            eval $executable lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
           name: Lint
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
@@ -94,7 +94,7 @@ jobs:
           paths:
             - << parameters.lint-cache-dir >>
           name: Save lint cache
-      - store_test_results:
+      - store_artifacts:
           path: << parameters.lint-results-dir >>
   test:
     executor: mac

@@ -1,6 +1,6 @@
 # Finch
 
-Finch is a configurable way to output version-to-version diffs for Markdown-formatted release documentation. The utility makes several assumptions about the desired format, and utilizes commit "tag" formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
+Finch is a configurable way to output version-to-version changelogs for your release documentation. The utility makes several assumptions about the desired format, and utilizes commit square-bracket "tag" formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
 
 # Installation
 
@@ -42,7 +42,7 @@ The following portions of Finch are configurable:
 To function properly, Finch requires at least a contributors list.
 
 ## File Type & Search Behavior
-Finch will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.finch` directory which contains a `config.json` file placed in either the home, current or a custom directory. For instance, if you provide a custom path through an env variable, Finch will attempt to find a valid configuration file at: `$FINCH_CONFIG/.finch/config.json`.
+Finch will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.finch` directory which contains a `config.json` file placed in either the home, current or a custom directory. Alternatively, if you provide a custom path through an env variable, Finch will attempt to find a valid configuration file at the included path.
 
 The config search paths will be executed in the following mannger:
 - Env var

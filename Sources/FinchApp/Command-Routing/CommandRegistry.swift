@@ -21,7 +21,7 @@ final class CommandRegistry {
     init(meta: App.Meta) {
         // swiftlint:disable line_length
         self.parser = .init(
-            usage: "generate <version1> <version2> [--option]...",
+            usage: "compare [--option]...",
             overview: "\(meta.name) is a flexible tool for generating well-formatted changelogs between application versions",
             seeAlso: "Visit https://github.com/namolnad/\(meta.name) for more information"
         )

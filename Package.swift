@@ -9,9 +9,10 @@ let package = Package(
         .library(name: "FinchApp", targets: ["FinchApp"])
     ],
     dependencies: [
-        .package(url: "git@github.com:pointfreeco/swift-snapshot-testing", from: "1.1.0"),
         .package(url: "git@github.com:apple/swift-package-manager.git", from: "0.3.0"),
-        .package(url: "git@github.com:realm/SwiftLint.git", from: "0.30.1")
+        .package(url: "git@github.com:orta/Komondor.git", from: "1.0.0"),
+        .package(url: "git@github.com:pointfreeco/swift-snapshot-testing", from: "1.1.0"),
+        .package(url: "git@github.com:realm/SwiftLint.git", from: "0.30.1"),
     ],
     targets: [
         .target(
@@ -31,3 +32,18 @@ let package = Package(
             dependencies: ["FinchApp", "SnapshotTesting"]),
     ]
 )
+
+#if canImport(PackageConfig)
+    import PackageConfig
+
+    let config = PackageConfig([
+        "komondor": [
+            "pre-push": [
+                "make lint",
+            ],
+            "post-checkout": [
+                "make projfile",
+            ]
+        ],
+    ])
+#endif

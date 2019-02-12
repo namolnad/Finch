@@ -1,1 +1,0 @@
-let appName: String = "DiffFormatter"

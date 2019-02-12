@@ -22,8 +22,8 @@ test_output/*
 
 # SPM
 .build/
-DiffFormatter.xcodeproj/
+Finch.xcodeproj/
 *.pkg
 
 # Build number file will be generated on build/release; Don't capture in VCS
-Sources/DiffFormatter/App/BuildNumber.swift
+Sources/Finch/App/BuildNumber.swift

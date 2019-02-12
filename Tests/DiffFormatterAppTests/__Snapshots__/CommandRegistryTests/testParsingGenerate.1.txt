@@ -1,7 +1,0 @@
-▿ (2 elements)
-  ▿ .0: Optional<String>
-    - some: "gen"
-  ▿ .1: Options
-    - projectDir: Optional<String>.none
-    - shouldPrintVersion: false
-    - verbose: false

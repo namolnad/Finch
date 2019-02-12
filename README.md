@@ -1,16 +1,20 @@
-# DiffFormatter
+# Finch
 
-DiffFormatter is a configurable way to output version-to-version diffs for Markdown-formatted release documentation. The utility makes several assumptions about the desired format, and utilizes commit "tag" formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
+Finch is a configurable way to output version-to-version changelogs for your release documentation. The utility makes several assumptions about the desired format, and utilizes commit square-bracket "tag" formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
+
+## Why 'Finch'?
+
+The name Finch is derived from the purpose of the application itself. It's primary goal is to make tracking the evolution of a product simple and straightforward. Because evolution is at the core of Finch, it seemed appropriate to name it after an evolutionary landmark, Darwin's [finches](https://bit.ly/2TJZlnb).
 
 # Installation
 
-DiffFormatter is currently only available by cloning this repository and running the command `make install` from the root of the cloned directory. This will install and link the DiffFormatter binary and will place a template config file at the following location `$HOME/.diffformatter/config.json.template`
+Finch is currently only available by cloning this repository and running the command `make install` from the root of the cloned directory. This will install and link the Finch binary and will place a template config file at the following location `$HOME/.finch/config.json.template`
 
 # Usage
 The first two arguments received must be the version strings, in order of: OLD_VERSION NEW_VERSION (branch or tag). Other accepted argurments are:
 1. The ability to hide the version header (`--no-show-version`)
 2. Release manager (`--release-manager`)
-3. Project directory (`--project-dir`) if DiffFormatter is not called from project directory
+3. Project directory (`--project-dir`) if Finch is not called from project directory
 4. Manual git diff (`--git-diff`). Must be received in format: git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_VERSION...NEW_VERSION
 5. Don't fetch origin before auto-generating diff (`--no-fetch`).
 6. Build number string to be included in version header (`--build-number`) Takes precedence over build number command in config. Example output: `6.19.1 (6258)`
@@ -19,7 +23,7 @@ In many cases it may be easiest to create a new shell function when your shell s
 
 ```
 format-version-diff() {
-  DiffFormatter $@ --project-dir="$HOME/Code/YourProject" --release-manager=$(git config --get user.email)
+  finch compare $@ --project-dir="$HOME/Code/YourProject" --release-manager=$(git config --get user.email)
 }
 
 # Used in the following manner:
@@ -27,7 +31,7 @@ format-version-diff() {
 ```
 
 # Configuration Setup
-The following portions of DiffFormatter are configurable:
+The following portions of Finch are configurable:
 - Contributor list
 - Contributor handle prefix
 - Section info (title and corresponding tags)
@@ -39,18 +43,18 @@ The following portions of DiffFormatter are configurable:
 - Git repo base url
 - Build number generation command
 
-To function properly, DiffFormatter requires at least a contributors list.
+To function properly, Finch requires at least a contributors list.
 
 ## File Type & Search Behavior
-DiffFormatter will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.diffformatter` directory which contains a `config.json` file placed in either the home, current or a custom directory. For instance, if you provide a custom path through an env variable, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diffformatter/config.json`.
+Finch will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.finch` directory which contains a `config.json` file placed in either the home, current or a custom directory. Alternatively, if you provide a custom path through an env variable, Finch will attempt to find a valid configuration file at the included path.
 
 The config search paths will be executed in the following mannger:
 - Env var
-  - DIFF_FORMATTER_CONFIG
+  - FINCH_CONFIG
 __OR__
 - Built in defaults overridden w/ waterfall technique
   - Home directory
-  - DiffFormatter's current directory
+  - Finch's current directory
   - --project-dir argument
 
 Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or omitted config file components will be ignored. Configuration customization is not additive to the existing configuration.

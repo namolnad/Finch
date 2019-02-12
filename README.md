@@ -85,7 +85,7 @@ Any non-empty configuration variables included in the config file found in each 
         "feature",
         "tag 2"
       ],
-      "format_string": " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>",
+      "format_string": " - << tags >> << message >> — << commit_type_hyperlink >> — << contributor_handle >>",
       "capitalizes_message": true,
       "excluded": true
     }

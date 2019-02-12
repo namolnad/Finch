@@ -19,7 +19,7 @@ extension FormatTemplate {
         self.init(outputtables: outputtables)
     }
 
-    // Equivalent to formatString: " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>"
+    // Equivalent to: " - << tags >> << message >> — << commit_type_hyperlink >> — << contributor_handle >>"
     static let `default`: FormatTemplate = .init(
         outputtables: [
             " - ",
@@ -86,17 +86,17 @@ private extension String {
             let outputtable: LineOutputtable
 
             switch component {
-            case "<<\(string(for: .commitTypeHyperlink))>>":
+            case "<< \(string(for: .commitTypeHyperlink)) >>":
                 outputtable = format(component: .commitTypeHyperlink)
-            case "<<\(string(for: .contributorEmail))>>":
+            case "<< \(string(for: .contributorEmail)) >>":
                 outputtable = format(component: .contributorEmail)
-            case "<<\(string(for: .contributorHandle))>>":
+            case "<< \(string(for: .contributorHandle)) >>":
                 outputtable = format(component: .contributorHandle)
-            case "<<\(string(for: .message))>>":
+            case "<< \(string(for: .message)) >>":
                 outputtable = format(component: .message)
-            case "<<\(string(for: .tags))>>":
+            case "<< \(string(for: .tags)) >>":
                 outputtable = format(component: .tags)
-            case "<<\(string(for: .sha))>>":
+            case "<< \(string(for: .sha)) >>":
                 outputtable = format(component: .sha)
             default:
                 outputtable = component

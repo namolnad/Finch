@@ -12,7 +12,7 @@
     {
       "title": "Features",
       "tags": ["*"],
-      "format_string": " - <<tags>> <<message>> — <<commit_type_hyperlink>> — <<contributor_handle>>"
+      "format_string": " - << tags >> << message >> — << commit_type_hyperlink >> — << contributor_handle >>"
     },
     {
       "title": "Bug Fixes",

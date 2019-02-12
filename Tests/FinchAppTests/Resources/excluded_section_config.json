@@ -21,7 +21,7 @@
                 "upgrade",
                 "cleanup"
             ],
-            "format_string": " - <<message>> — <<commit_type_hyperlink>>"
+            "format_string": " - << message >> — << commit_type_hyperlink >>"
         }
     ]
 }

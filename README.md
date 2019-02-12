@@ -2,6 +2,10 @@
 
 Finch is a configurable way to output version-to-version changelogs for your release documentation. The utility makes several assumptions about the desired format, and utilizes commit square-bracket "tag" formatting (`[cleanup] Remove legacy obj-c code`) to determine the appropriate section in which a commit should be placed.
 
+## Why 'Finch'?
+
+The name Finch is derived from the purpose of the application itself. It's primary goal is to make tracking the evolution of a product simple and straightforward. Because evolution is at the core of Finch, it seemed appropriate to name it after an evolutionary landmark, Darwin's [finches](https://bit.ly/2TJZlnb).
+
 # Installation
 
 Finch is currently only available by cloning this repository and running the command `make install` from the root of the cloned directory. This will install and link the Finch binary and will place a template config file at the following location `$HOME/.finch/config.json.template`

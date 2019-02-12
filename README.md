@@ -4,7 +4,7 @@ DiffFormatter is a configurable way to output version-to-version diffs for Markd
 
 # Installation
 
-DiffFormatter is currently only available by cloning this repository and running the command `make install` from the root of the cloned directory. This will install and link the DiffFormatter binary and will place a template config file at the following location `$HOME/.diffformatter/config.json.template`
+DiffFormatter is currently only available by cloning this repository and running the command `make install` from the root of the cloned directory. This will install and link the DiffFormatter binary and will place a template config file at the following location `$HOME/.finch/config.json.template`
 
 # Usage
 The first two arguments received must be the version strings, in order of: OLD_VERSION NEW_VERSION (branch or tag). Other accepted argurments are:
@@ -42,11 +42,11 @@ The following portions of DiffFormatter are configurable:
 To function properly, DiffFormatter requires at least a contributors list.
 
 ## File Type & Search Behavior
-DiffFormatter will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.diffformatter` directory which contains a `config.json` file placed in either the home, current or a custom directory. For instance, if you provide a custom path through an env variable, DiffFormatter will attempt to find a valid configuration file at: `$DIFF_FORMATTER_CONFIG/.diffformatter/config.json`.
+DiffFormatter will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.finch` directory which contains a `config.json` file placed in either the home, current or a custom directory. For instance, if you provide a custom path through an env variable, DiffFormatter will attempt to find a valid configuration file at: `$FINCH_CONFIG/.finch/config.json`.
 
 The config search paths will be executed in the following mannger:
 - Env var
-  - DIFF_FORMATTER_CONFIG
+  - FINCH_CONFIG
 __OR__
 - Built in defaults overridden w/ waterfall technique
   - Home directory

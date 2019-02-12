@@ -67,7 +67,7 @@ final class ChangeLogModelTests: XCTestCase {
         let configuration = Configurator(
             options: .blank,
             meta: .mock,
-            environment: ["DIFFFORMATTER_CONFIG": customPath],
+            environment: ["FINCH_CONFIG": customPath],
             fileManager: fileManagerMock
         ).configuration
 

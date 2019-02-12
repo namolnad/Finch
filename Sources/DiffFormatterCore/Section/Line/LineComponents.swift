@@ -1,6 +1,6 @@
 //
 //  LineComponents.swift
-//  DiffFormatter
+//  Finch
 //
 //  Created by Dan Loman on 8/15/18.
 //  Copyright © 2018 DHL. All rights reserved.

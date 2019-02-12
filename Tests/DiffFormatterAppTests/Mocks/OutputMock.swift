@@ -1,11 +1,11 @@
 //
 //  OutputMock.swift
-//  DiffFormatterAppTests
+//  FinchAppTests
 //
 //  Created by Dan Loman on 1/31/19.
 //
 
-import DiffFormatterUtilities
+import FinchUtilities
 
 final class OutputMock: OutputType {
 

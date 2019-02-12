@@ -1,6 +1,6 @@
 //
 //  Section.swift
-//  DiffFormatterCore
+//  FinchCore
 //
 //  Created by Dan Loman on 1/7/19.
 //  Copyright © 2019 DHL. All rights reserved.

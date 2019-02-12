@@ -1,6 +1,6 @@
 //
-//  Sequence+DiffFormatterApp.swift
-//  DiffFormatterApp.swift
+//  Sequence+FinchApp.swift
+//  FinchApp.swift
 //
 //  Created by Dan Loman on 1/2/19.
 //  Copyright © 2019 DHL. All rights reserved.

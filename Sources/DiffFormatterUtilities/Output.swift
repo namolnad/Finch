@@ -1,6 +1,6 @@
 //
 //  Output.swift
-//  DiffFormatterUtilities
+//  FinchUtilities
 //
 //  Created by Dan Loman on 1/30/19.
 //

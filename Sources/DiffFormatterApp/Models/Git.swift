@@ -1,14 +1,14 @@
 //
 //  Git.swift
-//  DiffFormatterApp.swift
+//  FinchApp.swift
 //
 //  Created by Dan Loman on 12/29/18.
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
 import Basic
-import DiffFormatterCore
-import DiffFormatterUtilities
+import FinchCore
+import FinchUtilities
 
 struct Git {
     let app: App

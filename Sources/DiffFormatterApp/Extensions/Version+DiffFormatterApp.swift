@@ -1,6 +1,6 @@
 //
-//  Version+DiffFormatterApp.swift
-//  DiffFormatterApp
+//  Version+FinchApp.swift
+//  FinchApp
 //
 //  Created by Dan Loman on 1/29/19.
 //

@@ -1,1 +1,1 @@
-let appName: String = "DiffFormatter"
+let appName: String = "Finch"

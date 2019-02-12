@@ -1,13 +1,13 @@
 //
 //  ChangeLogModel.swift
-//  DiffFormatterApp.swift
+//  FinchApp.swift
 //
 //  Created by Dan Loman on 7/5/18.
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
 import class Basic.Process
-import DiffFormatterCore
+import FinchCore
 
 protocol ChangeLogModelType {
     func versions(app: App, env: Environment) throws -> (old: Version, new: Version)

@@ -1,6 +1,6 @@
 //
 //  Executable.swift
-//  DiffFormatterUtilities
+//  FinchUtilities
 //
 //  Created by Dan Loman on 2/3/19.
 //

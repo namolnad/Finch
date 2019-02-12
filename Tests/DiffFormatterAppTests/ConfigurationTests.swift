@@ -1,12 +1,12 @@
 //
 //  ConfigurationTests.swift
-//  DiffFormatterTests
+//  FinchTests
 //
 //  Created by Dan Loman on 12/28/18.
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-@testable import DiffFormatterApp
+@testable import FinchApp
 import SnapshotTesting
 import XCTest
 

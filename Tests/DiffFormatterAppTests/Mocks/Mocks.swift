@@ -1,13 +1,13 @@
 //
 //  Mocks.swift
-//  DiffFormatterTests
+//  FinchTests
 //
 //  Created by Dan Loman on 12/28/18.
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-@testable import DiffFormatterApp
-@testable import DiffFormatterCore
+@testable import FinchApp
+@testable import FinchCore
 
 extension Configuration {
     static let mock: Configuration = {
@@ -35,7 +35,7 @@ extension Configuration {
 extension App.Meta {
     static let mock: App.Meta = .init(
         buildNumber: 12345,
-        name: "DiffFormatter",
+        name: "Finch",
         version: .init(1, 0, 1)
     )
 }

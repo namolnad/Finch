@@ -1,13 +1,13 @@
 //
 //  Configurator.swift
-//  DiffFormatterApp.swift
+//  FinchApp.swift
 //
 //  Created by Dan Loman on 8/14/18.
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import DiffFormatterCore
-import DiffFormatterUtilities
+import FinchCore
+import FinchUtilities
 import Foundation
 
 struct Configurator {

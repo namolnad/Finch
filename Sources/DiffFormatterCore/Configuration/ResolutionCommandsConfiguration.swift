@@ -1,6 +1,6 @@
 //
 //  ResolutionCommandsConfiguration.swift
-//  DiffFormatterCore
+//  FinchCore
 //
 //  Created by Dan Loman on 2/3/19.
 //

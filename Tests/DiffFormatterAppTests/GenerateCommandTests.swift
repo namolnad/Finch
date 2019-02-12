@@ -1,11 +1,11 @@
 //
 //  GenerateCommandTests.swift
-//  DiffFormatterAppTests
+//  FinchAppTests
 //
 //  Created by Dan Loman on 1/31/19.
 //
 
-@testable import DiffFormatterApp
+@testable import FinchApp
 import SnapshotTesting
 import XCTest
 

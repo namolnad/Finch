@@ -1,5 +1,5 @@
 APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME)
-APP_NAME=DiffFormatter
+APP_NAME=Finch
 APP_NAME_LOWERCASE=$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 APP_TMP=/tmp/$(APP_NAME).dst
 BIN_DIR=$(INSTALL_DIR)/bin

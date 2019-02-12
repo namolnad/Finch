@@ -1,6 +1,6 @@
 //
 //  CommandRegistry.swift
-//  DiffFormatterApp
+//  FinchApp
 //
 //  Created by Dan Loman on 1/29/19.
 //

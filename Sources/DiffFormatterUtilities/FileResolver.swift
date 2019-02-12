@@ -1,6 +1,6 @@
 //
 //  FileResolver.swift
-//  DiffFormatter
+//  Finch
 //
 //  Created by Dan Loman on 1/2/19.
 //  Copyright © 2019 DHL. All rights reserved.

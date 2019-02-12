@@ -1,11 +1,11 @@
 //
 //  GenerateCommand.swift
-//  DiffFormatterApp
+//  FinchApp
 //
 //  Created by Dan Loman on 1/29/19.
 //
 
-import DiffFormatterUtilities
+import FinchUtilities
 import Utility
 
 final class GenerateCommand: Command {

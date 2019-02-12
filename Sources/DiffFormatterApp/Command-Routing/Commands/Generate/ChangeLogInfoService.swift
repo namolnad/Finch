@@ -1,11 +1,11 @@
 //
 //  ChangeLogInfoService.swift
-//  DiffFormatterApp
+//  FinchApp
 //
 //  Created by Dan Loman on 2/4/19.
 //
 
-import DiffFormatterUtilities
+import FinchUtilities
 import Foundation
 
 protocol ChangeLogInfoServiceType {

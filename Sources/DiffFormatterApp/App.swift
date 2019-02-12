@@ -1,14 +1,14 @@
 //
 //  App.swift
-//  DiffFormatterApp
+//  FinchApp
 //
 //  Created by Dan Loman on 1/13/19.
 //  Copyright © 2019 DHL. All rights reserved.
 //
 
 import struct Utility.Version
-import struct DiffFormatterCore.Configuration
-import DiffFormatterUtilities
+import struct FinchCore.Configuration
+import FinchUtilities
 
 typealias Version = Utility.Version
 

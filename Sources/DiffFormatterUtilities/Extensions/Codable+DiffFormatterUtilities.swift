@@ -1,6 +1,6 @@
 //
-//  Codable+DiffFormatterUtilities.swift
-//  DiffFormatterUtilities
+//  Codable+FinchUtilities.swift
+//  FinchUtilities
 //
 //  Created by Dan Loman on 11/23/18.
 //  Copyright © 2018 DHL. All rights reserved.

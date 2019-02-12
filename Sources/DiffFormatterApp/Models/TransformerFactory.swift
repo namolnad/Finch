@@ -1,13 +1,13 @@
 //
 //  TransformerFactory.swift
-//  DiffFormatterApp.swift
+//  FinchApp.swift
 //
 //  Created by Dan Loman on 7/5/18.F
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import DiffFormatterCore
-import DiffFormatterUtilities
+import FinchCore
+import FinchUtilities
 
 struct TransformerFactory {
     private let configuration: Configuration

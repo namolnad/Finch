@@ -3,10 +3,10 @@
 import PackageDescription
 
 let package = Package(
-    name: "DiffFormatter",
+    name: "Finch",
     products: [
-        .executable(name: "DiffFormatter", targets: ["DiffFormatter"]),
-        .library(name: "DiffFormatterApp", targets: ["DiffFormatterApp"])
+        .executable(name: "Finch", targets: ["Finch"]),
+        .library(name: "FinchApp", targets: ["FinchApp"])
     ],
     dependencies: [
         .package(url: "git@github.com:pointfreeco/swift-snapshot-testing", from: "1.1.0"),
@@ -15,19 +15,19 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "DiffFormatter",
-            dependencies: ["DiffFormatterApp"]),
+            name: "Finch",
+            dependencies: ["FinchApp"]),
         .target(
-            name: "DiffFormatterApp",
-            dependencies: ["DiffFormatterCore"]),
+            name: "FinchApp",
+            dependencies: ["FinchCore"]),
         .target(
-            name: "DiffFormatterCore",
-            dependencies: ["DiffFormatterUtilities"]),
+            name: "FinchCore",
+            dependencies: ["FinchUtilities"]),
         .target(
-            name: "DiffFormatterUtilities",
+            name: "FinchUtilities",
             dependencies: ["Utility"]),
         .testTarget(
-            name: "DiffFormatterAppTests",
-            dependencies: ["DiffFormatterApp", "SnapshotTesting"]),
+            name: "FinchAppTests",
+            dependencies: ["FinchApp", "SnapshotTesting"]),
     ]
 )

@@ -13,6 +13,6 @@ final class CompareCommandTests: XCTestCase {
     func testCommandName() {
         let command = CompareCommand(meta: .mock, parser: .init(usage: "blah", overview: ""))
 
-        XCTAssertEqual(command.name, "gen")
+        XCTAssertEqual(command.name, "compare")
     }
 }

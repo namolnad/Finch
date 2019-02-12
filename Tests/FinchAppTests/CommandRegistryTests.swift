@@ -18,9 +18,9 @@ final class CommandRegistryTests: XCTestCase {
         assertSnapshot(matching: (parsingResult.0, parsingResult.1), as: .dump)
     }
 
-    func testParsingGenerate() {
+    func testParsingCompare() {
         let args: [String] = [
-            "gen",
+            "compare",
             "--versions",
             "6.12.1",
             "6.13.0",
@@ -38,9 +38,9 @@ final class CommandRegistryTests: XCTestCase {
         assertSnapshot(matching: (parsingResult.0, parsingResult.1), as: .dump)
     }
 
-    func testParsingGenerateManyOptions() {
+    func testParsingCompareManyOptions() {
         let args: [String] = [
-            "gen",
+            "compare",
             "--versions",
             "6.12.1",
             "6.13.0",

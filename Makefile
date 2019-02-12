@@ -94,10 +94,10 @@ publish: test
 	git tag $(NEW_VERSION)
 	git push --tags --force
 	git checkout master
-	@echo 'Reminder: Update version in master if needed.
+	@echo 'Reminder: Update version in master if needed.'
 
 setup:
-	$(LN) $(shell git rev-parse --show-toplevel)/Scripts/Hooks/pre-push .git/hooks/pre-push
+	swift run komondor install
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"

@@ -30,7 +30,7 @@ final class CommandRegistryTests: XCTestCase {
         let registry = CommandRegistry(meta: .mock)
 
         registry.register {
-            GenerateCommand(meta: .mock, parser: $0).bindingGlobalOptions(to: $1)
+            CompareCommand(meta: .mock, parser: $0).bindingGlobalOptions(to: $1)
         }
 
         let parsingResult = try! registry.parse(arguments: args)
@@ -57,7 +57,7 @@ final class CommandRegistryTests: XCTestCase {
         let registry = CommandRegistry(meta: .mock)
 
         registry.register {
-            GenerateCommand(meta: .mock, parser: $0).bindingGlobalOptions(to: $1)
+            CompareCommand(meta: .mock, parser: $0).bindingGlobalOptions(to: $1)
         }
 
         let parsingResult = try! registry.parse(arguments: args)

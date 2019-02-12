@@ -11,11 +11,11 @@ import FinchCore
 
 protocol ChangeLogModelType {
     func versions(app: App, env: Environment) throws -> (old: Version, new: Version)
-    func changeLog(options: GenerateCommand.Options, app: App, env: Environment) throws -> String
+    func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String
 }
 
 final class ChangeLogModel: ChangeLogModelType {
-    typealias Options = GenerateCommand.Options
+    typealias Options = CompareCommand.Options
 
     private struct OutputInfo {
         fileprivate var version: String?

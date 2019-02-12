@@ -107,7 +107,7 @@ final class ChangeLogModelTests: XCTestCase {
         )
     }
 
-    private func options(gitLog: String) -> GenerateCommand.Options {
+    private func options(gitLog: String) -> CompareCommand.Options {
         return .init(
             versions: (.init(0, 0, 1), .init(6, 13, 0)),
             buildNumber: nil,
@@ -135,7 +135,7 @@ struct ChangeLogInfoServiceMock: ChangeLogInfoServiceType {
         return "0.0.1 6.13.0"
     }
 
-    func buildNumber(options: GenerateCommand.Options, app: App, env: Environment) throws -> String? {
+    func buildNumber(options: CompareCommand.Options, app: App, env: Environment) throws -> String? {
         guard let buildNumber = options.buildNumber else {
             return nil
         }
@@ -143,7 +143,7 @@ struct ChangeLogInfoServiceMock: ChangeLogInfoServiceType {
         return buildNumber
     }
 
-    func changeLog(options: GenerateCommand.Options, app: App, env: Environment) throws -> String {
+    func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String {
         guard let log = options.gitLog else {
             return defaultInputMock
         }

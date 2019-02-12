@@ -1,5 +1,5 @@
 //
-//  GenerateCommandTests.swift
+//  CompareCommandTests.swift
 //  FinchAppTests
 //
 //  Created by Dan Loman on 1/31/19.
@@ -9,9 +9,9 @@
 import SnapshotTesting
 import XCTest
 
-final class GenerateCommandTests: XCTestCase {
+final class CompareCommandTests: XCTestCase {
     func testCommandName() {
-        let command = GenerateCommand(meta: .mock, parser: .init(usage: "blah", overview: ""))
+        let command = CompareCommand(meta: .mock, parser: .init(usage: "blah", overview: ""))
 
         XCTAssertEqual(command.name, "gen")
     }

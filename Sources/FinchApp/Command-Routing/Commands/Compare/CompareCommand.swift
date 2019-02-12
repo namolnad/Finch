@@ -1,5 +1,5 @@
 //
-//  GenerateCommand.swift
+//  CompareCommand.swift
 //  FinchApp
 //
 //  Created by Dan Loman on 1/29/19.
@@ -8,7 +8,7 @@
 import FinchUtilities
 import Utility
 
-final class GenerateCommand: Command {
+final class CompareCommand: Command {
     struct Options {
         fileprivate(set) var versions: (old: Version, new: Version)
         fileprivate(set) var buildNumber: String?
@@ -21,7 +21,7 @@ final class GenerateCommand: Command {
 
     private typealias Binder = ArgumentBinder<Options>
 
-    let name: String = "gen"
+    let name: String = "compare"
 
     private let binder: Binder = .init()
 
@@ -37,7 +37,7 @@ final class GenerateCommand: Command {
         self.model = model
         self.subparser = parser.add(
             subparser: name,
-            overview: "Generates the changelog"
+            overview: "Compares two versions and generates a formatted changelog"
         )
 
         bindOptions(to: binder, meta: meta)
@@ -67,7 +67,7 @@ final class GenerateCommand: Command {
     }
 
     @discardableResult
-    func bindingGlobalOptions(to binder: CommandRegistry.Binder) -> GenerateCommand {
+    func bindingGlobalOptions(to binder: CommandRegistry.Binder) -> CompareCommand {
         binder.bind(option: subparser.add(
             option: "--verbose",
             shortName: "-v",
@@ -94,7 +94,7 @@ final class GenerateCommand: Command {
             guard versions.count == 2, let firstVersion = versions.first, let secondVersion = versions.last else {
                 throw ArgumentParserError.invalidValue(
                     argument: "versions",
-                    error: .custom("Must receive 2 versions to properly generate changelog")
+                    error: .custom("Must receive 2 versions to properly compare and generate changelog")
                 )
             }
             if firstVersion < secondVersion {
@@ -143,8 +143,8 @@ final class GenerateCommand: Command {
     // swiftlint:enable function_body_length line_length
 }
 
-extension GenerateCommand.Options {
-    fileprivate static let blank: GenerateCommand.Options = .init(
+extension CompareCommand.Options {
+    fileprivate static let blank: CompareCommand.Options = .init(
         versions: (.init(0, 0, 0), .init(0, 0, 0)),
         buildNumber: nil,
         gitLog: nil,

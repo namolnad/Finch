@@ -18,7 +18,7 @@ public class AppRunner {
         self.registry = .init(meta: meta)
 
         registry.register {
-            GenerateCommand(meta: meta, parser: $0).bindingGlobalOptions(to: $1)
+            CompareCommand(meta: meta, parser: $0).bindingGlobalOptions(to: $1)
         }
     }
 

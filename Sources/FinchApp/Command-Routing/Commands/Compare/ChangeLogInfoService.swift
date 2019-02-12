@@ -9,8 +9,8 @@ import FinchUtilities
 import Foundation
 
 protocol ChangeLogInfoServiceType {
-    func buildNumber(options: GenerateCommand.Options, app: App, env: Environment) throws -> String?
-    func changeLog(options: GenerateCommand.Options, app: App, env: Environment) throws -> String
+    func buildNumber(options: CompareCommand.Options, app: App, env: Environment) throws -> String?
+    func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String
     // Returns a space separated string representing two versions. E.g. "0.2.1 0.3.0"
     func versionsString(app: App, env: Environment) throws -> String
 }
@@ -36,7 +36,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
     }
     // swiftlint:enable line_length
 
-    func buildNumber(options: GenerateCommand.Options, app: App, env: Environment) throws -> String? {
+    func buildNumber(options: CompareCommand.Options, app: App, env: Environment) throws -> String? {
         if let buildNumber = options.buildNumber {
             return buildNumber
         }
@@ -55,7 +55,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    func changeLog(options: GenerateCommand.Options, app: App, env: Environment) throws -> String {
+    func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String {
         if let log = options.gitLog {
             return log
         }
@@ -67,7 +67,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
             try git.fetch()
         }
 
-        app.print("Generating log", kind: .info)
+        app.print("Generating changelog", kind: .info)
 
         return try git.log(oldVersion: options.versions.old, newVersion: options.versions.new)
     }

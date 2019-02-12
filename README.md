@@ -6,14 +6,14 @@ Finch is a configurable tool designed to make tracking the history and evolution
 
 The name Finch is derived from the purpose of the application itself — tracking the evolution of a product. Because evolution is at the core of Finch, it seemed appropriate to name it after an evolutionary landmark, Darwin's [finches](https://bit.ly/2TJZlnb).
 
-# Installation
+## Installation
 Finch is available via multiple installation methods:
 - Installable package (**recommended**): Download and run the most recent [release](https://github.com/namolnad/Finch/releases)'s `Finch.pkg` file and follow the on-screen instructions
 - Swift Package Manager: Add to your `Package.swift` file's dependencies: `.package(url: "https://github.com/namolnad/Finch.git", from: "0.0.17")` and call via `swift run finch compare`
 - From source: If you’d like to build from source, you can clone this repository and run `make install` from the root of the cloned directory. This will install and link the Finch binary and will place a template config file at the following location `$HOME/.finch/config.json.template`
 
 
-# Usage
+## Usage
 To generate a changelog you must run the `compare` command. If `compare` is passed no arguments, Finch will first look for the two most recent semantically-versioned branches then the two most recent semantically-versioned git tags. You can also explicitly pass two versions by using the `--versions` option and passing 2 version arguments (branch or tag). Other accepted argurments are:
 1. The ability to hide the version header (`--no-show-version`)
 2. Release manager (`--release-manager`)
@@ -33,7 +33,7 @@ project-changelog() {
 # project-changelog --versions 6.12.1 6.13.0
 ```
 
-# Configuration Setup
+## Configuration Setup
 The following portions of Finch are configurable:
 - Contributor list
 - Contributor handle prefix
@@ -48,7 +48,7 @@ The following portions of Finch are configurable:
 
 To function properly, Finch requires at least a contributors list.
 
-## File Type & Search Behavior
+### File Type & Search Behavior
 Finch will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.finch` directory containing a `config.json` file. The `.finch` directory can placed in either the home, current, or project directories. Alternatively, if you provide a custom path through an env variable, Finch will look for a valid configuration file at the included path.
 
 The config search paths will be executed in the following mannger:
@@ -62,7 +62,7 @@ __OR__
 
 Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or omitted config file components will be ignored. Configuration customization is not additive to the existing configuration.
 
-## Configuration file formatting expectations
+### Configuration file formatting expectations
 `config.json` should be a valid JSON file with the following format. Top level keys may be omitted if a previous configuration has fully configured the setting as desired.
 
 ```
@@ -120,7 +120,7 @@ Any non-empty configuration variables included in the config file found in each 
   - Commits will only appear in a single section. Searches first for a section matching the first commit tag, then the second and so on.
   - Sections may be excluded by passing `excluded: true` in section config
 
-# Example output
+## Example output
 ```
 # 6.13.0 (3242)
 

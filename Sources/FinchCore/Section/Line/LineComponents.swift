@@ -22,7 +22,7 @@ public struct LineComponents {
     public let sha: String
     public let tags: [String]
 
-    public init(rawLine: String, configuration: Configuration, options: CompareOptions) {
+    public init(rawLine: String, configuration: Configuration, normalizeTags: Bool) {
         let componentString: (Kind) -> String = { kind in
             rawLine.component(kind: kind, configuration: configuration)
         }
@@ -35,7 +35,7 @@ public struct LineComponents {
         self.tags = Regex.Pattern.tagPattern(from: configuration)
             .matches(in: rawLine)
             .compactMap { $0.firstMatch(in: rawLine) }
-            .map { options.normalizeTags ? $0.lowercased() : $0 }
+            .map { normalizeTags ? $0.lowercased() : $0 }
     }
 }
 

@@ -13,7 +13,11 @@ import FinchUtilities
 typealias Version = Utility.Version
 
 public struct App {
-    public typealias Options = AppOptions
+    struct Options {
+        public internal(set) var projectDir: String?
+        public internal(set) var shouldPrintVersion: Bool
+        public internal(set) var verbose: Bool
+    }
 
     public struct Meta {
         public typealias Version = Utility.Version
@@ -29,9 +33,9 @@ public struct App {
         }
     }
 
-    public let configuration: Configuration
-    public let meta: Meta
-    public let options: Options
+    let configuration: Configuration
+    let meta: Meta
+    let options: Options
     private let output: OutputType
 
     init(configuration: Configuration, meta: Meta, options: Options, output: OutputType = Output.instance) {
@@ -44,4 +48,12 @@ public struct App {
     func print(_ value: String, kind: Output.Kind = .default) {
         output.print(value, kind: kind, verbose: options.verbose)
     }
+}
+
+extension App.Options {
+    static let blank: App.Options = .init(
+        projectDir: nil,
+        shouldPrintVersion: false,
+        verbose: false
+    )
 }

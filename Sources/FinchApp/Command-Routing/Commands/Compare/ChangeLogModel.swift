@@ -78,7 +78,7 @@ final class ChangeLogModel: ChangeLogModelType {
 
         let linesComponents = type(of: self)
             .filteredLines(input: rawChangeLog, using: transformerFactory.initialTransformers)
-            .compactMap { LineComponents(rawLine: $0, configuration: configuration, options: options) }
+            .compactMap { LineComponents(rawLine: $0, configuration: configuration, normalizeTags: options.normalizeTags) }
 
         var sections: [Section] = configuration
             .sectionsConfig

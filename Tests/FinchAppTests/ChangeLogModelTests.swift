@@ -7,7 +7,7 @@
 //
 
 @testable import FinchApp
-import FinchCore
+@testable import FinchCore
 import SnapshotTesting
 import XCTest
 
@@ -112,6 +112,7 @@ final class ChangeLogModelTests: XCTestCase {
             versions: (.init(0, 0, 1), .init(6, 13, 0)),
             buildNumber: nil,
             gitLog: gitLog,
+            normalizeTags: false,
             noFetch: true,
             noShowVersion: false,
             releaseManager: Configuration.mock.contributors.first?.email,

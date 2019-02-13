@@ -14,7 +14,6 @@ public struct SectionsConfiguration {
     public private(set) var footer: String?
     public private(set) var formatTemplate: FormatTemplate?
     public private(set) var header: String?
-    public private(set) var normalizeTags: Bool = false
     public private(set) var sectionInfos: [SectionInfo]
 }
 
@@ -45,7 +44,6 @@ extension SectionsConfiguration: SubConfiguration {
         footer: nil,
         formatTemplate: nil,
         header: nil,
-        normalizeTags: false,
         sectionInfos: []
     )
 
@@ -72,9 +70,6 @@ extension SectionsConfiguration: Mergeable {
             other.footer = footer
         }
 
-        other.delimiterConfig = .init(
-            input: other.delimiterConfig.input.isBlank ? delimiterConfig.input : other.delimiterConfig.input,
-            output: other.delimiterConfig.output.isBlank ? delimiterConfig.output : other.delimiterConfig.output
-        )
+        delimiterConfig.merge(into: &other.delimiterConfig)
     }
 }

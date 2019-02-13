@@ -7,12 +7,14 @@
 //
 
 import struct Utility.Version
-import struct FinchCore.Configuration
+import FinchCore
 import FinchUtilities
 
 typealias Version = Utility.Version
 
 public struct App {
+    public typealias Options = AppOptions
+
     public struct Meta {
         public typealias Version = Utility.Version
 
@@ -25,11 +27,6 @@ public struct App {
             self.name = name
             self.version = version
         }
-    }
-    public struct Options {
-        var projectDir: String?
-        var shouldPrintVersion: Bool
-        var verbose: Bool
     }
 
     public let configuration: Configuration
@@ -47,12 +44,4 @@ public struct App {
     func print(_ value: String, kind: Output.Kind = .default) {
         output.print(value, kind: kind, verbose: options.verbose)
     }
-}
-
-extension App.Options {
-    static let blank: App.Options = .init(
-        projectDir: nil,
-        shouldPrintVersion: false,
-        verbose: false
-    )
 }

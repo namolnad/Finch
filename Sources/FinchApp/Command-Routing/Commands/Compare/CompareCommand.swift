@@ -5,19 +5,12 @@
 //  Created by Dan Loman on 1/29/19.
 //
 
+import FinchCore
 import FinchUtilities
 import Utility
 
 final class CompareCommand: Command {
-    struct Options {
-        fileprivate(set) var versions: (old: Version, new: Version)
-        fileprivate(set) var buildNumber: String?
-        fileprivate(set) var gitLog: String?
-        fileprivate(set) var noFetch: Bool
-        fileprivate(set) var noShowVersion: Bool
-        fileprivate(set) var releaseManager: String?
-        fileprivate(set) var toPasteBoard: Bool
-    }
+    typealias Options = CompareOptions
 
     private typealias Binder = ArgumentBinder<Options>
 
@@ -141,16 +134,4 @@ final class CompareCommand: Command {
         )) { $0.toPasteBoard = $1 }
     }
     // swiftlint:enable function_body_length line_length
-}
-
-extension CompareCommand.Options {
-    fileprivate static let blank: CompareCommand.Options = .init(
-        versions: (.init(0, 0, 0), .init(0, 0, 0)),
-        buildNumber: nil,
-        gitLog: nil,
-        noFetch: false,
-        noShowVersion: false,
-        releaseManager: nil,
-        toPasteBoard: false
-    )
 }

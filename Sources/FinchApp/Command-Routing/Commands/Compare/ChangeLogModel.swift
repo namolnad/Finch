@@ -81,7 +81,7 @@ final class ChangeLogModel: ChangeLogModelType {
             .compactMap { LineComponents(rawLine: $0, configuration: configuration, normalizeTags: options.normalizeTags) }
 
         var sections: [Section] = configuration
-            .sectionsConfig
+            .formatConfig
             .sectionInfos
             .map { Section(configuration: configuration, info: $0, linesComponents: []) }
 
@@ -109,8 +109,8 @@ final class ChangeLogModel: ChangeLogModelType {
             version: version,
             releaseManager: releaseManager,
             sections: sections.filter { !$0.info.excluded && !$0.linesComponents.isEmpty },
-            footer: configuration.sectionsConfig.footer,
-            header: configuration.sectionsConfig.header,
+            footer: configuration.formatConfig.footer,
+            header: configuration.formatConfig.header,
             contributorHandlePrefix: configuration.contributorHandlePrefix
         )
     }

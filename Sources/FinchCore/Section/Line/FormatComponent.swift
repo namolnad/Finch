@@ -49,7 +49,7 @@ extension FormatComponent: LineOutputtable {
         case .sha:
             return components.sha
         case .tags:
-            let outputDelims = context.configuration.sectionsConfig.delimiterConfig.output
+            let outputDelims = context.configuration.formatConfig.delimiterConfig.output
 
             return components.tags
                 .reduce("") { $0 + "\(outputDelims.left)\($1)\(outputDelims.right)" }

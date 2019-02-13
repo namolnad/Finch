@@ -16,14 +16,14 @@ public struct Configuration {
     public private(set) var gitConfig: GitConfiguration
     public private(set) var projectDir: String = ""
     public private(set) var resolutionCommandsConfig: ResolutionCommandsConfiguration
-    public private(set) var sectionsConfig: SectionsConfiguration
+    public private(set) var formatConfig: FormatConfiguration
 }
 
 extension Configuration: Decodable {
     enum CodingKeys: String, CodingKey {
         case contributorsConfig
         case gitConfig
-        case sectionsConfig
+        case formatConfig
         case resolutionCommandsConfig
     }
 
@@ -33,7 +33,7 @@ extension Configuration: Decodable {
         self.contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
         self.gitConfig = container.decode(forKey: .gitConfig, default: .default)
         self.resolutionCommandsConfig = container.decode(forKey: .resolutionCommandsConfig, default: .blank)
-        self.sectionsConfig = container.decode(forKey: .sectionsConfig, default: .default)
+        self.formatConfig = container.decode(forKey: .formatConfig, default: .default)
     }
 }
 
@@ -55,7 +55,7 @@ extension Configuration {
             gitConfig: .default,
             projectDir: projectDir,
             resolutionCommandsConfig: .default,
-            sectionsConfig: .default
+            formatConfig: .default
         )
     }
 }

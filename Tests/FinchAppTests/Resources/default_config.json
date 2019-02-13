@@ -1,47 +1,51 @@
 {
-    "contributors_config": {
-        "contributors": [
-         {
-         "email": "jony.ive@apple.com",
-         "handle": "Jony.Ive"
-         },
-         {
-         "email": "long_live_the_citadel@rick.com",
-         "handle": "Rick.Sanchez"
-         },
-         {
-         "email": "elvis1935+still-alive@theking.com",
-         "handle": "Elvis.Presley"
-         }
-         ],
-        "contributor_handle_prefix": "@"
-    },
-    "section_infos": [
-                      {
-                      "title": "Features",
-                      "tags": ["*"]
-                      },
-                      {
-                      "title": "Bug Fixes",
-                      "tags": [
-                               "bugfix",
-                               "bug fix",
-                               "bug"
-                               ]
-                      },
-                      {
-                      "title": "Platform Improvements",
-                      "tags": [
-                               "platform",
-                               "tooling",
-                               "upgrade",
-                               "cleanup"
-                               ],
-                      "format_string": " - << message >> — << commit_type_hyperlink >>"
-                      }
-                      ],
-    "footer": "\n### Timeline\n- Begin development:\n- Feature cut-off / Start of bake / dogfooding:\n- Submission:\n- Release (expected):\n- Release (actual):\n",
-    "git_config": {
-        "repo_base_url": "https://github.com/citadel-of-ricks/C-137"
-    }
+  "contributors_config" : {
+    "contributor_handle_prefix" : "@",
+    "contributors" : [
+      {
+        "email" : "jony.ive@apple.com",
+        "handle" : "Jony.Ive"
+      },
+      {
+        "email" : "long_live_the_citadel@rick.com",
+        "handle" : "Rick.Sanchez"
+      },
+      {
+        "email" : "elvis1935+still-alive@theking.com",
+        "handle" : "Elvis.Presley"
+      }
+    ]
+  },
+  "git_config" : {
+    "repo_base_url" : "https:\/\/github.com\/citadel-of-ricks\/C-137"
+  },
+  "format_config" : {
+    "footer" : "\n### Timeline\n- Begin development:\n- Feature cut-off \/ Start of bake \/ dogfooding:\n- Submission:\n- Release (expected):\n- Release (actual):\n",
+    "section_infos" : [
+      {
+        "title" : "Features",
+        "tags" : [
+          "*"
+        ]
+      },
+      {
+        "title" : "Bug Fixes",
+        "tags" : [
+          "bugfix",
+          "bug fix",
+          "bug"
+        ]
+      },
+      {
+        "title" : "Platform Improvements",
+        "tags" : [
+          "platform",
+          "tooling",
+          "upgrade",
+          "cleanup"
+        ],
+        "format_string" : " - << message >> — << commit_type_hyperlink >>"
+      }
+    ]
+  }
 }

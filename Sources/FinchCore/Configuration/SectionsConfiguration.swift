@@ -9,7 +9,7 @@ public protocol Mergeable {
     func merge(into other: inout Self)
 }
 
-public struct SectionsConfiguration {
+public struct FormatConfiguration {
     public private(set) var delimiterConfig: DelimiterConfiguration
     public private(set) var footer: String?
     public private(set) var formatTemplate: FormatTemplate?
@@ -17,7 +17,7 @@ public struct SectionsConfiguration {
     public private(set) var sectionInfos: [SectionInfo]
 }
 
-extension SectionsConfiguration: Decodable {
+extension FormatConfiguration: Decodable {
     enum CodingKeys: String, CodingKey {
         case delimiterConfig
         case footer
@@ -38,8 +38,8 @@ extension SectionsConfiguration: Decodable {
     }
 }
 
-extension SectionsConfiguration: SubConfiguration {
-    public static var blank: SectionsConfiguration = .init(
+extension FormatConfiguration: SubConfiguration {
+    public static var blank: FormatConfiguration = .init(
         delimiterConfig: .blank,
         footer: nil,
         formatTemplate: nil,
@@ -47,13 +47,17 @@ extension SectionsConfiguration: SubConfiguration {
         sectionInfos: []
     )
 
-    public static var `default`: SectionsConfiguration {
-        return .blank
-    }
+    public static var `default`: FormatConfiguration = .init(
+        delimiterConfig: .default,
+        footer: nil,
+        formatTemplate: .default,
+        header: nil,
+        sectionInfos: .default
+    )
 }
 
-extension SectionsConfiguration: Mergeable {
-    public func merge(into other: inout SectionsConfiguration) {
+extension FormatConfiguration: Mergeable {
+    public func merge(into other: inout FormatConfiguration) {
         if other.sectionInfos.isEmpty {
             other.sectionInfos = sectionInfos
         }

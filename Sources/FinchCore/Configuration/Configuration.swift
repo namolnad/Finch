@@ -75,6 +75,6 @@ extension Configuration {
     }
 
     public var gitBranchPrefix: String {
-        return gitConfig.branchPrefix ?? ""
+        return gitConfig.branchPrefix
     }
 }

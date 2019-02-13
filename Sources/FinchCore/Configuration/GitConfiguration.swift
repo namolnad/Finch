@@ -7,7 +7,7 @@
 //
 
 public struct GitConfiguration {
-    public private(set) var branchPrefix: String?
+    public private(set) var branchPrefix: String
     public private(set) var executablePath: String?
     public private(set) var repoBaseUrl: String
 }
@@ -22,7 +22,7 @@ extension GitConfiguration: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.branchPrefix = container.optionalDecode(forKey: .branchPrefix)
+        self.branchPrefix = container.decode(forKey: .branchPrefix, default: "")
         self.executablePath = container.optionalDecode(forKey: .executablePath)
         self.repoBaseUrl = container.decode(forKey: .repoBaseUrl, default: "")
     }
@@ -30,7 +30,7 @@ extension GitConfiguration: Decodable {
 
 extension GitConfiguration: SubConfiguration {
     public static let blank: GitConfiguration = .init(
-        branchPrefix: nil,
+        branchPrefix: "",
         executablePath: nil,
         repoBaseUrl: ""
     )
@@ -40,7 +40,7 @@ extension GitConfiguration: SubConfiguration {
 
 extension GitConfiguration: Mergeable {
     public func merge(into other: inout GitConfiguration) {
-        if let branchPrefix = branchPrefix {
+        if !branchPrefix.isEmpty {
             other.branchPrefix = branchPrefix
         }
 

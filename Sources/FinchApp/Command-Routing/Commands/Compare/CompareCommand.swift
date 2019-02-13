@@ -110,6 +110,12 @@ final class CompareCommand: Command {
         )) { $0.gitLog = $1 }
 
         binder.bind(option: subparser.add(
+            option: "--normalize-tags",
+            kind: Bool.self,
+            usage: "Normalize all commit tags by lowercasing prior to running comparison"
+        )) { $0.normalizeTags = $1 }
+
+        binder.bind(option: subparser.add(
             option: "--no-fetch",
             kind: Bool.self,
             usage: "Don't fetch origin before auto-generating log"

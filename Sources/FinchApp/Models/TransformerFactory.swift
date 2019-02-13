@@ -24,7 +24,7 @@ struct TransformerFactory {
     }
 
     private var exclusionTransformers: [Transformer] {
-        let inputDelimiters = configuration.delimiterConfig.input
+        let inputDelimiters = configuration.sectionsConfig.delimiterConfig.input
 
         let patterns: [Regex.Replacement] = [
             .init(

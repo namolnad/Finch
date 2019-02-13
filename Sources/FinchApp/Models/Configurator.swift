@@ -81,12 +81,12 @@ struct Configurator {
 
         do {
             if let config = try immediateReturnPaths.firstMap(immediateResolver.resolve) {
-                configuration.update(with: config)
+                config.merge(into: &configuration)
                 return configuration
             }
 
-            for config in try cascadingPaths.compactMap(cascadingResolver.resolve) where !config.isBlank {
-                configuration.update(with: config)
+            for config in try cascadingPaths.compactMap(cascadingResolver.resolve) {
+                config.merge(into: &configuration)
             }
         } catch {
             output.print("\(error)", kind: .error, verbose: false)

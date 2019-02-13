@@ -37,13 +37,6 @@ public struct SectionInfo {
     }
 }
 
-//extension Section {
-//    public init(config: Configuration, info: SectionInfo, linesComponents: [LineComponents]) {
-//        self.init(configuration: config, info: info, linesComponents: linesComponents)
-//    }
-//
-//}
-
 extension SectionInfo: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

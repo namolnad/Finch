@@ -12,21 +12,25 @@
 extension Configuration {
     static let mock: Configuration = {
         var config: Configuration = .default(projectDir: "")
-        config.update(with: TestHelper.model(for: "default_config"))
+        let newConfig: Configuration = TestHelper.model(for: "default_config")
+
+        newConfig.merge(into: &config)
 
         return config
     }()
 
     static let mockExcludedSection: Configuration = {
         var config: Configuration = .mock
-        config.update(with: TestHelper.model(for: "excluded_section_config"))
+        let newConfig: Configuration = TestHelper.model(for: "excluded_section_config")
+        newConfig.merge(into: &config)
 
         return config
     }()
 
     static let mockBuildNumberCommand: Configuration = {
-        var config: Configuration = .mock
-        config.update(with: TestHelper.model(for: "build_number_command_config"))
+        var config: Configuration = .default(projectDir: "")
+        let newConfig: Configuration = TestHelper.model(for: "build_number_command_config")
+        newConfig.merge(into: &config)
 
         return config
     }()

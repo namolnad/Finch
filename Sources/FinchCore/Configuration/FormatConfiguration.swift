@@ -1,5 +1,5 @@
 //
-//  SectionsConfiguration.swift
+//  FormatConfiguration.swift
 //  FinchCore
 //
 //  Created by Dan Loman on 2/12/19.
@@ -58,19 +58,19 @@ extension FormatConfiguration: SubConfiguration {
 
 extension FormatConfiguration: Mergeable {
     public func merge(into other: inout FormatConfiguration) {
-        if other.sectionInfos.isEmpty {
+        if !sectionInfos.isEmpty {
             other.sectionInfos = sectionInfos
         }
 
-        if other.formatTemplate == nil {
+        if let formatTemplate = formatTemplate {
             other.formatTemplate = formatTemplate
         }
 
-        if other.header == nil {
+        if let header = header {
             other.header = header
         }
 
-        if other.footer == nil {
+        if let footer = footer {
             other.footer = footer
         }
 

@@ -13,17 +13,17 @@ public protocol SubConfiguration {
 
 public struct Configuration {
     public private(set) var contributorsConfig: ContributorsConfiguration
+    public private(set) var formatConfig: FormatConfiguration
     public private(set) var gitConfig: GitConfiguration
     public private(set) var projectDir: String = ""
     public private(set) var resolutionCommandsConfig: ResolutionCommandsConfiguration
-    public private(set) var formatConfig: FormatConfiguration
 }
 
 extension Configuration: Decodable {
     enum CodingKeys: String, CodingKey {
         case contributorsConfig
-        case gitConfig
         case formatConfig
+        case gitConfig
         case resolutionCommandsConfig
     }
 
@@ -31,9 +31,9 @@ extension Configuration: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         self.contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
+        self.formatConfig = container.decode(forKey: .formatConfig, default: .default)
         self.gitConfig = container.decode(forKey: .gitConfig, default: .default)
         self.resolutionCommandsConfig = container.decode(forKey: .resolutionCommandsConfig, default: .blank)
-        self.formatConfig = container.decode(forKey: .formatConfig, default: .default)
     }
 }
 
@@ -43,6 +43,7 @@ extension Configuration: Mergeable {
             other.projectDir = projectDir
         }
         contributorsConfig.merge(into: &other.contributorsConfig)
+        formatConfig.merge(into: &other.formatConfig)
         gitConfig.merge(into: &other.gitConfig)
         resolutionCommandsConfig.merge(into: &other.resolutionCommandsConfig)
     }
@@ -52,10 +53,10 @@ extension Configuration {
     public static func `default`(projectDir: String) -> Configuration {
         return .init(
             contributorsConfig: .default,
+            formatConfig: .default,
             gitConfig: .default,
             projectDir: projectDir,
-            resolutionCommandsConfig: .default,
-            formatConfig: .default
+            resolutionCommandsConfig: .default
         )
     }
 }

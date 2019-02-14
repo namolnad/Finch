@@ -1,4 +1,3 @@
----
 resolution_commands:
   build_number:
   - "/usr/bin/env"

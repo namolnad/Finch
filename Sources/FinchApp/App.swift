@@ -25,9 +25,9 @@ public struct App {
         }
     }
     struct Options {
-        public internal(set) var projectDir: String?
-        public internal(set) var shouldPrintVersion: Bool
-        public internal(set) var verbose: Bool
+        var projectDir: String?
+        var shouldPrintVersion: Bool
+        var verbose: Bool
     }
 
     let configuration: Configuration

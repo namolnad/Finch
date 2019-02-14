@@ -9,6 +9,7 @@
 import FinchApp
 import FinchUtilities
 import Foundation
+import enum Utility.ArgumentParserError
 
 let processInfo: ProcessInfo = .processInfo
 
@@ -31,7 +32,7 @@ do {
             "Error: %@",
             comment: "Formatted error message"
         ),
-        error.localizedDescription
+        (error as? ArgumentParserError)?.description ?? error.localizedDescription
     )
 
     Output.instance.print(formattedError, kind: .error)

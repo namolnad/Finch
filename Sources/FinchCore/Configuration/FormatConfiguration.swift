@@ -5,10 +5,6 @@
 //  Created by Dan Loman on 2/12/19.
 //
 
-public protocol Mergeable {
-    func merge(into other: inout Self)
-}
-
 public struct FormatConfiguration {
     public private(set) var delimiterConfig: DelimiterConfiguration
     public private(set) var footer: String?

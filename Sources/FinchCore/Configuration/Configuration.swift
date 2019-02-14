@@ -6,6 +6,10 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
+public protocol Mergeable {
+    func merge(into other: inout Self)
+}
+
 public protocol SubConfiguration {
     static var blank: Self { get }
     static var `default`: Self { get }

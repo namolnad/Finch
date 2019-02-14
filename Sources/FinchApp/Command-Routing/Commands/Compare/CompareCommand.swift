@@ -5,20 +5,19 @@
 //  Created by Dan Loman on 1/29/19.
 //
 
-import FinchCore
 import FinchUtilities
 import Utility
 
 final class CompareCommand: Command {
-    public struct Options {
-        public fileprivate(set) var versions: (old: Version, new: Version)
-        public fileprivate(set) var buildNumber: String?
-        public fileprivate(set) var gitLog: String?
-        public fileprivate(set) var normalizeTags: Bool
-        public fileprivate(set) var noFetch: Bool
-        public fileprivate(set) var noShowVersion: Bool
-        public fileprivate(set) var releaseManager: String?
-        public fileprivate(set) var toPasteBoard: Bool
+    struct Options {
+        fileprivate(set) var versions: (old: Version, new: Version)
+        fileprivate(set) var buildNumber: String?
+        fileprivate(set) var gitLog: String?
+        fileprivate(set) var normalizeTags: Bool
+        fileprivate(set) var noFetch: Bool
+        fileprivate(set) var noShowVersion: Bool
+        fileprivate(set) var releaseManager: String?
+        fileprivate(set) var toPasteBoard: Bool
     }
 
     private typealias Binder = ArgumentBinder<Options>
@@ -152,7 +151,7 @@ final class CompareCommand: Command {
 }
 
 extension CompareCommand.Options {
-    static let blank: CompareCommand.Options = .init(
+    fileprivate static let blank: CompareCommand.Options = .init(
         versions: (.init(0, 0, 0), .init(0, 0, 0)),
         buildNumber: nil,
         gitLog: nil,

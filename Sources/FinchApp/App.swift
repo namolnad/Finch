@@ -7,21 +7,13 @@
 //
 
 import struct Utility.Version
-import FinchCore
+import struct FinchCore.Configuration
 import FinchUtilities
 
-typealias Version = Utility.Version
+public typealias Version = Utility.Version
 
 public struct App {
-    struct Options {
-        public internal(set) var projectDir: String?
-        public internal(set) var shouldPrintVersion: Bool
-        public internal(set) var verbose: Bool
-    }
-
     public struct Meta {
-        public typealias Version = Utility.Version
-
         let buildNumber: Int
         let name: String
         let version: Version
@@ -31,6 +23,11 @@ public struct App {
             self.name = name
             self.version = version
         }
+    }
+    struct Options {
+        public internal(set) var projectDir: String?
+        public internal(set) var shouldPrintVersion: Bool
+        public internal(set) var verbose: Bool
     }
 
     let configuration: Configuration

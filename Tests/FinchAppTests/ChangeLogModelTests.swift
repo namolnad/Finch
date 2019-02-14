@@ -7,7 +7,7 @@
 //
 
 @testable import FinchApp
-@testable import FinchCore
+import FinchCore
 import SnapshotTesting
 import XCTest
 

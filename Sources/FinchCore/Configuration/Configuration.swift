@@ -28,7 +28,7 @@ extension Configuration: Decodable {
         case contributors
         case format
         case git
-        case resolutionCommands
+        case resolutionCommands = "resolution_commands"
     }
 
     public init(from decoder: Decoder) throws {

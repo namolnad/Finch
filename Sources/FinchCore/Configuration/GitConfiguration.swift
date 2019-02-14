@@ -14,9 +14,9 @@ public struct GitConfiguration {
 
 extension GitConfiguration: Decodable {
     enum CodingKeys: String, CodingKey {
-        case branchPrefix
-        case executablePath
-        case repoBaseUrl
+        case branchPrefix = "branch_prefix"
+        case executablePath = "executable_path"
+        case repoBaseUrl = "repo_base_url"
     }
 
     public init(from decoder: Decoder) throws {

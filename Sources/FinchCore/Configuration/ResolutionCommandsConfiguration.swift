@@ -5,9 +5,16 @@
 //  Created by Dan Loman on 2/3/19.
 //
 
-public struct ResolutionCommandsConfiguration: Decodable {
+public struct ResolutionCommandsConfiguration {
     public private(set) var buildNumber: [String]?
     public private(set) var versions: [String]?
+}
+
+extension ResolutionCommandsConfiguration: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case buildNumber = "build_number"
+        case versions
+    }
 }
 
 extension ResolutionCommandsConfiguration: SubConfiguration {

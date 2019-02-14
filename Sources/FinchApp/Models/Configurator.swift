@@ -37,7 +37,7 @@ struct Configurator {
         output: OutputType = Output.instance) {
         self.cascadingResolver = .init(
             fileManager: fileManager,
-            pathComponent: "/.\(meta.name.lowercased())/config.json"
+            pathComponent: "/.\(meta.name.lowercased())/config.yml"
         )
 
         // The immediate resolver expects an exact path to be passed in through the environment variable

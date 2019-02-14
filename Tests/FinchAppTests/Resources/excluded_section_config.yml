@@ -1,0 +1,20 @@
+format:
+  section_infos:
+  - title: Features
+    tags:
+    - "*"
+    excluded: true
+  - title: Bug Fixes
+    tags:
+    - bugfix
+    - bug fix
+    - bug
+  - title: Platform Improvements
+    tags:
+    - platform
+    - tooling
+    - upgrade
+    - cleanup
+    format_string: " - << message >> — << commit_type_hyperlink >>"
+
+

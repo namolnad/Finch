@@ -6,9 +6,16 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-public struct ContributorsConfiguration: Decodable {
+public struct ContributorsConfiguration {
     public private(set) var contributors: [Contributor]
     public private(set) var contributorHandlePrefix: String?
+}
+
+extension ContributorsConfiguration: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case contributors
+        case contributorHandlePrefix = "contributor_handle_prefix"
+    }
 }
 
 extension ContributorsConfiguration: SubConfiguration {

@@ -13,6 +13,7 @@ let package = Package(
         .package(url: "git@github.com:orta/Komondor.git", from: "1.0.0"),
         .package(url: "git@github.com:pointfreeco/swift-snapshot-testing", from: "1.1.0"),
         .package(url: "git@github.com:realm/SwiftLint.git", from: "0.30.1"),
+        .package(url: "git@github.com:jpsim/Yams.git", from: "1.0.1"),
     ],
     targets: [
         .target(
@@ -26,10 +27,10 @@ let package = Package(
             dependencies: ["FinchUtilities"]),
         .target(
             name: "FinchUtilities",
-            dependencies: ["Utility"]),
+            dependencies: ["Utility", "Yams"]),
         .testTarget(
             name: "FinchAppTests",
-            dependencies: ["FinchApp", "SnapshotTesting"]),
+            dependencies: ["FinchApp", "SnapshotTesting", "Yams"]),
     ]
 )
 

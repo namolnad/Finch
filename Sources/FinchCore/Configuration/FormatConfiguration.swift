@@ -17,9 +17,9 @@ extension FormatConfiguration: Decodable {
     enum CodingKeys: String, CodingKey {
         case delimiterConfig = "delimiters"
         case footer
-        case formatString
+        case formatString = "format_string"
         case header
-        case sectionInfos
+        case sectionInfos = "section_infos"
     }
 
     public init(from decoder: Decoder) throws {

@@ -11,9 +11,9 @@ import Foundation
 
 public struct SectionInfo {
     enum CodingKeys: String, CodingKey {
-        case capitalizesMessage
+        case capitalizesMessage = "capitalizes_message"
         case excluded
-        case formatString
+        case formatString = "format_string"
         case tags
         case title
     }

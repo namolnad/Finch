@@ -18,6 +18,7 @@ final class CompareCommand: Command {
         fileprivate(set) var noShowVersion: Bool
         fileprivate(set) var releaseManager: String?
         fileprivate(set) var toPasteBoard: Bool
+        fileprivate(set) var useStdIn: Bool
     }
 
     private typealias Binder = ArgumentBinder<Options>
@@ -146,6 +147,12 @@ final class CompareCommand: Command {
             kind: Bool.self,
             usage: "Copy output to pasteboard in addition to stdout"
         )) { $0.toPasteBoard = $1 }
+
+        binder.bind(option: subparser.add(
+            option: "--use-stdin",
+            kind: Bool.self,
+            usage: "Use standard input as git-log source"
+        )) { $0.useStdIn = $1 }
     }
     // swiftlint:enable function_body_length line_length
 }
@@ -159,6 +166,7 @@ extension CompareCommand.Options {
         noFetch: false,
         noShowVersion: false,
         releaseManager: nil,
-        toPasteBoard: false
+        toPasteBoard: false,
+        useStdIn: false
     )
 }

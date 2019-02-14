@@ -8,6 +8,7 @@
 
 import class Basic.Process
 import FinchCore
+import Foundation
 
 protocol ChangeLogModelType {
     func versions(app: App, env: Environment) throws -> (old: Version, new: Version)
@@ -28,10 +29,15 @@ final class ChangeLogModel: ChangeLogModelType {
 
     private let resolver: VersionResolving
     private let service: ChangeLogInfoServiceType
+    private let stdIn: FileHandle
 
-    init(resolver: VersionResolving = VersionsResolver(), service: ChangeLogInfoServiceType = ChangeLogInfoService()) {
+    init(
+        resolver: VersionResolving = VersionsResolver(),
+        service: ChangeLogInfoServiceType = ChangeLogInfoService(),
+        stdIn: FileHandle = .standardInput) {
         self.resolver = resolver
         self.service = service
+        self.stdIn = stdIn
     }
 
     func changeLog(options: Options, app: App, env: Environment) throws -> String {
@@ -70,14 +76,15 @@ final class ChangeLogModel: ChangeLogModelType {
 
     private func outputInfo(for options: Options, app: App, env: Environment) throws -> OutputInfo {
         let configuration = app.configuration
-        let rawChangeLog: String = try service.changeLog(options: options, app: app, env: env)
+        let rawChangeLog: String = try options.useStdIn ?
+            stdInChangeLog() :
+            service.changeLog(options: options, app: app, env: env)
         let version: String? = try versionHeader(options: options, app: app, env: env)
         let releaseManager: Contributor? = self.releaseManager(options: options, configuration: configuration)
 
         let transformers = TransformerFactory(configuration: configuration).initialTransformers
 
-        let linesComponents = type(of: self)
-            .filteredLines(input: rawChangeLog, using: transformers)
+        let linesComponents = filteredLines(input: rawChangeLog, using: transformers)
             .compactMap { rawLine in
                 LineComponents(
                     rawLine: rawLine,
@@ -122,7 +129,7 @@ final class ChangeLogModel: ChangeLogModelType {
     }
 
     // Normalizes input/removes
-    private static func filteredLines(input: String, using transformers: [Transformer]) -> [String] {
+    private func filteredLines(input: String, using transformers: [Transformer]) -> [String] {
         // Input must be sorted for regex to remove consecutive matching lines (cherry-picks)
         let sortedInput = input
             .components(separatedBy: "\n")
@@ -173,5 +180,9 @@ final class ChangeLogModel: ChangeLogModelType {
         }
 
         return configuration.contributors.first { $0.email == email }
+    }
+
+    private func stdInChangeLog() throws -> String {
+        return try stdIn.readFileContents()
     }
 }

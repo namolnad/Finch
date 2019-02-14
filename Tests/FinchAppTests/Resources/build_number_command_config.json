@@ -1,5 +1,5 @@
 {
-  "resolution_commands_config" : {
+  "resolution_commands" : {
     "build_number" : [
       "\/usr\/bin\/env",
       "bash",

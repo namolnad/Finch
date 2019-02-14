@@ -15,7 +15,7 @@ public struct FormatConfiguration {
 
 extension FormatConfiguration: Decodable {
     enum CodingKeys: String, CodingKey {
-        case delimiterConfig
+        case delimiterConfig = "delimiters"
         case footer
         case formatString
         case header

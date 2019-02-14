@@ -1,5 +1,5 @@
 {
-  "contributors_config" : {
+  "contributors" : {
     "contributor_handle_prefix" : "@",
     "contributors" : [
       {
@@ -16,10 +16,10 @@
       }
     ]
   },
-  "git_config" : {
+  "git" : {
     "repo_base_url" : "https:\/\/github.com\/citadel-of-ricks\/C-137"
   },
-  "format_config" : {
+  "format" : {
     "footer" : "\n### Timeline\n- Begin development:\n- Feature cut-off \/ Start of bake \/ dogfooding:\n- Submission:\n- Release (expected):\n- Release (actual):\n",
     "section_infos" : [
       {

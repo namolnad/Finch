@@ -5,20 +5,28 @@
 //  Created by Dan Loman on 2/3/19.
 //
 
-import Foundation
-
 public struct ResolutionCommandsConfiguration: Decodable {
-    public let buildNumber: [String]?
-    public let versions: [String]?
+    public private(set) var buildNumber: [String]?
+    public private(set) var versions: [String]?
 }
 
-extension ResolutionCommandsConfiguration {
-    public static let blank: ResolutionCommandsConfiguration = .init(buildNumber: nil, versions: nil)
+extension ResolutionCommandsConfiguration: SubConfiguration {
+    public static let blank: ResolutionCommandsConfiguration = .init(
+        buildNumber: nil,
+        versions: nil
+    )
+
+    public static var `default`: ResolutionCommandsConfiguration { return .blank }
 }
 
-extension ResolutionCommandsConfiguration {
-    var isBlank: Bool {
-        return [buildNumber, versions]
-            .reduce(true) { $0 && $1?.isEmpty == true }
+extension ResolutionCommandsConfiguration: Mergeable {
+    public func merge(into other: inout ResolutionCommandsConfiguration) {
+        if let buildNumber = buildNumber, !buildNumber.isEmpty {
+            other.buildNumber = buildNumber
+        }
+
+        if let versions = versions, !versions.isEmpty {
+            other.versions = versions
+        }
     }
 }

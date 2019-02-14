@@ -13,6 +13,7 @@ final class CompareCommand: Command {
         fileprivate(set) var versions: (old: Version, new: Version)
         fileprivate(set) var buildNumber: String?
         fileprivate(set) var gitLog: String?
+        fileprivate(set) var normalizeTags: Bool
         fileprivate(set) var noFetch: Bool
         fileprivate(set) var noShowVersion: Bool
         fileprivate(set) var releaseManager: String?
@@ -117,6 +118,12 @@ final class CompareCommand: Command {
         )) { $0.gitLog = $1 }
 
         binder.bind(option: subparser.add(
+            option: "--normalize-tags",
+            kind: Bool.self,
+            usage: "Normalize all commit tags by lowercasing prior to running comparison"
+        )) { $0.normalizeTags = $1 }
+
+        binder.bind(option: subparser.add(
             option: "--no-fetch",
             kind: Bool.self,
             usage: "Don't fetch origin before auto-generating log"
@@ -148,6 +155,7 @@ extension CompareCommand.Options {
         versions: (.init(0, 0, 0), .init(0, 0, 0)),
         buildNumber: nil,
         gitLog: nil,
+        normalizeTags: false,
         noFetch: false,
         noShowVersion: false,
         releaseManager: nil,

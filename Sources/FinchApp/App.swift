@@ -10,12 +10,10 @@ import struct Utility.Version
 import struct FinchCore.Configuration
 import FinchUtilities
 
-typealias Version = Utility.Version
+public typealias Version = Utility.Version
 
 public struct App {
     public struct Meta {
-        public typealias Version = Utility.Version
-
         let buildNumber: Int
         let name: String
         let version: Version
@@ -26,15 +24,15 @@ public struct App {
             self.version = version
         }
     }
-    public struct Options {
+    struct Options {
         var projectDir: String?
         var shouldPrintVersion: Bool
         var verbose: Bool
     }
 
-    public let configuration: Configuration
-    public let meta: Meta
-    public let options: Options
+    let configuration: Configuration
+    let meta: Meta
+    let options: Options
     private let output: OutputType
 
     init(configuration: Configuration, meta: Meta, options: Options, output: OutputType = Output.instance) {

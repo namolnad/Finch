@@ -74,13 +74,20 @@ final class ChangeLogModel: ChangeLogModelType {
         let version: String? = try versionHeader(options: options, app: app, env: env)
         let releaseManager: Contributor? = self.releaseManager(options: options, configuration: configuration)
 
-        let transformerFactory = TransformerFactory(configuration: configuration)
+        let transformers = TransformerFactory(configuration: configuration).initialTransformers
 
         let linesComponents = type(of: self)
-            .filteredLines(input: rawChangeLog, using: transformerFactory.initialTransformers)
-            .compactMap { LineComponents(rawLine: $0, configuration: configuration) }
+            .filteredLines(input: rawChangeLog, using: transformers)
+            .compactMap { rawLine in
+                LineComponents(
+                    rawLine: rawLine,
+                    configuration: configuration,
+                    normalizeTags: options.normalizeTags
+                )
+            }
 
         var sections: [Section] = configuration
+            .formatConfig
             .sectionInfos
             .map { Section(configuration: configuration, info: $0, linesComponents: []) }
 
@@ -108,8 +115,8 @@ final class ChangeLogModel: ChangeLogModelType {
             version: version,
             releaseManager: releaseManager,
             sections: sections.filter { !$0.info.excluded && !$0.linesComponents.isEmpty },
-            footer: configuration.footer,
-            header: configuration.header,
+            footer: configuration.formatConfig.footer,
+            header: configuration.formatConfig.header,
             contributorHandlePrefix: configuration.contributorHandlePrefix
         )
     }

@@ -81,15 +81,15 @@ extension Regex.Pattern {
     static let rawPattern: Regex.Pattern = "&&&(.*?)&&&(?:.*?)@@@(.*?)\\(#(.*?)\\)@@@###(.*?)###"
 
     static func filteredMessagePattern(from configuration: Configuration) -> Regex.Pattern {
-        let leftDelim = configuration.delimiterConfig.input.left.escaped
-        let rightDelim = configuration.delimiterConfig.input.right.escaped
+        let leftDelim = configuration.formatConfig.delimiterConfig.input.left.escaped
+        let rightDelim = configuration.formatConfig.delimiterConfig.input.right.escaped
 
         return "@@@(?:\(leftDelim)(?:.*?)\(rightDelim))*(.*?)(?: \\(#\\d+\\))?@@@"
     }
 
     static func tagPattern(from configuration: Configuration) -> Regex.Pattern {
-        let leftDelim = configuration.delimiterConfig.input.left.escaped
-        let rightDelim = configuration.delimiterConfig.input.right.escaped
+        let leftDelim = configuration.formatConfig.delimiterConfig.input.left.escaped
+        let rightDelim = configuration.formatConfig.delimiterConfig.input.right.escaped
 
         return "\(leftDelim)(.*?)\(rightDelim)"
     }

@@ -15,7 +15,7 @@ public struct Line {
 extension Line {
     static func from(components: LineComponents, context: LineContext) -> Line {
         let template: FormatTemplate = context.sectionInfo.formatTemplate ??
-            context.configuration.formatTemplate ??
+            context.configuration.formatConfig.formatTemplate ??
             .default
 
         let value = template.outputtables.reduce("") { partial, next in

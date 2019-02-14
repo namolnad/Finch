@@ -12,7 +12,6 @@ import SnapshotTesting
 import XCTest
 
 final class ChangeLogModelTests: XCTestCase {
-
     private var model: ChangeLogModel {
         return ChangeLogModel(
             resolver: VersionsResolverMock(),
@@ -91,7 +90,8 @@ final class ChangeLogModelTests: XCTestCase {
         assertSnapshot(
             matching: LineComponents(
                 rawLine: sample,
-                configuration: .mock
+                configuration: .mock,
+                normalizeTags: false
             ),
             as: .dump
         )
@@ -101,7 +101,8 @@ final class ChangeLogModelTests: XCTestCase {
         assertSnapshot(
             matching: LineComponents(
                 rawLine: sample2,
-                configuration: .mock
+                configuration: .mock,
+                normalizeTags: false
             ),
             as: .dump
         )
@@ -112,6 +113,7 @@ final class ChangeLogModelTests: XCTestCase {
             versions: (.init(0, 0, 1), .init(6, 13, 0)),
             buildNumber: nil,
             gitLog: gitLog,
+            normalizeTags: false,
             noFetch: true,
             noShowVersion: false,
             releaseManager: Configuration.mock.contributors.first?.email,

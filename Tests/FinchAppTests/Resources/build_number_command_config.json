@@ -1,3 +1,10 @@
 {
-    "build_number_command_arguments": ["/usr/bin/env", "bash", "-c", "echo \"$NEW_VERSION-build-num-here\""]
+  "resolution_commands" : {
+    "build_number" : [
+      "\/usr\/bin\/env",
+      "bash",
+      "-c",
+      "echo \"$NEW_VERSION-build-num-here\""
+    ]
+  }
 }

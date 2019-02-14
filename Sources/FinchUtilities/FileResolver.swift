@@ -20,9 +20,9 @@ public final class FileResolver<FileType: Decodable> {
 
     private let pathComponent: String
 
-    public init(fileManager: FileManager, pathComponent: String? = nil) {
+    public init(fileManager: FileManager, pathComponent: String = "") {
         self.fileManager = fileManager
-        self.pathComponent = pathComponent ?? ""
+        self.pathComponent = pathComponent
     }
 
     public func resolve(path: String) throws -> FileType? {

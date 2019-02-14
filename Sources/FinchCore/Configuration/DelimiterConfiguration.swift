@@ -6,37 +6,45 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
+public struct DelimiterConfiguration: Equatable {
+    public private(set) var input: DelimiterPair
+    public private(set) var output: DelimiterPair
+}
 
-public struct DelimiterConfiguration: Decodable, Equatable {
+extension DelimiterConfiguration: Decodable {
     enum CodingKeys: String, CodingKey {
         case input
         case output
     }
-    public let input: DelimiterPair
-    public let output: DelimiterPair
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        input = (try? container.decode(DelimiterPair.self, forKey: .input)) ?? .blank
-        output = (try? container.decode(DelimiterPair.self, forKey: .output)) ?? .blank
-    }
-
-    public init(input: DelimiterPair, output: DelimiterPair) {
-        self.input = input
-        self.output = output
+        input = container.decode(forKey: .input, default: .blank)
+        output = container.decode(forKey: .output, default: .blank)
     }
 }
 
-extension DelimiterConfiguration {
-    public static let `default`: DelimiterConfiguration = .init(input: .defaultInput, output: .defaultOutput)
+extension DelimiterConfiguration: SubConfiguration {
+    public static let `default`: DelimiterConfiguration = .init(
+        input: .defaultInput,
+        output: .defaultOutput
+    )
 
-    public static let blank: DelimiterConfiguration = .init(input: .blank, output: .blank)
+    public static let blank: DelimiterConfiguration = .init(
+        input: .blank,
+        output: .blank
+    )
 }
 
-extension DelimiterConfiguration {
-    var isBlank: Bool {
-        return input.isBlank && output.isBlank
+extension DelimiterConfiguration: Mergeable {
+    public func merge(into other: inout DelimiterConfiguration) {
+        if !input.isBlank {
+            other.input = input
+        }
+
+        if !output.isBlank {
+            other.output = output
+        }
     }
 }

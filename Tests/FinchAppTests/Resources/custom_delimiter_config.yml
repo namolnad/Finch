@@ -10,7 +10,7 @@ contributors:
 git:
   repo_base_url: https://github.com/citadel-of-ricks/C-137
 format:
-  footer: |2
+  footer: |
 
     ### Timeline
     - Begin development:

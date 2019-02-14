@@ -25,19 +25,19 @@ public struct Configuration {
 
 extension Configuration: Decodable {
     enum CodingKeys: String, CodingKey {
-        case contributorsConfig
-        case formatConfig
-        case gitConfig
-        case resolutionCommandsConfig
+        case contributors
+        case format
+        case git
+        case resolutionCommands
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.contributorsConfig = container.decode(forKey: .contributorsConfig, default: .blank)
-        self.formatConfig = container.decode(forKey: .formatConfig, default: .default)
-        self.gitConfig = container.decode(forKey: .gitConfig, default: .default)
-        self.resolutionCommandsConfig = container.decode(forKey: .resolutionCommandsConfig, default: .blank)
+        self.contributorsConfig = container.decode(forKey: .contributors, default: .blank)
+        self.formatConfig = container.decode(forKey: .format, default: .default)
+        self.gitConfig = container.decode(forKey: .git, default: .default)
+        self.resolutionCommandsConfig = container.decode(forKey: .resolutionCommands, default: .blank)
     }
 }
 

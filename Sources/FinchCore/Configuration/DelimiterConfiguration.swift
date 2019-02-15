@@ -11,7 +11,7 @@ public struct DelimiterConfiguration: Equatable {
     public private(set) var output: DelimiterPair
 }
 
-extension DelimiterConfiguration: Decodable {
+extension DelimiterConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case input
         case output

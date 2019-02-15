@@ -12,7 +12,7 @@ public struct GitConfiguration {
     public private(set) var repoBaseUrl: String
 }
 
-extension GitConfiguration: Decodable {
+extension GitConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case branchPrefix = "branch_prefix"
         case executablePath = "executable_path"

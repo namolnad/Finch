@@ -16,3 +16,9 @@ protocol Command {
     func run(with result: ParsingResult, app: App, env: Environment) throws
     func bindingGlobalOptions(to binder: ArgumentBinder<App.Options>) -> Self
 }
+
+extension Command {
+    func bindingGlobalOptions(to binder: ArgumentBinder<App.Options>) -> Self {
+        return self
+    }
+}

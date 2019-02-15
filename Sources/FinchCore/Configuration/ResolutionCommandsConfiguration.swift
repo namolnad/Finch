@@ -10,7 +10,7 @@ public struct ResolutionCommandsConfiguration {
     public private(set) var versions: [String]?
 }
 
-extension ResolutionCommandsConfiguration: Decodable {
+extension ResolutionCommandsConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case buildNumber = "build_number"
         case versions

@@ -23,7 +23,7 @@ public struct Configuration {
     public private(set) var resolutionCommandsConfig: ResolutionCommandsConfiguration
 }
 
-extension Configuration: Decodable {
+extension Configuration: Codable {
     enum CodingKeys: String, CodingKey {
         case contributors
         case format
@@ -38,6 +38,15 @@ extension Configuration: Decodable {
         self.formatConfig = container.decode(forKey: .format, default: .default)
         self.gitConfig = container.decode(forKey: .git, default: .default)
         self.resolutionCommandsConfig = container.decode(forKey: .resolutionCommands, default: .blank)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(contributorsConfig, forKey: .contributors)
+        try container.encode(formatConfig, forKey: .format)
+        try container.encode(gitConfig, forKey: .git)
+        try container.encode(resolutionCommandsConfig, forKey: .resolutionCommands)
     }
 }
 
@@ -62,6 +71,12 @@ extension Configuration {
             projectDir: projectDir,
             resolutionCommandsConfig: .default
         )
+    }
+
+    public static func example(projectDir: String) -> Configuration {
+        var example: Configuration = .default(projectDir: projectDir)
+        ContributorsConfiguration.example.merge(into: &example.contributorsConfig)
+        return example
     }
 }
 

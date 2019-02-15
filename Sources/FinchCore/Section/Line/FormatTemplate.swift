@@ -32,6 +32,19 @@ extension FormatTemplate {
             FormatComponent.contributorHandle
         ]
     )
+
+    var formatString: String {
+        return outputtables.reduce("") { (partial: String, outputtable: LineOutputtable) in
+            switch outputtable {
+            case let component as FormatComponent:
+                return partial + "<< \(component.rawValue) >>"
+            case let string as String:
+                return partial + string
+            default:
+                return partial
+            }
+        }
+    }
 }
 
 private extension String {

@@ -37,7 +37,7 @@ public struct SectionInfo {
     }
 }
 
-extension SectionInfo: Decodable {
+extension SectionInfo: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -47,6 +47,16 @@ extension SectionInfo: Decodable {
         self.formatTemplate = FormatTemplate(formatString: formatString)
         self.tags = try container.decode(forKey: .tags)
         self.title = try container.decode(forKey: .title)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(formatTemplate?.formatString, forKey: .formatString)
+        try container.encode(capitalizesMessage, forKey: .capitalizesMessage)
+        try container.encode(excluded, forKey: .excluded)
+        try container.encode(tags, forKey: .tags)
+        try container.encode(title, forKey: .title)
     }
 }
 

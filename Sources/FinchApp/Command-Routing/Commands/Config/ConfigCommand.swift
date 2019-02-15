@@ -56,9 +56,9 @@ final class ConfigCommand: Command {
     private func bindOptions(to binder: Binder, meta: App.Meta) {
         binder.bind(option: subparser.add(
             option: "--example",
-            shortName: "-v",
+            shortName: "-e",
             kind: Bool.self,
-            usage: "Don't fetch origin before auto-generating log"
+            usage: "Displays example config"
         )) { $0.shouldPrintExample = $1 }
     }
 }

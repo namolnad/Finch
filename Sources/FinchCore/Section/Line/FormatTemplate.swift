@@ -26,9 +26,9 @@ extension FormatTemplate {
             FormatComponent.tags,
             " ",
             FormatComponent.message,
-            " — ",
+            " - ",
             FormatComponent.commitTypeHyperlink,
-            " — ",
+            " - ",
             FormatComponent.contributorHandle
         ]
     )

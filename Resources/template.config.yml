@@ -1,0 +1,52 @@
+contributors:
+  contributors:
+  - email: esme.squalor@example.com
+    handle: GigiGeniveve
+  contributor_handle_prefix: '@'
+format:
+  delimiters:
+    input:
+      left: '['
+      right: ']'
+    output:
+      left: '|'
+      right: '|'
+  footer: |
+  
+    ### Timeline
+    - Begin development:
+    - Feature cut-off / Start of bake / dogfooding:
+    - Submission:
+    - Release (expected):
+    - Release (actual):
+  format_string: ' - << tags >> << message >> - << commit_type_hyperlink >> - << contributor_handle
+    >>'
+  header: null
+  section_infos:
+  - format_string: ' - << tags >> << message >> - << commit_type_hyperlink >> - <<
+      contributor_handle >>'
+    capitalizes_message: false
+    excluded: false
+    tags:
+    - '*'
+    title: Features
+  - format_string: ' - << tags >> << message >> - << commit_type_hyperlink >> - <<
+      contributor_handle >>'
+    capitalizes_message: false
+    excluded: false
+    tags:
+    - bug fix
+    - bug
+    - bugfix
+    title: Bug Fixes
+git:
+  branch_prefix: origin/releases/ ## Defaults to 
+  repo_base_url: https://github.com/org/repo ## Configure to follow your convention
+resolution_commands:
+  build_number:
+  - /usr/bin/env
+  - bash
+  - -c
+  - git -C $HOME/Code/Finch rev-list --count @
+
+

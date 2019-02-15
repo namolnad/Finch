@@ -10,7 +10,7 @@ The name Finch is derived from the purpose of the application itself — trackin
 Finch is available via multiple installation methods:
 - Installable package (**recommended**): Download and run the most recent [release](https://github.com/namolnad/Finch/releases)'s `Finch.pkg` file and follow the on-screen instructions
 - Swift Package Manager: Add to your `Package.swift` file's dependencies: `.package(url: "https://github.com/namolnad/Finch.git", from: "0.0.17")` and call via `swift run finch compare`
-- From source: If you’d like to build from source, you can clone this repository and run `make install` from the root of the cloned directory. This will install and link the Finch binary and will place a template config file at the following location `$HOME/.finch/config.json.template`
+- From source: If you’d like to build from source, you can clone this repository and run `make install` from the root of the cloned directory. This will install and link the Finch binary and will place a template config file at the following location `$HOME/.finch/template.config.yml`
 
 
 ## Usage
@@ -33,25 +33,13 @@ project-changelog() {
 # project-changelog --versions 6.12.1 6.13.0
 ```
 
-## Configuration Setup
-The following portions of Finch are configurable:
-- Contributor list
-- Contributor handle prefix
-- Section info (title and corresponding tags)
-- Section's line format
-- Tag input and output delimiters
-- Footer (Appended to the end of the formatted diff as a simple string)
-- Git executable path
-- Git branch (or tag) prefix
-- Git repo base url
-- Build number generation command
-
-To function properly, Finch requires at least a contributors list.
+## Configuration
+View Finch's configurable elements in this [configuration template](Resources/template.config.yml).
 
 ### File Type & Search Behavior
-Finch will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.finch` directory containing a `config.json` file. The `.finch` directory can placed in either the home, current, or project directories. Alternatively, if you provide a custom path through an env variable, Finch will look for a valid configuration file at the included path.
+Finch will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.finch` directory containing a `config.yml` file. The `.finch` directory can be placed in either the home, current, or project directories. Alternatively, if you provide a custom path through an env variable, Finch will look for a valid configuration file at the included path.
 
-The config search paths will be executed in the following mannger:
+The config search paths will be executed in the following manner:
 - Env var
   - FINCH_CONFIG
 __OR__
@@ -60,58 +48,10 @@ __OR__
   - Finch's current directory
   - `--project-dir` argument
 
-Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or omitted config file components will be ignored. Configuration customization is not additive to the existing configuration.
+### Config formatting
+`config.yml` should be a valid YAML file in the same format as this [config template](Resources/template.config.yml). (Note: Not all keys need to be included as Finch uses default values where possible)
 
-### Configuration file formatting expectations
-`config.json` should be a valid JSON file with the following format. Top level keys may be omitted if a previous configuration has fully configured the setting as desired.
-
-```
-{
-  "contributors_config": {
-    "contributors": [
-      {
-        "email": "jony.ive@apple.com",
-        "quip_handle": "Jony.Ive"
-      },
-      {
-
-        "email": "tony.stark+junk@gmail.com",
-        "quip_handle": "Tony.Stark"
-      }
-    ],
-    "contributor_handle_prefix": "%"
-  },
-  "section_infos": [
-    {
-      "title": "Features",
-      "tags": [
-        "feature",
-        "tag 2"
-      ],
-      "format_string": " - << tags >> << message >> — << commit_type_hyperlink >> — << contributor_handle >>",
-      "capitalizes_message": true,
-      "excluded": true
-    }
-  ],
-  "footer": "Custom footer here",
-  "delimiter_config": {
-    "output": {
-        "left": "**❲**",
-        "right": "**❳**"
-    }
-  },
-  "git_config": {
-    "branch_prefix": "origin/releases/",
-    "repo_base_url": "https://github.com/org/repo"
-  },
-  "build_number_command_arguments": [
-    "/usr/bin/env",
-    "bash",
-    "-c",
-    "git rev-list --count origin/releases/$NEW_VERSION"
-  ]
-}
-```
+At any time you can see an example config by running `finch config --show-example`. Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or omitted config file components will be ignored.
 
 *Notes*
   - Sections should be listed in the order you want them to be displayed in the output

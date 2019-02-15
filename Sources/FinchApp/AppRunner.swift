@@ -20,6 +20,10 @@ public class AppRunner {
         registry.register {
             CompareCommand(meta: meta, parser: $0).bindingGlobalOptions(to: $1)
         }
+
+        registry.register {
+            ConfigCommand(meta: meta, parser: $0).bindingGlobalOptions(to: $1)
+        }
     }
 
     public func run(arguments: [String]) throws {

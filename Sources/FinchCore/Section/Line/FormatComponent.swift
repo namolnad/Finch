@@ -17,7 +17,7 @@ enum FormatComponent: String {
     case tags
 }
 
-extension FormatComponent: Decodable {}
+extension FormatComponent: Codable {}
 
 extension FormatComponent: LineOutputtable {
     func output(components: LineComponents, context: LineContext) -> String {

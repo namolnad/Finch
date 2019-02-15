@@ -8,7 +8,14 @@
 
 import Foundation
 
-public struct Contributor: Decodable {
+public struct Contributor: Codable {
     public let email: String
     public let handle: String
+}
+
+extension Contributor {
+    static let example: Contributor = .init(
+        email: "esme.squalor@example.com",
+        handle: "GigiGeniveve"
+    )
 }

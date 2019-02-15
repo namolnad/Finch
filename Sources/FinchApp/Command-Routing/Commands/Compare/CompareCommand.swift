@@ -132,7 +132,7 @@ final class CompareCommand: Command {
         binder.bind(option: subparser.add(
             option: "--no-show-version",
             kind: Bool.self,
-            usage: "The ability to hide the version header"
+            usage: "Hides version header"
         )) { $0.noShowVersion = $1 }
 
         binder.bind(option: subparser.add(

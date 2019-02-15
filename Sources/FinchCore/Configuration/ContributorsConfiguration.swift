@@ -11,7 +11,7 @@ public struct ContributorsConfiguration {
     public private(set) var contributorHandlePrefix: String?
 }
 
-extension ContributorsConfiguration: Decodable {
+extension ContributorsConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case contributors
         case contributorHandlePrefix = "contributor_handle_prefix"
@@ -40,4 +40,11 @@ extension ContributorsConfiguration: Mergeable {
             other.contributorHandlePrefix = contributorHandlePrefix
         }
     }
+}
+
+extension ContributorsConfiguration {
+    static let example: ContributorsConfiguration = .init(
+        contributors: [.example],
+        contributorHandlePrefix: "@"
+    )
 }

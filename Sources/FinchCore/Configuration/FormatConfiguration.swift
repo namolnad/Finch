@@ -13,7 +13,7 @@ public struct FormatConfiguration {
     public private(set) var sectionInfos: [SectionInfo]
 }
 
-extension FormatConfiguration: Decodable {
+extension FormatConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case delimiterConfig = "delimiters"
         case footer
@@ -31,6 +31,16 @@ extension FormatConfiguration: Decodable {
         self.formatTemplate = FormatTemplate(formatString: formatString)
         self.header = container.optionalDecode(forKey: .header)
         self.sectionInfos = container.decode(forKey: .sectionInfos, default: [])
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(delimiterConfig, forKey: .delimiterConfig)
+        try container.encode(footer, forKey: .footer)
+        try container.encode(formatTemplate?.formatString, forKey: .formatString)
+        try container.encode(header, forKey: .header)
+        try container.encode(sectionInfos, forKey: .sectionInfos)
     }
 }
 

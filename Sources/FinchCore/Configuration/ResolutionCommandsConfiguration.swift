@@ -10,7 +10,7 @@ public struct ResolutionCommandsConfiguration {
     public private(set) var versions: [String]?
 }
 
-extension ResolutionCommandsConfiguration: Decodable {
+extension ResolutionCommandsConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case buildNumber = "build_number"
         case versions
@@ -36,4 +36,16 @@ extension ResolutionCommandsConfiguration: Mergeable {
             other.versions = versions
         }
     }
+}
+
+extension ResolutionCommandsConfiguration {
+    static let example: ResolutionCommandsConfiguration = .init(
+        buildNumber: [
+            "/usr/bin/env",
+            "bash",
+            "-c",
+            "git -C $HOME/Code/Finch rev-list --count @"
+        ],
+        versions: nil
+    )
 }

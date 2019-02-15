@@ -34,7 +34,7 @@ project-changelog() {
 ```
 
 ## Configuration
-View Finch's configurable elements in this [configuration template](Resources/template.config.yml).
+View Finch's configurable components in this [configuration template](Resources/template.config.yml).
 
 ### File Type & Search Behavior
 Finch will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.finch` directory containing a `config.yml` file. The `.finch` directory can be placed in either the home, current, or project directories. Alternatively, if you provide a custom path through an env variable, Finch will look for a valid configuration file at the included path.

@@ -37,3 +37,15 @@ extension ResolutionCommandsConfiguration: Mergeable {
         }
     }
 }
+
+extension ResolutionCommandsConfiguration {
+    static let example: ResolutionCommandsConfiguration = .init(
+        buildNumber: [
+            "/usr/bin/env",
+            "bash",
+            "-c",
+            "git -C $HOME/Code/Finch rev-list --count @"
+        ],
+        versions: nil
+    )
+}

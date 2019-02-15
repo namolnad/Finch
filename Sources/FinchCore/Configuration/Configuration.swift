@@ -75,7 +75,15 @@ extension Configuration {
 
     public static func example(projectDir: String) -> Configuration {
         var example: Configuration = .default(projectDir: projectDir)
-        ContributorsConfiguration.example.merge(into: &example.contributorsConfig)
+
+        ContributorsConfiguration
+            .example
+            .merge(into: &example.contributorsConfig)
+
+        ResolutionCommandsConfiguration
+            .example
+            .merge(into: &example.resolutionCommandsConfig)
+
         return example
     }
 }

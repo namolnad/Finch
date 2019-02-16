@@ -117,7 +117,7 @@ final class ChangeLogModel: ChangeLogModelType {
             sections: sections.filter { !$0.info.excluded && !$0.linesComponents.isEmpty },
             footer: configuration.formatConfig.footer,
             header: configuration.formatConfig.header,
-            contributorHandlePrefix: configuration.contributorHandlePrefix
+            contributorHandlePrefix: configuration.contributorsConfig.contributorHandlePrefix
         )
     }
 
@@ -172,6 +172,6 @@ final class ChangeLogModel: ChangeLogModelType {
             return nil
         }
 
-        return configuration.contributors.first { $0.emails.contains(email) }
+        return configuration.contributorsConfig.contributors.first { $0.emails.contains(email) }
     }
 }

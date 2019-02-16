@@ -87,21 +87,3 @@ extension Configuration {
         return example
     }
 }
-
-extension Configuration {
-    public var contributors: [Contributor] {
-        return contributorsConfig.contributors
-    }
-
-    public var contributorHandlePrefix: String {
-        return contributorsConfig.contributorHandlePrefix ?? ""
-    }
-
-    public var gitExecutablePath: String? {
-        return gitConfig.executablePath
-    }
-
-    public var gitBranchPrefix: String {
-        return gitConfig.branchPrefix
-    }
-}

@@ -8,7 +8,7 @@
 
 public struct ContributorsConfiguration {
     public private(set) var contributors: [Contributor]
-    public private(set) var contributorHandlePrefix: String?
+    public private(set) var contributorHandlePrefix: String
 }
 
 extension ContributorsConfiguration: Codable {
@@ -21,13 +21,12 @@ extension ContributorsConfiguration: Codable {
 extension ContributorsConfiguration: SubConfiguration {
     public static let blank: ContributorsConfiguration = .init(
         contributors: [],
-        contributorHandlePrefix: nil
-    )
-
-    public static let `default`: ContributorsConfiguration = .init(
-        contributors: [],
         contributorHandlePrefix: ""
     )
+
+    public static var `default`: ContributorsConfiguration {
+        return .blank
+    }
 }
 
 extension ContributorsConfiguration: Mergeable {
@@ -36,7 +35,7 @@ extension ContributorsConfiguration: Mergeable {
             other.contributors = contributors
         }
 
-        if let contributorHandlePrefix = contributorHandlePrefix {
+        if !contributorHandlePrefix.isEmpty {
             other.contributorHandlePrefix = contributorHandlePrefix
         }
     }

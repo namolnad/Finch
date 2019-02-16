@@ -116,7 +116,7 @@ final class ChangeLogModelTests: XCTestCase {
             normalizeTags: false,
             noFetch: true,
             noShowVersion: false,
-            releaseManager: Configuration.mock.contributors.first?.emails.first,
+            releaseManager: Configuration.mock.contributorsConfig.contributors.first?.emails.first,
             toPasteBoard: false
         )
     }

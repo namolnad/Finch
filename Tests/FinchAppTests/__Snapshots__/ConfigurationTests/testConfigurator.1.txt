@@ -1,7 +1,6 @@
 ▿ Configuration
   ▿ contributorsConfig: ContributorsConfiguration
-    ▿ contributorHandlePrefix: Optional<String>
-      - some: "@"
+    - contributorHandlePrefix: "@"
     ▿ contributors: 3 elements
       ▿ Contributor
         ▿ emails: 1 element

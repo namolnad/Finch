@@ -16,6 +16,23 @@ extension ContributorsConfiguration: Codable {
         case contributors = "contributor_list"
         case contributorHandlePrefix = "contributor_handle_prefix"
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        self.contributorHandlePrefix = container.decode(forKey: .contributorHandlePrefix, default: "")
+        self.contributors = container.decode(forKey: .contributors, default: [])
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        if !contributorHandlePrefix.isEmpty {
+            try container.encode(contributorHandlePrefix, forKey: .contributorHandlePrefix)
+        }
+
+        try container.encode(contributors, forKey: .contributors)
+    }
 }
 
 extension ContributorsConfiguration: SubConfiguration {

@@ -1,7 +1,11 @@
 contributors:
   contributor_list:
-  - email: esme.squalor@example.com
+  - emails:
+    - esme.squalor@example.com
+    - esmeDevAccount@github.com
     handle: GigiGeniveve
+  - email: violet.baudelaire@gmail.com
+    handle: OlafIsEvil
   contributor_handle_prefix: '@'
 format:
   delimiters:

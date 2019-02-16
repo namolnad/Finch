@@ -34,7 +34,7 @@ extension FormatComponent: LineOutputtable {
             return components.contributorEmail
         case .contributorHandle:
             guard let contributor = context.configuration.contributors.first(where: { contributor in
-                contributor.email == components.contributorEmail
+                contributor.emails.contains(components.contributorEmail)
             }) else {
                 return components.contributorEmail
             }

@@ -172,6 +172,6 @@ final class ChangeLogModel: ChangeLogModelType {
             return nil
         }
 
-        return configuration.contributors.first { $0.email == email }
+        return configuration.contributors.first { $0.emails.contains(email) }
     }
 }

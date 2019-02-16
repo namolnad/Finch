@@ -44,7 +44,10 @@ extension ContributorsConfiguration: Mergeable {
 
 extension ContributorsConfiguration {
     static let example: ContributorsConfiguration = .init(
-        contributors: [.example],
+        contributors: [
+            .example1,
+            .example2
+        ],
         contributorHandlePrefix: "@"
     )
 }

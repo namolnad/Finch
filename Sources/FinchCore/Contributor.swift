@@ -46,11 +46,18 @@ extension Contributor: Codable {
 }
 
 extension Contributor {
-    static let example: Contributor = .init(
+    static let example1: Contributor = .init(
         emails: [
             "esme.squalor@example.com",
             "esmeDevAccount@github.com"
         ],
         handle: "GigiGeniveve"
+    )
+
+    static let example2: Contributor = .init(
+        emails: [
+            "violet.baudelaire@gmail.com"
+        ],
+        handle: "OlafIsEvil"
     )
 }

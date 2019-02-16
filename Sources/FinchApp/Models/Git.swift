@@ -25,10 +25,6 @@ extension Git {
     }
 
     func log(oldVersion: Version, newVersion: Version) throws -> String {
-        guard !isTest else {
-            return ""
-        }
-
         let prefix = app.configuration.gitConfig.branchPrefix
 
         return try git(

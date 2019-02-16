@@ -13,7 +13,7 @@ public struct ContributorsConfiguration {
 
 extension ContributorsConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
-        case contributors
+        case contributors = "contributor_list"
         case contributorHandlePrefix = "contributor_handle_prefix"
     }
 }

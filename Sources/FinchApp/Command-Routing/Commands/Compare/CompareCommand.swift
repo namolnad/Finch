@@ -6,6 +6,7 @@
 //
 
 import FinchUtilities
+import Foundation
 import Utility
 
 final class CompareCommand: Command {
@@ -114,7 +115,12 @@ final class CompareCommand: Command {
         binder.bind(option: subparser.add(
             option: "--git-log",
             kind: String.self,
-            usage: "Pass in the git-log string directly vs having \(meta.name) generate it. See README for details"
+            usage: .localizedStringWithFormat(
+                NSLocalizedString(
+                    "Pass in the git-log string directly vs having %@ generate it. See README for details",
+                    comment: "Git log option description"
+                ), meta.name
+            )
         )) { $0.gitLog = $1 }
 
         binder.bind(option: subparser.add(

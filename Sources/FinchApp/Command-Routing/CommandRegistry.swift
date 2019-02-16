@@ -19,13 +19,23 @@ final class CommandRegistry {
     private let parser: ArgumentParser
 
     init(meta: App.Meta) {
-        // swiftlint:disable line_length
         self.parser = .init(
             usage: "<command> [--option]...",
-            overview: "\(meta.name) is a flexible tool for generating well-formatted changelogs between application versions",
-            seeAlso: "Visit https://github.com/namolnad/\(meta.name) for more information"
+            overview: .localizedStringWithFormat(
+                NSLocalizedString(
+                    "%@ is a flexible tool for generating well-formatted changelogs between application versions",
+                    comment: "App overview description"
+                ),
+                meta.name
+            ),
+            seeAlso: .localizedStringWithFormat(
+                NSLocalizedString(
+                    "Visit https://github.com/namolnad/%@ for more information",
+                    comment: "More information and website referral description"
+                ),
+                meta.name
+            )
         )
-        // swiftlint:enable line_length
 
         bindOptions(to: binder, using: parser, meta: meta)
     }
@@ -63,7 +73,13 @@ final class CommandRegistry {
             option: "--version",
             shortName: "-V",
             kind: Bool.self,
-            usage: "Displays current \(meta.name) version and build number"
+            usage: .localizedStringWithFormat(
+                NSLocalizedString(
+                    "Displays current %@ version and build number",
+                    comment: "App version option description"
+                ),
+                meta.name
+            )
         )) { $0.shouldPrintVersion = $1 }
     }
 }

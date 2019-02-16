@@ -105,7 +105,7 @@ symlink: build
 
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest
-	swift test 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
+	swift test
 
 update_build_number:
 ifndef NO_UPDATE_BUILD_NUMBER

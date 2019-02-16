@@ -4,13 +4,16 @@
       - some: "@"
     ▿ contributors: 3 elements
       ▿ Contributor
-        - email: "jony.ive@apple.com"
+        ▿ emails: 1 element
+          - "jony.ive@apple.com"
         - handle: "Jony.Ive"
       ▿ Contributor
-        - email: "long_live_the_citadel@rick.com"
+        ▿ emails: 1 element
+          - "long_live_the_citadel@rick.com"
         - handle: "Rick.Sanchez"
       ▿ Contributor
-        - email: "elvis1935+still-alive@theking.com"
+        ▿ emails: 1 element
+          - "elvis1935+still-alive@theking.com"
         - handle: "Elvis.Presley"
   ▿ formatConfig: FormatConfiguration
     ▿ delimiterConfig: DelimiterConfiguration
@@ -29,9 +32,9 @@
           - FormatComponent.tags
           - " "
           - FormatComponent.message
-          - " — "
+          - " - "
           - FormatComponent.commitTypeHyperlink
-          - " — "
+          - " - "
           - FormatComponent.contributorHandle
     - header: Optional<String>.none
     ▿ sectionInfos: 3 elements

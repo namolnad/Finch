@@ -1,6 +1,6 @@
 contributors:
   contributor_handle_prefix: "@"
-  contributors:
+  contributor_list:
   - email: jony.ive@apple.com
     handle: Jony.Ive
   - email: long_live_the_citadel@rick.com

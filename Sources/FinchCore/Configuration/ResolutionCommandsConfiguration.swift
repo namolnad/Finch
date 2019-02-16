@@ -44,7 +44,7 @@ extension ResolutionCommandsConfiguration {
             "/usr/bin/env",
             "bash",
             "-c",
-            "git -C $HOME/Code/Finch rev-list --count @"
+            "git -C $PROJECT_DIR rev-list --count @ origin/releases/$NEW_VERSION"
         ],
         versions: nil
     )

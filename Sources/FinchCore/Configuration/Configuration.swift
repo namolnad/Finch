@@ -52,9 +52,6 @@ extension Configuration: Codable {
 
 extension Configuration: Mergeable {
     public func merge(into other: inout Configuration) {
-        if !projectDir.isEmpty {
-            other.projectDir = projectDir
-        }
         contributorsConfig.merge(into: &other.contributorsConfig)
         formatConfig.merge(into: &other.formatConfig)
         gitConfig.merge(into: &other.gitConfig)

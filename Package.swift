@@ -42,7 +42,7 @@ let package = Package(
                 "make lint",
             ],
             "post-checkout": [
-                "make projfile",
+                "make xcodeproj",
             ]
         ],
     ])

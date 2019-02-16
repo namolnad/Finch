@@ -5,8 +5,7 @@ import PackageDescription
 let package = Package(
     name: "Finch",
     products: [
-        .executable(name: "Finch", targets: ["Finch"]),
-        .library(name: "FinchApp", targets: ["FinchApp"])
+        .executable(name: "Finch", targets: ["Finch"])
     ],
     dependencies: [
         .package(url: "git@github.com:apple/swift-package-manager.git", from: "0.3.0"),

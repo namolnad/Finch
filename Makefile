@@ -15,6 +15,7 @@ LN=ln -fs
 MKDIR=mkdir -p
 ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
 OUTPUT_PACKAGE=$(APP_NAME).pkg
+PIPEFAIL=set -o pipefail
 SWIFT_BUILD_FLAGS=--configuration release
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
 VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(//p' | tr -d ") " | tr "," ".")
@@ -105,7 +106,7 @@ symlink: build
 
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest
-	swift test
+	$(PIPEFAIL) && swift test 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
 
 update_build_number:
 ifndef NO_UPDATE_BUILD_NUMBER

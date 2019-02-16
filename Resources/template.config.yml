@@ -1,6 +1,8 @@
 contributors:
   contributor_list:
-  - email: esme.squalor@example.com
+  - emails:
+    - esme.squalor@example.com
+    - esmeDevAccount@github.com
     handle: GigiGeniveve
   contributor_handle_prefix: '@'
 format:

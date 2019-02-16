@@ -15,7 +15,10 @@ public struct Contributor: Codable {
 
 extension Contributor {
     static let example: Contributor = .init(
-        emails: ["esme.squalor@example.com"],
+        emails: [
+            "esme.squalor@example.com",
+            "esmeDevAccount@github.com",
+        ],
         handle: "GigiGeniveve"
     )
 }

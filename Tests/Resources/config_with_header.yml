@@ -1,0 +1,39 @@
+contributors:
+  contributor_handle_prefix: "@"
+  contributor_list:
+  - email: jony.ive@apple.com
+    handle: Jony.Ive
+  - email: long_live_the_citadel@rick.com
+    handle: Rick.Sanchez
+  - email: elvis1935+still-alive@theking.com
+    handle: Elvis.Presley
+git:
+  repo_base_url: https://github.com/citadel-of-ricks/C-137
+format:
+  header: Ÿäß
+  footer: |
+
+    ### Timeline
+    - Begin development:
+    - Feature cut-off / Start of bake / dogfooding:
+    - Submission:
+    - Release (expected):
+    - Release (actual):
+  section_infos:
+  - title: Features
+    tags:
+    - "*"
+  - title: Bug Fixes
+    tags:
+    - bugfix
+    - bug fix
+    - bug
+  - title: Platform Improvements
+    tags:
+    - platform
+    - tooling
+    - upgrade
+    - cleanup
+    format_string: " - << message >> — << commit_type_hyperlink >>"
+
+

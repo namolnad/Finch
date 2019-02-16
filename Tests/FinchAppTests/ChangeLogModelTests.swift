@@ -108,6 +108,26 @@ final class ChangeLogModelTests: XCTestCase {
         )
     }
 
+    func testVersionResolution() {
+        let versions = try! model.versions(app: .mock(), env: [:])
+
+        XCTAssertEqual(versions.old, .init(0, 0, 13))
+        XCTAssertEqual(versions.new, .init(6, 13, 0))
+    }
+
+    func testOutputWithHeader() {
+        let output = try! model.changeLog(
+            options: options(gitLog: defaultInputMock),
+            app: .mock(configuration: .mockWithHeader),
+            env: [:]
+        )
+
+        assertSnapshot(
+            matching: output,
+            as: .dump
+        )
+    }
+
     private func options(gitLog: String) -> CompareCommand.Options {
         return .init(
             versions: (.init(0, 0, 1), .init(6, 13, 0)),

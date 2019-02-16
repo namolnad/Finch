@@ -47,7 +47,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
 
         let environment: Environment = env.merging([
             "NEW_VERSION": "\(options.versions.new)",
-            "PROJECT_DIR": "\(app.configuration.projectDir)"
+            "PROJECT_DIR": app.configuration.projectDir
         ]) { $1 }
 
         return try Shell(env: environment)

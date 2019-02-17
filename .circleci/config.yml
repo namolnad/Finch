@@ -16,9 +16,6 @@ jobs:
     steps:
       - checkout
       - run:
-          command: make update_build_number
-          name: Update build number
-      - run:
           command: make package
           name: Build package
       - run: mkdir -p << parameters.artifacts-path >>

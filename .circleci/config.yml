@@ -158,7 +158,10 @@ jobs:
 workflows:
   build:
     jobs:
-      - swiftlint
+      - swiftlint:
+          filters:
+            tags:
+              only: /.*/
       - build_app:
           filters:
             tags:

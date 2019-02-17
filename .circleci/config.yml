@@ -173,6 +173,7 @@ workflows:
       - build_package:
           requires:
             - resolve
+            - test
           filters:
             branches:
               ignore: /.*/
@@ -181,6 +182,7 @@ workflows:
       - generate_changelog:
           requires:
             - resolve
+            - test
           filters:
             branches:
               ignore: /.*/

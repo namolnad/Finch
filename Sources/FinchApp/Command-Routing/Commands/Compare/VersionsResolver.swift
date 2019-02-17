@@ -36,10 +36,10 @@ struct VersionsResolver: VersionResolving {
         let firstVersion = try Version(argument: String(firstVersionString))
         let secondVersion = try Version(argument: String(secondVersionString))
 
-        if firstVersion < secondVersion {
-            return (firstVersion, secondVersion)
-        } else {
+        guard firstVersion < secondVersion else {
             return (secondVersion, firstVersion)
         }
+
+        return (firstVersion, secondVersion)
     }
 }

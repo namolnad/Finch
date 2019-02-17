@@ -164,6 +164,9 @@ workflows:
             tags:
               only: /.*/
       - test:
+          filters:
+            tags:
+              only: /.*/
           requires:
             - build_app
       - build_package:
@@ -175,6 +178,8 @@ workflows:
             tags:
               only: /.*/
       - generate_changelog:
+          requires:
+            - build_app
           filters:
             branches:
               ignore: /.*/

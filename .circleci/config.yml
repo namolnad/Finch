@@ -42,7 +42,7 @@ jobs:
   build_package:
     executor: mac
     parameters:
-      artifacts-path:
+      artifacts:
         default: artifacts
         type: string
     steps:
@@ -51,9 +51,9 @@ jobs:
       - run:
           command: make package
           name: Build package
-      - run: mkdir -p << parameters.artifacts-path >>
+      - run: mkdir -p << parameters.artifacts >>
       - run:
-          command: mv "${CIRCLE_PROJECT_REPONAME}.pkg" << parameters.artifacts-path >>
+          command: mv "${CIRCLE_PROJECT_REPONAME}.pkg" << parameters.artifacts >>
           name: Move artifacts
       - persist:
           path: << parameters.artifacts >>
@@ -61,28 +61,20 @@ jobs:
   generate_changelog:
     executor: mac
     parameters:
-      changelog-path:
-        default: changelog.md
+      artifacts:
+        default: changelog
         type: string
     steps:
       - checkout
-      - run: make install
-      - run: FINCH_CONFIG=.finch/release_config.yml finch compare > << parameters.changelog-path >>
+      - run: mkdir -p << parameters.artifacts >>
       - attach
+      - run: FINCH_CONFIG=.finch/release_config.yml swift run finch compare > << parameters.artifacts >>/changelog.md
       - persist:
           path: << parameters.artifacts >>
 
   publish_release:
     executor: go
-    parameters:
-      artifacts-path:
-        default: artifacts
-        type: string
-      changelog-path:
-        default: changelog.md
-        type: string
     steps:
-      - run: mkdir -p << parameters.artifacts-path >>
       - attach
       - run:
           command: |
@@ -93,12 +85,12 @@ jobs:
               -r ${CIRCLE_PROJECT_REPONAME} \
               -c ${CIRCLE_SHA1} \
               -n ${CIRCLE_TAG} \
-              -b "$(cat << parameters.changelog-path >>)" \
+              -b "$(cat changelog/changelog.md)" \
               -delete \
               -replace \
               -draft \
               -prerelease \
-              ${CIRCLE_TAG} << parameters.artifacts-path >>
+              ${CIRCLE_TAG} "${CIRCLE_PROJECT_REPONAME}.pkg"
           name: Publish release to GitHub
 
   swiftlint:

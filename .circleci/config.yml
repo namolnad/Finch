@@ -57,7 +57,7 @@ jobs:
       - attach_workspace:
           at: << parameters.artifacts-path >>
       - run: mkdir -p << parameters.changelog-dir >>
-      - run: mv << parameters.changelog-path >> << parameters.changelog-dir >>/
+      - run: mv << parameters.artifacts-path >>/<< parameters.changelog-path >> << parameters.changelog-dir >>/
       - run:
           command: |
             go get github.com/tcnksm/ghr
@@ -71,7 +71,7 @@ jobs:
               -delete \
               -prerelease \
               -draft \
-              ${CIRCLE_TAG} << parameters.artifacts-path >>
+              ${CIRCLE_TAG} << parameters.artifacts-path >>/"$CIRCLE_PROJECT_REPONAME.pkg"
           name: Publish release to GitHub
   swiftlint:
     executor: mac

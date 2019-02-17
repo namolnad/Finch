@@ -36,13 +36,14 @@ jobs:
         default: changelog.md
         type: string
     steps:
+      - checkout
       - run: mkdir -p << parameters.changelog-dir >>
       - run: make install
       - run: finch compare > << parameters.changelog-dir >>/<< parameters.changelog-path >>
       - persist_to_workspace:
-        root: << parameters.changelog-dir >>
-        paths:
-          - << parameters.changelog-path >>
+          root: << parameters.changelog-dir >>
+          paths:
+            - << parameters.changelog-path >>
   publish_release:
     executor: go
     parameters:

@@ -19,10 +19,10 @@ final class AppTests: XCTestCase {
             output: outputMock
         )
 
-        XCTAssertEqual(outputMock.lastOutput, "")
+        XCTAssertNil(outputMock.outputs.last)
 
         app.print("hello")
 
-        XCTAssertEqual(outputMock.lastOutput, "hello")
+        XCTAssertEqual(outputMock.outputs.last, "hello")
     }
 }

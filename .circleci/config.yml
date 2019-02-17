@@ -29,19 +29,15 @@ jobs:
   generate_changelog:
     executor: mac
     parameters:
-      changelog-dir:
-        default: changelog
-        type: string
       changelog-path:
         default: changelog.md
         type: string
     steps:
       - checkout
-      - run: mkdir -p << parameters.changelog-dir >>
       - run: make install
-      - run: FINCH_CONFIG=.finch/release_config.yml finch compare > << parameters.changelog-dir >>/<< parameters.changelog-path >>
+      - run: FINCH_CONFIG=.finch/release_config.yml finch compare > << parameters.changelog-path >>
       - persist_to_workspace:
-          root: << parameters.changelog-dir >>
+          root: .
           paths:
             - << parameters.changelog-path >>
   publish_release:
@@ -60,8 +56,8 @@ jobs:
       - run: mkdir -p << parameters.artifacts-path >>
       - attach_workspace:
           at: << parameters.artifacts-path >>
-      - attach_workspace:
-          at: << parameters.changelog-path >>
+      - run: mkdir -p << parameters.changelog-dir >>
+      - run: mv << parameters.changelog-path >> << parameters.changelog-dir >>/
       - run:
           command: |
             go get github.com/tcnksm/ghr

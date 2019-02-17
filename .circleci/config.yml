@@ -1,11 +1,32 @@
 version: 2.1
+
 executors:
+
   mac:
     macos:
       xcode: "10.1.0"
+
   go:
     docker:
       - image: circleci/golang:1.8
+
+commands:
+
+  persist:
+    parameters:
+      path:
+        type: string
+    steps:
+      - persist_to_workspace:
+          root: .
+          paths:
+            - << parameters.path >>
+
+  attach:
+    steps:
+      - attach_workspace:
+          at: .
+
 jobs:
   build_package:
     executor: mac
@@ -15,6 +36,7 @@ jobs:
         type: string
     steps:
       - checkout
+      - attach
       - run:
           command: make package
           name: Build package
@@ -22,10 +44,9 @@ jobs:
       - run:
           command: mv "${CIRCLE_PROJECT_REPONAME}.pkg" << parameters.artifacts-path >>
           name: Move artifacts
-      - persist_to_workspace:
-          root: << parameters.artifacts-path >>
-          paths:
-            - .
+      - persist:
+          path: << parameters.artifacts >>
+
   generate_changelog:
     executor: mac
     parameters:
@@ -36,10 +57,10 @@ jobs:
       - checkout
       - run: make install
       - run: FINCH_CONFIG=.finch/release_config.yml finch compare > << parameters.changelog-path >>
-      - persist_to_workspace:
-          root: .
-          paths:
-            - << parameters.changelog-path >>
+      - attach
+      - persist:
+          path: << parameters.artifacts >>
+
   publish_release:
     executor: go
     parameters:
@@ -51,9 +72,7 @@ jobs:
         type: string
     steps:
       - run: mkdir -p << parameters.artifacts-path >>
-      - attach_workspace:
-          at: << parameters.artifacts-path >>
-      - run: mv << parameters.artifacts-path >>/<< parameters.changelog-path >> << parameters.changelog-path >>
+      - attach
       - run:
           command: |
             go get github.com/tcnksm/ghr
@@ -70,6 +89,7 @@ jobs:
               -prerelease \
               ${CIRCLE_TAG} << parameters.artifacts-path >>
           name: Publish release to GitHub
+
   swiftlint:
     executor: mac
     parameters:
@@ -115,6 +135,7 @@ jobs:
           name: Save lint cache
       - store_artifacts:
           path: << parameters.lint-results-dir >>
+
   test:
     executor: mac
     parameters:
@@ -123,6 +144,7 @@ jobs:
         type: string
     steps:
       - checkout
+      - attach
       - run: mkdir -p << parameters.test-results-dir >>
       - run:
           name: Run tests

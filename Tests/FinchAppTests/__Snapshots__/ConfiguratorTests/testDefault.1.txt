@@ -41,17 +41,17 @@
         - capitalizesMessage: false
         - excluded: false
         - formatTemplate: Optional<FormatTemplate>.none
-        ▿ tags: 1 member
+        ▿ tags: 1 element
           - "*"
         - title: "Features"
       ▿ SectionInfo
         - capitalizesMessage: false
         - excluded: false
         - formatTemplate: Optional<FormatTemplate>.none
-        ▿ tags: 3 members
+        ▿ tags: 3 elements
+          - "bugfix"
           - "bug fix"
           - "bug"
-          - "bugfix"
         - title: "Bug Fixes"
       ▿ SectionInfo
         - capitalizesMessage: false
@@ -63,11 +63,11 @@
               - FormatComponent.message
               - " — "
               - FormatComponent.commitTypeHyperlink
-        ▿ tags: 4 members
-          - "cleanup"
+        ▿ tags: 4 elements
           - "platform"
           - "tooling"
           - "upgrade"
+          - "cleanup"
         - title: "Platform Improvements"
   ▿ gitConfig: GitConfiguration
     - branchPrefix: ""

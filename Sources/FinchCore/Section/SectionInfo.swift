@@ -21,7 +21,7 @@ public struct SectionInfo {
     public let capitalizesMessage: Bool
     public let excluded: Bool
     public let formatTemplate: FormatTemplate?
-    public let tags: Set<String>
+    public let tags: [String]
     public let title: String
 
     public init(capitalizesMessage: Bool,
@@ -32,7 +32,7 @@ public struct SectionInfo {
         self.capitalizesMessage = capitalizesMessage
         self.excluded = excluded
         self.formatTemplate = formatTemplate
-        self.tags = Set(tags)
+        self.tags = tags
         self.title = title
     }
 }

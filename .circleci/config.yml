@@ -48,6 +48,7 @@ jobs:
               -r ${CIRCLE_PROJECT_REPONAME} \
               -c ${CIRCLE_SHA1} \
               -n ${CIRCLE_TAG} \
+              -b $(finch compare) \
               -delete \
               -prerelease \
               -draft \

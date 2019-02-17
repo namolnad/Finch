@@ -29,13 +29,11 @@ commands:
 
 jobs:
 
-  build_app:
+  resolve:
     executor: mac
     steps:
       - checkout
-      - run:
-          command: make build
-          name: Build app
+      - run: swift package resolve
       - persist:
           path: .build
 
@@ -158,8 +156,11 @@ jobs:
 workflows:
   build:
     jobs:
-      - swiftlint
-      - build_app:
+      - swiftlint:
+          filters:
+            tags:
+              only: /.*/
+      - resolve:
           filters:
             tags:
               only: /.*/
@@ -168,10 +169,10 @@ workflows:
             tags:
               only: /.*/
           requires:
-            - build_app
+            - resolve
       - build_package:
           requires:
-            - build_app
+            - resolve
           filters:
             branches:
               ignore: /.*/
@@ -179,7 +180,7 @@ workflows:
               only: /.*/
       - generate_changelog:
           requires:
-            - build_app
+            - resolve
           filters:
             branches:
               ignore: /.*/

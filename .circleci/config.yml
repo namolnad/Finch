@@ -20,7 +20,7 @@ jobs:
           name: Build package
       - run: mkdir -p << parameters.artifacts-path >>
       - run:
-          command: mv "$CIRCLE_PROJECT_REPONAME.pkg" << parameters.artifacts-path >>
+          command: mv "${CIRCLE_PROJECT_REPONAME}.pkg" << parameters.artifacts-path >>
           name: Move artifacts
       - persist_to_workspace:
           root: << parameters.artifacts-path >>
@@ -46,9 +46,6 @@ jobs:
       artifacts-path:
         default: artifacts
         type: string
-      changelog-dir:
-        default: changelog
-        type: string
       changelog-path:
         default: changelog.md
         type: string
@@ -56,8 +53,7 @@ jobs:
       - run: mkdir -p << parameters.artifacts-path >>
       - attach_workspace:
           at: << parameters.artifacts-path >>
-      - run: mkdir -p << parameters.changelog-dir >>
-      - run: mv << parameters.artifacts-path >>/<< parameters.changelog-path >> << parameters.changelog-dir >>/
+      - run: mv << parameters.artifacts-path >>/<< parameters.changelog-path >> << parameters.changelog-path >>
       - run:
           command: |
             go get github.com/tcnksm/ghr
@@ -67,11 +63,12 @@ jobs:
               -r ${CIRCLE_PROJECT_REPONAME} \
               -c ${CIRCLE_SHA1} \
               -n ${CIRCLE_TAG} \
-              -b $(cat << parameters.changelog-dir >>/<< parameters.changelog-path >>) \
+              -b $(cat << parameters.changelog-path >>) \
               -delete \
-              -prerelease \
+              -replace \
               -draft \
-              ${CIRCLE_TAG} << parameters.artifacts-path >>
+              -prerelease \
+              ${CIRCLE_TAG} << parameters.artifacts-path >>/
           name: Publish release to GitHub
   swiftlint:
     executor: mac

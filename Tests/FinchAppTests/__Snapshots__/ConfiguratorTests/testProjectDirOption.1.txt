@@ -75,5 +75,5 @@
     - repoBaseUrl: "https://github.com/citadel-of-ricks/C-137"
   - projectDir: "current"
   ▿ resolutionCommandsConfig: ResolutionCommandsConfiguration
-    - buildNumber: Optional<Array<String>>.none
-    - versions: Optional<Array<String>>.none
+    - buildNumber: Optional<String>.none
+    - versions: Optional<String>.none

@@ -41,9 +41,6 @@ let package = Package(
             "pre-push": [
                 "make lint",
             ],
-            "post-checkout": [
-                "make xcodeproj",
-            ]
         ],
     ])
 #endif

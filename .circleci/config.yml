@@ -16,9 +16,6 @@ jobs:
     steps:
       - checkout
       - run:
-          command: make update_build_number
-          name: Update build number
-      - run:
           command: make package
           name: Build package
       - run: mkdir -p << parameters.artifacts-path >>
@@ -29,16 +26,42 @@ jobs:
           root: << parameters.artifacts-path >>
           paths:
             - .
+  generate_changelog:
+    executor: mac
+    parameters:
+      changelog-dir:
+        default: changelog
+        type: string
+      changelog-path:
+        default: changelog.md
+        type: string
+    steps:
+      - checkout
+      - run: mkdir -p << parameters.changelog-dir >>
+      - run: make install
+      - run: FINCH_CONFIG=.finch/release_config.yml finch compare > << parameters.changelog-dir >>/<< parameters.changelog-path >>
+      - persist_to_workspace:
+          root: << parameters.changelog-dir >>
+          paths:
+            - << parameters.changelog-path >>
   publish_release:
     executor: go
     parameters:
       artifacts-path:
         default: artifacts
         type: string
+      changelog-dir:
+        default: changelog
+        type: string
+      changelog-path:
+        default: changelog.md
+        type: string
     steps:
       - run: mkdir -p << parameters.artifacts-path >>
       - attach_workspace:
           at: << parameters.artifacts-path >>
+      - attach_workspace:
+          at: << parameters.changelog-path >>
       - run:
           command: |
             go get github.com/tcnksm/ghr
@@ -48,8 +71,10 @@ jobs:
               -r ${CIRCLE_PROJECT_REPONAME} \
               -c ${CIRCLE_SHA1} \
               -n ${CIRCLE_TAG} \
+              -b $(cat << parameters.changelog-dir >>/<< parameters.changelog-path >>) \
               -delete \
               -prerelease \
+              -draft \
               ${CIRCLE_TAG} << parameters.artifacts-path >>
           name: Publish release to GitHub
   swiftlint:
@@ -123,11 +148,18 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
+      - generate_changelog:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
       - publish_release:
           requires:
             - swiftlint
             - test
             - build_package
+            - generate_changelog
           filters:
             branches:
               ignore: /.*/

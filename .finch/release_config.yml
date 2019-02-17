@@ -1,0 +1,21 @@
+format:
+  format_string: ' - << message >> - << commit_type_hyperlink >>'
+  section_infos:
+  - capitalizes_message: true
+    tags:
+    - feature
+    - features
+    title: Features
+  - capitalizes_message: true
+    tags:
+    - bug fix
+    - bug
+    - bugfix
+    - bug-fix
+    title: Bug Fixes
+git:
+  repo_base_url: https://github.com/namolnad/finch
+resolution_commands:
+  build_number: /usr/bin/env bash -c 'git -C $PROJECT_DIR rev-list $NEW_VERSION --count'
+
+

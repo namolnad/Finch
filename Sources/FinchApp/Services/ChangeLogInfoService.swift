@@ -51,7 +51,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
         ]) { $1 }
 
         return try Shell(env: environment)
-            .run(args: args)
+            .run(args: [args])
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
@@ -78,7 +78,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
             let environment = env.merging(["PROJECT_DIR": app.configuration.projectDir]) { $1 }
 
             let shell = Shell(env: environment, verbose: app.options.verbose)
-            return try shell.run(args: value)
+            return try shell.run(args: [value])
         }
 
         let git = Git(app: app, env: env)

@@ -89,8 +89,8 @@ publish: test
 	cat $(BUILD_NUMBER_FILE)
 	git add -f $(BUILD_NUMBER_FILE)
 	git commit --amend --no-edit
-	git tag $(NEW_VERSION)
-	git push --tags --force
+	git tag -f $(NEW_VERSION)
+	git push origin $(NEW_VERSION) --force
 	git checkout master
 	@echo 'Reminder: Update version in master if needed.'
 

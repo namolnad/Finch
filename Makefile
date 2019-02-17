@@ -81,7 +81,7 @@ prefix_install:
 
 publish: test
 	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
-	@$(CONFIRM) "Warning: This will force create/push a tag for $(NEW_VERSION)"
+	@$(CONFIRM) "Warning: This will force create/push a tag for '$(NEW_VERSION)'."
 	git checkout master
 	git checkout -B releases/$(NEW_VERSION)
 	@NEW_VERSION=$(NEW_VERSION) $(MAKE) update_version

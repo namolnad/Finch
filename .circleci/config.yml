@@ -71,7 +71,7 @@ jobs:
               -delete \
               -prerelease \
               -draft \
-              ${CIRCLE_TAG} << parameters.artifacts-path >>/${CIRCLE_PROJECT_REPONAME}.pkg
+              ${CIRCLE_TAG} << parameters.artifacts-path >>
           name: Publish release to GitHub
   swiftlint:
     executor: mac

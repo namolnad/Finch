@@ -39,7 +39,7 @@ jobs:
       - checkout
       - run: mkdir -p << parameters.changelog-dir >>
       - run: make install
-      - run: finch compare > << parameters.changelog-dir >>/<< parameters.changelog-path >>
+      - run: FINCH_CONFIG=.finch/release_config.yml finch compare > << parameters.changelog-dir >>/<< parameters.changelog-path >>
       - persist_to_workspace:
           root: << parameters.changelog-dir >>
           paths:

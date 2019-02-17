@@ -17,7 +17,7 @@ final class AppRunnerTests: XCTestCase {
             environment: [:],
             meta: .mock,
             output: outputMock
-        ).run(arguments: ["finch", "compare", "--git-log", defaultInputMock, "--versions", "6.20.0", "5.3.0"])
+        ).run(arguments: ["finch", "compare", "--git-log", defaultInputMock, "--versions", "6.20.0", "5.3.0", "--build-number", "612"])
 
         assertSnapshot(matching: outputMock.outputs, as: .dump)
     }

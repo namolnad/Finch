@@ -1,59 +1,81 @@
 version: 2.1
+
 executors:
+
   mac:
     macos:
       xcode: "10.1.0"
+
   go:
     docker:
       - image: circleci/golang:1.8
-jobs:
-  build_package:
-    executor: mac
+
+commands:
+
+  persist:
     parameters:
-      artifacts-path:
-        default: artifacts
+      path:
         type: string
     steps:
-      - checkout
-      - run:
-          command: make package
-          name: Build package
-      - run: mkdir -p << parameters.artifacts-path >>
-      - run:
-          command: mv "${CIRCLE_PROJECT_REPONAME}.pkg" << parameters.artifacts-path >>
-          name: Move artifacts
-      - persist_to_workspace:
-          root: << parameters.artifacts-path >>
-          paths:
-            - .
-  generate_changelog:
-    executor: mac
-    parameters:
-      changelog-path:
-        default: changelog.md
-        type: string
-    steps:
-      - checkout
-      - run: make install
-      - run: FINCH_CONFIG=.finch/release_config.yml finch compare > << parameters.changelog-path >>
       - persist_to_workspace:
           root: .
           paths:
-            - << parameters.changelog-path >>
-  publish_release:
-    executor: go
+            - << parameters.path >>
+
+  attach:
+    steps:
+      - attach_workspace:
+          at: .
+
+jobs:
+
+  build_app:
+    executor: mac
+    steps:
+      - checkout
+      - run:
+          command: make build
+          name: Build app
+      - persist:
+          path: .build
+
+  build_package:
+    executor: mac
     parameters:
-      artifacts-path:
+      artifacts:
         default: artifacts
         type: string
-      changelog-path:
-        default: changelog.md
+    steps:
+      - checkout
+      - attach
+      - run:
+          command: make package
+          name: Build package
+      - run: mkdir -p << parameters.artifacts >>
+      - run:
+          command: mv "${CIRCLE_PROJECT_REPONAME}.pkg" << parameters.artifacts >>
+          name: Move artifacts
+      - persist:
+          path: << parameters.artifacts >>
+
+  generate_changelog:
+    executor: mac
+    parameters:
+      artifacts:
+        default: changelog
         type: string
     steps:
-      - run: mkdir -p << parameters.artifacts-path >>
-      - attach_workspace:
-          at: << parameters.artifacts-path >>
-      - run: mv << parameters.artifacts-path >>/<< parameters.changelog-path >> << parameters.changelog-path >>
+      - checkout
+      - run: mkdir -p << parameters.artifacts >>
+      - attach
+      - run: FINCH_CONFIG=.finch/release_config.yml swift run finch compare > << parameters.artifacts >>/changelog.md
+      - persist:
+          path: << parameters.artifacts >>
+
+  publish_release:
+    executor: go
+    steps:
+      - attach
       - run:
           command: |
             go get github.com/tcnksm/ghr
@@ -63,13 +85,14 @@ jobs:
               -r ${CIRCLE_PROJECT_REPONAME} \
               -c ${CIRCLE_SHA1} \
               -n ${CIRCLE_TAG} \
-              -b "$(cat << parameters.changelog-path >>)" \
+              -b "$(cat changelog/changelog.md)" \
               -delete \
               -replace \
               -draft \
               -prerelease \
-              ${CIRCLE_TAG} << parameters.artifacts-path >>
+              ${CIRCLE_TAG} "${CIRCLE_PROJECT_REPONAME}.pkg"
           name: Publish release to GitHub
+
   swiftlint:
     executor: mac
     parameters:
@@ -115,6 +138,7 @@ jobs:
           name: Save lint cache
       - store_artifacts:
           path: << parameters.lint-results-dir >>
+
   test:
     executor: mac
     parameters:
@@ -123,6 +147,7 @@ jobs:
         type: string
     steps:
       - checkout
+      - attach
       - run: mkdir -p << parameters.test-results-dir >>
       - run:
           name: Run tests
@@ -134,8 +159,13 @@ workflows:
   build:
     jobs:
       - swiftlint
-      - test
+      - build_app
+      - test:
+          requires:
+            - build_app
       - build_package:
+          requires:
+            - build_app
           filters:
             branches:
               ignore: /.*/

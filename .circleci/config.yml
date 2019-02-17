@@ -50,6 +50,7 @@ jobs:
               -n ${CIRCLE_TAG} \
               -delete \
               -prerelease \
+              -draft \
               ${CIRCLE_TAG} << parameters.artifacts-path >>
           name: Publish release to GitHub
   swiftlint:

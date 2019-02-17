@@ -7,6 +7,7 @@ BINARIES_DIR=/usr/local/bin
 BUILD=swift build
 BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
 CONFIG_TEMPLATE=template.config.yml
+CONFIRM=./Scripts/prompt_confirmation
 CP=cp
 DISTRIBUTION_PLIST=$(APP_TMP)/Distribution.plist
 INSTALL_DIR=$(HOME)/.$(APP_NAME_LOWERCASE)
@@ -80,7 +81,7 @@ prefix_install:
 
 publish: test
 	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
-	@echo "Warning: This is force create/pushing a tag for $(NEW_VERSION)"
+	@$(CONFIRM) "Warning: This will force create/push a tag for $(NEW_VERSION)"
 	git checkout master
 	git checkout -B releases/$(NEW_VERSION)
 	@NEW_VERSION=$(NEW_VERSION) $(MAKE) update_version

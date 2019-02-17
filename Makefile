@@ -80,6 +80,10 @@ prefix_install:
 
 publish: test
 	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
+	read -p "Warning: This will force create/push a tag for $(NEW_VERSION), are you sure? (y/n) " -n 1 -t 5 -r CONFIRMATION < /dev/tty
+	if [[ ! $(CONFIRMATION) =~ ^[Yy]$ ]]; then
+	  echo '\nAborted' && exit 1
+	fi
 	git checkout master
 	git checkout -B releases/$(NEW_VERSION)
 	@NEW_VERSION=$(NEW_VERSION) $(MAKE) update_version

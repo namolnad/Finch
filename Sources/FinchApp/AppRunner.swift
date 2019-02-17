@@ -5,16 +5,21 @@
 //  Created by Dan Loman on 1/29/19.
 //
 
+import FinchUtilities
+
 public class AppRunner {
     private let environment: Environment
 
     private let meta: App.Meta
 
+    private let output: OutputType
+
     private let registry: CommandRegistry
 
-    public init(environment: Environment, meta: App.Meta) {
+    public init(environment: Environment, meta: App.Meta, output: OutputType = Output.instance) {
         self.environment = environment
         self.meta = meta
+        self.output = output
         self.registry = .init(meta: meta)
 
         registry.register {
@@ -34,10 +39,16 @@ public class AppRunner {
         let config = Configurator(
             options: options,
             meta: meta,
-            environment: environment
+            environment: environment,
+            output: output
         ).configuration
 
-        let app: App = .init(configuration: config, meta: meta, options: options)
+        let app: App = .init(
+            configuration: config,
+            meta: meta,
+            options: options,
+            output: output
+        )
 
         if let command = command {
             try registry.runCommand(

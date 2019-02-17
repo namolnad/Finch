@@ -8,10 +8,9 @@
 import FinchUtilities
 
 final class OutputMock: OutputType {
-
-    var lastOutput: String = ""
+    var outputs: [String] = []
 
     func print(_ value: String, kind: Output.Kind, verbose: Bool) {
-        lastOutput = value
+        outputs.append(value)
     }
 }

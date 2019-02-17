@@ -23,7 +23,7 @@ struct Resource {
         guard let path = Bundle(for: TestHelper.self).path(forResource: name, ofType: type.isEmpty ? nil : type) else {
             let url = URL(fileURLWithPath: #file)
                 .deletingLastPathComponent()
-                .appendingPathComponent("Resources")
+                .appendingPathComponent("../Resources")
                 .appendingPathComponent(name)
 
             if !type.isEmpty {

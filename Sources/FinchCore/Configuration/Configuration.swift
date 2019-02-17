@@ -52,9 +52,6 @@ extension Configuration: Codable {
 
 extension Configuration: Mergeable {
     public func merge(into other: inout Configuration) {
-        if !projectDir.isEmpty {
-            other.projectDir = projectDir
-        }
         contributorsConfig.merge(into: &other.contributorsConfig)
         formatConfig.merge(into: &other.formatConfig)
         gitConfig.merge(into: &other.gitConfig)
@@ -85,23 +82,5 @@ extension Configuration {
             .merge(into: &example.resolutionCommandsConfig)
 
         return example
-    }
-}
-
-extension Configuration {
-    public var contributors: [Contributor] {
-        return contributorsConfig.contributors
-    }
-
-    public var contributorHandlePrefix: String {
-        return contributorsConfig.contributorHandlePrefix ?? ""
-    }
-
-    public var gitExecutablePath: String? {
-        return gitConfig.executablePath
-    }
-
-    public var gitBranchPrefix: String {
-        return gitConfig.branchPrefix
     }
 }

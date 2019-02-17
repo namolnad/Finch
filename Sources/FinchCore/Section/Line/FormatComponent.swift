@@ -33,13 +33,15 @@ extension FormatComponent: LineOutputtable {
         case .contributorEmail:
             return components.contributorEmail
         case .contributorHandle:
-            guard let contributor = context.configuration.contributors.first(where: { contributor in
+            guard let contributor = context.configuration.contributorsConfig.contributors.first(where: { contributor in
                 contributor.emails.contains(components.contributorEmail)
             }) else {
                 return components.contributorEmail
             }
 
-            return "\(context.configuration.contributorHandlePrefix)\(contributor.handle)"
+            let prefix = context.configuration.contributorsConfig.contributorHandlePrefix
+
+            return "\(prefix)\(contributor.handle)"
         case .message:
             if context.sectionInfo.capitalizesMessage {
                 return components.message.capitalized

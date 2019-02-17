@@ -82,30 +82,24 @@ final class ChangeLogModelTests: XCTestCase {
         )
     }
 
-    func testLineComponentParsing() {
-        let sha = "5a544059e165f0703843d1c6c509cc853ad6afa4"
-
-        let sample = "&&&\(sha)&&& - @@@[tag1][tag2] fixing something somewhere (#1234)@@@###author@email.com###"
-
-        assertSnapshot(
-            matching: LineComponents(
-                rawLine: sample,
-                configuration: .mock,
-                normalizeTags: false
-            ),
-            as: .dump
+    func testOutputWithHeader() {
+        let output = try! model.changeLog(
+            options: options(gitLog: defaultInputMock),
+            app: .mock(configuration: .mockWithHeader),
+            env: [:]
         )
 
-        let sample2 = "&&&\(sha)&&& - @@@[tag1]fixing something somewhere@@@###author+1234@email.com###"
-
         assertSnapshot(
-            matching: LineComponents(
-                rawLine: sample2,
-                configuration: .mock,
-                normalizeTags: false
-            ),
+            matching: output,
             as: .dump
         )
+    }
+
+    func testVersionResolution() {
+        let versions = try! model.versions(app: .mock(), env: [:])
+
+        XCTAssertEqual(versions.old, .init(0, 0, 13))
+        XCTAssertEqual(versions.new, .init(6, 13, 0))
     }
 
     private func options(gitLog: String) -> CompareCommand.Options {
@@ -116,7 +110,7 @@ final class ChangeLogModelTests: XCTestCase {
             normalizeTags: false,
             noFetch: true,
             noShowVersion: false,
-            releaseManager: Configuration.mock.contributors.first?.emails.first,
+            releaseManager: Configuration.mock.contributorsConfig.contributors.first?.emails.first,
             toPasteBoard: false
         )
     }

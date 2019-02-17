@@ -34,6 +34,14 @@ extension Configuration {
 
         return config
     }()
+
+    static let mockWithHeader: Configuration = {
+        var config: Configuration = .default(projectDir: "fake")
+        let newConfig: Configuration = TestHelper.model(for: "config_with_header")
+        newConfig.merge(into: &config)
+
+        return config
+    }()
 }
 
 extension App.Meta {

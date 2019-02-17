@@ -18,16 +18,14 @@ struct Git {
 extension Git {
     private func gitExecutableArgs() throws -> [String] {
         return [
-            "\(try app.configuration.gitExecutablePath ?? executable(.git))",
+            "\(try app.configuration.gitConfig.executablePath ?? executable(.git))",
             "--git-dir",
             "\(app.configuration.projectDir)/.git"
         ]
     }
 
     func log(oldVersion: Version, newVersion: Version) throws -> String {
-        guard !isTest else {
-            return ""
-        }
+        let prefix = app.configuration.gitConfig.branchPrefix
 
         return try git(
             "log",
@@ -37,7 +35,7 @@ extension Git {
             "--oneline",
             "--format='format:&&&%H&&& - @@@%s@@@###%ae###'",
             "--date=short",
-            "\(app.configuration.gitBranchPrefix)\(oldVersion)...\(app.configuration.gitBranchPrefix)\(newVersion)"
+            "\(prefix)\(oldVersion)...\(prefix)\(newVersion)"
         )
     }
 
@@ -60,13 +58,13 @@ extension Git {
         return try git(
             "branch -r --list",
             "|",
-            "\(try executable(.grep)) -E '\(app.configuration.gitBranchPrefix)\(semVerRegex)'",
+            "\(try executable(.grep)) -E '\(app.configuration.gitConfig.branchPrefix)\(semVerRegex)'",
             "|",
             "\(try executable(.sort)) -V",
             "|",
             "\(try executable(.tail)) -2",
             "|",
-            "\(try executable(.sed)) 's#\(app.configuration.gitBranchPrefix)##'",
+            "\(try executable(.sed)) 's#\(app.configuration.gitConfig.branchPrefix)##'",
             "|",
             "\(try executable(.tr)) '\n' ' '"
         )

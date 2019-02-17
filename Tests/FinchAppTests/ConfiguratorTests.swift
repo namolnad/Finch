@@ -22,4 +22,20 @@ final class ConfiguratorTests: XCTestCase {
             as: .dump
         )
     }
+
+    func testProjectDirOption() {
+        assertSnapshot(
+            matching: Configurator(
+                options: .init(
+                    projectDir: "current",
+                    shouldPrintVersion: false,
+                    verbose: false
+                ),
+                meta: .mock,
+                environment: [:],
+                fileManager: .mock
+                ).configuration,
+            as: .dump
+        )
+    }
 }

@@ -5,8 +5,8 @@
 //  Created by Dan Loman on 2/16/19.
 //
 
-import XCTest
 @testable import FinchApp
+import XCTest
 
 final class AppTests: XCTestCase {
     func testOutput() {

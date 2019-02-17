@@ -70,10 +70,6 @@ jobs:
               -prerelease \
               ${CIRCLE_TAG} << parameters.artifacts-path >>/
           name: Publish release to GitHub
-      - store_artifacts:
-          path: << parameters.artifacts-path >>
-      - store_artifacts:
-          path: << parameters.changelog-path >>
   swiftlint:
     executor: mac
     parameters:

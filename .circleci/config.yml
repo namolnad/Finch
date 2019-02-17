@@ -90,7 +90,7 @@ jobs:
               -replace \
               -draft \
               -prerelease \
-              ${CIRCLE_TAG} "${CIRCLE_PROJECT_REPONAME}.pkg"
+              ${CIRCLE_TAG} "artifacts/${CIRCLE_PROJECT_REPONAME}.pkg"
           name: Publish release to GitHub
 
   swiftlint:

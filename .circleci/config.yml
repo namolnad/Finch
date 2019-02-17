@@ -68,7 +68,7 @@ jobs:
               -replace \
               -draft \
               -prerelease \
-              ${CIRCLE_TAG} << parameters.artifacts-path >>/
+              ${CIRCLE_TAG} << parameters.artifacts-path >>
           name: Publish release to GitHub
   swiftlint:
     executor: mac

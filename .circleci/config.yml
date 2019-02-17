@@ -28,6 +28,17 @@ commands:
           at: .
 
 jobs:
+
+  build_app:
+    executor: mac
+    steps:
+      - checkout
+      - run:
+          command: make build
+          name: Build app
+      - persist:
+          path: .build
+
   build_package:
     executor: mac
     parameters:
@@ -156,8 +167,13 @@ workflows:
   build:
     jobs:
       - swiftlint
-      - test
+      - build_app
+      - test:
+          requires:
+            - build_app
       - build_package:
+          requires:
+            - build_app
           filters:
             branches:
               ignore: /.*/

@@ -6,8 +6,8 @@
 //
 
 public struct ResolutionCommandsConfiguration {
-    public private(set) var buildNumber: [String]?
-    public private(set) var versions: [String]?
+    public private(set) var buildNumber: String?
+    public private(set) var versions: String?
 }
 
 extension ResolutionCommandsConfiguration: Codable {
@@ -40,12 +40,7 @@ extension ResolutionCommandsConfiguration: Mergeable {
 
 extension ResolutionCommandsConfiguration {
     static let example: ResolutionCommandsConfiguration = .init(
-        buildNumber: [
-            "/usr/bin/env",
-            "bash",
-            "-c",
-            "git -C $PROJECT_DIR rev-list --count @ origin/releases/$NEW_VERSION"
-        ],
+        buildNumber: "/usr/bin/env bash -c 'git -C $PROJECT_DIR rev-list origin/releases/$NEW_VERSION --count'",
         versions: nil
     )
 }

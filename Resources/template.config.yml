@@ -44,13 +44,9 @@ format:
     - bugfix
     title: Bug Fixes
 git:
-  branch_prefix: origin/releases/ ## Defaults to 
+  branch_prefix: origin/releases/ ## Defaults to ""
   repo_base_url: https://github.com/org/repo ## Configure to follow your convention
 resolution_commands:
-  build_number:
-  - /usr/bin/env
-  - bash
-  - -c
-  - git -C $HOME/Code/Finch rev-list --count @
+  build_number: /usr/bin/env bash -c 'git -C $PROJECT_DIR rev-list $NEW_VERSION --count'
 
 

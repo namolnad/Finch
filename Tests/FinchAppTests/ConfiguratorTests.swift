@@ -1,5 +1,5 @@
 //
-//  ConfigurationTests.swift
+//  ConfiguratorTests.swift
 //  FinchTests
 //
 //  Created by Dan Loman on 12/28/18.
@@ -10,8 +10,8 @@
 import SnapshotTesting
 import XCTest
 
-final class ConfigurationTests: XCTestCase {
-    func testConfigurator() {
+final class ConfiguratorTests: XCTestCase {
+    func testDefault() {
         assertSnapshot(
             matching: Configurator(
                 options: .blank,

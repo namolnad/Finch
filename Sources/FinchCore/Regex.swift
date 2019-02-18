@@ -51,6 +51,7 @@ extension Regex.Replacement {
     }
 }
 
+/// :nodoc:
 extension Regex.Pattern {
     func matches(in body: String) -> [NSTextCheckingResult] {
         guard let expression = try? NSRegularExpression(pattern: self, options: [.anchorsMatchLines]) else {
@@ -70,6 +71,7 @@ extension Regex.Pattern {
     }
 }
 
+/// :nodoc:
 extension NSTextCheckingResult {
     func firstMatch(in body: String) -> String? {
         guard numberOfRanges > 0 else {
@@ -80,6 +82,7 @@ extension NSTextCheckingResult {
     }
 }
 
+/// :nodoc:
 extension Regex.Pattern {
     static let rawPattern: Regex.Pattern = "&&&(.*?)&&&(?:.*?)@@@(.*?)\\(#(.*?)\\)@@@###(.*?)###"
 

@@ -61,6 +61,7 @@ extension ContributorsConfiguration: Mergeable {
     }
 }
 
+/// :nodoc:
 extension ContributorsConfiguration {
     static let example: ContributorsConfiguration = .init(
         contributors: [

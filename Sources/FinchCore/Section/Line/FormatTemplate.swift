@@ -7,6 +7,7 @@
 //
 
 public struct FormatTemplate {
+    /// :nodoc:
     let outputtables: [LineOutputtable]
 }
 
@@ -19,7 +20,7 @@ extension FormatTemplate {
         self.init(outputtables: outputtables)
     }
 
-    // Equivalent to: " - << tags >> << message >> — << commit_type_hyperlink >> — << contributor_handle >>"
+    /// Equivalent to: " - << tags >> << message >> — << commit_type_hyperlink >> — << contributor_handle >>"
     static let `default`: FormatTemplate = .init(
         outputtables: [
             " - ",

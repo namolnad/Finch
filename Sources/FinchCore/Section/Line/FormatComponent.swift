@@ -8,6 +8,9 @@
 
 import Foundation
 
+/*
+ * Format components are pieces of strings blah blah
+ */
 enum FormatComponent: String {
     case commitTypeHyperlink = "commit_type_hyperlink"
     case contributorEmail = "contributor_email"

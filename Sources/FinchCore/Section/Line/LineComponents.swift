@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 public struct LineComponents {
     enum Kind: Int {
         case sha = 1
@@ -40,6 +41,7 @@ public struct LineComponents {
     }
 }
 
+/// :nodoc:
 extension LineComponents.Kind {
     var regEx: String {
         switch self {

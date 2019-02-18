@@ -41,6 +41,7 @@ extension ResolutionCommandsConfiguration: Mergeable {
     }
 }
 
+/// :nodoc:
 extension ResolutionCommandsConfiguration {
     static let example: ResolutionCommandsConfiguration = .init(
         buildNumber: "/usr/bin/env bash -c 'git -C $PROJECT_DIR rev-list origin/releases/$NEW_VERSION --count'",

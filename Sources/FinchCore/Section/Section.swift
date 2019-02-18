@@ -21,6 +21,7 @@ public struct Section {
     }
 }
 
+/// :nodoc:
 extension Section {
     var lines: [Line] {
         return linesComponents.map { components -> Line in

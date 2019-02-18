@@ -46,6 +46,7 @@ extension Contributor: Codable {
     }
 }
 
+/// :nodoc:
 extension Contributor {
     static let example1: Contributor = .init(
         emails: [

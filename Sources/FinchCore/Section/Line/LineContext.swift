@@ -6,6 +6,7 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
+/// :nodoc:
 struct LineContext {
     let configuration: Configuration
     let sectionInfo: SectionInfo

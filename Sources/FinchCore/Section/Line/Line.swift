@@ -13,6 +13,7 @@ public struct Line {
     let value: String
 }
 
+/// :nodoc:
 extension Line {
     static func from(components: LineComponents, context: LineContext) -> Line {
         let template: FormatTemplate = context.sectionInfo.formatTemplate ??

@@ -13,12 +13,14 @@ public struct DelimiterPair: Codable, Equatable {
     public let right: String
 }
 
+/// :nodoc:
 extension DelimiterPair {
     static let defaultInput: DelimiterPair = .init(left: "[", right: "]")
     static let defaultOutput: DelimiterPair = .init(left: "|", right: "|")
     static let blank: DelimiterPair = .init(left: "", right: "")
 }
 
+/// :nodoc:
 extension DelimiterPair {
     var isBlank: Bool {
         return left.isEmpty ||

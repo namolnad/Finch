@@ -9,9 +9,11 @@
 import FinchUtilities
 import Foundation
 
+/// :nodoc:
 public enum Regex {
     public typealias Pattern = String
 
+    /// :nodoc:
     public struct Replacement {
         public let matching: Pattern
         public let replacement: Pattern
@@ -23,6 +25,7 @@ public enum Regex {
     }
 }
 
+/// :nodoc:
 extension Regex.Replacement {
     public func findReplace(in body: String) -> String {
         return findReplace(pattern: matching, in: body, with: replacement)

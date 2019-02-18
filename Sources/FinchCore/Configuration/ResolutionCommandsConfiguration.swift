@@ -10,6 +10,7 @@ public struct ResolutionCommandsConfiguration {
     public private(set) var versions: String?
 }
 
+/// :nodoc:
 extension ResolutionCommandsConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case buildNumber = "build_number"
@@ -17,6 +18,7 @@ extension ResolutionCommandsConfiguration: Codable {
     }
 }
 
+/// :nodoc:
 extension ResolutionCommandsConfiguration: SubConfiguration {
     public static let blank: ResolutionCommandsConfiguration = .init(
         buildNumber: nil,
@@ -26,6 +28,7 @@ extension ResolutionCommandsConfiguration: SubConfiguration {
     public static var `default`: ResolutionCommandsConfiguration { return .blank }
 }
 
+/// :nodoc:
 extension ResolutionCommandsConfiguration: Mergeable {
     public func merge(into other: inout ResolutionCommandsConfiguration) {
         if let buildNumber = buildNumber, !buildNumber.isEmpty {

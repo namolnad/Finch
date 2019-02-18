@@ -13,6 +13,7 @@ public struct Contributor {
     public let handle: String
 }
 
+/// :nodoc:
 extension Contributor: Codable {
     enum CodingKeys: String, CodingKey {
         case email

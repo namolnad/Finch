@@ -10,6 +10,15 @@ import FinchUtilities
 import Foundation
 
 public struct SectionInfo {
+    public let capitalizesMessage: Bool
+    public let excluded: Bool
+    public let formatTemplate: FormatTemplate?
+    public let tags: [String]
+    public let title: String
+}
+
+/// :nodoc:
+extension SectionInfo: Codable {
     enum CodingKeys: String, CodingKey {
         case capitalizesMessage = "capitalizes_message"
         case excluded
@@ -18,26 +27,6 @@ public struct SectionInfo {
         case title
     }
 
-    public let capitalizesMessage: Bool
-    public let excluded: Bool
-    public let formatTemplate: FormatTemplate?
-    public let tags: [String]
-    public let title: String
-
-    public init(capitalizesMessage: Bool,
-                excluded: Bool = false,
-                formatTemplate: FormatTemplate?,
-                tags: [String],
-                title: String) {
-        self.capitalizesMessage = capitalizesMessage
-        self.excluded = excluded
-        self.formatTemplate = formatTemplate
-        self.tags = tags
-        self.title = title
-    }
-}
-
-extension SectionInfo: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -63,6 +52,7 @@ extension SectionInfo: Codable {
 extension SectionInfo {
     fileprivate static let `default`: SectionInfo = .init(
         capitalizesMessage: false,
+        excluded: false,
         formatTemplate: .default,
         tags: ["*"],
         title: "Features"
@@ -70,6 +60,7 @@ extension SectionInfo {
 
     fileprivate static let bugs: SectionInfo = .init(
         capitalizesMessage: false,
+        excluded: false,
         formatTemplate: .default,
         tags: ["bugfix", "bug fix", "bug"],
         title: "Bug Fixes"

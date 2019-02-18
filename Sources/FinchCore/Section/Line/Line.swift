@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 public struct Line {
     let value: String
 }
@@ -31,6 +32,7 @@ extension Line {
     }
 }
 
+/// :nodoc:
 extension Line: Outputtable {
     public var output: String {
         return value

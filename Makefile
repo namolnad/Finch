@@ -10,6 +10,7 @@ CONFIG_TEMPLATE=template.config.yml
 CONFIRM=./Scripts/prompt_confirmation
 CP=cp
 DISTRIBUTION_PLIST=$(APP_TMP)/Distribution.plist
+DOCS=docs
 INSTALL_DIR=$(HOME)/.$(APP_NAME_LOWERCASE)
 INTERNAL_PACKAGE=$(APP_NAME)App.pkg
 LN=ln -fs
@@ -41,6 +42,9 @@ config_template:
 	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
 	$(MKDIR) $(INSTALL_DIR)
 	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/
+
+docs: xcodeproj
+	jazzy --config .jazzy/FinchCore.yml -o $(DOCS)/FinchCore --module-version $(VERSION_STRING)
 
 install: build symlink config_template
 	install -d $(BIN_DIR)

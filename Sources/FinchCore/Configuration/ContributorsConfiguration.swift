@@ -11,6 +11,7 @@ public struct ContributorsConfiguration {
     public private(set) var contributorHandlePrefix: String
 }
 
+/// :nodoc:
 extension ContributorsConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case contributors = "contributor_list"
@@ -35,6 +36,7 @@ extension ContributorsConfiguration: Codable {
     }
 }
 
+/// :nodoc:
 extension ContributorsConfiguration: SubConfiguration {
     public static let blank: ContributorsConfiguration = .init(
         contributors: [],
@@ -46,6 +48,7 @@ extension ContributorsConfiguration: SubConfiguration {
     }
 }
 
+/// :nodoc:
 extension ContributorsConfiguration: Mergeable {
     public func merge(into other: inout ContributorsConfiguration) {
         if !contributors.isEmpty {

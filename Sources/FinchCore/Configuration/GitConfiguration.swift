@@ -12,6 +12,7 @@ public struct GitConfiguration {
     public private(set) var repoBaseUrl: String
 }
 
+/// :nodoc:
 extension GitConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case branchPrefix = "branch_prefix"
@@ -28,6 +29,7 @@ extension GitConfiguration: Codable {
     }
 }
 
+/// :nodoc:
 extension GitConfiguration: SubConfiguration {
     public static let blank: GitConfiguration = .init(
         branchPrefix: "",
@@ -38,6 +40,7 @@ extension GitConfiguration: SubConfiguration {
     public static var `default`: GitConfiguration { return .blank }
 }
 
+/// :nodoc:
 extension GitConfiguration: Mergeable {
     public func merge(into other: inout GitConfiguration) {
         if !branchPrefix.isEmpty {

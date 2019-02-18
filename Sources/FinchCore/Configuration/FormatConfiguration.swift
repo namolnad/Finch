@@ -13,6 +13,7 @@ public struct FormatConfiguration {
     public private(set) var sectionInfos: [SectionInfo]
 }
 
+/// :nodoc:
 extension FormatConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case delimiterConfig = "delimiters"
@@ -44,6 +45,7 @@ extension FormatConfiguration: Codable {
     }
 }
 
+/// :nodoc:
 extension FormatConfiguration: SubConfiguration {
     public static var blank: FormatConfiguration = .init(
         delimiterConfig: .blank,
@@ -62,6 +64,7 @@ extension FormatConfiguration: SubConfiguration {
     )
 }
 
+/// :nodoc:
 extension FormatConfiguration: Mergeable {
     public func merge(into other: inout FormatConfiguration) {
         if !sectionInfos.isEmpty {

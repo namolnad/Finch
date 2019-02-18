@@ -11,6 +11,7 @@ public struct DelimiterConfiguration: Equatable {
     public private(set) var output: DelimiterPair
 }
 
+/// :nodoc:
 extension DelimiterConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case input
@@ -25,6 +26,7 @@ extension DelimiterConfiguration: Codable {
     }
 }
 
+/// :nodoc:
 extension DelimiterConfiguration: SubConfiguration {
     public static let `default`: DelimiterConfiguration = .init(
         input: .defaultInput,
@@ -37,6 +39,7 @@ extension DelimiterConfiguration: SubConfiguration {
     )
 }
 
+/// :nodoc:
 extension DelimiterConfiguration: Mergeable {
     public func merge(into other: inout DelimiterConfiguration) {
         if !input.isBlank {

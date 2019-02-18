@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 public struct Section {
     public let configuration: Configuration
     public let info: SectionInfo
@@ -33,6 +34,7 @@ extension Section {
         }
     }
 
+    /// :nodoc:
     public func inserting(lineComponents: LineComponents) -> Section {
         return .init(
             configuration: configuration,
@@ -42,6 +44,7 @@ extension Section {
     }
 }
 
+/// :nodoc:
 extension Section: Outputtable {
     public var output: String {
         return """

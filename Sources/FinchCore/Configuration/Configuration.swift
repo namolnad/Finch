@@ -6,10 +6,12 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
+/// :nodoc:
 public protocol Mergeable {
     func merge(into other: inout Self)
 }
 
+/// :nodoc:
 public protocol SubConfiguration {
     static var blank: Self { get }
     static var `default`: Self { get }
@@ -19,10 +21,12 @@ public struct Configuration {
     public private(set) var contributorsConfig: ContributorsConfiguration
     public private(set) var formatConfig: FormatConfiguration
     public private(set) var gitConfig: GitConfiguration
+    /// :nodoc:
     public private(set) var projectDir: String = ""
     public private(set) var resolutionCommandsConfig: ResolutionCommandsConfiguration
 }
 
+/// :nodoc:
 extension Configuration: Codable {
     enum CodingKeys: String, CodingKey {
         case contributors
@@ -50,6 +54,7 @@ extension Configuration: Codable {
     }
 }
 
+/// :nodoc:
 extension Configuration: Mergeable {
     public func merge(into other: inout Configuration) {
         contributorsConfig.merge(into: &other.contributorsConfig)
@@ -59,6 +64,7 @@ extension Configuration: Mergeable {
     }
 }
 
+/// :nodoc:
 extension Configuration {
     public static func `default`(projectDir: String) -> Configuration {
         return .init(

@@ -25,6 +25,7 @@ extension String: LineOutputtable {
     }
 }
 
+/// :nodoc:
 extension Array where Element == String {
     public func sorted(by pattern: Regex.Pattern) -> [String] {
         return sorted {

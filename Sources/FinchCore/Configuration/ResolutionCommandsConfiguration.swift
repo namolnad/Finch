@@ -11,7 +11,7 @@
  */
 public struct ResolutionCommandsConfiguration {
     /**
-     * Optional command string to resolve your project's build
+     * Optional command string to resolve a project's build
      * number at run-time.
      */
     public private(set) var buildNumber: String?

@@ -22,7 +22,7 @@ public struct FormatConfiguration {
 
     /**
      * A global format template to replace the built-in default.
-     * Initialized via a `format_string` key in your configuration file.
+     * Initialized via a `format_string` key in the configuration file.
      */
     public private(set) var formatTemplate: FormatTemplate?
 
@@ -34,7 +34,7 @@ public struct FormatConfiguration {
     /**
      * A list of SectionInfo structures for the project. Sections
      * will appear in the final output in the same order they are
-     * listed in your configuration file.
+     * listed in the configuration file.
      */
     public private(set) var sectionInfos: [SectionInfo]
 }

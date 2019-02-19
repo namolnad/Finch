@@ -9,7 +9,7 @@
 /**
  * Type-safe template which determines the final format for
  * the per-line output for a given section. Initialized via
- * a `format_string` at the global or section level in your
+ * a `format_string` at the global or section level in the
  * configuration file.
  */
 public struct FormatTemplate {

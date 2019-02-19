@@ -11,8 +11,8 @@
  */
 public struct GitConfiguration {
     /**
-     * An optional branch prefix for your project to precede versions
-     * when comparing.
+     * An optional branch prefix for the project. This string will
+     * prefix the included versions when running the compare command.
      * >  Defaults to ""
      *
      * #### Example
@@ -29,8 +29,8 @@ public struct GitConfiguration {
     public private(set) var executablePath: String?
 
     /**
-     * The base url for your project's repository. Used as a prefix for
-     * your commit and PR hyperlinks.
+     * The base url for a project's repository. Used as a prefix for
+     * commit and PR hyperlinks.
      */
     public private(set) var repoBaseUrl: String
 }

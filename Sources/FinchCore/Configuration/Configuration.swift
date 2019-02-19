@@ -18,7 +18,7 @@ public protocol SubConfiguration {
 }
 
 /**
- * A structure describing your project's configuration. Comprised of
+ * A structure describing a project's configuration. Comprised of
  * multiple sub-configurations.
  */
 public struct Configuration {

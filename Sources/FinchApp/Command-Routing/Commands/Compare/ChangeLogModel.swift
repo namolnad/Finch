@@ -71,7 +71,6 @@ final class ChangeLogModel: ChangeLogModelType {
     }
 
     /// See ChangeLogModelType.versions(app:env:)
-
     func versions(app: App, env: Environment) throws -> (old: Version, new: Version) {
         return try resolver.versions(
             from: try service.versionsString(app: app, env: env)

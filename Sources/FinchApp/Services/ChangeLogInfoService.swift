@@ -8,14 +8,24 @@
 import FinchUtilities
 import Foundation
 
+/// A protocol defining the service for changelog info.
 protocol ChangeLogInfoServiceType {
+    /// Returns the build number for the new version.
     func buildNumber(options: CompareCommand.Options, app: App, env: Environment) throws -> String?
+
+    /// Returns the raw changelog (git log) between the two compared versions.
     func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String
-    // Returns a space separated string representing two versions. E.g. "0.2.1 0.3.0"
+
+    /**
+     * Returns a space-separated string representing two
+     * versions. E.g. "0.2.1 0.3.0"
+     */
     func versionsString(app: App, env: Environment) throws -> String
 }
 
+/// A concrete type conforming to ChangeLogInfoServiceType protocol
 struct ChangeLogInfoService: ChangeLogInfoServiceType {
+    /// :nodoc:
     enum Error: LocalizedError {
         case noVersionsString
 
@@ -36,6 +46,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
     }
     // swiftlint:enable line_length
 
+    /// See ChangeLogInfoServiceType.buildNumber(options:app:env:)
     func buildNumber(options: CompareCommand.Options, app: App, env: Environment) throws -> String? {
         if let buildNumber = options.buildNumber {
             return buildNumber
@@ -55,6 +66,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
+    /// See ChangeLogInfoServiceType.changeLog(options:app:env:)
     func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String {
         if let log = options.gitLog {
             return log
@@ -72,6 +84,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
         return try git.log(oldVersion: options.versions.old, newVersion: options.versions.new)
     }
 
+    /// See ChangeLogInfoServiceType.versionString(app:env:)
     func versionsString(app: App, env: Environment) throws -> String {
         // First try for custom command
         if let value = app.configuration.resolutionCommandsConfig.versions {

@@ -9,7 +9,9 @@ import Foundation
 import Utility
 import var Basic.stdoutStream
 
+/// A class for registering, parsing and running commands.
 final class CommandRegistry {
+    /// :nodoc:
     typealias Binder = ArgumentBinder<App.Options>
 
     private let binder: Binder = .init()
@@ -18,6 +20,7 @@ final class CommandRegistry {
 
     private let parser: ArgumentParser
 
+    /// :nodoc:
     init(meta: App.Meta) {
         self.parser = .init(
             usage: "<command> [--option]...",
@@ -41,6 +44,11 @@ final class CommandRegistry {
     }
 
     // swiftlint:disable large_tuple
+    /**
+     * Parses the included arguments.
+     * - Returns:
+     * The chosen command (if exists), app options, and the parsing result.
+     */
     func parse(arguments: [String]) throws -> (String?, App.Options, ParsingResult) {
         let result = try parser.parse(arguments)
 
@@ -52,14 +60,17 @@ final class CommandRegistry {
     }
     // swiftlint:enable large_tuple
 
+    /// Prints the usage to standard out.
     func printUsage() {
         parser.printUsage(on: stdoutStream)
     }
 
+    /// Registers a given command.
     func register(command: (ArgumentParser, Binder) -> Command) {
         self.commands.append(command(parser, binder))
     }
 
+    /// Runs a given command.
     func runCommand(named name: String, with result: ParsingResult, app: App, env: Environment) throws {
         guard let command = commands.first(where: { $0.name == name }) else {
             return

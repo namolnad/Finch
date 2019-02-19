@@ -44,6 +44,7 @@ config_template:
 	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/
 
 docs: xcodeproj
+	jazzy --config .jazzy/FinchApp.yml -o $(DOCS)/FinchApp -m FinchApp --module-version $(VERSION_STRING)
 	jazzy --config .jazzy/FinchCore.yml -o $(DOCS)/FinchCore --module-version $(VERSION_STRING)
 
 install: build symlink config_template

@@ -7,6 +7,10 @@
 
 import FinchUtilities
 
+/**
+ * A class responsible for running the app. Internally registers
+ * all commands. Selects and runs the proper command.
+ */
 public class AppRunner {
     private let environment: Environment
 
@@ -16,6 +20,7 @@ public class AppRunner {
 
     private let registry: CommandRegistry
 
+    /// :nodoc:
     public init(environment: Environment, meta: App.Meta, output: OutputType = Output.instance) {
         self.environment = environment
         self.meta = meta
@@ -31,6 +36,7 @@ public class AppRunner {
         }
     }
 
+    /// Runs the app with the included arguments.
     public func run(arguments: [String]) throws {
         let args = Array(arguments.dropFirst())
 

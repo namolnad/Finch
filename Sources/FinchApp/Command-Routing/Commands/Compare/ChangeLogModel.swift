@@ -9,12 +9,18 @@
 import class Basic.Process
 import FinchCore
 
+/// A protocol defining the model for changelog creation/formatting.
 protocol ChangeLogModelType {
+    /// Returns the old and new versions being compared.
     func versions(app: App, env: Environment) throws -> (old: Version, new: Version)
+
+    /// Returns the transformed and formatted changelog.
     func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String
 }
 
+/// A concrete type conforming to ChangeLogModelType protocol.
 final class ChangeLogModel: ChangeLogModelType {
+    /// :nodoc:
     typealias Options = CompareCommand.Options
 
     private struct OutputInfo {
@@ -29,11 +35,13 @@ final class ChangeLogModel: ChangeLogModelType {
     private let resolver: VersionResolving
     private let service: ChangeLogInfoServiceType
 
+    /// :nodoc:
     init(resolver: VersionResolving = VersionsResolver(), service: ChangeLogInfoServiceType = ChangeLogInfoService()) {
         self.resolver = resolver
         self.service = service
     }
 
+    /// See ChangeLogModelType.changeLog(options:app:env:)
     func changeLog(options: Options, app: App, env: Environment) throws -> String {
         let outputInfo: OutputInfo = try self.outputInfo(for: options, app: app, env: env)
 
@@ -61,6 +69,8 @@ final class ChangeLogModel: ChangeLogModelType {
 
         return output
     }
+
+    /// See ChangeLogModelType.versions(app:env:)
 
     func versions(app: App, env: Environment) throws -> (old: Version, new: Version) {
         return try resolver.versions(

@@ -9,6 +9,7 @@
 import FinchCore
 import Foundation
 
+/// :nodoc:
 struct Transformer {
     let pattern: Regex.Replacement
 

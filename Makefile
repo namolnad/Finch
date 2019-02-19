@@ -13,6 +13,7 @@ DISTRIBUTION_PLIST=$(APP_TMP)/Distribution.plist
 DOCS=docs
 INSTALL_DIR=$(HOME)/.$(APP_NAME_LOWERCASE)
 INTERNAL_PACKAGE=$(APP_NAME)App.pkg
+JAZZY=bundle exec jazzy --module-version $(VERSION_STRING)
 LN=ln -fs
 MKDIR=mkdir -p
 ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
@@ -44,8 +45,8 @@ config_template:
 	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/
 
 docs: xcodeproj
-	jazzy --config .jazzy/FinchApp.yml -o $(DOCS)/FinchApp -m FinchApp --module-version $(VERSION_STRING)
-	jazzy --config .jazzy/FinchCore.yml -o $(DOCS)/FinchCore --module-version $(VERSION_STRING)
+	$(JAZZY) --config .jazzy/FinchApp.yml -o $(DOCS)/FinchApp
+	$(JAZZY) --config .jazzy/FinchCore.yml -o $(DOCS)/FinchCore
 
 install: build symlink config_template
 	install -d $(BIN_DIR)

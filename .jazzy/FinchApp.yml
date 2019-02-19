@@ -1,0 +1,14 @@
+author: Dan Loman
+clean: true
+github_url: https://github.com/namolnad/Finch
+min_acl: internal
+module: FinchApp
+theme: fullwidth
+xcodebuild_arguments: [build,-scheme,Finch-Package]
+
+custom_categories:
+  - name: Commands and Options
+    children:
+      - App
+      - CompareCommand
+      - ConfigCommand

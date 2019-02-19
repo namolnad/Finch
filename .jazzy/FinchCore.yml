@@ -1,0 +1,19 @@
+author: Dan Loman
+clean: true
+exclude:
+  - "Source/FinchCore/Regex.swift"
+github_url: https://github.com/namolnad/Finch
+# hide_documentation_coverage: true
+min_acl: internal
+module: FinchCore
+theme: fullwidth
+xcodebuild_arguments: [build,-scheme,Finch-Package]
+custom_categories:
+  - name: Configuration
+    children:
+      - Configuration
+      - ContributorsConfiguration
+      - DelimiterConfiguration
+      - FormatConfiguration
+      - GitConfiguration
+      - ResolutionCommandsConfiguration

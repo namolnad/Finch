@@ -13,7 +13,6 @@ import FinchUtilities
 /// :nodoc:
 public typealias Version = Utility.Version
 
-
 /// A structure to represent this app and its components.
 public struct App {
 

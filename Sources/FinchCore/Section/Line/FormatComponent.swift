@@ -23,11 +23,13 @@ enum FormatComponent: String {
      * \[PR #123\]\(url-to-pr\)
      */
     case commitTypeHyperlink = "commit_type_hyperlink"
+
     /**
      * ### Represents
      * The email address of the contributor who authored the commit.
      */
     case contributorEmail = "contributor_email"
+
     /**
      * ### Represents
      * The handle derived from the project's Contributor configuration file.
@@ -35,17 +37,19 @@ enum FormatComponent: String {
      * be used in its place.
      */
     case contributorHandle = "contributor_handle"
+
     /**
      * ### Represents
      * The message of the current commit.
      */
     case message
+
     /**
      * ### Represents
      * The sha of the current commit.
      */
-
     case sha
+
     /**
      * ### Represents
      * All tags included in the current commit.

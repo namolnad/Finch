@@ -6,8 +6,22 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
+/**
+ * FormatConfiguration's sub-configuration for the project's tag delimiters.
+ */
 public struct DelimiterConfiguration: Equatable {
+    /**
+     * The delimiter pair surrounding a commit tag prior to
+     * Finch processing.
+     * > Defaults to left `[` and right `]`
+     */
     public private(set) var input: DelimiterPair
+
+    /**
+     * The delimiter pair surrounding a commit tag in the final
+     * Finch output.
+     * > Defaults to left `|` and right `|`
+     */
     public private(set) var output: DelimiterPair
 }
 

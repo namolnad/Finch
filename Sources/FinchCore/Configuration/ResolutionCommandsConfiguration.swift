@@ -5,8 +5,22 @@
 //  Created by Dan Loman on 2/3/19.
 //
 
+/**
+ * Sub-configuration for shell commands used to resolve information
+ * only available at run-time.
+ */
 public struct ResolutionCommandsConfiguration {
+    /**
+     * Optional command string to resolve your project's build
+     * number at run-time.
+     */
     public private(set) var buildNumber: String?
+
+    /**
+     * Optional command string to resolve the two versions you want
+     * Finch to compare. Expects a single string with
+     * two valid, space-separated versions.
+     */
     public private(set) var versions: String?
 }
 

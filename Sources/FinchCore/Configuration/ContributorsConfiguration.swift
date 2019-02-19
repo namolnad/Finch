@@ -6,8 +6,19 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
+/**
+ * Sub-configuration for the project's contributors.
+ */
 public struct ContributorsConfiguration {
+    /**
+     * List of the project's contributors.
+     */
     public private(set) var contributors: [Contributor]
+
+    /**
+     * A custom prefix to precede all contributors' handles in the
+     * final output. `@`, for example.
+     */
     public private(set) var contributorHandlePrefix: String
 }
 

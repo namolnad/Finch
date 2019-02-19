@@ -8,8 +8,19 @@
 
 import Foundation
 
+/**
+ * A structure describing the left and right delimiters surrounding
+ * a commit message tag.
+ */
 public struct DelimiterPair: Codable, Equatable {
+    /**
+     * The left-hand tag delimiter.
+     */
     public let left: String
+
+    /**
+     * The right-hand tag delimiter.
+     */
     public let right: String
 }
 

@@ -17,12 +17,34 @@ public protocol SubConfiguration {
     static var `default`: Self { get }
 }
 
+/**
+ * A structure describing your project's configuration. Comprised of
+ * multiple sub-configurations.
+ */
 public struct Configuration {
+    /**
+     * Sub-configuration for the project's contributors.
+     */
     public private(set) var contributorsConfig: ContributorsConfiguration
+
+    /**
+     * Sub-configuration for the formatting of the overall output as well
+     * as the input for tag delimiters.
+     */
     public private(set) var formatConfig: FormatConfiguration
+
+    /**
+     * Sub-configuration for the project's Git setup.
+     */
     public private(set) var gitConfig: GitConfiguration
+
     /// :nodoc:
     public private(set) var projectDir: String = ""
+
+    /**
+     * Sub-configuration for shell commands used to resolve information
+     * only available at run-time.
+     */
     public private(set) var resolutionCommandsConfig: ResolutionCommandsConfiguration
 }
 

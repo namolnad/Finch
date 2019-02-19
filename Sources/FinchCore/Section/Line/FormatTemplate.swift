@@ -6,12 +6,19 @@
 //  Copyright © 2019 DHL. All rights reserved.
 //
 
+/**
+ * Type-safe template which determines the final format for
+ * the per-line output for a given section. Initialized via
+ * a `format_string` at the global or section level in your
+ * configuration file.
+ */
 public struct FormatTemplate {
     /// :nodoc:
     let outputtables: [LineOutputtable]
 }
 
 extension FormatTemplate {
+    /// :nodoc:
     init?(formatString: String?) {
         guard let outputtables = formatString?.lineOutputtables, !outputtables.isEmpty else {
             return nil
@@ -20,7 +27,11 @@ extension FormatTemplate {
         self.init(outputtables: outputtables)
     }
 
-    /// Equivalent to: " - << tags >> << message >> — << commit_type_hyperlink >> — << contributor_handle >>"
+    /**
+     * FormatTemplate if no section-specific or global `format_string` has
+     * been configured. Equivalent to the format_string value of:
+     * `" - << tags >> << message >> — << commit_type_hyperlink >> — << contributor_handle >>"`
+     */
     static let `default`: FormatTemplate = .init(
         outputtables: [
             " - ",
@@ -34,6 +45,7 @@ extension FormatTemplate {
         ]
     )
 
+    /// :nodoc:
     var formatString: String {
         return outputtables.reduce("") { (partial: String, outputtable: LineOutputtable) in
             switch outputtable {
@@ -49,7 +61,7 @@ extension FormatTemplate {
 }
 
 private extension String {
-    // Walk along format string to gather typed LineOutputtable's
+    /// Walk along format string to gather typed LineOutputtable's
     var lineOutputtables: [LineOutputtable] {
         var components: [String] = []
         var component: String = ""

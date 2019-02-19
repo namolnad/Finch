@@ -8,11 +8,23 @@
 
 import Foundation
 
+/**
+ * A structure to describe a given project contributor.
+ */
 public struct Contributor {
+    /**
+     * The contributor's emails. Either singular or list style
+     * keys are acceptable in the config file.
+     */
     public let emails: [String]
+
+    /**
+     * The contributor's custom handle/username for display in final output.
+     */
     public let handle: String
 }
 
+/// :nodoc:
 extension Contributor: Codable {
     enum CodingKeys: String, CodingKey {
         case email
@@ -45,6 +57,7 @@ extension Contributor: Codable {
     }
 }
 
+/// :nodoc:
 extension Contributor {
     static let example1: Contributor = .init(
         emails: [

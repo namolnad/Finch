@@ -9,20 +9,50 @@ import FinchUtilities
 import Foundation
 import Utility
 
+/// Command to compare two versions and generate the appropriate changelog.
 final class CompareCommand: Command {
+    /// CompareCommand options received from the commandline.
     struct Options {
+        /// The versions for comparison.
         fileprivate(set) var versions: (old: Version, new: Version)
+
+        /**
+         * The build number to be included in the version header. Has
+         * no effect if noShowVersion option is true.
+         */
         fileprivate(set) var buildNumber: String?
+
+        /**
+         * The raw git log to be used rather than having Finch
+         * generate/retrieve it.
+         */
         fileprivate(set) var gitLog: String?
+
+        /// Normalize the git commit tags by lowercasing them.
         fileprivate(set) var normalizeTags: Bool
+
+        /**
+         * Prevent Finch from performing the fetch operation on the
+         * project repo. Has no effect if the gitLog option is set.
+         */
         fileprivate(set) var noFetch: Bool
+
+        /// Exclude the version header from the final output.
         fileprivate(set) var noShowVersion: Bool
+
+        /**
+         * Email address for the release manager. If included, a
+         * special section will be included below the version header.
+         */
         fileprivate(set) var releaseManager: String?
+
+        /// Copy the final output to the system pasteboard.
         fileprivate(set) var toPasteBoard: Bool
     }
 
     private typealias Binder = ArgumentBinder<Options>
 
+    /// The command's name.
     let name: String = "compare"
 
     private let binder: Binder = .init()
@@ -31,6 +61,7 @@ final class CompareCommand: Command {
 
     private let subparser: ArgumentParser
 
+    /// :nodoc:
     init(
         meta: App.Meta,
         parser: ArgumentParser,
@@ -45,6 +76,7 @@ final class CompareCommand: Command {
         bindOptions(to: binder, meta: meta)
     }
 
+    /// Runs CompareCommand with the given result, app, and env.
     func run(with result: ParsingResult, app: App, env: Environment) throws {
         var options: Options = .blank
 
@@ -68,6 +100,14 @@ final class CompareCommand: Command {
         app.print(result)
     }
 
+    /**
+     * Binds special options received after the `compare` command
+     * to the global app options.
+     *
+     * #### Options for global binding
+     * - `--verbose`
+     * - `--project-dir`
+     */
     @discardableResult
     func bindingGlobalOptions(to binder: CommandRegistry.Binder) -> CompareCommand {
         binder.bind(option: subparser.add(

@@ -6,11 +6,23 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
+/**
+ * Sub-configuration for the project's contributors.
+ */
 public struct ContributorsConfiguration {
+    /**
+     * List of the project's contributors.
+     */
     public private(set) var contributors: [Contributor]
+
+    /**
+     * A custom prefix to precede all contributors' handles in the
+     * final output. `@`, for example.
+     */
     public private(set) var contributorHandlePrefix: String
 }
 
+/// :nodoc:
 extension ContributorsConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case contributors = "contributor_list"
@@ -35,6 +47,7 @@ extension ContributorsConfiguration: Codable {
     }
 }
 
+/// :nodoc:
 extension ContributorsConfiguration: SubConfiguration {
     public static let blank: ContributorsConfiguration = .init(
         contributors: [],
@@ -46,6 +59,7 @@ extension ContributorsConfiguration: SubConfiguration {
     }
 }
 
+/// :nodoc:
 extension ContributorsConfiguration: Mergeable {
     public func merge(into other: inout ContributorsConfiguration) {
         if !contributors.isEmpty {
@@ -58,6 +72,7 @@ extension ContributorsConfiguration: Mergeable {
     }
 }
 
+/// :nodoc:
 extension ContributorsConfiguration {
     static let example: ContributorsConfiguration = .init(
         contributors: [

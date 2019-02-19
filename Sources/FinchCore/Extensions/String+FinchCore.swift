@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 extension String {
     init(range: NSRange, in body: String) {
         guard let range = Range(range, in: body) else {
@@ -19,12 +20,14 @@ extension String {
     }
 }
 
+/// :nodoc:
 extension String: LineOutputtable {
     func output(components: LineComponents, context: LineContext) -> String {
         return self
     }
 }
 
+/// :nodoc:
 extension Array where Element == String {
     public func sorted(by pattern: Regex.Pattern) -> [String] {
         return sorted {

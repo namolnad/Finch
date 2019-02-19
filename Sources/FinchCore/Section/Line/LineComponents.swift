@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 public struct LineComponents {
     enum Kind: Int {
         case sha = 1
@@ -22,6 +23,7 @@ public struct LineComponents {
     public let sha: String
     public let tags: [String]
 
+    /// :nodoc:
     public init(rawLine: String, configuration: Configuration, normalizeTags: Bool) {
         let componentString: (Kind) -> String = { kind in
             rawLine.component(kind: kind, configuration: configuration)
@@ -39,6 +41,7 @@ public struct LineComponents {
     }
 }
 
+/// :nodoc:
 extension LineComponents.Kind {
     var regEx: String {
         switch self {

@@ -7,11 +7,15 @@
 
 import Foundation
 
+/// Protocol describing a version-resolving type.
 protocol VersionResolving {
+    /// Resolves an old and new version from a space separated version string.
     func versions(from versionString: String) throws -> (old: Version, new: Version)
 }
 
+/// A concrete type conforming to VersionResolving protocol.
 struct VersionsResolver: VersionResolving {
+    /// :nodoc:
     enum Error: LocalizedError {
         case unableToResolveVersion
 
@@ -26,6 +30,7 @@ struct VersionsResolver: VersionResolving {
         }
     }
 
+    /// See VersionResolving.versions(from:)
     func versions(from versionString: String) throws -> (old: Version, new: Version) {
         guard case let versionStrings = versionString.split(separator: " "),
             versionStrings.count == 2,

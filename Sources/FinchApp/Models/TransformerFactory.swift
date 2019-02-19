@@ -9,6 +9,7 @@
 import FinchCore
 import FinchUtilities
 
+/// :nodoc:
 struct TransformerFactory {
     private let configuration: Configuration
 

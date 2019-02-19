@@ -10,25 +10,34 @@ import FinchCore
 import FinchUtilities
 import Foundation
 
+/// A structure tasked with creating and returning the app's configuration.
 struct Configurator {
+    /// The app's configuration.
     var configuration: Configuration {
         return getConfiguration()
     }
 
-    // Paths for which the configurator should continue to modify the existing config with the next found config
+    /**
+     * Paths for which the configurator should continue
+     * to modify the existing config with the next found config.
+     */
     private let cascadingPaths: [String]
 
     private let cascadingResolver: FileResolver<Configuration>
 
     private let defaultConfig: Configuration
 
-    // Paths for which the configurator should return the first valid configuration
+    /**
+     * Paths for which the configurator should return
+     * the first valid configuration.
+     */
     private let immediateResolver: FileResolver<Configuration>
 
     private let immediateReturnPaths: [String]
 
     private let output: OutputType
 
+    /// :nodoc:
     init(
         options: App.Options,
         meta: App.Meta,

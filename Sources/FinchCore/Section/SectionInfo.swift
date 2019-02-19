@@ -9,7 +9,63 @@
 import FinchUtilities
 import Foundation
 
+/**
+ * A structure to describe the meta-contents of a section. Used for
+ * section description, formatting, and commit-to-section assignment.
+ */
 public struct SectionInfo {
+    /**
+     * If true, normalizes each commit message by capitalizing the first
+     * letter of the message.
+     * > Defaults to `false`
+     */
+    public let capitalizesMessage: Bool
+
+    /**
+     * If `true`, section is excluded from the final output.
+     * Useful if a wildcard section exists, but certain tags which would
+     * otherwise be captured by the wildcard are desired to be excluded
+     * from the final output.
+     * > Defaults to `false`
+     */
+    public let excluded: Bool
+
+    /**
+     * Optional template created if a `format_string` is included in the
+     * section's configuration.
+     */
+    public let formatTemplate: FormatTemplate?
+
+    /**
+     * The tags which are owned by the section. Each matching commit
+     * will be placed into its owning section.
+     *
+     * ### Behavior
+     *
+     * - Greedy
+     *    - If included sections have duplicative tags, the last section
+     * with a given tag wins
+     *
+     * - Exclusive
+     *    - Commits will only appear in a single section\
+     * - Searching
+     *    - As Finch iterates over each commit, it searches first
+     * for a section matching the first commit tag, then the second and so on.
+     *
+     * - Wildcard
+     *    - One wildcard section can be included.
+     * Do so by including a `*` in the section's tag config
+     */
+    public let tags: [String]
+
+    /**
+     * The section's unique title.
+     */
+    public let title: String
+}
+
+/// :nodoc:
+extension SectionInfo: Codable {
     enum CodingKeys: String, CodingKey {
         case capitalizesMessage = "capitalizes_message"
         case excluded
@@ -18,26 +74,6 @@ public struct SectionInfo {
         case title
     }
 
-    public let capitalizesMessage: Bool
-    public let excluded: Bool
-    public let formatTemplate: FormatTemplate?
-    public let tags: [String]
-    public let title: String
-
-    public init(capitalizesMessage: Bool,
-                excluded: Bool = false,
-                formatTemplate: FormatTemplate?,
-                tags: [String],
-                title: String) {
-        self.capitalizesMessage = capitalizesMessage
-        self.excluded = excluded
-        self.formatTemplate = formatTemplate
-        self.tags = tags
-        self.title = title
-    }
-}
-
-extension SectionInfo: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -63,6 +99,7 @@ extension SectionInfo: Codable {
 extension SectionInfo {
     fileprivate static let `default`: SectionInfo = .init(
         capitalizesMessage: false,
+        excluded: false,
         formatTemplate: .default,
         tags: ["*"],
         title: "Features"
@@ -70,12 +107,14 @@ extension SectionInfo {
 
     fileprivate static let bugs: SectionInfo = .init(
         capitalizesMessage: false,
+        excluded: false,
         formatTemplate: .default,
         tags: ["bugfix", "bug fix", "bug"],
         title: "Bug Fixes"
     )
 }
 
+/// :nodoc:
 extension Array where Element == SectionInfo {
     static let `default`: [SectionInfo] = [
         .default,

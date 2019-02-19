@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 extension Sequence {
     func firstMap<T>(_ transform: (Element) throws -> T?) rethrows -> T? {
         for element in self {

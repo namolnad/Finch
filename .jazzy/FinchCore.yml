@@ -1,0 +1,17 @@
+author: Dan Loman
+clean: true
+github_url: https://github.com/namolnad/Finch
+min_acl: internal
+module: FinchCore
+theme: fullwidth
+xcodebuild_arguments: [build,-scheme,Finch-Package]
+
+custom_categories:
+  - name: Configuration
+    children:
+      - Configuration
+      - ContributorsConfiguration
+      - DelimiterConfiguration
+      - FormatConfiguration
+      - GitConfiguration
+      - ResolutionCommandsConfiguration

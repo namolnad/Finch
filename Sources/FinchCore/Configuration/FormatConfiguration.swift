@@ -5,14 +5,41 @@
 //  Created by Dan Loman on 2/12/19.
 //
 
+/**
+ * Sub-configuration for the formatting of the overall output as well
+ * as the input for tag delimiters.
+ */
 public struct FormatConfiguration {
+    /**
+     * Sub-configuration for the project's tag delimiters.
+     */
     public private(set) var delimiterConfig: DelimiterConfiguration
+
+    /**
+     * A custom footer string.
+     */
     public private(set) var footer: String?
+
+    /**
+     * A global format template to replace the built-in default.
+     * Initialized via a `format_string` key in the configuration file.
+     */
     public private(set) var formatTemplate: FormatTemplate?
+
+    /**
+     * A custom header string.
+     */
     public private(set) var header: String?
+
+    /**
+     * A list of SectionInfo structures for the project. Sections
+     * will appear in the final output in the same order they are
+     * listed in the configuration file.
+     */
     public private(set) var sectionInfos: [SectionInfo]
 }
 
+/// :nodoc:
 extension FormatConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case delimiterConfig = "delimiters"
@@ -44,6 +71,7 @@ extension FormatConfiguration: Codable {
     }
 }
 
+/// :nodoc:
 extension FormatConfiguration: SubConfiguration {
     public static var blank: FormatConfiguration = .init(
         delimiterConfig: .blank,
@@ -62,6 +90,7 @@ extension FormatConfiguration: SubConfiguration {
     )
 }
 
+/// :nodoc:
 extension FormatConfiguration: Mergeable {
     public func merge(into other: inout FormatConfiguration) {
         if !sectionInfos.isEmpty {

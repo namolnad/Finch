@@ -8,10 +8,12 @@
 
 import Foundation
 
+/// :nodoc:
 public struct Line {
     let value: String
 }
 
+/// :nodoc:
 extension Line {
     static func from(components: LineComponents, context: LineContext) -> Line {
         let template: FormatTemplate = context.sectionInfo.formatTemplate ??
@@ -31,6 +33,7 @@ extension Line {
     }
 }
 
+/// :nodoc:
 extension Line: Outputtable {
     public var output: String {
         return value

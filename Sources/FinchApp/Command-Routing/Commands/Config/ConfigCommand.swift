@@ -11,19 +11,24 @@ import Foundation
 import Utility
 import Yams
 
+/// Command to run configuration-centric operations.
 final class ConfigCommand: Command {
+    /// ConfigCommand options received from the commandline.
     struct Options {
+        /// Print an example config.
         fileprivate(set) var shouldPrintExample: Bool
     }
 
     private typealias Binder = ArgumentBinder<Options>
 
+    /// ConfigCommand's name.
     let name: String = "config"
 
     private let binder: Binder = .init()
 
     private let subparser: ArgumentParser
 
+    /// :nodoc:
     init(
         meta: App.Meta,
         parser: ArgumentParser
@@ -41,6 +46,7 @@ final class ConfigCommand: Command {
         bindOptions(to: binder, meta: meta)
     }
 
+    /// Runs ConfigCommand with the given result, app, and env.
     func run(with result: ParsingResult, app: App, env: Environment) throws {
         var options: Options = .blank
 

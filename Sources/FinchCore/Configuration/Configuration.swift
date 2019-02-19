@@ -6,23 +6,49 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
+/// :nodoc:
 public protocol Mergeable {
     func merge(into other: inout Self)
 }
 
+/// :nodoc:
 public protocol SubConfiguration {
     static var blank: Self { get }
     static var `default`: Self { get }
 }
 
+/**
+ * A structure describing a project's configuration. Comprised of
+ * multiple sub-configurations.
+ */
 public struct Configuration {
+    /**
+     * Sub-configuration for the project's contributors.
+     */
     public private(set) var contributorsConfig: ContributorsConfiguration
+
+    /**
+     * Sub-configuration for the formatting of the overall output as well
+     * as the input for tag delimiters.
+     */
     public private(set) var formatConfig: FormatConfiguration
+
+    /**
+     * Sub-configuration for the project's Git setup.
+     */
     public private(set) var gitConfig: GitConfiguration
+
+    /// :nodoc:
     public private(set) var projectDir: String = ""
+
+    /**
+     * Sub-configuration for shell commands used to resolve information
+     * only available at run-time.
+     */
     public private(set) var resolutionCommandsConfig: ResolutionCommandsConfiguration
 }
 
+/// :nodoc:
 extension Configuration: Codable {
     enum CodingKeys: String, CodingKey {
         case contributors
@@ -50,6 +76,7 @@ extension Configuration: Codable {
     }
 }
 
+/// :nodoc:
 extension Configuration: Mergeable {
     public func merge(into other: inout Configuration) {
         contributorsConfig.merge(into: &other.contributorsConfig)
@@ -59,6 +86,7 @@ extension Configuration: Mergeable {
     }
 }
 
+/// :nodoc:
 extension Configuration {
     public static func `default`(projectDir: String) -> Configuration {
         return .init(

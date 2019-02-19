@@ -10,11 +10,13 @@ import Basic
 import FinchCore
 import FinchUtilities
 
+/// :nodoc:
 struct Git {
     let app: App
     let env: Environment
 }
 
+/// :nodoc:
 extension Git {
     private func gitExecutableArgs() throws -> [String] {
         return [

@@ -7,6 +7,7 @@
 
 import Utility
 
+/// :nodoc:
 extension Utility.Version: ArgumentKind {
     public static var completion: ShellCompletion {
         return .none

@@ -99,8 +99,6 @@ publish: test
 	git commit --amend --no-edit
 	git tag -f $(NEW_VERSION)
 	git push origin $(NEW_VERSION) -f
-	@echo 'Reminder: If this was a major or minor release, ensure the version is \
-	properly incremented to the next minor version in master.'
 
 setup:
 	swift run komondor install

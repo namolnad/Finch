@@ -25,6 +25,8 @@ struct Configurator {
 
     private let cascadingResolver: FileResolver<Configuration>
 
+    private let cascadingPrivateResolver: FileResolver<Configuration>
+
     private let defaultConfig: Configuration
 
     /**
@@ -47,6 +49,11 @@ struct Configurator {
         self.cascadingResolver = .init(
             fileManager: fileManager,
             pathComponent: "/.\(meta.name.lowercased())/config.yml"
+        )
+
+        self.cascadingPrivateResolver = .init(
+            fileManager: fileManager,
+            pathComponent: "/.\(meta.name.lowercased())/config.private.yml"
         )
 
         // The immediate resolver expects an exact path to be passed in through the environment variable
@@ -94,8 +101,14 @@ struct Configurator {
                 return configuration
             }
 
-            for config in try cascadingPaths.compactMap(cascadingResolver.resolve) {
-                config.merge(into: &configuration)
+            for path in cascadingPaths {
+                if let config = try cascadingResolver.resolve(path: path) {
+                    config.merge(into: &configuration)
+                }
+
+                if let config = try cascadingPrivateResolver.resolve(path: path) {
+                    config.merge(into: &configuration)
+                }
             }
         } catch {
             output.print("\(error)", kind: .error, verbose: false)

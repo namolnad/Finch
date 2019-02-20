@@ -2,7 +2,7 @@
 
 Finch is a configurable tool designed to make tracking the history and evolution of a product simple and easy to automate. It transforms a project's commit messages into well-formatted, section-based version changelogs — tailored to your team's specific documentation needs. Finch requires a commit message square-bracket [tag] convention which it utilizes to determine an appropriate section into which a given commit should be placed. (e.g. `[cleanup] Remove legacy obj-c code`)
 
-### Why 'Finch'?
+### Why is it called 'Finch'?
 
 The name Finch is derived from the purpose of the application itself — tracking the evolution of a product. Because evolution is at the core of Finch, it seemed appropriate to name it after an evolutionary landmark, Darwin's [finches](https://bit.ly/2TJZlnb).
 
@@ -18,7 +18,7 @@ To generate a changelog you must run the `compare` command. If `compare` is pass
 1. The ability to hide the version header (`--no-show-version`)
 2. Release manager (`--release-manager`)
 3. Project directory (`--project-dir`) if Finch is not called from project directory
-4. Manual git log (`--git-log`). Must be received in format: git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_VERSION...NEW_VERSION
+4. Manual git log (`--git-log`). Must be received in format: `git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_VERSION...NEW_VERSION`
 5. Don't fetch origin before auto-generating changelog (`--no-fetch`).
 6. Build number string to be included in version header (`--build-number`) Takes precedence over build number command in config. Example output: `6.19.1 (6258)`
 
@@ -36,29 +36,30 @@ project-changelog() {
 ## Configuration
 View Finch's configurable components in this [configuration template](Resources/template.config.yml).
 
-### File Type & Search Behavior
-Finch will start with a default configuration and will search several paths for configuration overrides. It expects a hidden `.finch` directory containing a `config.yml` file. The `.finch` directory can be placed in either the home, current, or project directories. Alternatively, if you provide a custom path through an env variable, Finch will look for a valid configuration file at the included path.
+### Config file location
+Finch searches for a hidden `.finch` directory containing a `config.yml` file. The `.finch` directory can be placed in either the home, current, or project directories. Alternatively, if you provide a custom path through an env variable, Finch will look for a valid configuration file at the included path. Finch also allows for private config files in case you prefer to keep portions of your config outside your version-control sytem. See the [search behavior](#config-merging-and-search-behavior) below.
+
+### Config format
+`config.yml` should be a valid YAML file in the same format as this [config template](Resources/template.config.yml). (Note: Not all keys need to be included as Finch uses default values where needed. You can see an example config at any time by running `finch config --show-example`.
+
+### Config merging and search behavior
+Finch will start with a default configuration and will search several paths for valid configuration files to override existing values. Any non-empty elements included in later configuration files will override their existing counterparts. Empty or omitted config file components will be ignored.
 
 The config search paths will be executed in the following manner:
 - Env var
   - FINCH_CONFIG
 __OR__
-- Built in defaults overridden w/ waterfall technique
+- Built in defaults overridden w/ waterfall technique (searching each directory first for `config.yml`, then for `config.private.yml`)
   - Home directory
   - Finch's current directory
   - `--project-dir` argument
 
-### Config formatting
-`config.yml` should be a valid YAML file in the same format as this [config template](Resources/template.config.yml). (Note: Not all keys need to be included as Finch uses default values where possible)
-
-At any time you can see an example config by running `finch config --show-example`. Any non-empty configuration variables included in the config file found in each step will overwrite the existing configuration. Empty or omitted config file components will be ignored.
-
 *Notes*
-  - Sections should be listed in the order you want them to be displayed in the output
-  - If included sections have duplicative tags, the last section with a given tag wins. Each matching commit will be placed into it's owning section.
-  - One wildcard section can be included. Do so by including a * in the section's tag config.
-  - Commits will only appear in a single section. Searches first for a section matching the first commit tag, then the second and so on.
-  - Sections may be excluded by passing `excluded: true` in section config
+- Sections should be listed in the order you want them to be displayed in the output
+- If included sections have duplicative tags, the last section with a given tag wins. Each matching commit will be placed into its owning section.
+- One wildcard section can be included. Do so by including a * in the section's tag config.
+- Commits will only appear in a single section. Searches first for a section matching the first commit tag, then the second and so on.
+- Sections may be excluded by passing excluded: true in section config
 
 ## Example output
 ```

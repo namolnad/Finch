@@ -13,7 +13,7 @@ protocol VersionsResolving {
     func versions(from versionString: String) throws -> (old: Version, new: Version)
 }
 
-/// A concrete type conforming to VersionResolving protocol.
+/// A concrete type conforming to `VersionsResolving` protocol.
 struct VersionsResolver: VersionsResolving {
     /// :nodoc:
     enum Error: LocalizedError {

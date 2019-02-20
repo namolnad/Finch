@@ -23,7 +23,7 @@ protocol ChangeLogInfoServiceType {
     func versionsString(app: App, env: Environment) throws -> String
 }
 
-/// A concrete type conforming to ChangeLogInfoServiceType protocol
+/// A concrete type conforming to `ChangeLogInfoServiceType` protocol
 struct ChangeLogInfoService: ChangeLogInfoServiceType {
     /// :nodoc:
     enum Error: LocalizedError {

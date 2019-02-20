@@ -18,7 +18,7 @@ protocol ChangeLogModelType {
     func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String
 }
 
-/// A concrete type conforming to ChangeLogModelType protocol.
+/// A concrete type conforming to `ChangeLogModelType` protocol.
 final class ChangeLogModel: ChangeLogModelType {
     /// :nodoc:
     typealias Options = CompareCommand.Options

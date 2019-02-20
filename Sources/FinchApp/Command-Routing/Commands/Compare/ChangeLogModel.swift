@@ -32,16 +32,16 @@ final class ChangeLogModel: ChangeLogModelType {
         fileprivate var contributorHandlePrefix: String = ""
     }
 
-    private let resolver: VersionResolving
+    private let resolver: VersionsResolving
     private let service: ChangeLogInfoServiceType
 
     /// :nodoc:
-    init(resolver: VersionResolving = VersionsResolver(), service: ChangeLogInfoServiceType = ChangeLogInfoService()) {
+    init(resolver: VersionsResolving = VersionsResolver(), service: ChangeLogInfoServiceType = ChangeLogInfoService()) {
         self.resolver = resolver
         self.service = service
     }
 
-    /// See ChangeLogModelType.changeLog(options:app:env:)
+    /// See `ChangeLogModelType.changeLog(options:app:env:)` for definition.
     func changeLog(options: Options, app: App, env: Environment) throws -> String {
         let outputInfo: OutputInfo = try self.outputInfo(for: options, app: app, env: env)
 
@@ -70,7 +70,7 @@ final class ChangeLogModel: ChangeLogModelType {
         return output
     }
 
-    /// See ChangeLogModelType.versions(app:env:)
+    /// See `ChangeLogModelType.versions(app:env:)` for definition.
     func versions(app: App, env: Environment) throws -> (old: Version, new: Version) {
         return try resolver.versions(
             from: try service.versionsString(app: app, env: env)

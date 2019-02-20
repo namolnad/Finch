@@ -148,7 +148,7 @@ struct ChangeLogInfoServiceMock: ChangeLogInfoServiceType {
     }
 }
 
-struct VersionsResolverMock: VersionResolving {
+struct VersionsResolverMock: VersionsResolving {
     func versions(from versionString: String) throws -> (old: Version, new: Version) {
         return (.init(0, 0, 13), .init(6, 13, 0))
     }

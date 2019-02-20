@@ -23,7 +23,7 @@ protocol ChangeLogInfoServiceType {
     func versionsString(app: App, env: Environment) throws -> String
 }
 
-/// A concrete type conforming to ChangeLogInfoServiceType protocol
+/// A concrete type conforming to `ChangeLogInfoServiceType` protocol
 struct ChangeLogInfoService: ChangeLogInfoServiceType {
     /// :nodoc:
     enum Error: LocalizedError {
@@ -46,7 +46,10 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
     }
     // swiftlint:enable line_length
 
-    /// See ChangeLogInfoServiceType.buildNumber(options:app:env:)
+    /**
+     * See `ChangeLogInfoServiceType.buildNumber(options:app:env:)`
+     * for definition.
+     */
     func buildNumber(options: CompareCommand.Options, app: App, env: Environment) throws -> String? {
         if let buildNumber = options.buildNumber {
             return buildNumber
@@ -66,7 +69,10 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    /// See ChangeLogInfoServiceType.changeLog(options:app:env:)
+    /**
+     * See `ChangeLogInfoServiceType.changeLog(options:app:env:)`
+     * for definition.
+     */
     func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String {
         if let log = options.gitLog {
             return log
@@ -84,7 +90,10 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
         return try git.log(oldVersion: options.versions.old, newVersion: options.versions.new)
     }
 
-    /// See ChangeLogInfoServiceType.versionString(app:env:)
+    /**
+     * See `ChangeLogInfoServiceType.versionString(app:env:)`
+     * for definition.
+     */
     func versionsString(app: App, env: Environment) throws -> String {
         // First try for custom command
         if let value = app.configuration.resolutionCommandsConfig.versions {

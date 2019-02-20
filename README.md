@@ -54,6 +54,13 @@ __OR__
   - Finch's current directory
   - `--project-dir` argument
 
+*Notes*
+- Sections should be listed in the order you want them to be displayed in the output
+- If included sections have duplicative tags, the last section with a given tag wins. Each matching commit will be placed into its owning section.
+- One wildcard section can be included. Do so by including a * in the section's tag config.
+- Commits will only appear in a single section. Searches first for a section matching the first commit tag, then the second and so on.
+- Sections may be excluded by passing excluded: true in section config
+
 ## Example output
 ```
 # 6.13.0 (3242)

@@ -1,4 +1,4 @@
-APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME)
+APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME_LOWERCASE)
 APP_NAME=Finch
 APP_NAME_LOWERCASE=$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 APP_TMP=/tmp/$(APP_NAME).dst
@@ -9,7 +9,7 @@ BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
 CONFIG_TEMPLATE=template.config.yml
 CONFIRM=./Scripts/prompt_confirmation
 CP=cp
-CURRENT_BRANCH=git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+CURRENT_BRANCH=$(shell git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||')
 DISTRIBUTION_PLIST=$(APP_TMP)/Distribution.plist
 DOCS=docs
 INSTALL_DIR=$(HOME)/.$(APP_NAME_LOWERCASE)
@@ -89,7 +89,7 @@ prefix_install:
 publish: test
 	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
 	@$(CONFIRM) "Warning: This will force create and push a tag for '$(NEW_VERSION)' \
-	based off the current state of the current branch: $(CURRENT_BRANCH)."
+	based off the current state of the current branch: '$(CURRENT_BRANCH)'."
 	@NEW_VERSION=$(NEW_VERSION) $(MAKE) update_version
 	git add $(VERSION_FILE)
 	git commit --allow-empty -m "[version] Publish version $(NEW_VERSION)"
@@ -104,8 +104,8 @@ setup:
 	swift run komondor install
 
 symlink: build
-	@echo "\nSymlinking $(APP_NAME)"
-	$(LN) $(BIN_DIR)/$(APP_NAME) $(BINARIES_DIR)
+	@echo "\nSymlinking $(APP_NAME_LOWERCASE)"
+	$(LN) $(BIN_DIR)/$(APP_NAME_LOWERCASE) $(BINARIES_DIR)
 
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest

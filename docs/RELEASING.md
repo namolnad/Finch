@@ -5,7 +5,7 @@ The Finch release process is largely automated, however there are a few things y
 ## Publishing a release
 
 ### Create and push a new tag
-See [Patch release](#Patch-release) or [Major and minor releases](#Major-and-minor-releases) for the appropriate next steps.
+See [Patch release](#patch-release) or [Major and minor releases](#major-and-minor-releases) for the appropriate next steps.
 
 #### Patch release
 1. Patch releases should be branched off the most recent tag: `git checkout -b releases/NEW_VERSION TAG` (replacing `NEW_VERSION` and `TAG` with the intended values).

@@ -9,6 +9,7 @@ BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
 CONFIG_TEMPLATE=template.config.yml
 CONFIRM=./Scripts/prompt_confirmation
 CP=cp
+CURRENT_BRANCH=git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
 DISTRIBUTION_PLIST=$(APP_TMP)/Distribution.plist
 DOCS=docs
 INSTALL_DIR=$(HOME)/.$(APP_NAME_LOWERCASE)
@@ -58,19 +59,19 @@ lint:
 package: build
 	$(MKDIR) $(APP_TMP)
 	$(CP) $(APP_EXECUTABLE) $(APP_TMP)
-
+	
 	pkgbuild \
 	  --identifier $(ORG_IDENTIFIER) \
 	  --install-location $(BINARIES_DIR) \
 	  --root $(APP_TMP) \
 	  --version $(VERSION_STRING) \
 	  $(INTERNAL_PACKAGE)
-
+	
 	productbuild \
 	  --synthesize \
 	  --package $(INTERNAL_PACKAGE) \
 	  $(DISTRIBUTION_PLIST)
-
+	
 	productbuild \
 	  --distribution $(DISTRIBUTION_PLIST) \
 	  --package-path $(INTERNAL_PACKAGE) \
@@ -87,9 +88,8 @@ prefix_install:
 
 publish: test
 	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
-	@$(CONFIRM) "Warning: This will force create/push a tag for '$(NEW_VERSION)'."
-	git checkout master
-	git checkout -B releases/$(NEW_VERSION)
+	@$(CONFIRM) "Warning: This will force create and push a tag for '$(NEW_VERSION)' \
+	based off the current state of the current branch: $(CURRENT_BRANCH)."
 	@NEW_VERSION=$(NEW_VERSION) $(MAKE) update_version
 	git add $(VERSION_FILE)
 	git commit --allow-empty -m "[version] Publish version $(NEW_VERSION)"
@@ -98,9 +98,7 @@ publish: test
 	git add -f $(BUILD_NUMBER_FILE)
 	git commit --amend --no-edit
 	git tag -f $(NEW_VERSION)
-	git push origin $(NEW_VERSION) --force
-	git checkout master
-	@echo 'Reminder: Update version in master if needed.'
+	git push origin $(NEW_VERSION) -f
 
 setup:
 	swift run komondor install

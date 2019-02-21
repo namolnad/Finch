@@ -6,6 +6,8 @@
 //
 
 import FinchUtilities
+import Foundation
+import enum Utility.ArgumentParserError
 
 /**
  * A class responsible for running the app. Internally registers
@@ -37,7 +39,23 @@ public class AppRunner {
     }
 
     /// Runs the app with the included arguments.
-    public func run(arguments: [String]) throws {
+    public func run(arguments: [String]) {
+        do {
+            try _run(arguments: arguments)
+        } catch {
+            let formattedError: String = .localizedStringWithFormat(
+                NSLocalizedString(
+                    "Error: %@",
+                    comment: "Formatted error message"
+                ),
+                (error as? ArgumentParserError)?.description ?? error.localizedDescription
+            )
+
+            output.print(formattedError, kind: .error, verbose: false)
+        }
+    }
+
+    private func _run(arguments: [String]) throws {
         let args = Array(arguments.dropFirst())
 
         let (command, options, result) = try registry.parse(arguments: args)

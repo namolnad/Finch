@@ -7,7 +7,6 @@
 //
 
 import FinchCore
-import Foundation
 
 /// :nodoc:
 struct Transformer {

@@ -6,8 +6,6 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
-
 /// :nodoc:
 protocol LineOutputtable {
     func output(components: LineComponents, context: LineContext) -> String

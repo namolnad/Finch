@@ -7,7 +7,6 @@
 //
 
 import FinchUtilities
-import Foundation
 
 /**
  * A structure to describe the meta-contents of a section. Used for

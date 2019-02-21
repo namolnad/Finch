@@ -6,8 +6,6 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
-
 /**
  * Enum representing special FormatString objects which indicate
  * where the component's corresponding data should be inserted in

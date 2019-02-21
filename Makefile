@@ -88,7 +88,7 @@ prefix_install:
 
 publish: test
 	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
-	@$(CONFIRM) "Warning: This will force create and push a tag for '$(NEW_VERSION)' \
+	@$(CONFIRM) "Warning: This will create and push a tag for '$(NEW_VERSION)' \
 	based off the current state of the current branch: $(CURRENT_BRANCH)."
 	@NEW_VERSION=$(NEW_VERSION) $(MAKE) update_version
 	git add $(VERSION_FILE)

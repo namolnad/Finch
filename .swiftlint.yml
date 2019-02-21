@@ -24,6 +24,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
   - Vendor
   - build
+  - Tests
 
 nesting:
   type_level: 3

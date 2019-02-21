@@ -6,8 +6,6 @@
 //  Copyright © 2019 DHL. All rights reserved.
 //
 
-import Foundation
-
 /// :nodoc:
 public struct Section {
     public let configuration: Configuration

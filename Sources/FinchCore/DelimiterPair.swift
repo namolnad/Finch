@@ -6,8 +6,6 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
-
 /**
  * A structure describing the left and right delimiters surrounding
  * a commit message tag.

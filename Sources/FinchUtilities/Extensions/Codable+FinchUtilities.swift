@@ -6,8 +6,6 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
-
 extension KeyedDecodingContainer {
     public func decode<T: Decodable>(forKey key: Key) throws -> T {
         return try decode(T.self, forKey: key)

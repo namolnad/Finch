@@ -6,8 +6,6 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Foundation
-
 /// :nodoc:
 public struct LineComponents {
     enum Kind: Int {

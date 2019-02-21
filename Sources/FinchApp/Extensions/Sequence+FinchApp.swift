@@ -6,8 +6,6 @@
 //  Copyright © 2019 DHL. All rights reserved.
 //
 
-import Foundation
-
 /// :nodoc:
 extension Sequence {
     func firstMap<T>(_ transform: (Element) throws -> T?) rethrows -> T? {

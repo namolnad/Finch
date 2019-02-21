@@ -165,7 +165,7 @@ jobs:
       - run: mkdir -p << parameters.test-results-dir >>
       - run:
           name: Run tests
-          command: make test
+          command: swift test
       - store_test_results:
           path: << parameters.test-results-dir >>
 

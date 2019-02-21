@@ -167,7 +167,7 @@ jobs:
           name: Run tests
           command: make test
       - store_test_results:
-          path: << parameters.test-results-dir >
+          path: << parameters.test-results-dir >>
 
 workflows:
   build:

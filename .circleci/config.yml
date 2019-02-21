@@ -163,7 +163,6 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p << parameters.test-results-dir >>
-      - run: swift test --generate-linuxmain
       - run:
           name: Run tests
           command: make test

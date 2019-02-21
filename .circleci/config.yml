@@ -153,6 +153,22 @@ jobs:
       - store_test_results:
           path: << parameters.test-results-dir >>
 
+  linux:
+    executor: go
+    parameters:
+      test-results-dir:
+        default: build/reports/test
+        type: string
+    steps:
+      - checkout
+      - run: mkdir -p << parameters.test-results-dir >>
+      - run: swift test --generate-linuxmain
+      - run:
+          name: Run tests
+          command: make test
+      - store_test_results:
+          path: << parameters.test-results-dir >
+
 workflows:
   build:
     jobs:
@@ -199,3 +215,4 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
+      - linux

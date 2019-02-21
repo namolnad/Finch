@@ -97,8 +97,8 @@ publish: test
 	cat $(BUILD_NUMBER_FILE)
 	git add -f $(BUILD_NUMBER_FILE)
 	git commit --amend --no-edit
-	git tag -f $(NEW_VERSION)
-	git push origin $(NEW_VERSION) -f
+	git tag $(NEW_VERSION)
+	git push origin $(NEW_VERSION)
 
 setup:
 	swift run komondor install

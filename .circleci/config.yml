@@ -154,7 +154,8 @@ jobs:
           path: << parameters.test-results-dir >>
 
   linux:
-    executor: go
+    docker:
+      - image: norionomura/swift:latest
     parameters:
       test-results-dir:
         default: build/reports/test

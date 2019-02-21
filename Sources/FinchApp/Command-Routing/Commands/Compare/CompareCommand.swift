@@ -92,8 +92,10 @@ final class CompareCommand: Command {
         )
 
         if options.toPasteBoard {
+            #if os(macOS)
             app.print(Strings.Compare.Progress.toPasteboard, kind: .info)
             pbCopy(text: result)
+            #endif
         }
 
         app.print(result)

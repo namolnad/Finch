@@ -32,7 +32,7 @@ extension Regex.Replacement {
     }
 
     private func findReplace(pattern: String, in body: String, with replacement: String) -> String {
-        guard !pattern.isEmpty || !body.isEmpty else {
+        guard [pattern, body].contains(where: { !$0.isEmpty }) else {
             return body
         }
         guard let expression = try? NSRegularExpression(

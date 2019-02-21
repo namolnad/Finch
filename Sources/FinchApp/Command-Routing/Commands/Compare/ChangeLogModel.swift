@@ -83,10 +83,8 @@ final class ChangeLogModel: ChangeLogModelType {
         let version: String? = try versionHeader(options: options, app: app, env: env)
         let releaseManager: Contributor? = self.releaseManager(options: options, configuration: configuration)
 
-        let transformers = TransformerFactory(configuration: configuration).initialTransformers
-
         let linesComponents = type(of: self)
-            .filteredLines(input: rawChangeLog, using: transformers)
+            .filteredLines(input: rawChangeLog, using: .default(for: configuration))
             .compactMap { rawLine in
                 LineComponents(
                     rawLine: rawLine,

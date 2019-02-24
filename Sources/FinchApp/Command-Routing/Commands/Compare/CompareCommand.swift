@@ -125,7 +125,7 @@ final class CompareCommand: Command {
         return self
     }
 
-    // swiftlint:disable function_body_length line_length
+    // swiftlint:disable function_body_length
     private func bindOptions(to binder: Binder, meta: App.Meta) {
         binder.bind(option: subparser.add(
             option: "--versions",
@@ -187,7 +187,7 @@ final class CompareCommand: Command {
             usage: Strings.Compare.Options.toPasteboard
         )) { $0.toPasteBoard = $1 }
     }
-    // swiftlint:enable function_body_length line_length
+    // swiftlint:enable function_body_length
 }
 
 extension CompareCommand.Options {

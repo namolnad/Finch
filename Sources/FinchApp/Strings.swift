@@ -7,6 +7,7 @@
 
 import Foundation
 
+// swiftlint:disable line_length
 enum Strings {
     enum Error {
         static func formatted(_ errorMessage: String) -> String {
@@ -61,9 +62,9 @@ enum Strings {
                     appName
                 )
             }
-            
+
             static var verbose: String = "Run command with verbose output"
-            
+
             static var projectDir: String = "Path to project if command is run from separate directory"
         }
     }
@@ -125,3 +126,4 @@ enum Strings {
         }
     }
 }
+// swiftlint:enable line_length

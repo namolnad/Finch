@@ -6,7 +6,6 @@
 //
 
 import FinchUtilities
-import Foundation
 import enum Utility.ArgumentParserError
 
 /**
@@ -43,15 +42,13 @@ public class AppRunner {
         do {
             try _run(arguments: arguments)
         } catch {
-            let formattedError: String = .localizedStringWithFormat(
-                NSLocalizedString(
-                    "Error: %@",
-                    comment: "Formatted error message"
-                ),
-                (error as? ArgumentParserError)?.description ?? error.localizedDescription
-            )
+            let message = (error as? ArgumentParserError)?.description ?? error.localizedDescription
 
-            output.print(formattedError, kind: .error, verbose: false)
+            output.print(
+                Strings.Error.formatted(message),
+                kind: .error,
+                verbose: false
+            )
         }
     }
 

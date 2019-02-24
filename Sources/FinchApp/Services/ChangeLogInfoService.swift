@@ -32,10 +32,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
         var failureReason: String? {
             switch self {
             case .noVersionsString:
-                return NSLocalizedString(
-                    "Unable to procure versions string. Ensure semantic-version branches or tags exist",
-                    comment: "Error message when failed to create versions string"
-                )
+                return Strings.Error.noVersions
             }
         }
     }

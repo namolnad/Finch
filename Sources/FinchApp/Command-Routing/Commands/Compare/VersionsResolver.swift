@@ -22,10 +22,7 @@ struct VersionsResolver: VersionsResolving {
         var failureReason: String? {
             switch self {
             case .unableToResolveVersion:
-                return NSLocalizedString(
-                    "Unable to automatically resolve versions. Pass versions in directly through --versions option",
-                    comment: "Error message indicating inability to auto-resolve versions"
-                )
+                return Strings.Error.unableToResolve
             }
         }
     }

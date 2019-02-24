@@ -7,7 +7,6 @@
 
 import FinchCore
 import FinchUtilities
-import Foundation
 import Utility
 import Yams
 
@@ -22,7 +21,7 @@ final class ConfigCommand: Command {
     private typealias Binder = ArgumentBinder<Options>
 
     /// ConfigCommand's name.
-    let name: String = "config"
+    let name: String = Strings.Config.commandName
 
     private let binder: Binder = .init()
 
@@ -35,12 +34,7 @@ final class ConfigCommand: Command {
         ) {
         self.subparser = parser.add(
             subparser: name,
-            overview: .localizedStringWithFormat(
-                NSLocalizedString(
-                    "Assists with generation and example presentation of %@ configuration",
-                    comment: "Configuration command overview"),
-                meta.name
-            )
+            overview: Strings.Config.commandOverview(appName: meta.name)
         )
 
         bindOptions(to: binder, meta: meta)
@@ -63,7 +57,7 @@ final class ConfigCommand: Command {
         binder.bind(option: subparser.add(
             option: "--show-example",
             kind: Bool.self,
-            usage: "Displays example config"
+            usage: Strings.Config.Options.showExample
         )) { $0.shouldPrintExample = $1 }
     }
 }

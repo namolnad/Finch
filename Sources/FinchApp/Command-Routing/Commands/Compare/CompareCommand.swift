@@ -6,7 +6,6 @@
 //
 
 import FinchUtilities
-import Foundation
 import Utility
 
 /// Command to compare two versions and generate the appropriate changelog.
@@ -53,7 +52,7 @@ final class CompareCommand: Command {
     private typealias Binder = ArgumentBinder<Options>
 
     /// The command's name.
-    let name: String = "compare"
+    let name: String = Strings.Compare.commandName
 
     private let binder: Binder = .init()
 
@@ -70,7 +69,7 @@ final class CompareCommand: Command {
         self.model = model
         self.subparser = parser.add(
             subparser: name,
-            overview: "Compares two versions and generates a formatted changelog"
+            overview: Strings.Compare.commandOverview
         )
 
         bindOptions(to: binder, meta: meta)
@@ -93,7 +92,7 @@ final class CompareCommand: Command {
         )
 
         if options.toPasteBoard {
-            app.print("Copying output to pasteboard", kind: .info)
+            app.print(Strings.Compare.Actions.toPasteboard, kind: .info)
             pbCopy(text: result)
         }
 
@@ -114,13 +113,13 @@ final class CompareCommand: Command {
             option: "--verbose",
             shortName: "-v",
             kind: Bool.self,
-            usage: "Run command with verbose output"
+            usage: Strings.App.Options.verbose
         )) { $0.verbose = $1 }
 
         binder.bind(option: subparser.add(
             option: "--project-dir",
             kind: PathArgument.self,
-            usage: "Path to project if command is run from separate directory"
+            usage: Strings.App.Options.projectDir
         )) { $0.projectDir = $1.path.asString }
 
         return self
@@ -131,12 +130,12 @@ final class CompareCommand: Command {
         binder.bind(option: subparser.add(
             option: "--versions",
             kind: [Version].self,
-            usage: "<version_1> <version_2> Use explicit versions for the changelog instead of auto-resolving"
+            usage: Strings.Compare.Options.versions
         )) { options, versions in
             guard versions.count == 2, let firstVersion = versions.first, let secondVersion = versions.last else {
                 throw ArgumentParserError.invalidValue(
                     argument: "versions",
-                    error: .custom("Must receive 2 versions to properly compare and generate changelog")
+                    error: .custom(Strings.Compare.Error.versions)
                 )
             }
             if firstVersion < secondVersion {
@@ -149,48 +148,43 @@ final class CompareCommand: Command {
         binder.bind(option: subparser.add(
             option: "--build-number",
             kind: String.self,
-            usage: "Build number string to be included in version header. Takes precedence over build number command in config. e.g. `6.19.1 (6258)`"
+            usage: Strings.Compare.Options.buildNumber
         )) { $0.buildNumber = $1 }
 
         binder.bind(option: subparser.add(
             option: "--git-log",
             kind: String.self,
-            usage: .localizedStringWithFormat(
-                NSLocalizedString(
-                    "Pass in the git-log string directly vs having %@ generate it. See README for details",
-                    comment: "Git log option description"
-                ), meta.name
-            )
+            usage: Strings.Compare.Options.gitLog(appName: meta.name)
         )) { $0.gitLog = $1 }
 
         binder.bind(option: subparser.add(
             option: "--normalize-tags",
             kind: Bool.self,
-            usage: "Normalize all commit tags by lowercasing prior to running comparison"
+            usage: Strings.Compare.Options.normalizeTags
         )) { $0.normalizeTags = $1 }
 
         binder.bind(option: subparser.add(
             option: "--no-fetch",
             kind: Bool.self,
-            usage: "Don't fetch origin before auto-generating log"
+            usage: Strings.Compare.Options.noFetch
         )) { $0.noFetch = $1 }
 
         binder.bind(option: subparser.add(
             option: "--no-show-version",
             kind: Bool.self,
-            usage: "Hides version header"
+            usage: Strings.Compare.Options.noShowVersion
         )) { $0.noShowVersion = $1 }
 
         binder.bind(option: subparser.add(
             option: "--release-manager",
             kind: String.self,
-            usage: "The release manager's email. e.g. `--release-manager=$(git config --get user.email)`"
+            usage: Strings.Compare.Options.releaseManager
         )) { $0.releaseManager = $1 }
 
         binder.bind(option: subparser.add(
             option: "--to-pasteboard",
             kind: Bool.self,
-            usage: "Copy output to pasteboard in addition to stdout"
+            usage: Strings.Compare.Options.toPasteboard
         )) { $0.toPasteBoard = $1 }
     }
     // swiftlint:enable function_body_length line_length

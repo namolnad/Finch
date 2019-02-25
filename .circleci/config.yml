@@ -161,6 +161,7 @@ jobs:
     executor: mac
     steps:
       - checkout
+      - attach
       - run: swift test --generate-linuxmain
       - persist_to_workspace:
           root: .
@@ -229,7 +230,9 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
-      - generate_linux_main
+      - generate_linux_main:
+          requires:
+            - resolve
       - test_linux:
           requires:
             - generate_linux_main

@@ -11,56 +11,28 @@ import Foundation
 enum Strings {
     enum Error {
         static func formatted(_ errorMessage: String) -> String {
-            return .localizedStringWithFormat(
-                NSLocalizedString(
-                    "Error: %@",
-                    comment: "Formatted error message"
-                ),
-                errorMessage
-            )
+            return "Error: \(errorMessage)"
         }
 
-        static let unableToResolve: String = NSLocalizedString(
-            "Unable to automatically resolve versions. Pass versions in directly through --versions option",
-            comment: "Error message indicating inability to auto-resolve versions"
-        )
+        static let unableToResolve: String = "Unable to automatically resolve versions. Pass versions in directly through --versions option"
 
-        static let noVersions: String = NSLocalizedString(
-            "Unable to procure versions string. Ensure semantic-version branches or tags exist",
-            comment: "Error message when failed to create versions string"
-        )
+        static let noVersions: String = "Unable to procure versions string. Ensure semantic-version branches or tags exist"
     }
 
     enum App {
+        private static let repoBaseUrl: String = "https://github.com/namolnad"
+
         static func overview(appName: String) -> String {
-            return .localizedStringWithFormat(
-                NSLocalizedString(
-                    "%@ is a flexible tool for generating well-formatted changelogs between application versions",
-                    comment: "App overview description"
-                ),
-                appName
-            )
+            return "\(appName) is a flexible tool for generating well-formatted changelogs between application versions"
         }
 
         static func seeAlso(appName: String) -> String {
-            return .localizedStringWithFormat(
-                NSLocalizedString(
-                    "Visit https://github.com/namolnad/%@ for more information",
-                    comment: "More information and website referral description"
-                ),
-                appName
-            )
+            return "Visit \(repoBaseUrl)/\(appName) for more information"
         }
 
         enum Options {
             static func showVersion(appName: String) -> String {
-                return .localizedStringWithFormat(
-                    NSLocalizedString(
-                        "Displays current %@ version and build number",
-                        comment: "App version option description"
-                    ),
-                    appName
-                )
+                return "Displays current \(appName) version and build number"
             }
 
             static var verbose: String = "Run command with verbose output"
@@ -78,13 +50,7 @@ enum Strings {
             static let noFetch: String = "Don't fetch origin before auto-generating log"
 
             static func gitLog(appName: String) -> String {
-                return .localizedStringWithFormat(
-                    NSLocalizedString(
-                        "Pass in the git-log string directly vs having %@ generate it. See README for details",
-                        comment: "Git log option description"
-                    ),
-                    appName
-                )
+                return "Pass in the git-log string directly vs having \(appName) generate it. See README for details"
             }
 
             static let versions: String = "<version_1> <version_2> Use explicit versions for the changelog instead of auto-resolving"
@@ -93,7 +59,7 @@ enum Strings {
 
             static let normalizeTags: String = "Normalize all commit tags by lowercasing prior to running comparison"
 
-            static let noShowVersion: String = "Hides version header"
+            static let noShowVersion: String = "Hide version header"
 
             static let releaseManager: String = "The release manager's email. e.g. `--release-manager=$(git config --get user.email)`"
 
@@ -113,12 +79,7 @@ enum Strings {
         static let commandName: String = "config"
 
         static func commandOverview(appName: String) -> String {
-            return .localizedStringWithFormat(
-                NSLocalizedString(
-                    "Assists with generation and example presentation of %@ configuration",
-                    comment: "Configuration command overview"),
-                appName
-            )
+            return "Assists with generation and example presentation of \(appName) configuration"
         }
 
         enum Options {

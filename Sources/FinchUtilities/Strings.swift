@@ -11,41 +11,19 @@ enum Strings {
     enum Error {
         enum Exec {
             static func notFound(_ exec: String) -> String {
-                return .localizedStringWithFormat(
-                    NSLocalizedString(
-                        "Executable %@ not found on PATH",
-                        comment: "Error message when executable not found on path"
-                    ),
-                    exec
-                )
+                return "Executable \(exec) not found on PATH"
             }
         }
 
         enum Shell {
-            static let emptyArguments: String = NSLocalizedString(
-                "Empty arguments passed to subprocess. Please report this issue.",
-                comment: "Error message indicating empty arguments passed to subprocess"
-            )
+            static let emptyArguments: String = "Empty arguments passed to subprocess. Please report this issue."
 
             static func emptyResult(args: String) -> String {
-                return .localizedStringWithFormat(
-                    NSLocalizedString(
-                        "Empty result from subprocess: %@. Consider reporting this issue.",
-                        comment: "Error message indicating empty subprocess result"
-                    ),
-                    args
-                )
+                return "Empty result from subprocess: \(args). Consider reporting this issue."
             }
 
             static func subprocessNonZeroExit(code: Int32, message: String) -> String {
-                return .localizedStringWithFormat(
-                    NSLocalizedString(
-                        "Internal process exited with non-zero status: %@ %@",
-                        comment: "Error message asking user to report the error they've encountered"
-                    ),
-                    code,
-                    message
-                )
+                return "Internal process exited with non-zero status: \(code) \(message)"
             }
         }
     }

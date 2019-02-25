@@ -178,6 +178,7 @@ jobs:
         type: string
     steps:
       - checkout
+      - attach
       - run: mkdir -p << parameters.test-results-dir >>
       - run:
           name: Run tests

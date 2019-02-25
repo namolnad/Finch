@@ -162,6 +162,7 @@ jobs:
     steps:
       - checkout
       - attach
+      - run: make update_build_number
       - run: swift test --generate-linuxmain
       - persist_to_workspace:
           root: .

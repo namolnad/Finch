@@ -10,6 +10,10 @@ executors:
     docker:
       - image: circleci/golang:1.8
 
+  linux:
+    docker:
+      - image: norionomura/swift:latest
+
 commands:
 
   persist:
@@ -153,9 +157,19 @@ jobs:
       - store_test_results:
           path: << parameters.test-results-dir >>
 
-  linux:
-    docker:
-      - image: norionomura/swift:latest
+  generate_linux_main:
+    executor: mac
+  steps:
+    - checkout
+    - run: swift test --generate-linuxmain
+    - persist_to_workspace:
+      root: .
+      paths:
+        - Tests/LinuxMain.swift
+        - Tests/FinchAppTests/XCTestManifests.swift
+
+  test_linux:
+    executor: linux
     parameters:
       test-results-dir:
         default: build/reports/test
@@ -215,4 +229,6 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
-      - linux
+      - test_linux:
+          requires:
+            - generate_linux_main

@@ -92,7 +92,7 @@ final class CompareCommand: Command {
         )
 
         if options.toPasteBoard {
-            app.print(Strings.Compare.Actions.toPasteboard, kind: .info)
+            app.print(Strings.Compare.Progress.toPasteboard, kind: .info)
             pbCopy(text: result)
         }
 

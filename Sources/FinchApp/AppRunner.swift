@@ -45,7 +45,7 @@ public class AppRunner {
             let message = (error as? ArgumentParserError)?.description ?? error.localizedDescription
 
             output.print(
-                Strings.Error.formatted(message),
+                Strings.Error.formatted(errorMessage: message),
                 kind: .error,
                 verbose: false
             )

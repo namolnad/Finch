@@ -32,7 +32,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
         var failureReason: String? {
             switch self {
             case .noVersionsString:
-                return Strings.Error.noVersions
+                return Strings.Compare.Error.noVersions
             }
         }
     }

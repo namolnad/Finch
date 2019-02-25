@@ -5,20 +5,8 @@
 //  Created by Dan Loman on 2/22/19.
 //
 
-import Foundation
-
 // swiftlint:disable line_length
 enum Strings {
-    enum Error {
-        static func formatted(_ errorMessage: String) -> String {
-            return "Error: \(errorMessage)"
-        }
-
-        static let unableToResolve: String = "Unable to automatically resolve versions. Pass versions in directly through --versions option"
-
-        static let noVersions: String = "Unable to procure versions string. Ensure semantic-version branches or tags exist"
-    }
-
     enum App {
         private static let repoBaseUrl: String = "https://github.com/namolnad"
 
@@ -31,13 +19,13 @@ enum Strings {
         }
 
         enum Options {
+            static var projectDir: String = "Path to project if command is run from separate directory"
+
             static func showVersion(appName: String) -> String {
                 return "Displays current \(appName) version and build number"
             }
 
             static var verbose: String = "Run command with verbose output"
-
-            static var projectDir: String = "Path to project if command is run from separate directory"
         }
     }
 
@@ -47,15 +35,13 @@ enum Strings {
         static let commandOverview: String = "Compares two versions and generates a formatted changelog"
 
         enum Options {
-            static let noFetch: String = "Don't fetch origin before auto-generating log"
+            static let buildNumber: String = "Build number string to be included in version header. Takes precedence over build number command in config. e.g. `6.19.1 (6258)`"
 
             static func gitLog(appName: String) -> String {
-                return "Pass in the git-log string directly vs having \(appName) generate it. See README for details"
+                return "Pass in the git-log string directly vs having \(appName) generate it"
             }
 
-            static let versions: String = "<version_1> <version_2> Use explicit versions for the changelog instead of auto-resolving"
-
-            static let buildNumber: String = "Build number string to be included in version header. Takes precedence over build number command in config. e.g. `6.19.1 (6258)`"
+            static let noFetch: String = "Don't fetch origin before auto-generating log"
 
             static let normalizeTags: String = "Normalize all commit tags by lowercasing prior to running comparison"
 
@@ -64,13 +50,19 @@ enum Strings {
             static let releaseManager: String = "The release manager's email. e.g. `--release-manager=$(git config --get user.email)`"
 
             static let toPasteboard: String = "Copy output to pasteboard in addition to stdout"
+
+            static let versions: String = "<version_1> <version_2> Use explicit versions for the changelog instead of auto-resolving"
         }
 
-        enum Actions {
+        enum Progress {
             static let toPasteboard: String = "Copying output to pasteboard"
         }
 
         enum Error {
+            static let noVersions: String = "Unable to procure versions string. Ensure semantic-version branches or tags exist"
+
+            static let unableToResolve: String = "Unable to automatically resolve versions. Pass versions in directly through --versions option"
+
             static let versions: String = "Must receive 2 versions to properly compare and generate changelog"
         }
     }
@@ -83,7 +75,13 @@ enum Strings {
         }
 
         enum Options {
-            static let showExample: String = "Displays example config"
+            static let showExample: String = "Display example config"
+        }
+    }
+
+    enum Error {
+        static func formatted(errorMessage: String) -> String {
+            return "Error: \(errorMessage)"
         }
     }
 }

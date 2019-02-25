@@ -5,8 +5,6 @@
 //  Created by Dan Loman on 2/23/19.
 //
 
-import Foundation
-
 enum Strings {
     enum Error {
         enum Exec {

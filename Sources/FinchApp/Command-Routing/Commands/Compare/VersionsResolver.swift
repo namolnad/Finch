@@ -22,7 +22,7 @@ struct VersionsResolver: VersionsResolving {
         var failureReason: String? {
             switch self {
             case .unableToResolveVersion:
-                return Strings.Error.unableToResolve
+                return Strings.Compare.Error.unableToResolve
             }
         }
     }

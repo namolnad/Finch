@@ -159,14 +159,14 @@ jobs:
 
   generate_linux_main:
     executor: mac
-  steps:
-    - checkout
-    - run: swift test --generate-linuxmain
-    - persist_to_workspace:
-      root: .
-      paths:
-        - Tests/LinuxMain.swift
-        - Tests/FinchAppTests/XCTestManifests.swift
+    steps:
+      - checkout
+      - run: swift test --generate-linuxmain
+      - persist_to_workspace:
+          root: .
+          paths:
+            - Tests/LinuxMain.swift
+            - Tests/FinchAppTests/XCTestManifests.swift
 
   test_linux:
     executor: linux
@@ -229,6 +229,7 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
+      - generate_linux_main
       - test_linux:
           requires:
             - generate_linux_main

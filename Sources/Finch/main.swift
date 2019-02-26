@@ -7,9 +7,7 @@
 //
 
 import FinchApp
-import FinchUtilities
 import Foundation
-import enum Utility.ArgumentParserError
 
 let processInfo: ProcessInfo = .processInfo
 
@@ -19,21 +17,7 @@ let meta: App.Meta = .init(
     version: appVersion
 )
 
-let runner = AppRunner(
+AppRunner(
     environment: processInfo.environment,
     meta: meta
-)
-
-do {
-    try runner.run(arguments: processInfo.arguments)
-} catch {
-    let formattedError: String = .localizedStringWithFormat(
-        NSLocalizedString(
-            "Error: %@",
-            comment: "Formatted error message"
-        ),
-        (error as? ArgumentParserError)?.description ?? error.localizedDescription
-    )
-
-    Output.instance.print(formattedError, kind: .error)
-}
+).run(arguments: processInfo.arguments)

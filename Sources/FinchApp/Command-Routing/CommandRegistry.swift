@@ -5,7 +5,6 @@
 //  Created by Dan Loman on 1/29/19.
 //
 
-import Foundation
 import Utility
 import var Basic.stdoutStream
 
@@ -24,20 +23,8 @@ final class CommandRegistry {
     init(meta: App.Meta) {
         self.parser = .init(
             usage: "<command> [--option]...",
-            overview: .localizedStringWithFormat(
-                NSLocalizedString(
-                    "%@ is a flexible tool for generating well-formatted changelogs between application versions",
-                    comment: "App overview description"
-                ),
-                meta.name
-            ),
-            seeAlso: .localizedStringWithFormat(
-                NSLocalizedString(
-                    "Visit https://github.com/namolnad/%@ for more information",
-                    comment: "More information and website referral description"
-                ),
-                meta.name
-            )
+            overview: Strings.App.overview(appName: meta.name),
+            seeAlso: Strings.App.seeAlso(appName: meta.name)
         )
 
         bindOptions(to: binder, using: parser, meta: meta)
@@ -84,13 +71,7 @@ final class CommandRegistry {
             option: "--version",
             shortName: "-V",
             kind: Bool.self,
-            usage: .localizedStringWithFormat(
-                NSLocalizedString(
-                    "Displays current %@ version and build number",
-                    comment: "App version option description"
-                ),
-                meta.name
-            )
+            usage: Strings.App.Options.showVersion(appName: meta.name)
         )) { $0.shouldPrintVersion = $1 }
     }
 }

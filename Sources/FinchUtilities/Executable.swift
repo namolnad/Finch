@@ -37,13 +37,7 @@ public enum Executable: String {
         public var failureReason: String? {
             switch self {
             case .notFound(let exec):
-                return .localizedStringWithFormat(
-                    NSLocalizedString(
-                        "Executable %@ not found on PATH",
-                        comment: "Error message when executable not found on path"
-                    ),
-                    exec
-                )
+                return Strings.Error.Exec.notFound(exec)
             }
         }
     }

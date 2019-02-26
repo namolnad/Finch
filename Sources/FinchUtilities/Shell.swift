@@ -18,27 +18,11 @@ public struct Shell {
         public var failureReason: String? {
             switch self {
             case .emptyArguments:
-                return NSLocalizedString(
-                        "Empty arguments passed to subprocess. Please report this issue.",
-                        comment: "Error message indicating empty arguments passed to subprocess"
-                )
+                return Strings.Error.Shell.emptyArguments
             case .emptyResult(args: let args):
-                return .localizedStringWithFormat(
-                    NSLocalizedString(
-                        "Empty result from subprocess: %@. Consider reporting this issue.",
-                        comment: "Error message indicating empty subprocess result"
-                    ),
-                    args
-                )
+                return Strings.Error.Shell.emptyResult(args: args)
             case .subprocessNonZeroExit(code: let code, message: let message):
-                return .localizedStringWithFormat(
-                    NSLocalizedString(
-                        "Internal process exited with non-zero status: %@ %@",
-                        comment: "Error message asking user to report the error they've encountered"
-                    ),
-                    code,
-                    message
-                )
+                return Strings.Error.Shell.subprocessNonZeroExit(code: code, message: message)
             }
         }
     }

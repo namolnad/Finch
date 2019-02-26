@@ -13,7 +13,7 @@ final class AppRunnerTests: XCTestCase {
     func testRunCompare() {
         let outputMock = OutputMock()
 
-        try! AppRunner(
+        AppRunner(
             environment: [:],
             meta: .mock,
             output: outputMock
@@ -25,7 +25,7 @@ final class AppRunnerTests: XCTestCase {
     func testRunConfigExample() {
         let outputMock = OutputMock()
 
-        try! AppRunner(
+        AppRunner(
             environment: [:],
             meta: .mock,
             output: outputMock
@@ -37,11 +37,11 @@ final class AppRunnerTests: XCTestCase {
     func testPrintAppVersion() {
         let outputMock = OutputMock()
 
-        try! AppRunner(
+        AppRunner(
             environment: [:],
             meta: .mock,
             output: outputMock
-            ).run(arguments: ["finch", "--version"])
+        ).run(arguments: ["finch", "--version"])
 
         XCTAssert(outputMock.outputs.first!.contains("Finch"))
     }

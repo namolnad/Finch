@@ -28,5 +28,6 @@ final class ProcessInfoMock: ProcessInfo {
     init(arguments: [String], environment: [String: String]) {
         self._arguments = arguments
         self._environment = environment
+        super.init()
     }
 }

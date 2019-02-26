@@ -179,6 +179,7 @@ jobs:
     steps:
       - checkout
       - attach
+      - run: make update_build_number
       - run: mkdir -p << parameters.test-results-dir >>
       - run:
           name: Run tests

@@ -2,6 +2,18 @@
 
 Finch is a configurable tool designed to make tracking the history and evolution of a product simple and easy to automate. It transforms a project's commit messages into well-formatted, section-based version changelogs — tailored to your team's specific documentation needs. Finch requires a commit message square-bracket [tag] convention which it utilizes to determine an appropriate section into which a given commit should be placed. (e.g. `[cleanup] Remove legacy obj-c code`)
 
+## Table of Contents
+- [Why is it called 'Finch'?](#why-is-it-called-finch)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+  - [Config file location](#config-file-location)
+  - [Config format](#config-format)
+  - [Config merging and search behavior](#config-merging-and-search-behavior)
+- [Contributing](#contributing)
+- [Example output](#example-output)
+- [License](#license)
+
 ### Why is it called 'Finch'?
 
 The name Finch is derived from the purpose of the application itself — tracking the evolution of a product. Because evolution is at the core of Finch, it seemed appropriate to name it after an evolutionary landmark, Darwin's [finches](https://bit.ly/2TJZlnb).
@@ -16,11 +28,11 @@ Finch is available via multiple installation methods:
 ## Usage
 To generate a changelog you must run the `compare` command. If `compare` is passed no arguments, Finch will first look for the two most recent semantically-versioned branches then the two most recent semantically-versioned git tags. You can also explicitly pass two versions by using the `--versions` option and passing 2 version arguments (branch or tag). Other accepted argurments are:
 1. The ability to hide the version header (`--no-show-version`)
-2. Release manager (`--release-manager`)
-3. Project directory (`--project-dir`) if Finch is not called from project directory
-4. Manual git log (`--git-log`). Must be received in format: `git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_VERSION...NEW_VERSION`
-5. Don't fetch origin before auto-generating changelog (`--no-fetch`).
-6. Build number string to be included in version header (`--build-number`) Takes precedence over build number command in config. Example output: `6.19.1 (6258)`
+1. Release manager (`--release-manager`)
+1. Project directory (`--project-dir`) if Finch is not called from project directory
+1. Manual git log (`--git-log`). Must be received in format: `git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_VERSION...NEW_VERSION`
+1. Don't fetch origin before auto-generating changelog (`--no-fetch`).
+1. Build number string to be included in version header (`--build-number`) Takes precedence over build number command in config. Example output: `6.19.1 (6258)`
 
 In many cases it may be easiest to create a new shell function when your shell startup files are sourced, such as the following:
 

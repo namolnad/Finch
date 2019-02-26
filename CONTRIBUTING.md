@@ -3,7 +3,7 @@ Thank you for your interest in contributing to Finch! Below you'll find informat
 
 ## Table of contents
 - [Pull requests](#pull-requests)
-  - [Pull request format](#pull-request-format)
+  - [PR format](#pr-format)
 - [Getting started](#getting-started)
 - [Documentation](#documentation)
 - [Tests](#tests)

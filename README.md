@@ -61,6 +61,9 @@ __OR__
 - Commits will only appear in a single section. Searches first for a section matching the first commit tag, then the second and so on.
 - Sections may be excluded by passing excluded: true in section config
 
+## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## Example output
 ```
 # 6.13.0 (3242)

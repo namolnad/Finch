@@ -92,3 +92,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
  - Release (actual):
 
 ```
+
+## License
+Finch is released under the [MIT License](LICENSE.md)

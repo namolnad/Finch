@@ -7,7 +7,10 @@
 //
 
 import Foundation
+import SnapshotTesting
 import Yams
+
+typealias TestCase = SnapshotTestCase
 
 final class TestHelper {
     private let decoder: YAMLDecoder = .init()

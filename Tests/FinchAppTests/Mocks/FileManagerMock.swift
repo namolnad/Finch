@@ -18,10 +18,6 @@ final class FileManagerMock: FileManager {
         return "current"
     }
 
-    override var homeDirectoryForCurrentUser: URL {
-        return URL(string: "home")!
-    }
-
     private let customConfigPath: String?
 
     init(customConfigPath: String? = nil) {
@@ -34,12 +30,10 @@ final class FileManagerMock: FileManager {
         switch firstPathComponent {
         case currentDirectoryPath:
             return nil
-        case homeDirectoryForCurrentUser.path:
-            return TestHelper.data(for: "default_config")
         case customConfigPath:
             return TestHelper.data(for: firstPathComponent)
         default:
-            fatalError()
+            return TestHelper.data(for: "default_config")
         }
     }
 }

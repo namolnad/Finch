@@ -8,9 +8,8 @@
 
 @testable import FinchApp
 import SnapshotTesting
-import XCTest
 
-final class ConfiguratorTests: XCTestCase {
+final class ConfiguratorTests: TestCase {
     func testDefault() {
         assertSnapshot(
             matching: Configurator(

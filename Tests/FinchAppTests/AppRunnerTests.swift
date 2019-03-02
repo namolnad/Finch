@@ -9,7 +9,7 @@
 import SnapshotTesting
 import XCTest
 
-final class AppRunnerTests: XCTestCase {
+final class AppRunnerTests: TestCase {
     func testRunCompare() {
         let outputMock = OutputMock()
 

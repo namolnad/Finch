@@ -9,7 +9,7 @@
 import SnapshotTesting
 import XCTest
 
-final class CommandRegistryTests: XCTestCase {
+final class CommandRegistryTests: TestCase {
     func testParsingVersion() {
         let registry = CommandRegistry(meta: .mock)
 

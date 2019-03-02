@@ -9,6 +9,13 @@
 import Foundation
 
 struct Resource {
+    /**
+     * Would use Bundle(for: TestHelper.self), but Bundle.init(for:)
+     * is not yet implemented in swift-corelibs-foundation
+     */
+    private var bundle: Bundle {
+        return Bundle(url: URL(fileURLWithPath: "./FinchAppTests.xctest"))!
+    }
 
     private let name: String
 
@@ -20,7 +27,7 @@ struct Resource {
     }
 
     var path: String {
-        guard let path = Bundle(for: TestHelper.self).path(forResource: name, ofType: type.isEmpty ? nil : type) else {
+        guard let path = bundle.path(forResource: name, ofType: type.isEmpty ? nil : type) else {
             let url = URL(fileURLWithPath: #file)
                 .deletingLastPathComponent()
                 .appendingPathComponent("../Resources")

@@ -9,7 +9,7 @@
 import SnapshotTesting
 import XCTest
 
-final class VersionResolverTests: XCTestCase {
+final class VersionResolverTests: TestCase {
     func testDefault() {
         let (old, new) = try! VersionsResolver().versions(from: "6.12.1 6.38.0")
 
@@ -31,22 +31,6 @@ final class VersionResolverTests: XCTestCase {
         XCTAssertEqual(new, .init(7, 38, 0))
     }
 
-    func testFailureTooManyArguments() {
-        do {
-            _ = try VersionsResolver().versions(from: "6.0.2 6.4.3 6.12.1")
-        } catch {
-            assertSnapshot(matching: error.localizedDescription, as: .dump)
-        }
-    }
-
-    func testFailureInvalidArguments() {
-        do {
-            _ = try VersionsResolver().versions(from: "blah 6.12.1")
-        } catch {
-            assertSnapshot(matching: error.localizedDescription, as: .dump)
-        }
-    }
-
     func testPreReleaseAndBuildMetaData() {
         let (old, new) = try! VersionsResolver().versions(from: "6.12.1-alpha.frankenstein+12.345 7.38.0")
 
@@ -58,5 +42,31 @@ final class VersionResolverTests: XCTestCase {
             )
         )
         XCTAssertEqual(new, .init(7, 38, 0))
+    }
+
+    func testFailureTooManyArguments() {
+        // error.localizedDescription output differs between platforms
+        guard TestHelper.isMacOS else {
+            return
+        }
+
+        do {
+            _ = try VersionsResolver().versions(from: "6.0.2 6.4.3 6.12.1")
+        } catch {
+            assertSnapshot(matching: error.localizedDescription, as: .dump)
+        }
+    }
+
+    func testFailureInvalidArguments() {
+        // error.localizedDescription output differs between platforms
+        guard TestHelper.isMacOS else {
+            return
+        }
+
+        do {
+            _ = try VersionsResolver().versions(from: "blah 6.12.1")
+        } catch {
+            assertSnapshot(matching: error.localizedDescription, as: .dump)
+        }
     }
 }

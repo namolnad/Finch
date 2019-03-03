@@ -9,7 +9,7 @@
 import SnapshotTesting
 import XCTest
 
-final class CompareCommandTests: XCTestCase {
+final class CompareCommandTests: TestCase {
     func testCommandName() {
         let command = CompareCommand(meta: .mock, parser: .init(usage: "blah", overview: ""))
 

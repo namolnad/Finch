@@ -11,7 +11,7 @@ import FinchCore
 import SnapshotTesting
 import XCTest
 
-final class ChangeLogModelTests: XCTestCase {
+final class ChangeLogModelTests: TestCase {
     private var model: ChangeLogModel {
         return ChangeLogModel(
             resolver: VersionsResolverMock(),

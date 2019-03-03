@@ -1,4 +1,4 @@
-APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME)
+APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME_LOWERCASE)
 APP_NAME=Finch
 APP_NAME_LOWERCASE=$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 APP_TMP=/tmp/$(APP_NAME).dst
@@ -21,13 +21,12 @@ ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
 OUTPUT_PACKAGE=$(APP_NAME).pkg
 PIPEFAIL=set -o pipefail
 SWIFT_BUILD_FLAGS=--configuration release
+UNAME=$(shell uname)
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
 VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(//p' | tr -d ") " | tr "," ".")
 
-# ZSH_COMMAND · run single command in `zsh` shell, ignoring most `zsh` startup files.
-ZSH_COMMAND := ZDOTDIR='/var/empty' zsh -o NO_GLOBAL_RCS -c
 # RM_SAFELY · `rm -rf` ensuring first and only parameter is non-null, contains more than whitespace, non-root if resolving absolutely.
-RM_SAFELY := $(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && noglob rm -rf $${1:A}' --
+RM_SAFELY := bash -c '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && set -o noglob && rm -rf $${1:A}' --
 
 
 .PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install xcodeproj publish setup symlink test update_build_number update_version
@@ -105,11 +104,15 @@ setup:
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
-	$(LN) $(BIN_DIR)/$(APP_NAME) $(BINARIES_DIR)
+	$(LN) $(BIN_DIR)/$(APP_NAME_LOWERCASE) $(BINARIES_DIR)
 
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest
+ifeq ($(UNAME), Darwin)
 	$(PIPEFAIL) && swift test 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
+else
+	swift test
+endif
 
 update_build_number:
 ifndef NO_UPDATE_BUILD_NUMBER

@@ -45,7 +45,10 @@ final class CompareCommand: Command {
          */
         fileprivate(set) var releaseManager: String?
 
-        /// Copy the final output to the system pasteboard.
+        /**
+         * Copy the final output to the system pasteboard. (Unavailable
+         * on Linux)
+         */
         fileprivate(set) var toPasteBoard: Bool
     }
 

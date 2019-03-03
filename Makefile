@@ -1,4 +1,4 @@
-APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME)
+APP_EXECUTABLE=$(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(APP_NAME_LOWERCASE)
 APP_NAME=Finch
 APP_NAME_LOWERCASE=$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 APP_TMP=/tmp/$(APP_NAME).dst
@@ -104,7 +104,7 @@ setup:
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
-	$(LN) $(BIN_DIR)/$(APP_NAME) $(BINARIES_DIR)
+	$(LN) $(BIN_DIR)/$(APP_NAME_LOWERCASE) $(BINARIES_DIR)
 
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest

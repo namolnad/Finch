@@ -183,11 +183,13 @@ final class CompareCommand: Command {
             usage: Strings.Compare.Options.releaseManager
         )) { $0.releaseManager = $1 }
 
+        #if os(macOS)
         binder.bind(option: subparser.add(
             option: "--to-pasteboard",
             kind: Bool.self,
             usage: Strings.Compare.Options.toPasteboard
         )) { $0.toPasteBoard = $1 }
+        #endif
     }
     // swiftlint:enable function_body_length
 }

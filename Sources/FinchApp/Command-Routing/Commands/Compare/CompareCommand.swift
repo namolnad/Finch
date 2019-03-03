@@ -46,8 +46,14 @@ final class CompareCommand: Command {
         fileprivate(set) var releaseManager: String?
 
         /**
-         * Copy the final output to the system pasteboard. (Unavailable
-         * on Linux)
+         * A set of tags required for commit presence in the final output.
+         * Note: Not used for section assignment.
+         */
+        fileprivate(set) var requiredTags: Set<String>
+
+        /**
+         * Copy the final output to the system pasteboard.
+         * *(Unavailable on Linux)*
          */
         fileprivate(set) var toPasteBoard: Bool
     }
@@ -186,6 +192,12 @@ final class CompareCommand: Command {
             usage: Strings.Compare.Options.releaseManager
         )) { $0.releaseManager = $1 }
 
+        binder.bind(option: subparser.add(
+            option: "--required-tags",
+            kind: [String].self,
+            usage: Strings.Compare.Options.requiredTags
+        )) { $0.requiredTags = Set($1) }
+
         #if os(macOS)
         binder.bind(option: subparser.add(
             option: "--to-pasteboard",
@@ -206,6 +218,7 @@ extension CompareCommand.Options {
         noFetch: false,
         noShowVersion: false,
         releaseManager: nil,
+        requiredTags: [],
         toPasteBoard: false
     )
 }

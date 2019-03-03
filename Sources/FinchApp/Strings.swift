@@ -49,6 +49,8 @@ enum Strings {
 
             static let releaseManager: String = "The release manager's email. e.g. `--release-manager=$(git config --get user.email)`"
 
+            static let requiredTags: String = "A set of tags required for commit presence in the final output"
+
             static let toPasteboard: String = "Copy output to pasteboard in addition to stdout"
 
             static let versions: String = "<version_1> <version_2> Use explicit versions for the changelog instead of auto-resolving"

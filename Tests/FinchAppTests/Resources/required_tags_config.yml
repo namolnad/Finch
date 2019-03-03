@@ -1,0 +1,22 @@
+format:
+  format_string: "- << message >>"
+  section_infos:
+  - title: Features
+    tags:
+    - "*"
+    capitalizes_message: true
+  - title: Bug Fixes
+    tags:
+    - bugfix
+    - bug fix
+    - bug
+    capitalizes_message: true
+  - title: Platform Improvements
+    tags:
+    - platform
+    - tooling
+    - upgrade
+    - cleanup
+    capitalizes_message: true
+
+

@@ -104,7 +104,7 @@ final class ChangeLogModelTests: TestCase {
 
     func testRequiredTags() {
         let output = try! model.changeLog(
-            options: options(gitLog: multipleTagsMock),
+            options: options(gitLog: multipleTagsMock, requiredTags: ["app-store"]),
             app: .mock(configuration: .mockRequiredTags),
             env: [:]
         )
@@ -115,7 +115,7 @@ final class ChangeLogModelTests: TestCase {
         )
     }
 
-    private func options(gitLog: String) -> CompareCommand.Options {
+    private func options(gitLog: String, requiredTags: Set<String> = []) -> CompareCommand.Options {
         return .init(
             versions: (.init(0, 0, 1), .init(6, 13, 0)),
             buildNumber: nil,
@@ -124,6 +124,7 @@ final class ChangeLogModelTests: TestCase {
             noFetch: true,
             noShowVersion: false,
             releaseManager: Configuration.mock.contributorsConfig.contributors.first?.emails.first,
+            requiredTags: requiredTags,
             toPasteBoard: false
         )
     }

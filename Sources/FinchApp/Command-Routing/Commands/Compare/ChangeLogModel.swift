@@ -114,7 +114,7 @@ final class ChangeLogModel: ChangeLogModelType {
                 continue
             }
             guard case let section = sections[index],
-                Set(components.tags).isSuperset(of: section.info.requiredNonAssigningTags) else {
+                options.requiredTags.isSubset(of: components.tags) else {
                     continue
             }
 

@@ -41,7 +41,6 @@
         - capitalizesMessage: false
         - excluded: false
         - formatTemplate: Optional<FormatTemplate>.none
-        - requiredNonAssigningTags: 0 members
         ▿ tags: 1 element
           - "*"
         - title: "Features"
@@ -49,7 +48,6 @@
         - capitalizesMessage: false
         - excluded: false
         - formatTemplate: Optional<FormatTemplate>.none
-        - requiredNonAssigningTags: 0 members
         ▿ tags: 3 elements
           - "bugfix"
           - "bug fix"
@@ -65,7 +63,6 @@
               - FormatComponent.message
               - " — "
               - FormatComponent.commitTypeHyperlink
-        - requiredNonAssigningTags: 0 members
         ▿ tags: 4 elements
           - "platform"
           - "tooling"

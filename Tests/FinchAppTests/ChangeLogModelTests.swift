@@ -102,6 +102,19 @@ final class ChangeLogModelTests: TestCase {
         XCTAssertEqual(versions.new, .init(6, 13, 0))
     }
 
+    func testRequiredTags() {
+        let output = try! model.changeLog(
+            options: options(gitLog: multipleTagsMock),
+            app: .mock(configuration: .mockRequiredTags),
+            env: [:]
+        )
+
+        assertSnapshot(
+            matching: output,
+            as: .dump
+        )
+    }
+
     private func options(gitLog: String) -> CompareCommand.Options {
         return .init(
             versions: (.init(0, 0, 1), .init(6, 13, 0)),
@@ -111,7 +124,6 @@ final class ChangeLogModelTests: TestCase {
             noFetch: true,
             noShowVersion: false,
             releaseManager: Configuration.mock.contributorsConfig.contributors.first?.emails.first,
-            requireAllTags: false,
             toPasteBoard: false
         )
     }

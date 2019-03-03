@@ -1,0 +1,28 @@
+format:
+  format_string: "- << message >>"
+  section_infos:
+  - title: Features
+    required_non_assigning_tags:
+    - app-store
+    tags:
+    - "*"
+    capitalizes_message: true
+  - title: Bug Fixes
+    required_non_assigning_tags:
+    - app-store
+    tags:
+    - bugfix
+    - bug fix
+    - bug
+    capitalizes_message: true
+  - title: Platform Improvements
+    required_non_assigning_tags:
+    - app-store
+    tags:
+    - platform
+    - tooling
+    - upgrade
+    - cleanup
+    capitalizes_message: true
+
+

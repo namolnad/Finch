@@ -36,6 +36,15 @@ public struct SectionInfo {
     public let formatTemplate: FormatTemplate?
 
     /**
+     * *Advanced Usage:* If non-empty, presence of all included
+     * tags will be required for a commit to gain section membership.
+     * **IMPORTANT:** These tags will not be used in section assignment,
+     * and in some cases may need to duplicate values already included
+     * in the `tags` portion of the `SectionInfo` configuration.
+     */
+    public let requiredNonAssigningTags: Set<String>
+
+    /**
      * The tags which are owned by the section. Each matching commit
      * will be placed into its owning section.
      *
@@ -69,6 +78,7 @@ extension SectionInfo: Codable {
         case capitalizesMessage = "capitalizes_message"
         case excluded
         case formatString = "format_string"
+        case requiredNonAssigningTags = "required_non_assigning_tags"
         case tags
         case title
     }
@@ -80,6 +90,7 @@ extension SectionInfo: Codable {
         self.capitalizesMessage = container.decode(forKey: .capitalizesMessage, default: false)
         self.excluded = container.decode(forKey: .excluded, default: false)
         self.formatTemplate = FormatTemplate(formatString: formatString)
+        self.requiredNonAssigningTags = container.decode(forKey: .requiredNonAssigningTags, default: [])
         self.tags = try container.decode(forKey: .tags)
         self.title = try container.decode(forKey: .title)
     }
@@ -90,6 +101,8 @@ extension SectionInfo: Codable {
         try container.encode(formatTemplate?.formatString, forKey: .formatString)
         try container.encode(capitalizesMessage, forKey: .capitalizesMessage)
         try container.encode(excluded, forKey: .excluded)
+//        Leave out of example for now as may be confusing for non-advanced users
+//        try container.encode(requiredNonAssigningTags, forKey: .requiredNonAssigningTags)
         try container.encode(tags, forKey: .tags)
         try container.encode(title, forKey: .title)
     }
@@ -100,6 +113,7 @@ extension SectionInfo {
         capitalizesMessage: false,
         excluded: false,
         formatTemplate: .default,
+        requiredNonAssigningTags: [],
         tags: ["*"],
         title: "Features"
     )
@@ -108,6 +122,7 @@ extension SectionInfo {
         capitalizesMessage: false,
         excluded: false,
         formatTemplate: .default,
+        requiredNonAssigningTags: [],
         tags: ["bugfix", "bug fix", "bug"],
         title: "Bug Fixes"
     )

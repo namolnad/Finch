@@ -1,3 +1,3 @@
 import struct Utility.Version
 
-let appVersion: Version = .init(0, 0, 18)
+let appVersion: Version = .init(0, 0, 19)

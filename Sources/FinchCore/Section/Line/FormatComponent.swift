@@ -85,7 +85,7 @@ extension FormatComponent: LineOutputtable {
             return "\(prefix)\(contributor.handle)"
         case .message:
             if context.sectionInfo.capitalizesMessage {
-                return components.message.capitalized
+                return String(components.message.prefix(1).capitalized + components.message.dropFirst())
             } else {
                 return components.message
             }

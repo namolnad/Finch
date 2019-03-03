@@ -45,6 +45,7 @@ final class VersionResolverTests: TestCase {
     }
 
     func testFailureTooManyArguments() {
+        // error.localizedDescription output differs between platforms
         guard TestHelper.isMacOS else {
             return
         }
@@ -57,6 +58,7 @@ final class VersionResolverTests: TestCase {
     }
 
     func testFailureInvalidArguments() {
+        // error.localizedDescription output differs between platforms
         guard TestHelper.isMacOS else {
             return
         }

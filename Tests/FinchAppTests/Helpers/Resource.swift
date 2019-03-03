@@ -11,11 +11,11 @@ import Foundation
 struct Resource {
     /// Bundle.init(for:) is not yet implemented in swift-corelibs-foundation
     private var bundle: Bundle? {
-        #if os(macOS)
+        guard TestHelper.isMacOS else {
+            return nil
+        }
+
         return Bundle(for: TestHelper.self)
-        #else
-        return nil
-        #endif
     }
 
     private let name: String

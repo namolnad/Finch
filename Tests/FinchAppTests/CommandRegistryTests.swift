@@ -48,7 +48,6 @@ final class CommandRegistryTests: TestCase {
             "--no-fetch",
             "--no-show-version",
             "--verbose",
-            "--to-pasteboard",
             "--release-manager",
             "frank",
             "--build-number=15"

@@ -13,6 +13,15 @@ import Yams
 typealias TestCase = SnapshotTestCase
 
 final class TestHelper {
+
+    static var isMacOS: Bool {
+        #if os(macOS)
+        return true
+        #else
+        return false
+        #endif
+    }
+
     private let decoder: YAMLDecoder = .init()
 
     private static let instance: TestHelper = .init()

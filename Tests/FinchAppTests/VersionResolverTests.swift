@@ -31,22 +31,6 @@ final class VersionResolverTests: TestCase {
         XCTAssertEqual(new, .init(7, 38, 0))
     }
 
-    func testFailureTooManyArguments() {
-        do {
-            _ = try VersionsResolver().versions(from: "6.0.2 6.4.3 6.12.1")
-        } catch {
-            assertSnapshot(matching: error.localizedDescription, as: .dump)
-        }
-    }
-
-    func testFailureInvalidArguments() {
-        do {
-            _ = try VersionsResolver().versions(from: "blah 6.12.1")
-        } catch {
-            assertSnapshot(matching: error.localizedDescription, as: .dump)
-        }
-    }
-
     func testPreReleaseAndBuildMetaData() {
         let (old, new) = try! VersionsResolver().versions(from: "6.12.1-alpha.frankenstein+12.345 7.38.0")
 
@@ -58,5 +42,23 @@ final class VersionResolverTests: TestCase {
             )
         )
         XCTAssertEqual(new, .init(7, 38, 0))
+    }
+
+    func testFailureTooManyArguments() {
+        guard TestHelper.isMacOS else { return }
+        do {
+            _ = try VersionsResolver().versions(from: "6.0.2 6.4.3 6.12.1")
+        } catch {
+            assertSnapshot(matching: error.localizedDescription, as: .dump)
+        }
+    }
+
+    func testFailureInvalidArguments() {
+        guard TestHelper.isMacOS else { return }
+        do {
+            _ = try VersionsResolver().versions(from: "blah 6.12.1")
+        } catch {
+            assertSnapshot(matching: error.localizedDescription, as: .dump)
+        }
     }
 }

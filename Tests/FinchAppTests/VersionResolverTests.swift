@@ -45,7 +45,10 @@ final class VersionResolverTests: TestCase {
     }
 
     func testFailureTooManyArguments() {
-        guard TestHelper.isMacOS else { return }
+        guard TestHelper.isMacOS else {
+            return
+        }
+
         do {
             _ = try VersionsResolver().versions(from: "6.0.2 6.4.3 6.12.1")
         } catch {
@@ -54,7 +57,10 @@ final class VersionResolverTests: TestCase {
     }
 
     func testFailureInvalidArguments() {
-        guard TestHelper.isMacOS else { return }
+        guard TestHelper.isMacOS else {
+            return
+        }
+
         do {
             _ = try VersionsResolver().versions(from: "blah 6.12.1")
         } catch {

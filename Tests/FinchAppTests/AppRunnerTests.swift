@@ -29,7 +29,7 @@ final class AppRunnerTests: TestCase {
             environment: [:],
             meta: .mock,
             output: outputMock
-        ).run(arguments: ["finch", "config", "--show-example"])
+        ).run(arguments: ["finch", "config", "show-example"])
 
         assertSnapshot(matching: outputMock.outputs, as: .dump)
     }

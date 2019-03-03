@@ -1,4 +1,8 @@
 # Finch 🐦
+![CircleCI branch](https://img.shields.io/circleci/project/github/namolnad/Finch/master.svg?style=for-the-badge)
+![GitHub release](https://img.shields.io/github/release-pre/namolnad/Finch.svg?color=blue&style=for-the-badge)
+![Platforms](https://img.shields.io/badge/Platforms-MacOS_Linux-Blue.svg?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-Blue.svg?style=for-the-badge)
 
 Finch is a configurable tool designed to make tracking the history and evolution of a product simple and easy to automate. It transforms a project's commit messages into well-formatted, section-based version changelogs — tailored to your team's specific documentation needs. Finch requires a commit message square-bracket [tag] convention which it utilizes to determine an appropriate section into which a given commit should be placed. (e.g. `[cleanup] Remove legacy obj-c code`)
 

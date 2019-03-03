@@ -9,7 +9,7 @@
 import SnapshotTesting
 import XCTest
 
-final class VersionResolverTests: XCTestCase {
+final class VersionResolverTests: TestCase {
     func testDefault() {
         let (old, new) = try! VersionsResolver().versions(from: "6.12.1 6.38.0")
 

@@ -109,6 +109,13 @@ final class ChangeLogModel: ChangeLogModelType {
             }
 
         for components in linesComponents {
+            guard !options.requireAllTags else {
+                if let (idx, section) = sections.enumerated().first(where: { Set(components.tags).isSuperset(of: $1.info.tags) }) {
+                    sections[idx] = section.inserting(lineComponents: components)
+                }
+                continue
+            }
+
             let tag = components.tags.first(where: tagToIndex.keys.contains) ?? "*"
             guard let index = tagToIndex[tag] else {
                 continue

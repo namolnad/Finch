@@ -111,6 +111,7 @@ final class ChangeLogModelTests: TestCase {
             noFetch: true,
             noShowVersion: false,
             releaseManager: Configuration.mock.contributorsConfig.contributors.first?.emails.first,
+            requireAllTags: false,
             toPasteBoard: false
         )
     }

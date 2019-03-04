@@ -98,6 +98,7 @@ publish: test
 	git commit --amend --no-edit
 	git tag $(NEW_VERSION)
 	git push origin $(NEW_VERSION)
+	git reset origin/$(CURRENT_BRANCH)
 
 setup:
 	swift run komondor install

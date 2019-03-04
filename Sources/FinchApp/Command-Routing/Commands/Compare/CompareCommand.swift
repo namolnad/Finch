@@ -50,12 +50,6 @@ final class CompareCommand: Command {
          * Note: Not used for section assignment.
          */
         fileprivate(set) var requiredTags: Set<String>
-
-        /**
-         * Copy the final output to the system pasteboard.
-         * *(Unavailable on Linux)*
-         */
-        fileprivate(set) var toPasteBoard: Bool
     }
 
     private typealias Binder = ArgumentBinder<Options>
@@ -99,13 +93,6 @@ final class CompareCommand: Command {
             app: app,
             env: env
         )
-
-        if options.toPasteBoard {
-            #if os(macOS)
-            app.print(Strings.Compare.Progress.toPasteboard, kind: .info)
-            pbCopy(text: result)
-            #endif
-        }
 
         app.print(result)
     }
@@ -197,14 +184,6 @@ final class CompareCommand: Command {
             kind: [String].self,
             usage: Strings.Compare.Options.requiredTags
         )) { $0.requiredTags = Set($1) }
-
-        #if os(macOS)
-        binder.bind(option: subparser.add(
-            option: "--to-pasteboard",
-            kind: Bool.self,
-            usage: Strings.Compare.Options.toPasteboard
-        )) { $0.toPasteBoard = $1 }
-        #endif
     }
     // swiftlint:enable function_body_length
 }
@@ -218,7 +197,6 @@ extension CompareCommand.Options {
         noFetch: false,
         noShowVersion: false,
         releaseManager: nil,
-        requiredTags: [],
-        toPasteBoard: false
+        requiredTags: []
     )
 }

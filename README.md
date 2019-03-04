@@ -4,10 +4,11 @@
 ![Platforms](https://img.shields.io/badge/Platforms-MacOS_Linux-Blue.svg?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-Blue.svg?style=for-the-badge)
 
-Finch is a configurable tool designed to make tracking the history and evolution of a product simple and easy to automate. It transforms a project's commit messages into well-formatted, section-based version changelogs — tailored to your team's specific documentation needs. Finch requires a commit message square-bracket [tag] convention which it utilizes to determine an appropriate section into which a given commit should be placed. (e.g. `[cleanup] Remove legacy obj-c code`)
+Finch is a configurable tool designed to make tracking the history and evolution of a product simple and easy to automate. It transforms a project's Git commit messages into well-formatted version changelogs — tailored to your team's specific needs.
 
 ## Table of Contents
 - [Why is it called 'Finch'?](#why-is-it-called-finch)
+- [Philosophy](#philosophy)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
@@ -18,9 +19,11 @@ Finch is a configurable tool designed to make tracking the history and evolution
 - [Example output](#example-output)
 - [License](#license)
 
-### Why is it called 'Finch'?
-
+## Why is it called 'Finch'?
 The name Finch is derived from the purpose of the application itself — tracking the evolution of a product. Because evolution is at the core of Finch, it seemed appropriate to name it after an evolutionary landmark, Darwin's [finches](https://bit.ly/2TJZlnb).
+
+## Philosophy
+We at [Instacart](https://tech.instacart.com/) strongly believe in the importance of a good changelog. We also know changelogs can occasionally end up A) overlooked/untimely and B) difficult to maintain in terms of styling/approach as different team-members are managing a given release. It was these issues, and the desire to automate them for our team, which led to the creation of Finch. We believe that well-formed and intentional Git commit messages can serve as the underlying data for powering an automated and hassle-free changelog system. Through the use of some relatively minor commit-message discipline — and according to whatever conventions your team would like to use — Finch can help you automate your internal and external-facing changelogs, providing as much detail or polish as is desired.
 
 ## Installation
 Finch is available via multiple installation methods:
@@ -30,6 +33,12 @@ Finch is available via multiple installation methods:
 
 
 ## Usage
+Finch requires a commit message `[tag] commit message` convention (we use square brackets surrounding our tags) which it utilizes to determine an appropriate section into which a given commit should be placed.
+
+**Example commit messages**
+> [cleanup] Remove legacy obj-c code  
+> [feature][app-store] Add teleportation capabilities
+
 To generate a changelog you must run the `compare` command. If `compare` is passed no arguments, Finch will first look for the two most recent semantically-versioned branches then the two most recent semantically-versioned git tags. You can also explicitly pass two versions by using the `--versions` option and passing 2 version arguments (branch or tag). Other accepted argurments are:
 1. The ability to hide the version header (`--no-show-version`)
 1. Release manager (`--release-manager`)

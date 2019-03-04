@@ -132,8 +132,7 @@ final class ChangeLogModelTests: TestCase {
             noFetch: true,
             noShowVersion: !showVersion,
             releaseManager: showReleaseManager ? contributorEmail : nil,
-            requiredTags: requiredTags,
-            toPasteBoard: false
+            requiredTags: requiredTags
         )
     }
 }

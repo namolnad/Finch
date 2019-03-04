@@ -51,13 +51,7 @@ enum Strings {
 
             static let requiredTags: String = "A set of tags required for commit presence in the final output"
 
-            static let toPasteboard: String = "Copy output to pasteboard in addition to stdout"
-
             static let versions: String = "<version_1> <version_2> Use explicit versions for the changelog instead of auto-resolving"
-        }
-
-        enum Progress {
-            static let toPasteboard: String = "Copying output to pasteboard"
         }
 
         enum Error {

@@ -19,13 +19,15 @@ enum Strings {
         }
 
         enum Options {
+            static var configPath: String = "Path to config"
+
             static var projectDir: String = "Path to project if command is run from separate directory"
 
             static func showVersion(appName: String) -> String {
                 return "Displays current \(appName) version and build number"
             }
 
-            static var verbose: String = "Run command with verbose output"
+            static var verbose: String = "Run with verbose output"
         }
     }
 

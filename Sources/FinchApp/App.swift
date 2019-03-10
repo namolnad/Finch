@@ -37,7 +37,10 @@ public struct App {
 
     /// App options received from the commandline.
     struct Options {
-        ///The project directory if it is not the current working directory.
+        /// Path to config
+        var configPath: String?
+
+        /// The project directory if it is not the current working directory.
         var projectDir: String?
 
         /// Print the app version information and exit.
@@ -76,6 +79,7 @@ public struct App {
 /// :nodoc:
 extension App.Options {
     static let blank: App.Options = .init(
+        configPath: nil,
         projectDir: nil,
         shouldPrintVersion: false,
         verbose: false

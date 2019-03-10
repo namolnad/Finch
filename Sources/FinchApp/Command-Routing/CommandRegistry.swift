@@ -73,5 +73,11 @@ final class CommandRegistry {
             kind: Bool.self,
             usage: Strings.App.Options.showVersion(appName: meta.name)
         )) { $0.shouldPrintVersion = $1 }
+
+        binder.bind(option: parser.add(
+            option: "--config",
+            kind: String.self,
+            usage: Strings.App.Options.configPath
+        )) { $0.configPath = $1 }
     }
 }

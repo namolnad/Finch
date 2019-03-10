@@ -102,11 +102,18 @@ final class CompareCommand: Command {
      * to the global app options.
      *
      * #### Options for global binding
-     * - `--verbose`
+     * - `--config`
      * - `--project-dir`
+     * - `--verbose`
      */
     @discardableResult
     func bindingGlobalOptions(to binder: CommandRegistry.Binder) -> CompareCommand {
+        binder.bind(option: subparser.add(
+            option: "--config",
+            kind: String.self,
+            usage: Strings.App.Options.configPath
+        )) { $0.configPath = $1 }
+
         binder.bind(option: subparser.add(
             option: "--verbose",
             shortName: "-v",

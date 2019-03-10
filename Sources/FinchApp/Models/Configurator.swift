@@ -60,6 +60,7 @@ struct Configurator {
         self.immediateResolver = .init(fileManager: fileManager)
 
         let immediateReturnPaths = [
+            options.configPath,
             environment["\(meta.name.uppercased())_CONFIG"]
         ]
 

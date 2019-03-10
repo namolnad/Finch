@@ -51,7 +51,7 @@ In many cases it may be easiest to create a new shell function when your shell s
 
 ```
 project-changelog() {
-  finch compare $@ --project-dir="$HOME/Code/YourProject" --release-manager=$(git config --get user.email)
+  finch compare --project-dir="$HOME/Code/YourProject" --release-manager=$(git config --get user.email) $@
 }
 
 # Used in the following manner:

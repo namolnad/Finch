@@ -26,6 +26,7 @@ final class ConfiguratorTests: TestCase {
         assertSnapshot(
             matching: Configurator(
                 options: .init(
+                    configPath: nil,
                     projectDir: "current",
                     shouldPrintVersion: false,
                     verbose: false

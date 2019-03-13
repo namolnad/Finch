@@ -62,7 +62,7 @@ project-changelog() {
 View Finch's configurable components in this [configuration template](Resources/template.config.yml).
 
 ### Config file location
-Finch searches for a hidden `.finch` directory containing a `config.yml` file. The `.finch` directory can be placed in either the home, current, or project directories. Alternatively, if you provide a custom path through an env variable, Finch will look for a valid configuration file at the included path. Finch also allows for private config files in case you prefer to keep portions of your config outside your version-control sytem. See the [search behavior](#config-merging-and-search-behavior) below.
+Finch searches for a hidden `.finch` directory containing a `config.yml` file. The `.finch` directory can be placed in either the home, current, or project directories. Alternatively, if you provide a custom path through a `--config` argument or an env variable, Finch will look for a valid configuration file at the included path. Finch also allows for private config files in case you prefer to keep portions of your config outside your version-control sytem. See the [search behavior](#config-merging-and-search-behavior) below.
 
 ### Config format
 `config.yml` should be a valid YAML file in the same format as this [config template](Resources/template.config.yml). (Note: Not all keys need to be included as Finch uses default values where needed. You can see an example config at any time by running `finch config show-example`.
@@ -71,8 +71,8 @@ Finch searches for a hidden `.finch` directory containing a `config.yml` file. T
 Finch will start with a default configuration and will search several paths for valid configuration files to override existing values. Any non-empty elements included in later configuration files will override their existing counterparts. Empty or omitted config file components will be ignored.
 
 The config search paths will be executed in the following manner:
-- Env var
-  - FINCH_CONFIG
+- `--config` argument
+- `FINCH_CONFIG` Env var
 __OR__
 - Built in defaults overridden w/ waterfall technique (searching each directory first for `config.yml`, then for `config.private.yml`)
   - Home directory

@@ -1,0 +1,79 @@
+▿ Configuration
+  ▿ contributorsConfig: ContributorsConfiguration
+    - contributorHandlePrefix: "@"
+    ▿ contributors: 3 elements
+      ▿ Contributor
+        ▿ emails: 1 element
+          - "jony.ive@apple.com"
+        - handle: "Jony.Ive"
+      ▿ Contributor
+        ▿ emails: 1 element
+          - "long_live_the_citadel@rick.com"
+        - handle: "Rick.Sanchez"
+      ▿ Contributor
+        ▿ emails: 1 element
+          - "elvis1935+still-alive@theking.com"
+        - handle: "Elvis.Presley"
+  ▿ formatConfig: FormatConfiguration
+    ▿ delimiterConfig: DelimiterConfiguration
+      ▿ input: DelimiterPair
+        - left: "["
+        - right: "]"
+      ▿ output: DelimiterPair
+        - left: "|"
+        - right: "|"
+    ▿ footer: Optional<String>
+      - some: "\n### Timeline\n- Begin development:\n- Feature cut-off / Start of bake / dogfooding:\n- Submission:\n- Release (expected):\n- Release (actual):\n"
+    ▿ formatTemplate: Optional<FormatTemplate>
+      ▿ some: FormatTemplate
+        ▿ outputtables: 8 elements
+          - " - "
+          - FormatComponent.tags
+          - " "
+          - FormatComponent.message
+          - " - "
+          - FormatComponent.commitTypeHyperlink
+          - " - "
+          - FormatComponent.contributorHandle
+    - header: Optional<String>.none
+    ▿ sectionInfos: 3 elements
+      ▿ SectionInfo
+        - capitalizesMessage: false
+        - excluded: true
+        - formatTemplate: Optional<FormatTemplate>.none
+        ▿ tags: 1 element
+          - "*"
+        - title: "Features"
+      ▿ SectionInfo
+        - capitalizesMessage: false
+        - excluded: false
+        - formatTemplate: Optional<FormatTemplate>.none
+        ▿ tags: 3 elements
+          - "bugfix"
+          - "bug fix"
+          - "bug"
+        - title: "Bug Fixes"
+      ▿ SectionInfo
+        - capitalizesMessage: false
+        - excluded: false
+        ▿ formatTemplate: Optional<FormatTemplate>
+          ▿ some: FormatTemplate
+            ▿ outputtables: 4 elements
+              - " - "
+              - FormatComponent.message
+              - " — "
+              - FormatComponent.commitTypeHyperlink
+        ▿ tags: 4 elements
+          - "platform"
+          - "tooling"
+          - "upgrade"
+          - "cleanup"
+        - title: "Platform Improvements"
+  ▿ gitConfig: GitConfiguration
+    - branchPrefix: ""
+    - executablePath: Optional<String>.none
+    - repoBaseUrl: "https://github.com/citadel-of-ricks/C-137"
+  - projectDir: ""
+  ▿ resolutionCommandsConfig: ResolutionCommandsConfiguration
+    - buildNumber: Optional<String>.none
+    - versions: Optional<String>.none

@@ -2,7 +2,7 @@
 import SnapshotTesting
 import XCTest
 
-final class ConfigurationTests: XCTestCase {
+final class ConfigurationTests: TestCase {
     func testOverriddenWithPartialConfig() {
         var config: Configuration = .mockExcludedSection
         let otherConfig: Configuration = .default(projectDir: "")

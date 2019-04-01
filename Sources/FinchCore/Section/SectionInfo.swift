@@ -61,6 +61,12 @@ public struct SectionInfo {
      * The section's unique title.
      */
     public let title: String
+
+    /**
+    * Internal flag to indicate this should be ignored when
+    * overwriting downstream configs
+    */
+    let isDefault: Bool
 }
 
 /// :nodoc:
@@ -82,6 +88,7 @@ extension SectionInfo: Codable {
         self.formatTemplate = FormatTemplate(formatString: formatString)
         self.tags = try container.decode(forKey: .tags)
         self.title = try container.decode(forKey: .title)
+        self.isDefault = false
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -101,7 +108,8 @@ extension SectionInfo {
         excluded: false,
         formatTemplate: .default,
         tags: ["*"],
-        title: "Features"
+        title: "Features",
+        isDefault: true
     )
 
     fileprivate static let bugs: SectionInfo = .init(
@@ -109,7 +117,8 @@ extension SectionInfo {
         excluded: false,
         formatTemplate: .default,
         tags: ["bugfix", "bug fix", "bug"],
-        title: "Bug Fixes"
+        title: "Bug Fixes",
+        isDefault: true
     )
 }
 

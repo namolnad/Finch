@@ -39,7 +39,7 @@
     ▿ sectionInfos: 3 elements
       ▿ SectionInfo
         - capitalizesMessage: false
-        - excluded: false
+        - excluded: true
         - formatTemplate: Optional<FormatTemplate>.none
         - isDefault: false
         ▿ tags: 1 element
@@ -76,7 +76,7 @@
     - branchPrefix: ""
     - executablePath: Optional<String>.none
     - repoBaseUrl: "https://github.com/citadel-of-ricks/C-137"
-  - projectDir: "current"
+  - projectDir: ""
   ▿ resolutionCommandsConfig: ResolutionCommandsConfiguration
     - buildNumber: Optional<String>.none
     - versions: Optional<String>.none

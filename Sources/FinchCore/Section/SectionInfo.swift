@@ -113,8 +113,6 @@ extension SectionInfo {
     )
 }
 
-extension SectionInfo: Equatable {}
-
 /// :nodoc:
 extension Array where Element == SectionInfo {
     static let `default`: [SectionInfo] = [

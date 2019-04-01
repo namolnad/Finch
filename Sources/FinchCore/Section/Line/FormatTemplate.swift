@@ -12,23 +12,7 @@
  * a `format_string` at the global or section level in the
  * configuration file.
  */
-public struct FormatTemplate: Equatable {
-    public static func == (lhs: FormatTemplate, rhs: FormatTemplate) -> Bool {
-        guard lhs.outputtables.count == rhs.outputtables.count else {
-            return false
-        }
-        return zip(lhs.outputtables, rhs.outputtables).allSatisfy {
-            switch ($0, $1) {
-            case let (l, r) as (String, String):
-                return l == r
-            case let (l, r) as (FormatComponent, FormatComponent):
-                return l == r
-            default:
-                return false
-            }
-        }
-    }
-
+public struct FormatTemplate {
     /// :nodoc:
     let outputtables: [LineOutputtable]
 }

@@ -93,7 +93,7 @@ extension FormatConfiguration: SubConfiguration {
 /// :nodoc:
 extension FormatConfiguration: Mergeable {
     public func merge(into other: inout FormatConfiguration) {
-        if !sectionInfos.isEmpty, sectionInfos != .default {
+        if !sectionInfos.isEmpty {
             other.sectionInfos = sectionInfos
         }
 

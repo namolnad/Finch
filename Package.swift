@@ -8,11 +8,11 @@ let package = Package(
         .executable(name: "finch", targets: ["Finch"])
     ],
     dependencies: [
-        .package(url: "git@github.com:apple/swift-package-manager.git", from: "0.3.0"),
-        .package(url: "git@github.com:orta/Komondor.git", from: "1.0.0"),
-        .package(url: "git@github.com:pointfreeco/swift-snapshot-testing", from: "1.1.0"),
-        .package(url: "git@github.com:realm/SwiftLint.git", from: "0.30.1"),
-        .package(url: "git@github.com:jpsim/Yams.git", from: "1.0.1"),
+        .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.3.0"),
+        .package(url: "https://github.com/orta/Komondor.git", from: "1.0.0"),
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.1.0"),
+        .package(url: "https://github.com/realm/SwiftLint.git", from: "0.30.1"),
+        .package(url: "https://github.com/jpsim/Yams.git", from: "1.0.1"),
     ],
     targets: [
         .target(

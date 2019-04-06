@@ -53,7 +53,7 @@ install: build symlink config_template
 	install $(APP_EXECUTABLE) $(BIN_DIR)/
 
 lint:
-	swift run swiftlint --strict
+	swift run --package-path .devtools swiftlint --strict
 
 package: build
 	$(MKDIR) $(APP_TMP)
@@ -101,7 +101,7 @@ publish: test
 	git reset origin/$(CURRENT_BRANCH)
 
 setup:
-	swift run komondor install
+	swift run --package-path .devtools komondor install
 
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
@@ -110,9 +110,9 @@ symlink: build
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest
 ifeq ($(UNAME), Darwin)
-	$(PIPEFAIL) && swift test 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
+	$(PIPEFAIL) && swift test --package-path Tests 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
 else
-	swift test
+	swift test --package-path Tests
 endif
 
 update_build_number:

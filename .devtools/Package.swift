@@ -5,8 +5,7 @@ import PackageDescription
 let package = Package(
     name: "FinchDevTools",
     dependencies: [
-        .package(url: "https://github.com/orta/Komondor.git", from: "1.0.0"),
-        .package(url: "https://github.com/realm/SwiftLint.git", from: "0.30.1"),
+        .package(url: "https://github.com/realm/SwiftLint.git", from: "0.30.1")
     ],
     targets: [
         .target(
@@ -17,14 +16,3 @@ let package = Package(
     ]
 )
 
-#if canImport(PackageConfig)
-    import PackageConfig
-
-    let config = PackageConfig([
-        "komondor": [
-            "pre-push": [
-                "make lint"
-            ]
-        ]
-    ])
-#endif

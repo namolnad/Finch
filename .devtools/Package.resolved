@@ -11,30 +11,12 @@
         }
       },
       {
-        "package": "Komondor",
-        "repositoryURL": "https://github.com/orta/Komondor.git",
-        "state": {
-          "branch": null,
-          "revision": "265fd04de2316edc72d9065d2ef5118b20a71187",
-          "version": "1.0.2"
-        }
-      },
-      {
         "package": "Nimble",
         "repositoryURL": "https://github.com/Quick/Nimble.git",
         "state": {
           "branch": null,
           "revision": "e9d769113660769a4d9dd3afb855562c0b7ae7b0",
           "version": "7.3.4"
-        }
-      },
-      {
-        "package": "PackageConfig",
-        "repositoryURL": "https://github.com/orta/PackageConfig.git",
-        "state": {
-          "branch": null,
-          "revision": "9c8b95d295b15dc5307503064f3ee87772bc5d17",
-          "version": "0.9.0"
         }
       },
       {
@@ -53,15 +35,6 @@
           "branch": null,
           "revision": "2ca499ba456795616fbc471561ff1d963e6ae160",
           "version": "4.1.0"
-        }
-      },
-      {
-        "package": "ShellOut",
-        "repositoryURL": "https://github.com/JohnSundell/ShellOut.git",
-        "state": {
-          "branch": null,
-          "revision": "d3d54ce662dfee7fef619330b71d251b8d4869f9",
-          "version": "2.2.0"
         }
       },
       {

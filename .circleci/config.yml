@@ -123,7 +123,7 @@ jobs:
           command: |
             executable=$(echo '<< parameters.lint-bin >>')
             if ! [ $(command -v $executable) ]; then
-              executable='swift run swiftlint'
+              executable='swift run --package-path .devtools swiftlint'
             fi
 
             eval $executable lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
@@ -163,7 +163,7 @@ jobs:
       - checkout
       - attach
       - run: make update_build_number
-      - run: swift test --generate-linuxmain
+      - run: swift test --package-path Tests --generate-linuxmain
       - persist_to_workspace:
           root: .
           paths:
@@ -183,7 +183,7 @@ jobs:
       - run: mkdir -p << parameters.test-results-dir >>
       - run:
           name: Run tests
-          command: swift test
+          command: make test
       - store_test_results:
           path: << parameters.test-results-dir >>
 

@@ -29,7 +29,7 @@ VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(
 RM_SAFELY := bash -c '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && set -o noglob && rm -rf $${1:A}' --
 
 
-.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install xcodeproj publish setup symlink test update_build_number update_version
+.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install xcodeproj publish symlink test update_build_number update_version
 
 all: install
 
@@ -53,7 +53,7 @@ install: build symlink config_template
 	install $(APP_EXECUTABLE) $(BIN_DIR)/
 
 lint:
-	swift run swiftlint --strict
+	swift run --package-path .devtools swiftlint --strict
 
 package: build
 	$(MKDIR) $(APP_TMP)
@@ -100,9 +100,6 @@ publish: test
 	git push origin $(NEW_VERSION)
 	git reset origin/$(CURRENT_BRANCH)
 
-setup:
-	swift run komondor install
-
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
 	$(LN) $(BIN_DIR)/$(APP_NAME_LOWERCASE) $(BINARIES_DIR)
@@ -110,9 +107,9 @@ symlink: build
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest
 ifeq ($(UNAME), Darwin)
-	$(PIPEFAIL) && swift test 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
+	$(PIPEFAIL) && swift test --package-path Tests 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
 else
-	swift test
+	swift test --package-path Tests
 endif
 
 update_build_number:

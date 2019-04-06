@@ -96,7 +96,7 @@ jobs:
           name: Publish release to GitHub
 
   swiftlint:
-    executor: mac
+    executor: linux
     parameters:
       lint-cache-dir:
         default: lint/cache

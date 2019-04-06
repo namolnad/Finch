@@ -8,11 +8,7 @@ let package = Package(
         .package(url: "https://github.com/realm/SwiftLint.git", from: "0.30.1")
     ],
     targets: [
-        .target(
-            name: "Fake",
-	    path: ".",
-            sources: ["blank.swift"]
-        )
+        .target(name: "FinchDevTools", path: ".", sources: ["Tools.swift"])
     ]
 )
 

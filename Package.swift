@@ -11,6 +11,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/Carthage/Commandant.git", from: "0.17.0"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "1.0.1"),
+        .package(url: "https://github.com/mxcl/Version.git", from: "1.0.0")
     ],
     targets: [
         .target(
@@ -18,7 +19,7 @@ let package = Package(
             dependencies: ["FinchApp"]),
         .target(
             name: "FinchApp",
-            dependencies: ["FinchCore", "Commandant"]),
+            dependencies: ["FinchCore", "Commandant", "Version"]),
         .target(
             name: "FinchCore",
             dependencies: ["FinchUtilities"]),

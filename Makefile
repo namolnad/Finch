@@ -123,7 +123,7 @@ ifdef NEW_VERSION
 	$(eval MAJOR:=$(word 1,$(VERSION_COMPONENTS)))
 	$(eval MINOR:=$(word 2,$(VERSION_COMPONENTS)))
 	$(eval PATCH:=$(word 3,$(VERSION_COMPONENTS)))
-	@echo "import struct Utility.Version\n\nlet appVersion: Version = .init($(MAJOR), $(MINOR), $(PATCH))" > $(VERSION_FILE)
+	@echo "import Version\n\nlet appVersion: Version = .init($(MAJOR), $(MINOR), $(PATCH))" > $(VERSION_FILE)
 endif
 
 xcodeproj:

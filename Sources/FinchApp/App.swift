@@ -6,12 +6,12 @@
 //  Copyright © 2019 DHL. All rights reserved.
 //
 
-import struct Utility.Version
+import Version
 import struct FinchCore.Configuration
 import FinchUtilities
 
 /// :nodoc:
-public typealias Version = Utility.Version
+public typealias Version = Version.Version
 
 /// A structure to represent this app and its components.
 public struct App {

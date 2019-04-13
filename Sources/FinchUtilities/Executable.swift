@@ -8,8 +8,8 @@
 import Foundation
 
 public func executable(_ executable: Executable) throws -> String {
-    guard let path = ExecutableFinder().executablePath(executable: executable) else {
-        throw Error.notFound(rawValue)
+    guard let path = try ExecutableFinder().executablePath(executable: executable) else {
+        throw Executable.Error.notFound(executable.rawValue)
     }
 
     return path
@@ -52,8 +52,11 @@ private struct ExecutableFinder {
 
     private let env: [String: String]
 
-    init(env: [String: String] = ProcessInfo.processInfo) {
+    private let fileManager: FileManager
+
+    init(env: [String: String] = ProcessInfo.processInfo.environment, fileManager: FileManager = .default) {
         self.env = env
+        self.fileManager = fileManager
     }
 
     private func getSearchPath() throws -> String {
@@ -64,16 +67,16 @@ private struct ExecutableFinder {
         return path
     }
 
-    private func searchPaths(from path: String) -> String {
-        return path.split(separator: ":")
+    private func searchPaths(from path: String) -> [String] {
+        return path.components(separatedBy: ":")
     }
 
     fileprivate func executablePath(executable: Executable) throws -> String? {
         return searchPaths(from: try getSearchPath())
             .map { $0 + "/" + executable.rawValue }
-            .map(Path.init)
+            .map { Path(string: $0) }
             .first { fileManager.isExecutableFile(atPath: $0.absolutePath) }?
-            .map { $0.absolutePath }
+            .absolutePath
     }
 
 }

@@ -6,7 +6,6 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Basic
 import Foundation
 
 public struct Shell {
@@ -40,26 +39,37 @@ public struct Shell {
             throw Error.emptyArguments
         }
 
-        let process: Basic.Process = .init(
-            arguments: [try executable(.sh), "-c"] + [args.joined(separator: " ")],
-            environment: env,
-            verbose: verbose
-        )
+        let pipe = Pipe()
+        let process = Process()
+        process.arguments = [try executable(.sh), "-c"] + [args.joined(separator: " ")]
+        process.environment = env
+        process.standardOutput = pipe
 
-        try process.launch()
-        try process.waitUntilExit()
+        let fileHandle = pipe.fileHandleForReading
 
-        guard let result = process.result else {
-            throw Error.emptyResult(args: args.joined(separator: " "))
+        if #available(macOS 10.13, *) {
+            try process.run()
+        } else {
+            process.launch()
         }
 
-        switch result.exitStatus {
-        case .signalled(signal: let code), .terminated(code: let code):
-            guard code == 0 else {
-                throw Error.subprocessNonZeroExit(code: code, message: try result.utf8stderrOutput())
+        process.waitUntilExit()
+
+        let code = process.terminationStatus
+
+        switch code {
+        case 0:
+            guard let string = output(fileHandle: fileHandle) else {
+                throw Error.emptyResult(args: args.joined(separator: " "))
             }
 
-            return try result.utf8Output()
+            return string
+        default:
+            throw Error.subprocessNonZeroExit(code: code, message: output(fileHandle: fileHandle) ?? "")
         }
+    }
+
+    private func output(fileHandle: FileHandle) -> String? {
+        return String(data: fileHandle.readDataToEndOfFile(), encoding: .utf8)
     }
 }

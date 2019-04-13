@@ -25,6 +25,7 @@ let package = Package(
         .target(
             name: "FinchUtilities",
             dependencies: ["Utility", "Yams"]),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
 

@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "FinchApp", targets: ["FinchApp"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.3.0"),
+        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.17.0"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "1.0.1"),
     ],
     targets: [
@@ -18,13 +18,13 @@ let package = Package(
             dependencies: ["FinchApp"]),
         .target(
             name: "FinchApp",
-            dependencies: ["FinchCore"]),
+            dependencies: ["FinchCore", "Commandant"]),
         .target(
             name: "FinchCore",
             dependencies: ["FinchUtilities"]),
         .target(
             name: "FinchUtilities",
-            dependencies: ["Utility", "Yams"]),
+            dependencies: ["Yams"]),
     ]
 )
 

@@ -5,10 +5,8 @@
 //  Created by Dan Loman on 1/29/19.
 //
 
-import Utility
-
 /// :nodoc:
-extension Utility.Version: ArgumentKind {
+extension Version: ArgumentKind {
     public static var completion: ShellCompletion {
         return .none
     }

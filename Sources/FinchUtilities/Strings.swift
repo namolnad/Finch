@@ -11,6 +11,8 @@ enum Strings {
             static func notFound(_ exec: String) -> String {
                 return "Executable \(exec) not found on PATH"
             }
+
+            static let noPathVariable: String = "No PATH variable found in Environment"
         }
 
         enum Shell {

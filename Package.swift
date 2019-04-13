@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:4.2
 
 import PackageDescription
 
@@ -26,6 +26,6 @@ let package = Package(
             name: "FinchUtilities",
             dependencies: ["Utility", "Yams"]),
     ],
-    swiftLanguageVersions: [.v5]
+    swiftLanguageVersions: [.v4, .v4_2, .v5]
 )
 

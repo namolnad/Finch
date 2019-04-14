@@ -15,6 +15,7 @@ import FinchUtilities
 public class AppRunner {
     enum AppError: Error {
         case notPrepared
+        case unsupportedConfigMode
         case wrapped(Error)
     }
 
@@ -29,15 +30,17 @@ public class AppRunner {
         registry.register(CompareCommand(env: environment, meta: meta, output: output))
         registry.register(ConfigCommand(env: environment, meta: meta, output: output))
         registry.register(HelpCommand(registry: registry))
+        registry.register(VersionCommand(env: environment, meta: meta, output: output))
     }
 
     /// Runs the app with the included arguments.
     public func run(arguments: [String]) {
-        var args = arguments
+        // Drop argument for Finch executable
+        var args = arguments[1...]
 
         let command = args.removeFirst()
 
-        guard let result = registry.run(command: command, arguments: args) else {
+        guard let result = registry.run(command: command, arguments: Array(args)) else {
             return
         }
 

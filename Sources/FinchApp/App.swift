@@ -36,9 +36,8 @@ public struct App {
     /// Abstract base class of app options received from the commandline.
     class Options {
         enum Key: String {
-            case configPath
+            case configPath = "config"
             case projectDir = "project-dir"
-            case shouldPrintVersion = "version"
             case verbose = "verbose"
         }
 
@@ -48,16 +47,12 @@ public struct App {
         /// The project directory if it is not the current working directory.
         var projectDir: String?
 
-        /// Print the app version information and exit.
-        var shouldPrintVersion: Bool
-
         /// Execute with verbose output.
         var verbose: Bool
 
-        init(configPath: String?, projectDir: String?, shouldPrintVersion: Bool, verbose: Bool) {
+        init(configPath: String?, projectDir: String?, verbose: Bool) {
             self.configPath = configPath
             self.projectDir = projectDir
-            self.shouldPrintVersion = shouldPrintVersion
             self.verbose = verbose
         }
     }
@@ -86,16 +81,6 @@ public struct App {
     func print(_ value: String, kind: Output.Kind = .default) {
         output.print(value, kind: kind, verbose: options.verbose)
     }
-
-    /// Attempts to handle options first; returns true if handled
-    func handle(options: App.Options) -> Bool {
-        if options.shouldPrintVersion {
-            print("\(meta.name) \(meta.version) (\(meta.buildNumber))")
-            return true
-        }
-
-        return false
-    }
 }
 
 /// :nodoc:
@@ -104,7 +89,6 @@ extension App.Options {
         return .init(
             configPath: nil,
             projectDir: nil,
-            shouldPrintVersion: false,
             verbose: false
         )
     }

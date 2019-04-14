@@ -11,7 +11,7 @@ import FinchUtilities
 ///// :nodoc:
 public typealias Environment = [String: String]
 
-protocol Command: CommandProtocol {
+protocol Command: CommandProtocol where Options: App.Options {
 
     var environment: Environment { get }
 
@@ -22,7 +22,8 @@ protocol Command: CommandProtocol {
     func run(options: Options, app: App, env: Environment) -> Result<(), ClientError>
 }
 
-extension Command where Options: App.Options {
+extension Command {
+    /// Should NOT be implemented by types conforming to Command.
     func run(_ options: Options) -> Result<(), ClientError> {
         let config = Configurator(
             options: options,

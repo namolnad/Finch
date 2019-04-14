@@ -41,15 +41,18 @@ public struct Shell {
 
         let pipe = Pipe()
         let process = Process()
-        process.arguments = [try executable(.sh), "-c"] + [args.joined(separator: " ")]
+        let path = try executable(.sh)
+        process.arguments = ["-c", args.joined(separator: " ")]
         process.environment = env
         process.standardOutput = pipe
 
         let fileHandle = pipe.fileHandleForReading
 
         if #available(macOS 10.13, *) {
+            process.executableURL = URL(fileURLWithPath: path)
             try process.run()
         } else {
+            process.launchPath = path
             process.launch()
         }
 

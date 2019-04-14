@@ -43,7 +43,7 @@ extension Git {
 
     @discardableResult
     func fetch() throws -> String {
-        return try git("fetch")
+        return try git("fetch", "--quiet")
     }
 
     func versionsStringUsingTags() throws -> String {

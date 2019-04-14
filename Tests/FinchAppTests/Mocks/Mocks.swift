@@ -64,7 +64,6 @@ extension App.Options {
     static let mock: App.Options = .init(
         configPath: nil,
         projectDir: "home/dir",
-        shouldPrintVersion: false,
         verbose: false
     )
 }

@@ -60,11 +60,10 @@ final class CompareCommand: Command {
          */
         fileprivate(set) var requiredTags: Set<String>
 
-        static func evaluate(_ m: CommandMode) -> Result<CompareOptions, CommandantError<CompareOptions.ClientError>> {
+        static func evaluate(_ m: CommandMode) -> Result<CompareCommand.Options, CommandantError<CompareOptions.ClientError>> {
             return curry(self.init)
                 <*> m <| Option<String?>(key: App.Options.Key.configPath.rawValue, defaultValue: nil, usage: Strings.App.Options.configPath)
                 <*> m <| Option<String?>(key: App.Options.Key.projectDir.rawValue, defaultValue: nil, usage: Strings.App.Options.projectDir)
-                <*> m <| Switch(key: App.Options.Key.shouldPrintVersion.rawValue, usage: Strings.App.Options.showVersion)
                 <*> m <| Switch(key: App.Options.Key.verbose.rawValue, usage: Strings.App.Options.verbose)
                 <*> m <| Option<Versions>(key: "versions", defaultValue: .null, usage: Strings.Compare.Options.versions)
                 <*> m <| Option<String?>(key: "build-number", defaultValue: nil, usage: Strings.Compare.Options.buildNumber)
@@ -79,7 +78,6 @@ final class CompareCommand: Command {
         init(
             configPath: String?,
             projectDir: String?,
-            shouldPrintVersion: Bool,
             verbose: Bool,
             versions: Versions,
             buildNumber: String?,
@@ -98,7 +96,7 @@ final class CompareCommand: Command {
             self.releaseManager = releaseManager
             self.requiredTags = Set(requiredTags)
 
-            super.init(configPath: configPath, projectDir: projectDir, shouldPrintVersion: shouldPrintVersion, verbose: verbose)
+            super.init(configPath: configPath, projectDir: projectDir, verbose: verbose)
         }
     }
 
@@ -123,7 +121,7 @@ final class CompareCommand: Command {
         self.model = model
     }
 
-    func run(options: Options, app: App, env: Environment) -> Result<(), AppRunner.AppError> {
+    func run(options: Options, app: App, env: Environment) -> Result<(), ClientError> {
         do {
             if [options.versions.new, options.versions.old].allSatisfy({ $0 == .null }) {
                 let versions = try model.versions(app: app, env: env)
@@ -148,7 +146,6 @@ final class CompareCommand: Command {
         return .init(
             configPath: nil,
             projectDir: nil,
-            shouldPrintVersion: false,
             verbose: false,
             versions: .null,
             buildNumber: nil,

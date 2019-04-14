@@ -22,32 +22,50 @@ struct ConfigCommand: Command {
     final class ConfigOptions: App.Options, OptionsProtocol {
         typealias ClientError = AppRunner.AppError
 
-        /// Print an example config.
-        fileprivate(set) var shouldPrintExample: String
+        /// Config command mode (subcommand)
+        let mode: Mode
 
-        static func evaluate(_ m: CommandMode) -> Result<ConfigOptions, CommandantError<ConfigOptions.ClientError>> {
+        static func evaluate(_ m: CommandMode) -> Result<ConfigCommand.Options, CommandantError<ConfigOptions.ClientError>> {
             return curry(self.init)
                 <*> m <| Option<String?>(key: App.Options.Key.configPath.rawValue, defaultValue: nil, usage: Strings.App.Options.configPath)
                 <*> m <| Option<String?>(key: App.Options.Key.projectDir.rawValue, defaultValue: nil, usage: Strings.App.Options.projectDir)
-                <*> m <| Switch(key: App.Options.Key.shouldPrintVersion.rawValue, usage: Strings.App.Options.showVersion)
                 <*> m <| Switch(key: App.Options.Key.verbose.rawValue, usage: Strings.App.Options.verbose)
-                <*> m <| Argument(usage: Strings.Config.Options.showExample)
+                <*> m <| Argument(usage: "\(Mode.allCases.filter { $0 != .unknown }.reduce("") { "\($0)\n[\($1.function)]\n\t\($1.usage)\n" })", usageParameter: "subcommand")
         }
 
         init(
             configPath: String?,
             projectDir: String?,
-            shouldPrintVersion: Bool,
             verbose: Bool,
-            shouldPrintExample: String) {
-            self.shouldPrintExample = shouldPrintExample
+            mode: String) {
+            self.mode = Mode(rawValue: mode) ?? .unknown
 
-            super.init(configPath: configPath, projectDir: projectDir, shouldPrintVersion: shouldPrintVersion, verbose: verbose)
+            super.init(configPath: configPath, projectDir: projectDir, verbose: verbose)
         }
     }
 
-    private enum Mode: String {
+    enum Mode: String, CaseIterable {
+        /// Print an example config.
         case showExample = "show-example"
+        case unknown
+
+        fileprivate var function: String {
+            switch self {
+            case .showExample:
+                return rawValue
+            case .unknown:
+                return ""
+            }
+        }
+
+        fileprivate var usage: String {
+            switch self {
+            case .showExample:
+                return Strings.Config.Options.showExample
+            case .unknown:
+                return ""
+            }
+        }
     }
 
     let environment: Environment
@@ -68,8 +86,9 @@ struct ConfigCommand: Command {
     }
 
     /// Runs ConfigCommand with the given result, app, and env.
-    func run(options: Options, app: App, env: Environment) -> Result<(), AppRunner.AppError> {
-        if options.shouldPrintExample == ConfigCommand.Mode.showExample.rawValue {
+    func run(options: Options, app: App, env: Environment) -> Result<(), ClientError> {
+        switch options.mode {
+        case .showExample:
             let exampleConfig: Configuration = .example(projectDir: app.configuration.projectDir)
 
             do {
@@ -77,18 +96,18 @@ struct ConfigCommand: Command {
             } catch {
                 return .failure(.wrapped(error))
             }
+            return .success(())
+        case .unknown:
+            return .failure(.unsupportedConfigMode)
         }
-
-        return .success(())
     }
 
     fileprivate static var blank: ConfigOptions {
         return .init(
             configPath: nil,
             projectDir: nil,
-            shouldPrintVersion: false,
             verbose: false,
-            shouldPrintExample: ""
+            mode: ""
         )
     }
 }

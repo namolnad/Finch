@@ -28,7 +28,6 @@ final class ConfiguratorTests: TestCase {
                 options: .init(
                     configPath: nil,
                     projectDir: "current",
-                    shouldPrintVersion: false,
                     verbose: false
                 ),
                 meta: .mock,

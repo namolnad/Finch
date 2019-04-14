@@ -41,7 +41,7 @@ final class AppRunnerTests: TestCase {
             environment: [:],
             meta: .mock,
             output: outputMock
-        ).run(arguments: ["finch", "--version"])
+        ).run(arguments: ["finch", "version"])
 
         XCTAssert(outputMock.outputs.first!.contains("Finch"))
     }

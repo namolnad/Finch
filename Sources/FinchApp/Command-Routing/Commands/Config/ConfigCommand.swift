@@ -14,13 +14,13 @@ import Yams
 /// Command to run configuration-centric operations.
 struct ConfigCommand: Command {
 
-    typealias ClientError = AppRunner.AppError
+    typealias ClientError = AppError
 
     typealias Options = ConfigOptions
 
     /// ConfigCommand options received from the commandline.
     final class ConfigOptions: App.Options, OptionsProtocol {
-        typealias ClientError = AppRunner.AppError
+        typealias ClientError = AppError
 
         /// Config command mode (subcommand)
         let mode: Mode

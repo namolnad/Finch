@@ -83,6 +83,8 @@ enum Strings {
         static func formatted(errorMessage: String) -> String {
             return "Error: \(errorMessage)"
         }
+
+        static let unsupportedConfigMode: String = "Not a valid subcommand"
     }
 }
 // swiftlint:enable line_length

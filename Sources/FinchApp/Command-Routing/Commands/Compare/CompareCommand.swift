@@ -13,13 +13,13 @@ import Version
 /// Command to compare two versions and generate the appropriate changelog.
 final class CompareCommand: Command {
 
-    typealias ClientError = AppRunner.AppError
+    typealias ClientError = AppError
 
     typealias Options = CompareOptions
 
     /// CompareCommand options received from the commandline.
     final class CompareOptions: App.Options, OptionsProtocol {
-        typealias ClientError = AppRunner.AppError
+        typealias ClientError = AppError
 
         /// The versions for comparison.
         fileprivate(set) var versions: Versions

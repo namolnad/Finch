@@ -7,18 +7,31 @@
 
 import Commandant
 import FinchUtilities
+import Foundation
+
+enum AppError: LocalizedError {
+    /// Unsupported mode (subcommand) for config command
+    case unsupportedConfigMode
+
+    /// Wraps error types which should be propogated
+    case wrapped(Error)
+
+    var localizedDescription: String {
+        switch self {
+        case .unsupportedConfigMode:
+            return Strings.Error.unsupportedConfigMode
+        case let .wrapped(error):
+            return error.localizedDescription
+        }
+
+    }
+}
 
 /**
  * A class responsible for running the app. Internally registers
  * all commands. Selects and runs the proper command.
  */
 public class AppRunner {
-    enum AppError: Error {
-        case notPrepared
-        case unsupportedConfigMode
-        case wrapped(Error)
-    }
-
     private let output: OutputType
 
     private let registry: CommandRegistry<AppError> = .init()
@@ -59,52 +72,3 @@ public class AppRunner {
     }
 }
 
-// Abstract base class
-//class BaseCommand: CommandProtocol {
-//    typealias Options = App.Options
-//
-//    typealias ClientError = AppRunner.AppError
-//
-//    var verb: String {
-//        fatalError("Not implemented")
-//    }
-//
-//    var function: String {
-//        fatalError("Not implemented")
-//    }
-//
-//    private let environment: Environment
-//
-//    private let meta: App.Meta
-//
-//    private let output: OutputType
-//
-//    init(env: Environment, meta: App.Meta, output: OutputType) {
-//        self.environment = env
-//        self.meta = meta
-//        self.output = output
-//    }
-//
-//    /// Implemented by the base class. Should NOT be overidden
-//    final func run(_ options: BaseCommand.Options) -> Result<(), AppRunner.AppError> {
-//        let config = Configurator(
-//            options: options,
-//            meta: meta,
-//            environment: environment,
-//            output: output
-//            ).configuration
-//
-//        let app: App = .init(
-//            configuration: config,
-//            meta: meta,
-//            options: options,
-//            output: output
-//        )
-//
-//        return run(options: options, app: app, env: environment)
-//    }
-//
-//    func run<T: Options>(options: T, app: App, env: Environment) -> Result<(), AppRunner.AppError> {
-//        fatalError("Not implemented")
-//    }
-//}

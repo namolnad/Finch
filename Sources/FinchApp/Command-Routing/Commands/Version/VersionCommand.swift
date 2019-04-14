@@ -5,7 +5,7 @@ import FinchUtilities
 final class VersionCommand: Command {
     final class VersionOptions: App.Options, OptionsProtocol {
 
-        typealias ClientError = AppRunner.AppError
+        typealias ClientError = AppError
 
         static func evaluate(_ m: CommandMode) -> Result<VersionCommand.VersionOptions, CommandantError<ClientError>> {
             return curry(self.init)
@@ -15,7 +15,7 @@ final class VersionCommand: Command {
         }
     }
 
-    typealias ClientError = AppRunner.AppError
+    typealias ClientError = AppError
 
     typealias Options = VersionOptions
 

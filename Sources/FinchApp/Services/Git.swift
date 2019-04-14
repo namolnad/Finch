@@ -6,9 +6,9 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Basic
 import FinchCore
 import FinchUtilities
+import Version
 
 /// :nodoc:
 struct Git {

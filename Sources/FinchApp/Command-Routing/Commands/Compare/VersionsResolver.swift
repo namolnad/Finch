@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Version
 
 /// Protocol describing a version-resolving type.
 protocol VersionsResolving {
@@ -35,8 +36,10 @@ struct VersionsResolver: VersionsResolving {
             let secondVersionString = versionStrings.last else {
             throw Error.unableToResolveVersion
         }
-        let firstVersion = try Version(argument: String(firstVersionString))
-        let secondVersion = try Version(argument: String(secondVersionString))
+        guard let firstVersion = Version(String(firstVersionString)),
+            let secondVersion = Version(String(secondVersionString)) else {
+                throw Error.unableToResolveVersion
+        }
 
         guard firstVersion < secondVersion else {
             return (secondVersion, firstVersion)

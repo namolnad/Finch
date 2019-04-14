@@ -6,12 +6,10 @@
 //  Copyright © 2019 DHL. All rights reserved.
 //
 
+import Commandant
 import Version
 import struct FinchCore.Configuration
 import FinchUtilities
-
-/// :nodoc:
-public typealias Version = Version.Version
 
 /// A structure to represent this app and its components.
 public struct App {
@@ -35,8 +33,15 @@ public struct App {
         }
     }
 
-    /// App options received from the commandline.
-    struct Options {
+    /// Abstract base class of app options received from the commandline.
+    class Options {
+        enum Key: String {
+            case configPath
+            case projectDir = "project-dir"
+            case shouldPrintVersion = "version"
+            case verbose = "verbose"
+        }
+
         /// Path to config
         var configPath: String?
 
@@ -48,6 +53,13 @@ public struct App {
 
         /// Execute with verbose output.
         var verbose: Bool
+
+        init(configPath: String?, projectDir: String?, shouldPrintVersion: Bool, verbose: Bool) {
+            self.configPath = configPath
+            self.projectDir = projectDir
+            self.shouldPrintVersion = shouldPrintVersion
+            self.verbose = verbose
+        }
     }
 
     /// The app's derived configuration.
@@ -74,14 +86,26 @@ public struct App {
     func print(_ value: String, kind: Output.Kind = .default) {
         output.print(value, kind: kind, verbose: options.verbose)
     }
+
+    /// Attempts to handle options first; returns true if handled
+    func handle(options: App.Options) -> Bool {
+        if options.shouldPrintVersion {
+            print("\(meta.name) \(meta.version) (\(meta.buildNumber))")
+            return true
+        }
+
+        return false
+    }
 }
 
 /// :nodoc:
 extension App.Options {
-    static let blank: App.Options = .init(
-        configPath: nil,
-        projectDir: nil,
-        shouldPrintVersion: false,
-        verbose: false
-    )
+    static var blank: App.Options {
+        return .init(
+            configPath: nil,
+            projectDir: nil,
+            shouldPrintVersion: false,
+            verbose: false
+        )
+    }
 }

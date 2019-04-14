@@ -5,15 +5,24 @@
 //  Created by Dan Loman on 1/29/19.
 //
 
+import Commandant
+import Curry
 import FinchUtilities
-import Utility
+import Version
 
 /// Command to compare two versions and generate the appropriate changelog.
 final class CompareCommand: Command {
+
+    typealias ClientError = AppRunner.AppError
+
+    typealias Options = CompareOptions
+
     /// CompareCommand options received from the commandline.
-    struct Options {
+    final class CompareOptions: App.Options, OptionsProtocol {
+        typealias ClientError = AppRunner.AppError
+
         /// The versions for comparison.
-        fileprivate(set) var versions: (old: Version, new: Version)
+        fileprivate(set) var versions: Versions
 
         /**
          * The build number to be included in the version header. Has
@@ -50,160 +59,123 @@ final class CompareCommand: Command {
          * Note: Not used for section assignment.
          */
         fileprivate(set) var requiredTags: Set<String>
+
+        static func evaluate(_ m: CommandMode) -> Result<CompareOptions, CommandantError<CompareOptions.ClientError>> {
+            return curry(self.init)
+                <*> m <| Option<String?>(key: App.Options.Key.configPath.rawValue, defaultValue: nil, usage: Strings.App.Options.configPath)
+                <*> m <| Option<String?>(key: App.Options.Key.projectDir.rawValue, defaultValue: nil, usage: Strings.App.Options.projectDir)
+                <*> m <| Switch(key: App.Options.Key.shouldPrintVersion.rawValue, usage: Strings.App.Options.showVersion)
+                <*> m <| Switch(key: App.Options.Key.verbose.rawValue, usage: Strings.App.Options.verbose)
+                <*> m <| Option<Versions>(key: "versions", defaultValue: .null, usage: Strings.Compare.Options.versions)
+                <*> m <| Option<String?>(key: "build-number", defaultValue: nil, usage: Strings.Compare.Options.buildNumber)
+                <*> m <| Option<String?>(key: "git-log", defaultValue: nil, usage: Strings.Compare.Options.gitLog)
+                <*> m <| Switch(key: "normalize-tags", usage: Strings.Compare.Options.normalizeTags)
+                <*> m <| Switch(key: "no-fetch", usage: Strings.Compare.Options.noFetch)
+                <*> m <| Switch(key: "no-show-version", usage: Strings.Compare.Options.noShowVersion)
+                <*> m <| Option<String?>(key: "release-manager", defaultValue: nil, usage: Strings.Compare.Options.releaseManager)
+                <*> m <| Option<[String]>(key: "required-tags", defaultValue: [], usage: Strings.Compare.Options.requiredTags)
+        }
+
+        init(
+            configPath: String?,
+            projectDir: String?,
+            shouldPrintVersion: Bool,
+            verbose: Bool,
+            versions: Versions,
+            buildNumber: String?,
+            gitLog: String?,
+            normalizeTags: Bool,
+            noFetch: Bool,
+            noShowVersion: Bool,
+            releaseManager: String?,
+            requiredTags: [String]) {
+            self.versions = versions
+            self.buildNumber = buildNumber
+            self.gitLog = gitLog
+            self.normalizeTags = normalizeTags
+            self.noFetch = noFetch
+            self.noShowVersion = noShowVersion
+            self.releaseManager = releaseManager
+            self.requiredTags = Set(requiredTags)
+
+            super.init(configPath: configPath, projectDir: projectDir, shouldPrintVersion: shouldPrintVersion, verbose: verbose)
+        }
     }
 
-    private typealias Binder = ArgumentBinder<Options>
+    let environment: Environment
+
+    let function: String = Strings.Compare.commandOverview
+
+    let meta: App.Meta
+
+    let output: OutputType
 
     /// The command's name.
-    let name: String = Strings.Compare.commandName
-
-    private let binder: Binder = .init()
+    let verb: String = Strings.Compare.commandName
 
     private let model: ChangeLogModelType
 
-    private let subparser: ArgumentParser
-
     /// :nodoc:
-    init(
-        meta: App.Meta,
-        parser: ArgumentParser,
-        model: ChangeLogModelType = ChangeLogModel()
-        ) {
+    init(env: Environment, meta: App.Meta, output: OutputType, model: ChangeLogModelType = ChangeLogModel()) {
+        self.environment = env
+        self.meta = meta
+        self.output = output
         self.model = model
-        self.subparser = parser.add(
-            subparser: name,
-            overview: Strings.Compare.commandOverview
-        )
-
-        bindOptions(to: binder, meta: meta)
     }
 
-    /// Runs CompareCommand with the given result, app, and env.
-    func run(with result: ParsingResult, app: App, env: Environment) throws {
-        var options: Options = .blank
+    func run(options: Options, app: App, env: Environment) -> Result<(), AppRunner.AppError> {
+        do {
+            if [options.versions.new, options.versions.old].allSatisfy({ $0 == .null }) {
+                let versions = try model.versions(app: app, env: env)
+                options.versions = .init(old: versions.old, new: versions.new)
+            }
 
-        try binder.fill(parseResult: result, into: &options)
+            let result = try model.changeLog(
+                options: options,
+                app: app,
+                env: env
+            )
 
-        if [options.versions.new, options.versions.old].allSatisfy({ $0 == .init(0, 0, 0) }) {
-            options.versions = try model.versions(app: app, env: env)
+            app.print(result)
+        } catch {
+            return .failure(.wrapped(error))
         }
 
-        let result = try model.changeLog(
-            options: options,
-            app: app,
-            env: env
+        return .success(())
+    }
+
+    fileprivate static var blank: CompareOptions {
+        return .init(
+            configPath: nil,
+            projectDir: nil,
+            shouldPrintVersion: false,
+            verbose: false,
+            versions: .null,
+            buildNumber: nil,
+            gitLog: nil,
+            normalizeTags: false,
+            noFetch: false,
+            noShowVersion: false,
+            releaseManager: nil,
+            requiredTags: []
         )
-
-        app.print(result)
     }
-
-    /**
-     * Binds special options received after the `compare` command
-     * to the global app options.
-     *
-     * #### Options for global binding
-     * - `--config`
-     * - `--project-dir`
-     * - `--verbose`
-     */
-    @discardableResult
-    func bindingGlobalOptions(to binder: CommandRegistry.Binder) -> CompareCommand {
-        binder.bind(option: subparser.add(
-            option: "--config",
-            kind: String.self,
-            usage: Strings.App.Options.configPath
-        )) { $0.configPath = $1 }
-
-        binder.bind(option: subparser.add(
-            option: "--verbose",
-            shortName: "-v",
-            kind: Bool.self,
-            usage: Strings.App.Options.verbose
-        )) { $0.verbose = $1 }
-
-        binder.bind(option: subparser.add(
-            option: "--project-dir",
-            kind: PathArgument.self,
-            usage: Strings.App.Options.projectDir
-        )) { $0.projectDir = $1.path.asString }
-
-        return self
-    }
-
-    // swiftlint:disable function_body_length
-    private func bindOptions(to binder: Binder, meta: App.Meta) {
-        binder.bind(option: subparser.add(
-            option: "--versions",
-            kind: [Version].self,
-            usage: Strings.Compare.Options.versions
-        )) { options, versions in
-            guard versions.count == 2, let firstVersion = versions.first, let secondVersion = versions.last else {
-                throw ArgumentParserError.invalidValue(
-                    argument: "versions",
-                    error: .custom(Strings.Compare.Error.versions)
-                )
-            }
-            if firstVersion < secondVersion {
-                options.versions = (old: firstVersion, new: secondVersion)
-            } else {
-                options.versions = (old: secondVersion, new: firstVersion)
-            }
-        }
-
-        binder.bind(option: subparser.add(
-            option: "--build-number",
-            kind: String.self,
-            usage: Strings.Compare.Options.buildNumber
-        )) { $0.buildNumber = $1 }
-
-        binder.bind(option: subparser.add(
-            option: "--git-log",
-            kind: String.self,
-            usage: Strings.Compare.Options.gitLog(appName: meta.name)
-        )) { $0.gitLog = $1 }
-
-        binder.bind(option: subparser.add(
-            option: "--normalize-tags",
-            kind: Bool.self,
-            usage: Strings.Compare.Options.normalizeTags
-        )) { $0.normalizeTags = $1 }
-
-        binder.bind(option: subparser.add(
-            option: "--no-fetch",
-            kind: Bool.self,
-            usage: Strings.Compare.Options.noFetch
-        )) { $0.noFetch = $1 }
-
-        binder.bind(option: subparser.add(
-            option: "--no-show-version",
-            kind: Bool.self,
-            usage: Strings.Compare.Options.noShowVersion
-        )) { $0.noShowVersion = $1 }
-
-        binder.bind(option: subparser.add(
-            option: "--release-manager",
-            kind: String.self,
-            usage: Strings.Compare.Options.releaseManager
-        )) { $0.releaseManager = $1 }
-
-        binder.bind(option: subparser.add(
-            option: "--required-tags",
-            kind: [String].self,
-            usage: Strings.Compare.Options.requiredTags
-        )) { $0.requiredTags = Set($1) }
-    }
-    // swiftlint:enable function_body_length
 }
 
-extension CompareCommand.Options {
-    fileprivate static let blank: CompareCommand.Options = .init(
-        versions: (.init(0, 0, 0), .init(0, 0, 0)),
-        buildNumber: nil,
-        gitLog: nil,
-        normalizeTags: false,
-        noFetch: false,
-        noShowVersion: false,
-        releaseManager: nil,
-        requiredTags: []
-    )
+struct Versions: ArgumentProtocol {
+    let old: Version
+
+    let new: Version
+
+    static var null: Versions = .init(old: .null, new: .null)
+
+    public static var name: String = "versions"
+
+    public static func from(string: String) -> Versions? {
+        guard let versions = try? VersionsResolver().versions(from: string) else {
+            return nil
+        }
+
+        return Versions(old: versions.old, new: versions.new)
+    }
 }

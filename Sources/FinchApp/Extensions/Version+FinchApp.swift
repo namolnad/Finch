@@ -6,16 +6,16 @@
 //
 
 /// :nodoc:
-extension Version: ArgumentKind {
-    public static var completion: ShellCompletion {
-        return .none
-    }
-
-    public init(argument: String) throws {
-        guard let version = Version(string: argument) else {
-            throw ArgumentConversionError.typeMismatch(value: argument, expectedType: Version.self)
-        }
-
-        self = version
-    }
-}
+//extension Version: ArgumentKind {
+//    public static var completion: ShellCompletion {
+//        return .none
+//    }
+//
+//    public init(argument: String) throws {
+//        guard let version = Version(string: argument) else {
+//            throw ArgumentConversionError.typeMismatch(value: argument, expectedType: Version.self)
+//        }
+//
+//        self = version
+//    }
+//}

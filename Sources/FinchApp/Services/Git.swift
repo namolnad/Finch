@@ -57,6 +57,10 @@ extension Git {
     }
 
     func versionsStringUsingBranches(semVerRegex: String) throws -> String {
+        guard !app.configuration.gitConfig.branchPrefix.isEmpty else {
+            return ""
+        }
+
         return try git(
             "branch -r --list",
             "|",

@@ -1,8 +1,0 @@
-▿ (2 elements)
-  ▿ .0: Optional<String>
-    - some: "compare"
-  ▿ .1: Options
-    - configPath: Optional<String>.none
-    - projectDir: Optional<String>.none
-    - shouldPrintVersion: false
-    - verbose: false

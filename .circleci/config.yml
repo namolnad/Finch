@@ -4,7 +4,7 @@ executors:
 
   mac:
     macos:
-      xcode: "10.1.0"
+      xcode: "10.2.0"
 
   go:
     docker:
@@ -12,7 +12,7 @@ executors:
 
   linux:
     docker:
-      - image: norionomura/swift:423
+      - image: norionomura/swift:latest
 
 commands:
 

@@ -60,6 +60,7 @@ final class CompareCommand: Command {
          */
         fileprivate(set) var requiredTags: Set<String>
 
+        // swiftlint:disable line_length identifier_name
         static func evaluate(_ m: CommandMode) -> Result<CompareCommand.Options, CommandantError<CompareOptions.ClientError>> {
             return curry(self.init)
                 <*> m <| Option<String?>(key: App.Options.Key.configPath.rawValue, defaultValue: nil, usage: Strings.App.Options.configPath)
@@ -74,6 +75,7 @@ final class CompareCommand: Command {
                 <*> m <| Option<String?>(key: "release-manager", defaultValue: nil, usage: Strings.Compare.Options.releaseManager)
                 <*> m <| Option<[String]>(key: "required-tags", defaultValue: [], usage: Strings.Compare.Options.requiredTags)
         }
+        // swiftlint:enable line_length identifier_name
 
         init(
             configPath: String?,

@@ -25,6 +25,7 @@ struct ConfigCommand: Command {
         /// Config command mode (subcommand)
         let mode: Mode
 
+        // swiftlint:disable line_length identifier_name
         static func evaluate(_ m: CommandMode) -> Result<ConfigCommand.Options, CommandantError<ConfigOptions.ClientError>> {
             return curry(self.init)
                 <*> m <| Option<String?>(key: App.Options.Key.configPath.rawValue, defaultValue: nil, usage: Strings.App.Options.configPath)
@@ -32,6 +33,7 @@ struct ConfigCommand: Command {
                 <*> m <| Switch(key: App.Options.Key.verbose.rawValue, usage: Strings.App.Options.verbose)
                 <*> m <| Argument(usage: "\(Mode.allCases.filter { $0 != .unknown }.reduce("") { "\($0)\n[\($1.function)]\n\t\($1.usage)\n" })", usageParameter: "subcommand")
         }
+        // swiftlint:enable line_length identifier_name
 
         init(
             configPath: String?,

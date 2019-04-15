@@ -7,12 +7,14 @@ final class VersionCommand: Command {
 
         typealias ClientError = AppError
 
+        // swiftlint:disable line_length identifier_name
         static func evaluate(_ m: CommandMode) -> Result<VersionCommand.VersionOptions, CommandantError<ClientError>> {
             return curry(self.init)
                 <*> m <| Option<String?>(key: App.Options.Key.configPath.rawValue, defaultValue: nil, usage: Strings.App.Options.configPath)
                 <*> m <| Option<String?>(key: App.Options.Key.projectDir.rawValue, defaultValue: nil, usage: Strings.App.Options.projectDir)
                 <*> m <| Switch(key: App.Options.Key.verbose.rawValue, usage: Strings.App.Options.verbose)
         }
+        // swiftlint:enable line_length identifier_name
     }
 
     typealias ClientError = AppError

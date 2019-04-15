@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import SnapshotTesting
 import Yams
+import XCTest
 
-typealias TestCase = SnapshotTestCase
+typealias TestCase = XCTestCase
 
 final class TestHelper {
 

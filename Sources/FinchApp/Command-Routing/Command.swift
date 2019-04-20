@@ -8,6 +8,12 @@
 import Commandant
 import FinchUtilities
 
+#if swift(>=5.0)
+import Result
+
+public typealias Result = Result
+#endif
+
 ///// :nodoc:
 public typealias Environment = [String: String]
 

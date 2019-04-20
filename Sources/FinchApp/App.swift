@@ -6,12 +6,10 @@
 //  Copyright © 2019 DHL. All rights reserved.
 //
 
-import struct Utility.Version
+import Commandant
 import struct FinchCore.Configuration
 import FinchUtilities
-
-/// :nodoc:
-public typealias Version = Utility.Version
+import Version
 
 /// A structure to represent this app and its components.
 public struct App {
@@ -35,19 +33,28 @@ public struct App {
         }
     }
 
-    /// App options received from the commandline.
-    struct Options {
+    /// Abstract base class of app options received from the commandline.
+    class Options {
+        enum Key: String {
+            case configPath = "config"
+            case projectDir = "project-dir"
+            case verbose = "verbose"
+        }
+
         /// Path to config
         var configPath: String?
 
         /// The project directory if it is not the current working directory.
         var projectDir: String?
 
-        /// Print the app version information and exit.
-        var shouldPrintVersion: Bool
-
         /// Execute with verbose output.
         var verbose: Bool
+
+        init(configPath: String?, projectDir: String?, verbose: Bool) {
+            self.configPath = configPath
+            self.projectDir = projectDir
+            self.verbose = verbose
+        }
     }
 
     /// The app's derived configuration.
@@ -78,10 +85,11 @@ public struct App {
 
 /// :nodoc:
 extension App.Options {
-    static let blank: App.Options = .init(
-        configPath: nil,
-        projectDir: nil,
-        shouldPrintVersion: false,
-        verbose: false
-    )
+    static var blank: App.Options {
+        return .init(
+            configPath: nil,
+            projectDir: nil,
+            verbose: false
+        )
+    }
 }

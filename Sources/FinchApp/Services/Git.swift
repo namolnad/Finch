@@ -6,9 +6,9 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import Basic
 import FinchCore
 import FinchUtilities
+import Version
 
 /// :nodoc:
 struct Git {
@@ -43,7 +43,7 @@ extension Git {
 
     @discardableResult
     func fetch() throws -> String {
-        return try git("fetch")
+        return try git("fetch", "--quiet")
     }
 
     func versionsStringUsingTags() throws -> String {
@@ -57,6 +57,10 @@ extension Git {
     }
 
     func versionsStringUsingBranches(semVerRegex: String) throws -> String {
+        guard !app.configuration.gitConfig.branchPrefix.isEmpty else {
+            return ""
+        }
+
         return try git(
             "branch -r --list",
             "|",

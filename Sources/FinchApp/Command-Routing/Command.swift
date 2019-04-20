@@ -5,32 +5,43 @@
 //  Created by Dan Loman on 1/29/19.
 //
 
-import Utility
+import Commandant
+import FinchUtilities
+#if !swift(>=5.0)
+@_exported import Result
+#endif
 
-/// :nodoc:
-public typealias ParsingResult = ArgumentParser.Result
-
-/// :nodoc:
+///// :nodoc:
 public typealias Environment = [String: String]
 
-/// Protocol describing a command.
-protocol Command {
-    /// Name of the command.
-    var name: String { get }
+protocol Command: CommandProtocol where Options: App.Options {
 
-    /**
-     * Runs the command with the parsing result, app,
-     * and current environment.
-     */
-    func run(with result: ParsingResult, app: App, env: Environment) throws
+    var environment: Environment { get }
 
-    /// Optional function to allow the command to bind to the main app options,
-    func bindingGlobalOptions(to binder: ArgumentBinder<App.Options>) -> Self
+    var meta: App.Meta { get }
+
+    var output: OutputType { get }
+
+    func run(options: Options, app: App, env: Environment) -> Result<(), ClientError>
 }
 
-/// :nodoc:
 extension Command {
-    func bindingGlobalOptions(to binder: ArgumentBinder<App.Options>) -> Self {
-        return self
+    /// Should NOT be implemented by types conforming to Command.
+    func run(_ options: Options) -> Result<(), ClientError> {
+        let config = Configurator(
+            options: options,
+            meta: meta,
+            environment: environment,
+            output: output
+            ).configuration
+
+        let app: App = .init(
+            configuration: config,
+            meta: meta,
+            options: options,
+            output: output
+        )
+
+        return run(options: options, app: app, env: environment)
     }
 }

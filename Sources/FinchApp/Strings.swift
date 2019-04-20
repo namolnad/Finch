@@ -7,14 +7,16 @@
 
 // swiftlint:disable line_length
 enum Strings {
-    enum App {
-        private static let repoBaseUrl: String = "https://github.com/namolnad"
+    private static let appName: String = "Finch"
 
-        static func overview(appName: String) -> String {
+    private static let repoBaseUrl: String = "https://github.com/namolnad"
+
+    enum App {
+        static var overview: String {
             return "\(appName) is a flexible tool for generating well-formatted changelogs between application versions"
         }
 
-        static func seeAlso(appName: String) -> String {
+        static var seeAlso: String {
             return "Visit \(repoBaseUrl)/\(appName) for more information"
         }
 
@@ -23,7 +25,7 @@ enum Strings {
 
             static var projectDir: String = "Path to project if command is run from separate directory"
 
-            static func showVersion(appName: String) -> String {
+            static var showVersion: String {
                 return "Displays current \(appName) version and build number"
             }
 
@@ -39,7 +41,7 @@ enum Strings {
         enum Options {
             static let buildNumber: String = "Build number string to be included in version header. Takes precedence over build number command in config. e.g. `6.19.1 (6258)`"
 
-            static func gitLog(appName: String) -> String {
+            static var gitLog: String {
                 return "Pass in the git-log string directly vs having \(appName) generate it"
             }
 
@@ -51,9 +53,9 @@ enum Strings {
 
             static let releaseManager: String = "The release manager's email. e.g. `--release-manager=$(git config --get user.email)`"
 
-            static let requiredTags: String = "A set of tags required for commit presence in the final output"
+            static let requiredTags: String = "A set of tags required for commit presence in the final output. NOTE: Must be enclosed in quotes"
 
-            static let versions: String = "<version_1> <version_2> Use explicit versions for the changelog instead of auto-resolving"
+            static let versions: String = "'<version_1> <version_2>' Use explicit versions for the changelog instead of auto-resolving. NOTE: Must be enclosed in quotes"
         }
 
         enum Error {
@@ -68,7 +70,7 @@ enum Strings {
     enum Config {
         static let commandName: String = "config"
 
-        static func commandOverview(appName: String) -> String {
+        static var commandOverview: String {
             return "Assists with generation and example presentation of \(appName) configuration"
         }
 
@@ -81,6 +83,8 @@ enum Strings {
         static func formatted(errorMessage: String) -> String {
             return "Error: \(errorMessage)"
         }
+
+        static let unsupportedConfigMode: String = "Not a valid subcommand"
     }
 }
 // swiftlint:enable line_length

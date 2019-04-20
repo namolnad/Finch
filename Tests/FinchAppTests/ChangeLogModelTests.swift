@@ -10,6 +10,7 @@
 import FinchCore
 import SnapshotTesting
 import XCTest
+import Version
 
 final class ChangeLogModelTests: TestCase {
     private var model: ChangeLogModel {
@@ -120,12 +121,15 @@ final class ChangeLogModelTests: TestCase {
         )
     }
 
-    private func options(gitLog: String, requiredTags: Set<String> = [], showReleaseManager: Bool = true, showVersion: Bool = true) -> CompareCommand.Options {
+    private func options(gitLog: String, requiredTags: [String] = [], showReleaseManager: Bool = true, showVersion: Bool = true) -> CompareCommand.Options {
         let contributorEmail = Configuration.mock.contributorsConfig
             .contributors.first!.emails.first!
 
         return .init(
-            versions: (.init(0, 0, 1), .init(6, 13, 0)),
+            configPath: nil,
+            projectDir: nil,
+            verbose: false,
+            versions: .init(old: .init(0, 0, 1), new: .init(6, 13, 0)),
             buildNumber: nil,
             gitLog: gitLog,
             normalizeTags: false,

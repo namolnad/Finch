@@ -2,57 +2,39 @@
   "object": {
     "pins": [
       {
-        "package": "AEXML",
-        "repositoryURL": "https://github.com/tadija/AEXML",
+        "package": "Commandant",
+        "repositoryURL": "https://github.com/Carthage/Commandant.git",
         "state": {
           "branch": null,
-          "revision": "54bb8ea6fb693dd3f92a89e5fcc19e199fdeedd0",
-          "version": "4.3.3"
+          "revision": "ab68611013dec67413628ac87c1f29e8427bc8e4",
+          "version": "0.17.0"
         }
       },
       {
-        "package": "JSONUtilities",
-        "repositoryURL": "https://github.com/yonaskolb/JSONUtilities.git",
+        "package": "Curry",
+        "repositoryURL": "https://github.com/thoughtbot/Curry.git",
         "state": {
           "branch": null,
-          "revision": "db238f4858ac2ac3fff228b5b71ce90488a6a9b3",
-          "version": "4.1.0"
+          "revision": "4331dd50bc1db007db664a23f32e6f3df93d4e1a",
+          "version": "4.0.2"
         }
       },
       {
-        "package": "PathKit",
-        "repositoryURL": "https://github.com/kylef/PathKit.git",
+        "package": "Nimble",
+        "repositoryURL": "https://github.com/Quick/Nimble.git",
         "state": {
           "branch": null,
-          "revision": "e2f5be30e4c8f531c9c1e8765aa7b71c0a45d7a0",
-          "version": "0.9.2"
+          "revision": "43304bf2b1579fd555f2fdd51742771c1e4f2b98",
+          "version": "8.0.1"
         }
       },
       {
-        "package": "Rainbow",
-        "repositoryURL": "https://github.com/onevcat/Rainbow.git",
+        "package": "Quick",
+        "repositoryURL": "https://github.com/Quick/Quick.git",
         "state": {
           "branch": null,
-          "revision": "9c52c1952e9b2305d4507cf473392ac2d7c9b155",
-          "version": "3.1.5"
-        }
-      },
-      {
-        "package": "Spectre",
-        "repositoryURL": "https://github.com/kylef/Spectre.git",
-        "state": {
-          "branch": null,
-          "revision": "f14ff47f45642aa5703900980b014c2e9394b6e5",
-          "version": "0.9.0"
-        }
-      },
-      {
-        "package": "SwiftPM",
-        "repositoryURL": "https://github.com/apple/swift-package-manager.git",
-        "state": {
-          "branch": null,
-          "revision": "235aacc514cb81a6881364b0fedcb3dd083228f3",
-          "version": "0.3.0"
+          "revision": "0b4ed6c706dd0cce923b5019a605a9bcc6b1b600",
+          "version": "2.0.0"
         }
       },
       {
@@ -60,44 +42,17 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing",
         "state": {
           "branch": null,
-          "revision": "1fb2e65cf62d2f983b3cab2871cbb218ea9ee9b7",
-          "version": "1.3.0"
+          "revision": "883f0b0623ae55f41f42e2399dab428017896448",
+          "version": "1.5.0"
         }
       },
       {
-        "package": "SwiftCLI",
-        "repositoryURL": "https://github.com/jakeheis/SwiftCLI.git",
+        "package": "Version",
+        "repositoryURL": "https://github.com/mxcl/Version.git",
         "state": {
           "branch": null,
-          "revision": "5318c37d3cacc8780f50b87a8840a6774320ebdf",
-          "version": "5.2.2"
-        }
-      },
-      {
-        "package": "SwiftShell",
-        "repositoryURL": "https://github.com/kareman/SwiftShell",
-        "state": {
-          "branch": null,
-          "revision": "beebe43c986d89ea5359ac3adcb42dac94e5e08a",
-          "version": "4.1.2"
-        }
-      },
-      {
-        "package": "XcodeGen",
-        "repositoryURL": "https://github.com/yonaskolb/XcodeGen.git",
-        "state": {
-          "branch": null,
-          "revision": "95bc051d268f6b8b924ae9c84e40566efe90cb80",
-          "version": "2.3.0"
-        }
-      },
-      {
-        "package": "xcodeproj",
-        "repositoryURL": "https://github.com/tuist/xcodeproj.git",
-        "state": {
-          "branch": null,
-          "revision": "8e15cc74149ee946b7ae125685177915b4ff7317",
-          "version": "6.4.0"
+          "revision": "61140c9f8a94c0326076fd2d44817834f4c6aafc",
+          "version": "1.1.0"
         }
       },
       {
@@ -105,8 +60,8 @@
         "repositoryURL": "https://github.com/jpsim/Yams.git",
         "state": {
           "branch": null,
-          "revision": "b08dba4bcea978bf1ad37703a384097d3efce5af",
-          "version": "1.0.2"
+          "revision": "c947a306d2e80ecb2c0859047b35c73b8e1ca27f",
+          "version": "2.0.0"
         }
       }
     ]

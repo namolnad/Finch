@@ -6,8 +6,8 @@
 //  Copyright © 2018 DHL. All rights reserved.
 //
 
-import class Basic.Process
 import FinchCore
+import Version
 
 /// A protocol defining the model for changelog creation/formatting.
 protocol ChangeLogModelType {

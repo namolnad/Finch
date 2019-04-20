@@ -4,7 +4,7 @@ APP_NAME_LOWERCASE=$(shell echo '$(APP_NAME)' | tr '[:upper:]' '[:lower:]')
 APP_TMP=/tmp/$(APP_NAME).dst
 BIN_DIR=$(INSTALL_DIR)/bin
 BINARIES_DIR=/usr/local/bin
-BUILD=swift build --static-swift-stdlib
+BUILD=swift build
 BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
 CONFIG_TEMPLATE=template.config.yml
 CONFIRM=./Scripts/prompt_confirmation
@@ -123,7 +123,7 @@ ifdef NEW_VERSION
 	$(eval MAJOR:=$(word 1,$(VERSION_COMPONENTS)))
 	$(eval MINOR:=$(word 2,$(VERSION_COMPONENTS)))
 	$(eval PATCH:=$(word 3,$(VERSION_COMPONENTS)))
-	@echo "import struct Utility.Version\n\nlet appVersion: Version = .init($(MAJOR), $(MINOR), $(PATCH))" > $(VERSION_FILE)
+	@echo "import Version\n\nlet appVersion: Version = .init($(MAJOR), $(MINOR), $(PATCH))" > $(VERSION_FILE)
 endif
 
 xcodeproj:

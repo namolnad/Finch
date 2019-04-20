@@ -5,67 +5,111 @@
 //  Created by Dan Loman on 2/14/19.
 //
 
+import Commandant
+import Curry
 import FinchCore
 import FinchUtilities
-import Utility
 import Yams
 
 /// Command to run configuration-centric operations.
-final class ConfigCommand: Command {
+struct ConfigCommand: Command {
+
+    typealias ClientError = AppError
+
+    typealias Options = ConfigOptions
+
     /// ConfigCommand options received from the commandline.
-    struct Options {
-        /// Print an example config.
-        fileprivate(set) var shouldPrintExample: Bool
-    }
+    final class ConfigOptions: App.Options, OptionsProtocol {
+        typealias ClientError = AppError
 
-    private enum Mode: String {
-        case showExample = "show-example"
-    }
+        /// Config command mode (subcommand)
+        let mode: Mode
 
-    private typealias Binder = ArgumentBinder<Options>
+        // swiftlint:disable line_length identifier_name
+        static func evaluate(_ m: CommandMode) -> Result<ConfigCommand.Options, CommandantError<ConfigOptions.ClientError>> {
+            return curry(self.init)
+                <*> m <| Option<String?>(key: App.Options.Key.configPath.rawValue, defaultValue: nil, usage: Strings.App.Options.configPath)
+                <*> m <| Option<String?>(key: App.Options.Key.projectDir.rawValue, defaultValue: nil, usage: Strings.App.Options.projectDir)
+                <*> m <| Switch(key: App.Options.Key.verbose.rawValue, usage: Strings.App.Options.verbose)
+                <*> m <| Argument(usage: "\(Mode.allCases.filter { $0 != .unknown }.reduce("") { "\($0)\n[\($1.function)]\n\t\($1.usage)\n" })", usageParameter: "subcommand")
+        }
+        // swiftlint:enable line_length identifier_name
 
-    /// ConfigCommand's name.
-    let name: String = Strings.Config.commandName
+        init(
+            configPath: String?,
+            projectDir: String?,
+            verbose: Bool,
+            mode: String) {
+            self.mode = Mode(rawValue: mode) ?? .unknown
 
-    private let binder: Binder = .init()
-
-    private let subparser: ArgumentParser
-
-    /// :nodoc:
-    init(meta: App.Meta, parser: ArgumentParser) {
-        self.subparser = parser.add(
-            subparser: name,
-            overview: Strings.Config.commandOverview(appName: meta.name)
-        )
-
-        subparser.add(
-            subparser: Mode.showExample.rawValue,
-            overview: Strings.Config.Options.showExample
-        )
-
-        bindOptions(to: binder, meta: meta)
-    }
-
-    /// Runs ConfigCommand with the given result, app, and env.
-    func run(with result: ParsingResult, app: App, env: Environment) throws {
-        var options: Options = .blank
-
-        try binder.fill(parseResult: result, into: &options)
-
-        if options.shouldPrintExample {
-            let exampleConfig: Configuration = .example(projectDir: app.configuration.projectDir)
-
-            app.print(try YAMLEncoder().encode(exampleConfig))
+            super.init(configPath: configPath, projectDir: projectDir, verbose: verbose)
         }
     }
 
-    private func bindOptions(to binder: Binder, meta: App.Meta) {
-        binder.bind(parser: subparser) { $0.shouldPrintExample = $1 == Mode.showExample.rawValue }
-    }
-}
+    enum Mode: String, CaseIterable {
+        /// Print an example config.
+        case showExample = "show-example"
+        case unknown
 
-extension ConfigCommand.Options {
-    fileprivate static let blank: ConfigCommand.Options = .init(
-        shouldPrintExample: false
-    )
+        fileprivate var function: String {
+            switch self {
+            case .showExample:
+                return rawValue
+            case .unknown:
+                return ""
+            }
+        }
+
+        fileprivate var usage: String {
+            switch self {
+            case .showExample:
+                return Strings.Config.Options.showExample
+            case .unknown:
+                return ""
+            }
+        }
+    }
+
+    let environment: Environment
+
+    let function: String = Strings.Config.commandOverview
+
+    let meta: App.Meta
+
+    let output: OutputType
+
+    /// ConfigCommand's name.
+    let verb: String = Strings.Config.commandName
+
+    init(env: Environment, meta: App.Meta, output: OutputType = Output.instance) {
+        self.meta = meta
+        self.environment = env
+        self.output = output
+    }
+
+    /// Runs ConfigCommand with the given result, app, and env.
+    func run(options: Options, app: App, env: Environment) -> Result<(), ClientError> {
+        switch options.mode {
+        case .showExample:
+            let exampleConfig: Configuration = .example(projectDir: app.configuration.projectDir)
+
+            do {
+                app.print(try YAMLEncoder().encode(exampleConfig))
+            } catch {
+                return .failure(.wrapped(error))
+            }
+            return .success(())
+        case .unknown:
+            return .failure(.unsupportedConfigMode)
+        }
+    }
+
+    fileprivate static var blank: ConfigOptions {
+        return .init(
+            configPath: nil,
+            projectDir: nil,
+            verbose: false,
+            mode: ""
+        )
+    }
 }

@@ -12,7 +12,7 @@ executors:
 
   linux:
     docker:
-      - image: norionomura/swift:latest
+      - image: norionomura/swift:423
 
 commands:
 

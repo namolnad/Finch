@@ -1,9 +1,6 @@
 import Commandant
 import Curry
 import FinchUtilities
-#if !swift(>=5.0)
-import Result
-#endif
 
 final class VersionCommand: Command {
     final class VersionOptions: App.Options, OptionsProtocol {

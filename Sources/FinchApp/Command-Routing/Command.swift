@@ -8,7 +8,10 @@
 import Commandant
 import FinchUtilities
 #if !swift(>=5.0)
-import Result
+enum Result<Success, Failure: Error> {
+    case success(Success)
+    case failure(Failure)
+}
 #endif
 
 ///// :nodoc:

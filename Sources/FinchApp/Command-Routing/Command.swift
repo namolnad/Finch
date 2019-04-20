@@ -8,7 +8,7 @@
 import Commandant
 import FinchUtilities
 #if !swift(>=5.0)
-enum Result<Success, Failure: Error> {
+public enum Result<Success, Failure: Error> {
     case success(Success)
     case failure(Failure)
 }

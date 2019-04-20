@@ -48,14 +48,7 @@ public struct Shell {
 
         let fileHandle = pipe.fileHandleForReading
 
-        if #available(macOS 10.13, *) {
-            process.executableURL = URL(fileURLWithPath: path)
-            try process.run()
-        } else {
-            process.launchPath = path
-            process.launch()
-        }
-
+        try process.run(at: path)
         process.waitUntilExit()
 
         let code = process.terminationStatus
@@ -74,5 +67,20 @@ public struct Shell {
 
     private func output(fileHandle: FileHandle) -> String? {
         return String(data: fileHandle.readDataToEndOfFile(), encoding: .utf8)
+    }
+}
+
+private extension Process {
+    func run(at path: String) throws {
+        #if os(macOS)
+        if #available(macOS 10.13, *) {
+            executableURL = URL(fileURLWithPath: path)
+            try run()
+            return
+        }
+        #endif
+
+        launchPath = path
+        launch()
     }
 }

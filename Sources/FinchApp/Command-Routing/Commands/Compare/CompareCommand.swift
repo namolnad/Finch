@@ -8,9 +8,6 @@
 import Commandant
 import Curry
 import FinchUtilities
-#if !swift(>=5.0)
-import Result
-#endif
 import Version
 
 /// Command to compare two versions and generate the appropriate changelog.

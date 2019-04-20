@@ -9,9 +9,6 @@ import Commandant
 import Curry
 import FinchCore
 import FinchUtilities
-#if !swift(>=5.0)
-import Result
-#endif
 import Yams
 
 /// Command to run configuration-centric operations.

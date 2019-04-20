@@ -8,7 +8,7 @@
 import Commandant
 import FinchUtilities
 
-#if swift(>=5.0)
+#if swift(<5.0)
 import Result
 
 public typealias Result = Result

@@ -8,7 +8,7 @@
 import Commandant
 import FinchUtilities
 #if !swift(>=5.0)
-import Result
+@_exported import Result
 #endif
 
 ///// :nodoc:

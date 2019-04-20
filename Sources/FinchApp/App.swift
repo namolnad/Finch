@@ -7,9 +7,9 @@
 //
 
 import Commandant
-import Version
 import struct FinchCore.Configuration
 import FinchUtilities
+import Version
 
 /// A structure to represent this app and its components.
 public struct App {

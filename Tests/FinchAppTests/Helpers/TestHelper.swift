@@ -8,9 +8,16 @@
 
 import Foundation
 import Yams
+#if !swift(>=5.0)
+import SnapshotTesting
+#endif
 import XCTest
 
+#if swift(>=5.0)
 typealias TestCase = XCTestCase
+#else
+typealias TestCase = SnapshotTestCase
+#endif
 
 final class TestHelper {
 

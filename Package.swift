@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:4.2
 
 import PackageDescription
 
@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "FinchApp", targets: ["FinchApp"])
     ],
     dependencies: [
-        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.17.0"),
+        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.16.0"),
         .package(url: "https://github.com/thoughtbot/Curry.git", from: "4.0.0"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "2.0.0"),
         .package(url: "https://github.com/mxcl/Version.git", from: "1.0.0")
@@ -26,8 +26,7 @@ let package = Package(
             dependencies: ["FinchUtilities"]),
         .target(
             name: "FinchUtilities",
-            dependencies: ["Yams"]),
+            dependencies: ["Yams"])
     ],
-    swiftLanguageVersions: [.v4, .v4_2, .v5]
+    swiftLanguageVersions: [.v4, .v4_2, .version("5")]
 )
-

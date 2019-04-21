@@ -12,9 +12,7 @@ enum Strings {
     private static let repoBaseUrl: String = "https://github.com/namolnad"
 
     enum App {
-        static var overview: String {
-            return "\(appName) is a flexible tool for generating well-formatted changelogs between application versions"
-        }
+        static let overview: String = "A flexible tool for generating well-formatted changelogs between application versions"
 
         static var seeAlso: String {
             return "Visit \(repoBaseUrl)/\(appName) for more information"
@@ -74,8 +72,9 @@ enum Strings {
             return "Assists with generation and example presentation of \(appName) configuration"
         }
 
-        enum Options {
-            static let showExample: String = "Display example config"
+        enum Example {
+            static let commandName: String = "show-example"
+            static let commandOverview: String = "Display example config"
         }
     }
 

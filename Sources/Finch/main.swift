@@ -9,15 +9,15 @@
 import FinchApp
 import Foundation
 
-let processInfo: ProcessInfo = .processInfo
-
 let meta: App.Meta = .init(
     buildNumber: appBuildNumber,
     name: appName,
     version: appVersion
 )
 
-AppRunner(
-    environment: processInfo.environment,
+let result = AppRunner(
+    environment: ProcessInfo.processInfo.environment,
     meta: meta
-).run(arguments: processInfo.arguments)
+).run(with: CommandLine.arguments)
+
+exit(result)

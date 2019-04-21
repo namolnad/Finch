@@ -5,22 +5,13 @@
 //  Created by Dan Loman on 1/29/19.
 //
 
-import Commandant
-import Curry
 import FinchUtilities
+import SwiftCLI
 import Version
 
 /// Command to compare two versions and generate the appropriate changelog.
-final class CompareCommand: Command {
-
-    typealias ClientError = AppError
-
-    typealias Options = CompareOptions
-
-    /// CompareCommand options received from the commandline.
-    final class CompareOptions: App.Options, OptionsProtocol {
-        typealias ClientError = AppError
-
+final class CompareCommand: BaseCommand {
+    struct Options {
         /// The versions for comparison.
         fileprivate(set) var versions: Versions
 
@@ -59,104 +50,64 @@ final class CompareCommand: Command {
          * Note: Not used for section assignment.
          */
         fileprivate(set) var requiredTags: Set<String>
-
-        // swiftlint:disable line_length identifier_name
-        static func evaluate(_ m: CommandMode) -> Result<CompareCommand.Options, CommandantError<CompareOptions.ClientError>> {
-            return curry(self.init)
-                <*> m <| Option<String?>(key: App.Options.Key.configPath.rawValue, defaultValue: nil, usage: Strings.App.Options.configPath)
-                <*> m <| Option<String?>(key: App.Options.Key.projectDir.rawValue, defaultValue: nil, usage: Strings.App.Options.projectDir)
-                <*> m <| Switch(key: App.Options.Key.verbose.rawValue, usage: Strings.App.Options.verbose)
-                <*> m <| Option<Versions>(key: "versions", defaultValue: .null, usage: Strings.Compare.Options.versions)
-                <*> m <| Option<String?>(key: "build-number", defaultValue: nil, usage: Strings.Compare.Options.buildNumber)
-                <*> m <| Option<String?>(key: "git-log", defaultValue: nil, usage: Strings.Compare.Options.gitLog)
-                <*> m <| Switch(key: "normalize-tags", usage: Strings.Compare.Options.normalizeTags)
-                <*> m <| Switch(key: "no-fetch", usage: Strings.Compare.Options.noFetch)
-                <*> m <| Switch(key: "no-show-version", usage: Strings.Compare.Options.noShowVersion)
-                <*> m <| Option<String?>(key: "release-manager", defaultValue: nil, usage: Strings.Compare.Options.releaseManager)
-                <*> m <| Option<[String]>(key: "required-tags", defaultValue: [], usage: Strings.Compare.Options.requiredTags)
-        }
-        // swiftlint:enable line_length identifier_name
-
-        init(
-            configPath: String?,
-            projectDir: String?,
-            verbose: Bool,
-            versions: Versions,
-            buildNumber: String?,
-            gitLog: String?,
-            normalizeTags: Bool,
-            noFetch: Bool,
-            noShowVersion: Bool,
-            releaseManager: String?,
-            requiredTags: [String]) {
-            self.versions = versions
-            self.buildNumber = buildNumber
-            self.gitLog = gitLog
-            self.normalizeTags = normalizeTags
-            self.noFetch = noFetch
-            self.noShowVersion = noShowVersion
-            self.releaseManager = releaseManager
-            self.requiredTags = Set(requiredTags)
-
-            super.init(configPath: configPath, projectDir: projectDir, verbose: verbose)
-        }
     }
 
-    let environment: Environment
+    let versions: Key<Versions> = .init("--versions", description: Strings.Compare.Options.versions)
+    let buildNumber: Key<String> = .init("--build-number", description: Strings.Compare.Options.buildNumber)
+    let gitLog: Key<String> = .init("--git-log", description: Strings.Compare.Options.gitLog)
+    let normalizeTags: Flag = .init("--normalize-tags", description: Strings.Compare.Options.normalizeTags)
+    let noFetch: Flag = .init("--no-fetch", description: Strings.Compare.Options.noFetch)
+    let noShowVersion: Flag = .init("--no-show-version", description: Strings.Compare.Options.noShowVersion)
+    let releaseManager: Key<String> = .init("--release-manager", description: Strings.Compare.Options.releaseManager)
+    let requiredTags: Key<[String]> = .init("--required-tags", description: Strings.Compare.Options.requiredTags)
 
-    let function: String = Strings.Compare.commandOverview
+    override var shortDescription: String { return Strings.Compare.commandOverview }
 
-    let meta: App.Meta
-
-    let output: OutputType
+    override var longDescription: String { return Strings.Compare.commandOverview }
 
     /// The command's name.
-    let verb: String = Strings.Compare.commandName
+    override var name: String { return Strings.Compare.commandName }
 
     private let model: ChangeLogModelType
 
     /// :nodoc:
-    init(env: Environment, meta: App.Meta, output: OutputType, model: ChangeLogModelType = ChangeLogModel()) {
-        self.environment = env
-        self.meta = meta
-        self.output = output
+    init(appGenerator: @escaping AppGenerator, model: ChangeLogModelType = ChangeLogModel()) {
         self.model = model
+
+        super.init(appGenerator: appGenerator)
     }
 
-    func run(options: Options, app: App, env: Environment) -> Result<(), ClientError> {
-        do {
-            if [options.versions.new, options.versions.old].allSatisfy({ $0 == .null }) {
-                let versions = try model.versions(app: app, env: env)
-                options.versions = .init(old: versions.old, new: versions.new)
-            }
-
-            let result = try model.changeLog(
-                options: options,
-                app: app,
-                env: env
-            )
-
-            app.print(result)
-        } catch {
-            return .failure(.wrapped(error))
+    override func run(with app: App) throws {
+        let versions: Versions
+        if let value = self.versions.value {
+            versions = value
+        } else {
+            let derivedVersions = try model.versions(app: app)
+            versions = .init(old: derivedVersions.old, new: derivedVersions.new)
         }
 
-        return .success(())
-    }
-
-    fileprivate static var blank: CompareOptions {
-        return .init(
-            configPath: nil,
-            projectDir: nil,
-            verbose: false,
-            versions: .null,
-            buildNumber: nil,
-            gitLog: nil,
-            normalizeTags: false,
-            noFetch: false,
-            noShowVersion: false,
-            releaseManager: nil,
-            requiredTags: []
+        let options: Options = .init(
+            versions: versions,
+            buildNumber: buildNumber.value,
+            gitLog: gitLog.value,
+            normalizeTags: normalizeTags.value,
+            noFetch: noFetch.value,
+            noShowVersion: noShowVersion.value,
+            releaseManager: releaseManager.value,
+            requiredTags: Set(requiredTags.value ?? [])
         )
+
+        let result = try model.changeLog(
+            options: options,
+            app: app
+        )
+
+        app.print(result)
+    }
+}
+
+extension Array: ConvertibleFromString where Element == String {
+    public static func convert(from: String) -> [String]? {
+        return from.components(separatedBy: " ")
     }
 }

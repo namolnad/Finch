@@ -5,111 +5,34 @@
 //  Created by Dan Loman on 2/14/19.
 //
 
-import Commandant
-import Curry
 import FinchCore
 import FinchUtilities
+import SwiftCLI
 import Yams
 
 /// Command to run configuration-centric operations.
-struct ConfigCommand: Command {
+final class ConfigGroup: CommandGroup {
+    let children: [Routable]
 
-    typealias ClientError = AppError
+    var name: String { return Strings.Config.commandName }
 
-    typealias Options = ConfigOptions
+    let shortDescription: String = Strings.Config.commandOverview
 
-    /// ConfigCommand options received from the commandline.
-    final class ConfigOptions: App.Options, OptionsProtocol {
-        typealias ClientError = AppError
-
-        /// Config command mode (subcommand)
-        let mode: Mode
-
-        // swiftlint:disable line_length identifier_name
-        static func evaluate(_ m: CommandMode) -> Result<ConfigCommand.Options, CommandantError<ConfigOptions.ClientError>> {
-            return curry(self.init)
-                <*> m <| Option<String?>(key: App.Options.Key.configPath.rawValue, defaultValue: nil, usage: Strings.App.Options.configPath)
-                <*> m <| Option<String?>(key: App.Options.Key.projectDir.rawValue, defaultValue: nil, usage: Strings.App.Options.projectDir)
-                <*> m <| Switch(key: App.Options.Key.verbose.rawValue, usage: Strings.App.Options.verbose)
-                <*> m <| Argument(usage: "\(Mode.allCases.filter { $0 != .unknown }.reduce("") { "\($0)\n[\($1.function)]\n\t\($1.usage)\n" })", usageParameter: "subcommand")
-        }
-        // swiftlint:enable line_length identifier_name
-
-        init(
-            configPath: String?,
-            projectDir: String?,
-            verbose: Bool,
-            mode: String) {
-            self.mode = Mode(rawValue: mode) ?? .unknown
-
-            super.init(configPath: configPath, projectDir: projectDir, verbose: verbose)
-        }
+    init(children: [Routable]) {
+        self.children = children
     }
+}
 
-    enum Mode: String, CaseIterable {
-        /// Print an example config.
-        case showExample = "show-example"
-        case unknown
+final class ConfigExampleCommand: BaseCommand {
+    override var name: String { return Strings.Config.Example.commandName }
 
-        fileprivate var function: String {
-            switch self {
-            case .showExample:
-                return rawValue
-            case .unknown:
-                return ""
-            }
-        }
+    override var shortDescription: String { return Strings.Config.Example.commandOverview }
 
-        fileprivate var usage: String {
-            switch self {
-            case .showExample:
-                return Strings.Config.Options.showExample
-            case .unknown:
-                return ""
-            }
-        }
-    }
+    override var longDescription: String { return Strings.Config.Example.commandOverview }
 
-    let environment: Environment
+    override func run(with app: App) throws {
+        let exampleConfig: Configuration = .example(projectDir: app.configuration.projectDir)
 
-    let function: String = Strings.Config.commandOverview
-
-    let meta: App.Meta
-
-    let output: OutputType
-
-    /// ConfigCommand's name.
-    let verb: String = Strings.Config.commandName
-
-    init(env: Environment, meta: App.Meta, output: OutputType = Output.instance) {
-        self.meta = meta
-        self.environment = env
-        self.output = output
-    }
-
-    /// Runs ConfigCommand with the given result, app, and env.
-    func run(options: Options, app: App, env: Environment) -> Result<(), ClientError> {
-        switch options.mode {
-        case .showExample:
-            let exampleConfig: Configuration = .example(projectDir: app.configuration.projectDir)
-
-            do {
-                app.print(try YAMLEncoder().encode(exampleConfig))
-            } catch {
-                return .failure(.wrapped(error))
-            }
-            return .success(())
-        case .unknown:
-            return .failure(.unsupportedConfigMode)
-        }
-    }
-
-    fileprivate static var blank: ConfigOptions {
-        return .init(
-            configPath: nil,
-            projectDir: nil,
-            verbose: false,
-            mode: ""
-        )
+        app.print(try YAMLEncoder().encode(exampleConfig))
     }
 }

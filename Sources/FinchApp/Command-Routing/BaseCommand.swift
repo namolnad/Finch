@@ -1,5 +1,5 @@
 //
-//  Command.swift
+//  BaseCommand.swift
 //  FinchApp
 //
 //  Created by Dan Loman on 1/29/19.
@@ -33,7 +33,11 @@ class BaseCommand: Command {
     final func execute() throws {
         let app = appGenerator(configPath.value, projectDir.value, verbose.value)
 
-        try run(with: app)
+        do {
+            try run(with: app)
+        } catch {
+            app.print(error.localizedDescription)
+        }
     }
 }
 

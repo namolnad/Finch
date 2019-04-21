@@ -1,5 +1,6 @@
 // swift-tools-version:4.2
 
+import Foundation
 import PackageDescription
 
 var dependencies: [Package.Dependency] = [
@@ -15,27 +16,40 @@ var finchDependencies: [Target.Dependency] = ["FinchCore", "Commandant", "Curry"
 dependencies.append(.package(url: "https://github.com/antitypical/Result.git", from:"4.1.0"))
 finchDependencies.append("Result")
 #endif
+var targets: [Target] = [
+    .target(
+        name: "Finch",
+        dependencies: ["FinchApp"]),
+    .target(
+        name: "FinchApp",
+        dependencies: finchDependencies),
+    .target(
+        name: "FinchCore",
+        dependencies: ["FinchUtilities"]),
+    .target(
+        name: "FinchUtilities",
+        dependencies: ["Yams"])
+]
+
+if ProcessInfo.processInfo.environment["FINCH_TESTS"] != nil {
+    targets.append(
+        .testTarget(
+            name: "FinchAppTests",
+            dependencies: ["FinchApp", "SnapshotTesting", "Yams"],
+            path: "Tests"
+        )
+    )
+    dependencies.append(
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.1.0")
+    )
+}
 
 let package = Package(
     name: "Finch",
     products: [
-        .executable(name: "finch", targets: ["Finch"]),
-        .library(name: "FinchApp", targets: ["FinchApp"])
+        .executable(name: "finch", targets: ["Finch"])
     ],
     dependencies: dependencies,
-    targets: [
-        .target(
-            name: "Finch",
-            dependencies: ["FinchApp"]),
-        .target(
-            name: "FinchApp",
-            dependencies: finchDependencies),
-        .target(
-            name: "FinchCore",
-            dependencies: ["FinchUtilities"]),
-        .target(
-            name: "FinchUtilities",
-            dependencies: ["Yams"])
-    ],
+    targets: targets,
     swiftLanguageVersions: [.v4, .v4_2, .version("5")]
 )

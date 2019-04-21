@@ -41,7 +41,8 @@ struct Configurator {
 
     /// :nodoc:
     init(
-        options: App.Options,
+        configPath: String?,
+        projectDir: String?,
         meta: App.Meta,
         environment: Environment,
         fileManager: FileManager = .default,
@@ -60,7 +61,7 @@ struct Configurator {
         self.immediateResolver = .init(fileManager: fileManager)
 
         let immediateReturnPaths = [
-            options.configPath,
+            configPath,
             environment["\(meta.name.uppercased())_CONFIG"]
         ]
 
@@ -68,7 +69,7 @@ struct Configurator {
             .compactMap { $0 }
             .filter { !$0.isEmpty }
 
-        self.defaultConfig = .default(projectDir: options.projectDir ?? fileManager.currentDirectoryPath)
+        self.defaultConfig = .default(projectDir: projectDir ?? fileManager.currentDirectoryPath)
 
         self.output = output
 
@@ -85,7 +86,7 @@ struct Configurator {
         ]
 
         // Append project dir if passed in as argument
-        if let value = options.projectDir {
+        if let value = projectDir {
             cascadingPaths.append(value)
         }
 

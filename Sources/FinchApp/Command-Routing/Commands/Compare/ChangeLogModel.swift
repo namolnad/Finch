@@ -12,10 +12,10 @@ import Version
 /// A protocol defining the model for changelog creation/formatting.
 protocol ChangeLogModelType {
     /// Returns the old and new versions being compared.
-    func versions(app: App, env: Environment) throws -> (old: Version, new: Version)
+    func versions(app: App) throws -> (old: Version, new: Version)
 
     /// Returns the transformed and formatted changelog.
-    func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String
+    func changeLog(options: CompareCommand.Options, app: App) throws -> String
 }
 
 /// A concrete type conforming to `ChangeLogModelType` protocol.
@@ -42,8 +42,8 @@ final class ChangeLogModel: ChangeLogModelType {
     }
 
     /// See `ChangeLogModelType.changeLog(options:app:env:)` for definition.
-    func changeLog(options: Options, app: App, env: Environment) throws -> String {
-        let outputInfo: OutputInfo = try self.outputInfo(for: options, app: app, env: env)
+    func changeLog(options: Options, app: App) throws -> String {
+        let outputInfo: OutputInfo = try self.outputInfo(for: options, app: app)
 
         var output = ""
 
@@ -71,16 +71,16 @@ final class ChangeLogModel: ChangeLogModelType {
     }
 
     /// See `ChangeLogModelType.versions(app:env:)` for definition.
-    func versions(app: App, env: Environment) throws -> (old: Version, new: Version) {
+    func versions(app: App) throws -> (old: Version, new: Version) {
         return try resolver.versions(
-            from: try service.versionsString(app: app, env: env)
+            from: try service.versionsString(app: app)
         )
     }
 
-    private func outputInfo(for options: Options, app: App, env: Environment) throws -> OutputInfo {
+    private func outputInfo(for options: Options, app: App) throws -> OutputInfo {
         let configuration = app.configuration
-        let rawChangeLog: String = try service.changeLog(options: options, app: app, env: env)
-        let version: String? = try versionHeader(options: options, app: app, env: env)
+        let rawChangeLog: String = try service.changeLog(options: options, app: app)
+        let version: String? = try versionHeader(options: options, app: app)
         let releaseManager: Contributor? = self.releaseManager(options: options, configuration: configuration)
 
         let linesComponents = type(of: self)
@@ -163,14 +163,14 @@ final class ChangeLogModel: ChangeLogModelType {
         """
     }
 
-    private func versionHeader(options: Options, app: App, env: Environment) throws -> String? {
+    private func versionHeader(options: Options, app: App) throws -> String? {
         guard !options.noShowVersion else {
             return nil
         }
 
         let versionHeader: String = options.versions.new.description
 
-        guard let buildNumber = try service.buildNumber(options: options, app: app, env: env) else {
+        guard let buildNumber = try service.buildNumber(options: options, app: app) else {
             return versionHeader
         }
 

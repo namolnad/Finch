@@ -17,7 +17,7 @@ final class AppRunnerTests: TestCase {
             environment: [:],
             meta: .mock,
             output: outputMock
-        ).run(arguments: ["finch", "compare", "--git-log", defaultInputMock, "--versions", "6.20.0 5.3.0", "--build-number", "612"])
+        ).run(with: ["finch", "compare", "--git-log", defaultInputMock, "--versions", "6.20.0 5.3.0", "--build-number", "612"])
 
         assertSnapshot(matching: outputMock.outputs, as: .dump)
     }
@@ -29,20 +29,8 @@ final class AppRunnerTests: TestCase {
             environment: [:],
             meta: .mock,
             output: outputMock
-        ).run(arguments: ["finch", "config", "show-example"])
+        ).run(with: ["finch", "config", "show-example"])
 
         assertSnapshot(matching: outputMock.outputs, as: .dump)
-    }
-
-    func testPrintAppVersion() {
-        let outputMock = OutputMock()
-
-        AppRunner(
-            environment: [:],
-            meta: .mock,
-            output: outputMock
-        ).run(arguments: ["finch", "version"])
-
-        XCTAssert(outputMock.outputs.first!.contains("Finch"))
     }
 }

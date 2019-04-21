@@ -157,18 +157,18 @@ jobs:
       - store_test_results:
           path: << parameters.test-results-dir >>
 
-  generate_linux_main:
+  generate_linuxmain:
     executor: mac
     steps:
       - checkout
       - attach
       - run: make update_build_number
-      - run: swift test --package-path Tests --generate-linuxmain
+      - run: make linuxmain
       - persist_to_workspace:
           root: .
           paths:
-            - Tests/LinuxMain.swift
-            - Tests/FinchAppTests/XCTestManifests.swift
+            - LinuxMain.swift
+            - Tests/XCTestManifests.swift
 
   test_linux:
     executor: linux
@@ -233,9 +233,9 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
-      - generate_linux_main:
+      - generate_linuxmain:
           requires:
             - resolve
       - test_linux:
           requires:
-            - generate_linux_main
+            - generate_linuxmain

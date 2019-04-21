@@ -1,7 +1,7 @@
-import Commandant
+import SwiftCLI
 import Version
 
-struct Versions: ArgumentProtocol {
+struct Versions: ConvertibleFromString {
     let old: Version
 
     let new: Version
@@ -10,8 +10,8 @@ struct Versions: ArgumentProtocol {
 
     public static var name: String = "versions"
 
-    public static func from(string: String) -> Versions? {
-        guard let versions = try? VersionsResolver().versions(from: string) else {
+    public static func convert(from: String) -> Versions? {
+        guard let versions = try? VersionsResolver().versions(from: from) else {
             return nil
         }
 

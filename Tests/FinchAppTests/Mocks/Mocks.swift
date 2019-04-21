@@ -60,14 +60,6 @@ extension App.Meta {
     )
 }
 
-extension App.Options {
-    static let mock: App.Options = .init(
-        configPath: nil,
-        projectDir: "home/dir",
-        verbose: false
-    )
-}
-
 let defaultInputMock = """
 > &&&fce9cb800905de678a99577a64c8230e63f1cc37&&& - @@@[autocomplete-v3] add analytics (#1030)@@@###elvis1935+still-alive@theking.com###
 > &&&2236c36e40c4409927fdcd2b6ebd29b18aa03e36&&& - @@@[express-placement] build error fix (#1025)@@@###jony.ive@apple.com###

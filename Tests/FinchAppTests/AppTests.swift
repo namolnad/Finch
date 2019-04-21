@@ -15,7 +15,6 @@ final class AppTests: TestCase {
         let app = App(
             configuration: .mock,
             meta: .mock,
-            options: .mock,
             output: outputMock
         )
 

@@ -21,6 +21,7 @@ ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
 OUTPUT_PACKAGE=$(APP_NAME).pkg
 PIPEFAIL=set -o pipefail
 SWIFT_BUILD_FLAGS=--configuration release
+TEST=FINCH_TESTS=1 swift test
 UNAME=$(shell uname)
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
 VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(//p' | tr -d ") " | tr "," ".")
@@ -29,7 +30,7 @@ VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(
 RM_SAFELY := bash -c '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && set -o noglob && rm -rf $${1:A}' --
 
 
-.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install xcodeproj publish symlink test update_build_number update_version
+.PHONY: all build build_with_disable_sandbox config_template install lint linuxmain package prefix_install project publish symlink test update_build_number update_version
 
 all: install
 
@@ -44,7 +45,7 @@ config_template:
 	$(MKDIR) $(INSTALL_DIR)
 	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/
 
-docs: xcodeproj
+docs: project
 	$(JAZZY) --config .jazzy/FinchApp.yml -o $(DOCS)/FinchApp
 	$(JAZZY) --config .jazzy/FinchCore.yml -o $(DOCS)/FinchCore
 
@@ -54,6 +55,9 @@ install: build symlink config_template
 
 lint:
 	swift run --package-path .devtools swiftlint --strict
+
+linuxmain:
+	$(TEST) --generate-linuxmain
 
 package: build
 	$(MKDIR) $(APP_TMP)
@@ -107,9 +111,9 @@ symlink: build
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest
 ifeq ($(UNAME), Darwin)
-	$(PIPEFAIL) && swift test --package-path Tests 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
+	$(PIPEFAIL) && $(TEST) 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
 else
-	swift test --package-path Tests
+	$(TEST)
 endif
 
 update_build_number:
@@ -126,8 +130,8 @@ ifdef NEW_VERSION
 	@echo "import Version\n\nlet appVersion: Version = .init($(MAJOR), $(MINOR), $(PATCH))" > $(VERSION_FILE)
 endif
 
-xcodeproj:
-	swift package generate-xcodeproj --enable-code-coverage
+project:
+	FINCH_TESTS=1 swift package generate-xcodeproj --enable-code-coverage
 
 %:
 	@:

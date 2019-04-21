@@ -13,7 +13,6 @@ import Version
 /// :nodoc:
 struct Git {
     let app: App
-    let env: Environment
 }
 
 /// :nodoc:
@@ -77,6 +76,6 @@ extension Git {
     }
 
     private func git(_ args: String...) throws -> String {
-        return try Shell(env: env).run(args: gitExecutableArgs() + args)
+        return try Shell(env: app.environment).run(args: gitExecutableArgs() + args)
     }
 }

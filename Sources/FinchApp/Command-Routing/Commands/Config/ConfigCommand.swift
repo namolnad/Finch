@@ -28,8 +28,6 @@ final class ConfigExampleCommand: BaseCommand {
 
     override var shortDescription: String { return Strings.Config.Example.commandOverview }
 
-    override var longDescription: String { return Strings.Config.Example.commandOverview }
-
     override func run(with app: App) throws {
         let exampleConfig: Configuration = .example(projectDir: app.configuration.projectDir)
 

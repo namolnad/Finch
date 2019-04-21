@@ -63,8 +63,6 @@ final class CompareCommand: BaseCommand {
 
     override var shortDescription: String { return Strings.Compare.commandOverview }
 
-    override var longDescription: String { return Strings.Compare.commandOverview }
-
     /// The command's name.
     override var name: String { return Strings.Compare.commandName }
 

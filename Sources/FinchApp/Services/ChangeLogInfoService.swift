@@ -44,7 +44,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
     // swiftlint:enable line_length
 
     /**
-     * See `ChangeLogInfoServiceType.buildNumber(options:app:env:)`
+     * See `ChangeLogInfoServiceType.buildNumber(options:app:)`
      * for definition.
      */
     func buildNumber(options: CompareCommand.Options, app: App) throws -> String? {
@@ -67,7 +67,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
     }
 
     /**
-     * See `ChangeLogInfoServiceType.changeLog(options:app:env:)`
+     * See `ChangeLogInfoServiceType.changeLog(options:app:)`
      * for definition.
      */
     func changeLog(options: CompareCommand.Options, app: App) throws -> String {
@@ -88,7 +88,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
     }
 
     /**
-     * See `ChangeLogInfoServiceType.versionString(app:env:)`
+     * See `ChangeLogInfoServiceType.versionString(app:)`
      * for definition.
      */
     func versionsString(app: App) throws -> String {

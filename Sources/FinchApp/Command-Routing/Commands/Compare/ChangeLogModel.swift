@@ -41,7 +41,7 @@ final class ChangeLogModel: ChangeLogModelType {
         self.service = service
     }
 
-    /// See `ChangeLogModelType.changeLog(options:app:env:)` for definition.
+    /// See `ChangeLogModelType.changeLog(options:app:)` for definition.
     func changeLog(options: Options, app: App) throws -> String {
         let outputInfo: OutputInfo = try self.outputInfo(for: options, app: app)
 
@@ -70,7 +70,7 @@ final class ChangeLogModel: ChangeLogModelType {
         return output
     }
 
-    /// See `ChangeLogModelType.versions(app:env:)` for definition.
+    /// See `ChangeLogModelType.versions(app:)` for definition.
     func versions(app: App) throws -> (old: Version, new: Version) {
         return try resolver.versions(
             from: try service.versionsString(app: app)

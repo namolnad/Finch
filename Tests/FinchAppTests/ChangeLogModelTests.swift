@@ -23,8 +23,7 @@ final class ChangeLogModelTests: TestCase {
     func testDefaultOutput() {
         let output = try! model.changeLog(
             options: options(gitLog: defaultInputMock),
-            app: .mock(),
-            env: [:]
+            app: .mock()
         )
 
         assertSnapshot(
@@ -36,8 +35,7 @@ final class ChangeLogModelTests: TestCase {
     func testCherryPickedSectionOutput() {
         let output = try! model.changeLog(
             options: options(gitLog: cherryPickedInputMock),
-            app: .mock(),
-            env: [:]
+            app: .mock()
         )
 
         assertSnapshot(
@@ -49,8 +47,7 @@ final class ChangeLogModelTests: TestCase {
     func testExcludedSectionOutput() {
         let output = try! model.changeLog(
             options: options(gitLog: cherryPickedInputMock),
-            app: .mock(configuration: .mockExcludedSection),
-            env: [:]
+            app: .mock(configuration: .mockExcludedSection)
         )
 
         assertSnapshot(
@@ -65,7 +62,8 @@ final class ChangeLogModelTests: TestCase {
         let fileManagerMock = FileManagerMock(customConfigPath: customPath)
 
         let configuration = Configurator(
-            options: .blank,
+            configPath: nil,
+            projectDir: "current",
             meta: .mock,
             environment: ["FINCH_CONFIG": customPath],
             fileManager: fileManagerMock
@@ -73,8 +71,7 @@ final class ChangeLogModelTests: TestCase {
 
         let output = try! model.changeLog(
             options: options(gitLog: defaultInputMock),
-            app: .mock(configuration: configuration),
-            env: [:]
+            app: .mock(configuration: configuration)
         )
 
         assertSnapshot(
@@ -86,8 +83,7 @@ final class ChangeLogModelTests: TestCase {
     func testOutputWithHeader() {
         let output = try! model.changeLog(
             options: options(gitLog: defaultInputMock),
-            app: .mock(configuration: .mockWithHeader),
-            env: [:]
+            app: .mock(configuration: .mockWithHeader)
         )
 
         assertSnapshot(
@@ -97,7 +93,7 @@ final class ChangeLogModelTests: TestCase {
     }
 
     func testVersionResolution() {
-        let versions = try! model.versions(app: .mock(), env: [:])
+        let versions = try! model.versions(app: .mock())
 
         XCTAssertEqual(versions.old, .init(0, 0, 13))
         XCTAssertEqual(versions.new, .init(6, 13, 0))
@@ -111,8 +107,7 @@ final class ChangeLogModelTests: TestCase {
                 showReleaseManager: false,
                 showVersion: false
             ),
-            app: .mock(configuration: .mockRequiredTags),
-            env: [:]
+            app: .mock(configuration: .mockRequiredTags)
         )
 
         assertSnapshot(
@@ -126,9 +121,6 @@ final class ChangeLogModelTests: TestCase {
             .contributors.first!.emails.first!
 
         return .init(
-            configPath: nil,
-            projectDir: nil,
-            verbose: false,
             versions: .init(old: .init(0, 0, 1), new: .init(6, 13, 0)),
             buildNumber: nil,
             gitLog: gitLog,
@@ -136,7 +128,7 @@ final class ChangeLogModelTests: TestCase {
             noFetch: true,
             noShowVersion: !showVersion,
             releaseManager: showReleaseManager ? contributorEmail : nil,
-            requiredTags: requiredTags
+            requiredTags: Set(requiredTags)
         )
     }
 }
@@ -145,18 +137,17 @@ extension App {
     static func mock(configuration: Configuration = .mock) -> App {
         return .init(
             configuration: configuration,
-            meta: .mock,
-            options: .mock
+            meta: .mock
         )
     }
 }
 
 struct ChangeLogInfoServiceMock: ChangeLogInfoServiceType {
-    func versionsString(app: App, env: Environment) throws -> String {
+    func versionsString(app: App) throws -> String {
         return "0.0.1 6.13.0"
     }
 
-    func buildNumber(options: CompareCommand.Options, app: App, env: Environment) throws -> String? {
+    func buildNumber(options: CompareCommand.Options, app: App) throws -> String? {
         guard let buildNumber = options.buildNumber else {
             return nil
         }
@@ -164,7 +155,7 @@ struct ChangeLogInfoServiceMock: ChangeLogInfoServiceType {
         return buildNumber
     }
 
-    func changeLog(options: CompareCommand.Options, app: App, env: Environment) throws -> String {
+    func changeLog(options: CompareCommand.Options, app: App) throws -> String {
         guard let log = options.gitLog else {
             return defaultInputMock
         }

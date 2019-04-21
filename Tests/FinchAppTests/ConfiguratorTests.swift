@@ -13,7 +13,8 @@ final class ConfiguratorTests: TestCase {
     func testDefault() {
         assertSnapshot(
             matching: Configurator(
-                options: .blank,
+                configPath: nil,
+                projectDir: "current",
                 meta: .mock,
                 environment: [:],
                 fileManager: .mock
@@ -25,11 +26,8 @@ final class ConfiguratorTests: TestCase {
     func testProjectDirOption() {
         assertSnapshot(
             matching: Configurator(
-                options: .init(
-                    configPath: nil,
-                    projectDir: "current",
-                    verbose: false
-                ),
+                configPath: nil,
+                projectDir: "current",
                 meta: .mock,
                 environment: [:],
                 fileManager: .mock

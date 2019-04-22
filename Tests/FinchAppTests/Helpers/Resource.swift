@@ -31,7 +31,8 @@ struct Resource {
         guard let path = bundle?.path(forResource: name, ofType: type.isEmpty ? nil : type) else {
             let url = URL(fileURLWithPath: #file)
                 .deletingLastPathComponent()
-                .appendingPathComponent("../Resources")
+                .deletingLastPathComponent()
+                .appendingPathComponent("Resources")
                 .appendingPathComponent(name)
 
             if !type.isEmpty {

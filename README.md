@@ -55,7 +55,7 @@ project-changelog() {
 }
 
 # Used in the following manner:
-# project-changelog --versions 6.12.1 6.13.0
+# project-changelog --versions '6.12.1 6.13.0'
 ```
 
 ## Configuration

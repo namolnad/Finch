@@ -67,6 +67,10 @@ final class ChangeLogModel: ChangeLogModelType {
             output.append(value)
         }
 
+        if options.useNewlineChar {
+            output = output.replacingOccurrences(of: "\n", with: "\\n")
+        }
+
         return output
     }
 

@@ -113,7 +113,7 @@ final class CompareCommand: BaseCommand {
 }
 
 extension Array: ConvertibleFromString where Element == String {
-    public init?(input: String) {
-        self = input.components(separatedBy: " ")
+    public static func convert(from: String) -> [String]? {
+        return from.components(separatedBy: " ")
     }
 }

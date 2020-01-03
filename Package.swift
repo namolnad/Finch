@@ -4,7 +4,7 @@ import Foundation
 import PackageDescription
 
 var dependencies: [Package.Dependency] = [
-    .package(url: "https://github.com/jakeheis/SwiftCLI", from: "6.0.0"),
+    .package(url: "https://github.com/jakeheis/SwiftCLI", from: "5.0.0"),
     .package(url: "https://github.com/jpsim/Yams.git", from: "2.0.0"),
     .package(url: "https://github.com/mxcl/Version.git", from: "1.0.0")
 ]

@@ -54,6 +54,8 @@ enum Strings {
             static let requiredTags: String = "A set of tags required for commit presence in the final output. NOTE: Must be enclosed in quotes"
 
             static let versions: String = "'<version_1> <version_2>' Use explicit versions for the changelog instead of auto-resolving. NOTE: Must be enclosed in quotes"
+
+            static let useNewlineChar: String = "Encodes the line breaks as '\n' and not as the new-line value"
         }
 
         enum Error {

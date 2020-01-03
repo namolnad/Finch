@@ -50,6 +50,12 @@ final class CompareCommand: BaseCommand {
          * Note: Not used for section assignment.
          */
         fileprivate(set) var requiredTags: Set<String>
+
+        /**
+        * If the new line char is encoded as a new line or as the combined "\n"
+        * Note: Not used for section assignment.
+        */
+        fileprivate(set) var useNewlineChar: Bool
     }
 
     let versions: Key<Versions> = .init("--versions", description: Strings.Compare.Options.versions)
@@ -60,6 +66,7 @@ final class CompareCommand: BaseCommand {
     let noShowVersion: Flag = .init("--no-show-version", description: Strings.Compare.Options.noShowVersion)
     let releaseManager: Key<String> = .init("--release-manager", description: Strings.Compare.Options.releaseManager)
     let requiredTags: Key<[String]> = .init("--required-tags", description: Strings.Compare.Options.requiredTags)
+    let useNewlineChar: Flag = .init("--use-newline-char", description: Strings.Compare.Options.useNewlineChar)
 
     override var shortDescription: String { return Strings.Compare.commandOverview }
 
@@ -92,7 +99,8 @@ final class CompareCommand: BaseCommand {
             noFetch: noFetch.value,
             noShowVersion: noShowVersion.value,
             releaseManager: releaseManager.value,
-            requiredTags: Set(requiredTags.value ?? [])
+            requiredTags: Set(requiredTags.value ?? []),
+            useNewlineChar: useNewlineChar.value
         )
 
         let result = try model.changeLog(

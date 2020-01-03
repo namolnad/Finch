@@ -31,7 +31,6 @@ extension Git {
         return try git(
             "log",
             "--left-right",
-            "--graph",
             "--cherry-pick",
             "--oneline",
             "--format='format:&&&%H&&& - @@@%s@@@###%ae###'",

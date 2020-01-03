@@ -116,7 +116,25 @@ final class ChangeLogModelTests: TestCase {
         )
     }
 
-    private func options(gitLog: String, requiredTags: [String] = [], showReleaseManager: Bool = true, showVersion: Bool = true) -> CompareCommand.Options {
+    func testUseNewlineChar() {
+        let output = try! model.changeLog(
+            options: options(
+                gitLog: multipleTagsMock,
+                requiredTags: ["app-store"],
+                showReleaseManager: false,
+                showVersion: false,
+                useNewlineChar: true
+            ),
+            app: .mock(configuration: .mockRequiredTags)
+        )
+
+        assertSnapshot(
+            matching: output,
+            as: .dump
+        )
+    }
+
+    private func options(gitLog: String, requiredTags: [String] = [], showReleaseManager: Bool = true, showVersion: Bool = true, useNewlineChar: Bool = false) -> CompareCommand.Options {
         let contributorEmail = Configuration.mock.contributorsConfig
             .contributors.first!.emails.first!
 
@@ -128,7 +146,8 @@ final class ChangeLogModelTests: TestCase {
             noFetch: true,
             noShowVersion: !showVersion,
             releaseManager: showReleaseManager ? contributorEmail : nil,
-            requiredTags: Set(requiredTags)
+            requiredTags: Set(requiredTags),
+            useNewlineChar: useNewlineChar
         )
     }
 }

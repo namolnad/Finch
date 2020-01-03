@@ -1,7 +1,7 @@
 import SwiftCLI
 import Version
 
-struct Versions: ConvertibleFromString {
+struct Versions {
     let old: Version
 
     let new: Version
@@ -9,12 +9,14 @@ struct Versions: ConvertibleFromString {
     static var null: Versions = .init(old: .null, new: .null)
 
     public static var name: String = "versions"
+}
 
-    public static func convert(from: String) -> Versions? {
-        guard let versions = try? VersionsResolver().versions(from: from) else {
+extension Versions: ConvertibleFromString {
+    init?(input: String) {
+        guard let versions = try? VersionsResolver().versions(from: input) else {
             return nil
         }
 
-        return Versions(old: versions.old, new: versions.new)
+        self = .init(old: versions.old, new: versions.new)
     }
 }

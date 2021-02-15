@@ -6,10 +6,6 @@ executors:
     macos:
       xcode: "12.3.0"
 
-  go:
-    docker:
-      - image: circleci/golang:1.12
-
   linux:
     docker:
       - image: norionomura/swift:532
@@ -56,58 +52,18 @@ jobs:
       - persist:
           path: .build
 
-  build_package:
+  publish_release:
     executor: mac
-    parameters:
-      artifacts:
-        default: artifacts
-        type: string
     steps:
       - checkout
       - attach
       - run:
           command: make package
           name: Build package
-      - run: mkdir -p << parameters.artifacts >>
-      - run:
-          command: mv "${CIRCLE_PROJECT_REPONAME}.pkg" << parameters.artifacts >>
-          name: Move artifacts
-      - persist:
-          path: << parameters.artifacts >>
-
-  generate_changelog:
-    executor: mac
-    parameters:
-      artifacts:
-        default: changelog
-        type: string
-    steps:
-      - checkout
-      - run: mkdir -p << parameters.artifacts >>
-      - attach
-      - run: FINCH_CONFIG=.finch/release_config.yml swift run finch compare > << parameters.artifacts >>/changelog.md
-      - persist:
-          path: << parameters.artifacts >>
-
-  publish_release:
-    executor: go
-    steps:
-      - attach
-      - run:
-          command: |
-            go get github.com/tcnksm/ghr
-            ghr \
-              -t ${GITHUB_TOKEN} \
-              -u ${CIRCLE_PROJECT_USERNAME} \
-              -r ${CIRCLE_PROJECT_REPONAME} \
-              -c ${CIRCLE_SHA1} \
-              -n ${CIRCLE_TAG} \
-              -b "$(cat changelog/changelog.md)" \
-              -delete \
-              -replace \
-              -draft \
-              -prerelease \
-              ${CIRCLE_TAG} "artifacts/${CIRCLE_PROJECT_REPONAME}.pkg"
+      - run: FINCH_CONFIG=.finch/release_config.yml swift run finch compare > changelog.md
+      - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install gh
+      - run: 
+          command: gh release create ${CIRCLE_TAG} -d -p -F changelog.md "${CIRCLE_PROJECT_REPONAME}.pkg"
           name: Publish release to GitHub
 
   lint:
@@ -210,24 +166,6 @@ workflows:
               only: /.*/
           requires:
             - resolve
-      - build_package:
-          requires:
-            - resolve
-            - test
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*/
-      - generate_changelog:
-          requires:
-            - resolve
-            - test
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*/
       - publish_release:
           requires:
             - test

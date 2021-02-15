@@ -19,10 +19,10 @@ jobs:
         with:
           path: ${{ env.MINT_PATH }}
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/Mintfile') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - name: SwiftLint
         run: mint run swiftlint swiftlint --strict
       - name: SwiftFormat

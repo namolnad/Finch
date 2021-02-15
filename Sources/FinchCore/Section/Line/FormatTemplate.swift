@@ -89,13 +89,13 @@ extension String {
             let currentIsOpening = self[idx] == "<"
             let currentIsClosing = self[idx] == ">"
 
-            if nextEqualToCurrent && currentIsOpening {
+            if nextEqualToCurrent, currentIsOpening {
                 flush()
             }
 
             component.append(self[idx])
 
-            if currentEqualToPrev && currentIsClosing {
+            if currentEqualToPrev, currentIsClosing {
                 flush()
             }
         }

@@ -20,7 +20,7 @@ extension Line {
 
         let value = template.outputtables.reduce("") { partial, next in
             let nextOut = next.output(components: components, context: context)
-            if partial.hasSuffix(" ") && nextOut.hasPrefix(" ") {
+            if partial.hasSuffix(" "), nextOut.hasPrefix(" ") {
                 return partial + String(nextOut.dropFirst())
             } else {
                 return partial + nextOut

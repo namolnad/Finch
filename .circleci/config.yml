@@ -31,6 +31,21 @@ commands:
       - attach_workspace:
           at: .
 
+  mint:
+    parameters:
+      command:
+        type: string
+        default: bootstrap
+    steps:
+      - restore_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-mint-cache-{{ arch }}-{{ checksum "Mintfile" }}
+      - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
+      - run: mint << parameters.command >>
+      - save_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-mint-cache-{{ arch }}-{{ checksum "Mintfile" }}
+          paths:
+            - .mint_build/
+
 jobs:
 
   resolve:
@@ -94,22 +109,6 @@ jobs:
               -prerelease \
               ${CIRCLE_TAG} "artifacts/${CIRCLE_PROJECT_REPONAME}.pkg"
           name: Publish release to GitHub
-
-  mint:
-    executor: mac
-    parameters:
-      command:
-        type: string
-        default: bootstrap
-    steps:
-      - restore_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-mint-cache-{{ arch }}-{{ checksum "Mintfile" }}
-      - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
-      - run: mint << parameters.command >>
-      - save_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-mint-cache-{{ arch }}-{{ checksum "Mintfile" }}
-          paths:
-            - .mint_build/
 
   lint:
     executor: mac

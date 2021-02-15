@@ -1,10 +1,3 @@
-//
-//  ChangeLogInfoService.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 2/4/19.
-//
-
 import FinchUtilities
 import Foundation
 

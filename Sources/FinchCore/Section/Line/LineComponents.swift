@@ -1,11 +1,3 @@
-//
-//  LineComponents.swift
-//  Finch
-//
-//  Created by Dan Loman on 8/15/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 /// :nodoc:
 public struct LineComponents {
     enum Kind: Int {

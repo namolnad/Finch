@@ -1,11 +1,3 @@
-//
-//  Git.swift
-//  FinchApp.swift
-//
-//  Created by Dan Loman on 12/29/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 import FinchCore
 import FinchUtilities
 import Version

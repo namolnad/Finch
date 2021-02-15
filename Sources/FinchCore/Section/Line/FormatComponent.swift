@@ -1,11 +1,3 @@
-//
-//  Line_FormatComponent.swift
-//  Finch
-//
-//  Created by Dan Loman on 11/23/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 /**
  * Enum representing special FormatString objects which indicate
  * where the component's corresponding data should be inserted in

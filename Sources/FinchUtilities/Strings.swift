@@ -1,10 +1,3 @@
-//
-//  Strings.swift
-//  FinchUtilities
-//
-//  Created by Dan Loman on 2/23/19.
-//
-
 enum Strings {
     enum Error {
         enum Exec {

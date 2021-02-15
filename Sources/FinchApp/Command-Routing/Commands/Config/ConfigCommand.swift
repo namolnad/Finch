@@ -1,10 +1,3 @@
-//
-//  ConfigCommand.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 2/14/19.
-//
-
 import FinchCore
 import FinchUtilities
 import SwiftCLI

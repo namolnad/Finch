@@ -1,11 +1,3 @@
-//
-//  Mocks.swift
-//  FinchTests
-//
-//  Created by Dan Loman on 12/28/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 @testable import FinchApp
 @testable import FinchCore
 

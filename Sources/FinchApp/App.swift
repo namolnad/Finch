@@ -1,11 +1,3 @@
-//
-//  App.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 1/13/19.
-//  Copyright © 2019 DHL. All rights reserved.
-//
-
 import struct FinchCore.Configuration
 import FinchUtilities
 import Version

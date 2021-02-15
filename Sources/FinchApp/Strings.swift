@@ -1,10 +1,3 @@
-//
-//  Strings.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 2/22/19.
-//
-
 // swiftlint:disable line_length
 enum Strings {
     private static let appName: String = "Finch"

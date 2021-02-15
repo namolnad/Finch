@@ -1,11 +1,3 @@
-//
-//  ChangeLogModelTests.swift
-//  FinchTests
-//
-//  Created by Dan Loman on 8/16/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 @testable import FinchApp
 import FinchCore
 import SnapshotTesting

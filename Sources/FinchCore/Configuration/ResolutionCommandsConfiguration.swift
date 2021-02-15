@@ -1,10 +1,3 @@
-//
-//  ResolutionCommandsConfiguration.swift
-//  FinchCore
-//
-//  Created by Dan Loman on 2/3/19.
-//
-
 /**
  * Sub-configuration for shell commands used to resolve information
  * only available at run-time.

@@ -1,11 +1,3 @@
-//
-//  GitConfiguration.swift
-//  FinchCore
-//
-//  Created by Dan Loman on 8/17/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 /**
  * Sub-configuration for the project's Git setup.
  */

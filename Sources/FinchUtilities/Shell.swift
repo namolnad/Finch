@@ -1,11 +1,3 @@
-//
-//  Shell.swift
-//  Finch
-//
-//  Created by Dan Loman on 8/17/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 import Foundation
 
 public struct Shell {

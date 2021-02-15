@@ -1,11 +1,3 @@
-//
-//  FormatTemplate.swift
-//  FinchCore
-//
-//  Created by Dan Loman on 1/2/19.
-//  Copyright © 2019 DHL. All rights reserved.
-//
-
 /**
  * Type-safe template which determines the final format for
  * the per-line output for a given section. Initialized via

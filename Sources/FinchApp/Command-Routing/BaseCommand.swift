@@ -1,10 +1,3 @@
-//
-//  BaseCommand.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 1/29/19.
-//
-
 import FinchUtilities
 import SwiftCLI
 

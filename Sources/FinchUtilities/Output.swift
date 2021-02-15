@@ -1,10 +1,3 @@
-//
-//  Output.swift
-//  FinchUtilities
-//
-//  Created by Dan Loman on 1/30/19.
-//
-
 import Foundation
 
 public protocol OutputType {

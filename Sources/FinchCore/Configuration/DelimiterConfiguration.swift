@@ -1,11 +1,3 @@
-//
-//  DelimiterConfiguration.swift
-//  FinchCore
-//
-//  Created by Dan Loman on 8/17/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 /**
  * FormatConfiguration's sub-configuration for the project's tag delimiters.
  */

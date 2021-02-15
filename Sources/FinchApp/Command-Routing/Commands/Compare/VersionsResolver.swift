@@ -1,10 +1,3 @@
-//
-//  VersionsResolver.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 2/3/19.
-//
-
 import Foundation
 import Version
 

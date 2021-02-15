@@ -21,8 +21,6 @@
 --wrapconditions before-first
 --wrapparameters before-first
 
---disable fileHeader
-
 --enable isEmpty
 
 --exclude Scripts

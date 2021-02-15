@@ -1,10 +1,3 @@
-//
-//  Executable.swift
-//  FinchUtilities
-//
-//  Created by Dan Loman on 2/3/19.
-//
-
 import Foundation
 
 public func executable(_ executable: Executable) throws -> String {

@@ -1,10 +1,3 @@
-//
-//  OutputMock.swift
-//  FinchAppTests
-//
-//  Created by Dan Loman on 1/31/19.
-//
-
 import FinchUtilities
 
 final class OutputMock: OutputType {

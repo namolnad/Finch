@@ -13,7 +13,6 @@
 --octalgrouping none
 --patternlet hoist
 --self init-only
---selfrequired info,debug,warn,error,critical
 --semicolons never
 --stripunusedargs closure-only
 --wraparguments before-first
@@ -23,5 +22,4 @@
 
 --enable isEmpty
 
---exclude Scripts
 --exclude DerivedData

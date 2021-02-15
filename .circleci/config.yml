@@ -95,6 +95,22 @@ jobs:
               ${CIRCLE_TAG} "artifacts/${CIRCLE_PROJECT_REPONAME}.pkg"
           name: Publish release to GitHub
 
+  mint:
+    executor: mac
+    parameters:
+      command:
+        type: string
+        default: bootstrap
+    steps:
+      - restore_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-mint-cache-{{ arch }}-{{ checksum "Mintfile" }}
+      - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
+      - run: mint << parameters.command >>
+      - save_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-mint-cache-{{ arch }}-{{ checksum "Mintfile" }}
+          paths:
+            - .mint_build/
+
   lint:
     executor: mac
     parameters:
@@ -112,11 +128,7 @@ jobs:
             - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
           name: Restore lint cache
       - run: mkdir -p << parameters.lint-cache-dir >> << parameters.lint-results-dir >>
-      - run:
-          command: |
-            git clone https://github.com/yonaskolb/Mint.git
-            make -C Mint
-            mint bootstrap
+      - mint
       - run:
           command: |
             mint run swiftlint swiftlint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
@@ -180,12 +192,15 @@ jobs:
           path: << parameters.test-results-dir >>
 
 workflows:
-  build:
+  lint:
     jobs:
       - lint:
           filters:
             tags:
               only: /.*/
+
+  build:
+    jobs:
       - resolve:
           filters:
             tags:
@@ -216,7 +231,6 @@ workflows:
               only: /.*/
       - publish_release:
           requires:
-            - swiftlint
             - test
             - build_package
             - generate_changelog

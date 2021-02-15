@@ -35,7 +35,7 @@ if ProcessInfo.processInfo.environment["FINCH_TESTS"] != nil {
         )
     )
     dependencies.append(
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.1.0")
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.8.2")
     )
 }
 

@@ -14,7 +14,7 @@ public protocol Outputtable {
 /// :nodoc:
 extension Array: Outputtable where Element: Outputtable {
     public var output: String {
-        map { $0.output }
+        map(\.output)
             .joined(separator: "\n")
     }
 }

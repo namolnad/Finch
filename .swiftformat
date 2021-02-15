@@ -25,7 +25,6 @@
 --disable blankLinesAtStartOfScope
 --disable blankLinesBetweenScopes
 --disable blankLinesAtEndOfScope
---disable preferKeyPath
 
 --enable isEmpty
 

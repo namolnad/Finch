@@ -18,9 +18,9 @@ public struct Shell {
             switch self {
             case .emptyArguments:
                 return Strings.Error.Shell.emptyArguments
-            case .emptyResult(args: let args):
+            case let .emptyResult(args: args):
                 return Strings.Error.Shell.emptyResult(args: args)
-            case .subprocessNonZeroExit(code: let code, message: let message):
+            case let .subprocessNonZeroExit(code: code, message: message):
                 return Strings.Error.Shell.subprocessNonZeroExit(code: code, message: message)
             }
         }

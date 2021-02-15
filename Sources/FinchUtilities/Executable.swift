@@ -31,7 +31,7 @@ public enum Executable: String {
 
         public var failureReason: String? {
             switch self {
-            case .notFound(let exec):
+            case let .notFound(exec):
                 return Strings.Error.Exec.notFound(exec)
             }
         }

@@ -22,7 +22,6 @@
 --wrapparameters before-first
 
 --disable fileHeader
---disable hoistPatternLet
 --disable blankLinesAtStartOfScope
 --disable blankLinesBetweenScopes
 --disable blankLinesAtEndOfScope

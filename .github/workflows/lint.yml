@@ -6,22 +6,19 @@ jobs:
   lint:
     runs-on: macos-latest
     env:
-      MINT_PATH: ~/.mint_build
+      MINT_PATH: ${{ github.workspace }}/.mint_build
     steps:
       - uses: actions/checkout@v2
       - name: Install mint
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
       - name: Cache dependencies
         uses: actions/cache@v2
-        env:
-          cache-name: cache-dependencies
         with:
           path: ${{ env.MINT_PATH }}
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/Mintfile') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+          key: ${{ runner.os }}-mint-${{ hashFiles('**/Mintfile') }}
+          restore-keys: ${{ runner.os }}-mint-
+      - name: Bootstrap mint
+        run: mint bootstrap
       - name: SwiftLint
         run: mint run swiftlint swiftlint --strict
       - name: SwiftFormat

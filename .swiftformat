@@ -8,7 +8,7 @@
 --importgrouping testable-top
 --indent 4
 --maxwidth 150
-##--modifierorder public,private(set),final,override
+--modifierorder override,acl,setterACL,dynamic,mutators,lazy,final,required,convenience,typeMethods,owned
 --nospaceoperators ...,..<
 --octalgrouping none
 --patternlet hoist

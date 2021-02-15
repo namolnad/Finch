@@ -1,0 +1,43 @@
+--binarygrouping none
+--commas inline
+--decimalgrouping none
+--extensionacl on-declarations
+--header strip
+--hexgrouping none
+--ifdef no-indent
+--importgrouping testable-top
+--indent 4
+--maxwidth 150
+##--modifierorder public,private(set),final,override
+--nospaceoperators ...,..<
+--octalgrouping none
+--patternlet hoist
+--self init-only
+--selfrequired info,debug,warn,error,critical
+--semicolons never
+--stripunusedargs closure-only
+--wraparguments before-first
+--wrapcollections before-first
+--wrapconditions before-first
+--wrapparameters before-first
+
+--disable extensionAccessControl
+--disable andOperator
+--disable wrapMultilineStatementBraces
+--disable elseOnSameLine
+--disable indent
+--disable wrap
+--disable fileHeader
+--disable wrapArguments
+--disable redundantReturn
+--disable sortedImports
+--disable hoistPatternLet
+--disable blankLinesAtStartOfScope
+--disable blankLinesBetweenScopes
+--disable blankLinesAtEndOfScope
+--disable preferKeyPath
+
+--enable isEmpty
+
+--exclude Scripts
+--exclude DerivedData

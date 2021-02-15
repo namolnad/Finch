@@ -37,7 +37,8 @@ enum Strings {
         static let commandOverview: String = "Compares two versions and generates a formatted changelog"
 
         enum Options {
-            static let buildNumber: String = "Build number string to be included in version header. Takes precedence over build number command in config. e.g. `6.19.1 (6258)`"
+            static let buildNumber: String =
+                "Build number string to be included in version header. Takes precedence over build number command in config. e.g. `6.19.1 (6258)`"
 
             static var gitLog: String {
                 "Pass in the git-log string directly vs having \(appName) generate it"
@@ -53,7 +54,8 @@ enum Strings {
 
             static let requiredTags: String = "A set of tags required for commit presence in the final output. NOTE: Must be enclosed in quotes"
 
-            static let versions: String = "'<version_1> <version_2>' Use explicit versions for the changelog instead of auto-resolving. NOTE: Must be enclosed in quotes"
+            static let versions: String =
+                "'<version_1> <version_2>' Use explicit versions for the changelog instead of auto-resolving. NOTE: Must be enclosed in quotes"
 
             static let useNewlineChar: String = "Encodes the line breaks as '\n' and not as the new-line value"
         }

@@ -134,7 +134,13 @@ final class ChangeLogModelTests: TestCase {
         )
     }
 
-    private func options(gitLog: String, requiredTags: [String] = [], showReleaseManager: Bool = true, showVersion: Bool = true, useNewlineChar: Bool = false) -> CompareCommand.Options {
+    private func options(
+        gitLog: String,
+        requiredTags: [String] = [],
+        showReleaseManager: Bool = true,
+        showVersion: Bool = true,
+        useNewlineChar: Bool = false
+    ) -> CompareCommand.Options {
         let contributorEmail = Configuration.mock.contributorsConfig
             .contributors.first!.emails.first!
 

@@ -46,7 +46,8 @@ struct Configurator {
         meta: App.Meta,
         environment: Environment,
         fileManager: FileManager = .default,
-        output: OutputType = Output.instance) {
+        output: OutputType = Output.instance
+    ) {
         self.cascadingResolver = .init(
             fileManager: fileManager,
             pathComponent: "/.\(meta.name.lowercased())/config.yml"

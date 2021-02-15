@@ -48,11 +48,13 @@ public struct App {
     private let output: OutputType
 
     /// :nodoc:
-    init(configuration: Configuration,
-         environment: Environment = [:],
-         meta: Meta,
-         verbose: Bool = false,
-         output: OutputType = Output.instance) {
+    init(
+        configuration: Configuration,
+        environment: Environment = [:],
+        meta: Meta,
+        verbose: Bool = false,
+        output: OutputType = Output.instance
+    ) {
         self.configuration = configuration
         self.environment = environment
         self.meta = meta

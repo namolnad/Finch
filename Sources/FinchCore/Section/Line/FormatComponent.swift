@@ -74,11 +74,11 @@ extension FormatComponent: LineOutputtable {
         case .contributorEmail:
             return components.contributorEmail
         case .contributorHandle:
-            guard let contributor = context.configuration.contributorsConfig.contributors.first(where: { contributor in
-                contributor.emails.contains(components.contributorEmail)
-            }) else {
-                return components.contributorEmail
-            }
+            guard
+                let contributor = context.configuration.contributorsConfig.contributors.first(where: { contributor in
+                    contributor.emails.contains(components.contributorEmail)
+                })
+            else { return components.contributorEmail }
 
             let prefix = context.configuration.contributorsConfig.contributorHandlePrefix
 

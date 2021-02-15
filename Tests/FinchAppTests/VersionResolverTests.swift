@@ -36,9 +36,12 @@ final class VersionResolverTests: TestCase {
 
         XCTAssertEqual(
             old,
-            .init(major: 6, minor: 12, patch: 1,
-                  prereleaseIdentifiers: ["alpha", "frankenstein"],
-                  buildMetadataIdentifiers: ["12", "345"]
+            .init(
+                major: 6,
+                minor: 12,
+                patch: 1,
+                prereleaseIdentifiers: ["alpha", "frankenstein"],
+                buildMetadataIdentifiers: ["12", "345"]
             )
         )
         XCTAssertEqual(new, .init(major: 7, minor: 38, patch: 0))

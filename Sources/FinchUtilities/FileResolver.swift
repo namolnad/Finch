@@ -23,12 +23,11 @@ public final class FileResolver<FileType: Decodable> {
     }
 
     public func resolve(path: String) throws -> FileType? {
-        guard case
-            let filePath = path + pathComponent,
+        guard
+            case let filePath = path + pathComponent,
             let data = fileManager.contents(atPath: filePath),
-            let encodedYaml = String(data: data, encoding: .utf8) else {
-            return nil
-        }
+            let encodedYaml = String(data: data, encoding: .utf8)
+        else { return nil }
 
         return try decoder.decode(from: encodedYaml)
     }

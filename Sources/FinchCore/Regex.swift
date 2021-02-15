@@ -35,12 +35,12 @@ extension Regex.Replacement {
         guard [pattern, body].contains(where: { !$0.isEmpty }) else {
             return body
         }
-        guard let expression = try? NSRegularExpression(
-            pattern: pattern,
-            options: [.anchorsMatchLines, .useUnixLineSeparators]
-        ) else {
-            return body
-        }
+        guard
+            let expression = try? NSRegularExpression(
+                pattern: pattern,
+                options: [.anchorsMatchLines, .useUnixLineSeparators]
+            )
+        else { return body }
 
         return expression.stringByReplacingMatches(
             in: body,

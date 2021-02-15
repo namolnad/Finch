@@ -28,8 +28,10 @@ public struct LineComponents {
         }
 
         self.contributorEmail = componentString(.contributorEmail)
-        self.message = (Regex.Pattern.filteredMessagePattern(from: configuration).firstMatch(in: rawLine) ??
-            componentString(.message)).trimmingCharacters(in: .whitespacesAndNewlines)
+        self.message = (
+            Regex.Pattern.filteredMessagePattern(from: configuration).firstMatch(in: rawLine) ??
+                componentString(.message)
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
         self.pullRequestNumber = Int(componentString(.pullRequestNumber))
         self.sha = componentString(.sha)
         self.tags = Regex.Pattern.tagPattern(from: configuration)

@@ -14,16 +14,20 @@ var finchDependencies: [Target.Dependency] = ["FinchCore", "SwiftCLI", "Version"
 var targets: [Target] = [
     .target(
         name: "Finch",
-        dependencies: ["FinchApp"]),
+        dependencies: ["FinchApp"]
+    ),
     .target(
         name: "FinchApp",
-        dependencies: finchDependencies),
+        dependencies: finchDependencies
+    ),
     .target(
         name: "FinchCore",
-        dependencies: ["FinchUtilities"]),
+        dependencies: ["FinchUtilities"]
+    ),
     .target(
         name: "FinchUtilities",
-        dependencies: ["Yams"])
+        dependencies: ["Yams"]
+    )
 ]
 
 if ProcessInfo.processInfo.environment["FINCH_TESTS"] != nil {

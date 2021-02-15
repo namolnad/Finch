@@ -1,3 +1,3 @@
 import Version
 
-let appVersion: Version = .init(major: 0, minor: 3, patch: 0)
+let appVersion: Version = .init(major: 0, minor: 4, patch: 0)

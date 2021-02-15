@@ -22,4 +22,4 @@ jobs:
       - name: Publish Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: gh release create ${GITHUB_REF} -d -p -F changelog.md Finch.pkg
+        run: gh release create ${GITHUB_REF} -p -F changelog.md Finch.pkg

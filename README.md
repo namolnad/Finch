@@ -1,5 +1,5 @@
 # Finch 🐦
-![CircleCI branch](https://img.shields.io/circleci/project/github/namolnad/Finch/main.svg?style=for-the-badge)
+![Test status](https://img.shields.io/github/workflow/status/namolnad/Finch/Test.svg?color=blue&include_prereleases&style=for-the-badge)
 ![GitHub release](https://img.shields.io/github/release-pre/namolnad/Finch.svg?color=blue&style=for-the-badge)
 ![Platforms](https://img.shields.io/badge/Platforms-MacOS_Linux-Blue.svg?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-Blue.svg?style=for-the-badge)

@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install mint
-        run: HOMEBREW_NO_UPDATE=1 brew install mint
+        run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
       - name: Build Package
         run: make package
       - name: Generate Changelog

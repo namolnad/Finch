@@ -31,7 +31,7 @@ final class ConfiguratorTests: TestCase {
                 meta: .mock,
                 environment: [:],
                 fileManager: .mock
-                ).configuration,
+            ).configuration,
             as: .dump
         )
     }

@@ -38,8 +38,8 @@ extension Regex.Replacement {
         guard let expression = try? NSRegularExpression(
             pattern: pattern,
             options: [.anchorsMatchLines, .useUnixLineSeparators]
-            ) else {
-                return body
+        ) else {
+            return body
         }
 
         return expression.stringByReplacingMatches(

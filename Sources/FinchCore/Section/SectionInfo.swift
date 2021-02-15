@@ -63,9 +63,9 @@ public struct SectionInfo {
     public let title: String
 
     /**
-    * Internal flag to indicate this should be ignored when
-    * overwriting downstream configs
-    */
+     * Internal flag to indicate this should be ignored when
+     * overwriting downstream configs
+     */
     let isDefault: Bool
 }
 

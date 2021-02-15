@@ -31,14 +31,14 @@ struct VersionsResolver: VersionsResolving {
     /// See `VersionsResolving.versions(from:)` for definition.
     func versions(from versionString: String) throws -> (old: Version, new: Version) {
         guard case let versionStrings = versionString.split(separator: " "),
-            versionStrings.count == 2,
-            let firstVersionString = versionStrings.first,
-            let secondVersionString = versionStrings.last else {
+              versionStrings.count == 2,
+              let firstVersionString = versionStrings.first,
+              let secondVersionString = versionStrings.last else {
             throw Error.unableToResolveVersion
         }
         guard let firstVersion = Version(String(firstVersionString)),
-            let secondVersion = Version(String(secondVersionString)) else {
-                throw Error.unableToResolveVersion
+              let secondVersion = Version(String(secondVersionString)) else {
+            throw Error.unableToResolveVersion
         }
 
         guard firstVersion < secondVersion else {

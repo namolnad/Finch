@@ -52,9 +52,9 @@ final class CompareCommand: BaseCommand {
         fileprivate(set) var requiredTags: Set<String>
 
         /**
-        * If the new line char is encoded as a new line or as the combined "\n"
-        * Note: Not used for section assignment.
-        */
+         * If the new line char is encoded as a new line or as the combined "\n"
+         * Note: Not used for section assignment.
+         */
         fileprivate(set) var useNewlineChar: Bool
     }
 

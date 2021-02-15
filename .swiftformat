@@ -23,7 +23,6 @@
 
 --disable wrapMultilineStatementBraces
 --disable elseOnSameLine
---disable indent
 --disable wrap
 --disable fileHeader
 --disable wrapArguments

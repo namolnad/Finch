@@ -118,8 +118,8 @@ final class ChangeLogModel: ChangeLogModelType {
                 continue
             }
             guard case let section = sections[index],
-                options.requiredTags.isSubset(of: components.tags) else {
-                    continue
+                  options.requiredTags.isSubset(of: components.tags) else {
+                continue
             }
 
             sections[index] = section.inserting(lineComponents: components)

@@ -1,0 +1,29 @@
+name: Lint
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: macos-latest
+    env:
+      MINT_PATH: ~/.mint_build
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install mint
+        run: HOMEBREW_NO_UPDATE=1 brew install mint
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-dependencies
+        with:
+          path: ${{ env.MINT_PATH }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/Mintfile') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+      - name: SwiftLint
+        run: mint run swiftlint swiftlint --strict
+      - name: SwiftFormat
+        run: mint run swiftformat swiftformat --lint .

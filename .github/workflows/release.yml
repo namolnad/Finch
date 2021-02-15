@@ -18,4 +18,6 @@ jobs:
           FINCH_CONFIG: .finch/release_config.yml
         run: swift run finch compare > changelog.md
       - name: Publish Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release create ${GITHUB_REF} -d -p -F changelog.md Finch.pkg

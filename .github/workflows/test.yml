@@ -1,0 +1,43 @@
+name: Test
+
+on: pull_request
+
+jobs:
+  checkout:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+  test:
+    needs: checkout
+    runs-on: macos-latest
+    steps:
+      - name: Run Tests
+        run: make test
+
+  generate_linuxmain:
+    needs: checkout
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: make update_build_number
+      - run: make linuxmain
+      - name: Archive Linux Testing Files
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-test-dependencies
+          path: |
+            LinuxMain.swift
+            Tests/XCTestManifests.swift
+
+  test_linux:
+    needs: generate_linuxmain
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Unarchive Linux Testing Files
+        uses: actions/download-artifact@v2
+        with:
+          name: linux-test-dependencies
+      - run: make update_build_number
+      - name: Run Tests
+        run: make test

@@ -24,6 +24,7 @@ test_output/*
 .build/
 Finch.xcodeproj/
 *.pkg
+.swiftpm
 
 # Build number file will be generated on build/release; Don't capture in VCS
 Sources/Finch/App/BuildNumber.swift

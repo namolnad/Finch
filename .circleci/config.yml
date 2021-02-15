@@ -95,7 +95,7 @@ jobs:
               ${CIRCLE_TAG} "artifacts/${CIRCLE_PROJECT_REPONAME}.pkg"
           name: Publish release to GitHub
 
-  swiftlint:
+  lint:
     executor: mac
     parameters:
       lint-cache-dir:
@@ -116,10 +116,15 @@ jobs:
           command: |
             git clone https://github.com/yonaskolb/Mint.git
             make -C Mint
+            mint bootstrap
       - run:
           command: |
             mint run swiftlint swiftlint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
-          name: Lint
+          name: SwiftLint
+      - run:
+          command: |
+            mint run swiftformat swiftformat --lint .
+          name: SwiftFormat
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}-{{ .Branch }}
           paths:
@@ -177,7 +182,7 @@ jobs:
 workflows:
   build:
     jobs:
-      - swiftlint:
+      - lint:
           filters:
             tags:
               only: /.*/

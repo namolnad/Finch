@@ -9,8 +9,8 @@
 @testable import FinchApp
 import FinchCore
 import SnapshotTesting
-import XCTest
 import Version
+import XCTest
 
 final class ChangeLogModelTests: TestCase {
     private var model: ChangeLogModel {

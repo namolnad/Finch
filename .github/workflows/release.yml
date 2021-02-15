@@ -2,7 +2,7 @@ name: Release
 
 on:
   create:
-    tags: *
+    tags: '*'
 
 jobs:
   publish_release:

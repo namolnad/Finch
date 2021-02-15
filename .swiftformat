@@ -22,7 +22,6 @@
 --wrapparameters before-first
 
 --disable fileHeader
---disable redundantReturn
 --disable sortedImports
 --disable hoistPatternLet
 --disable blankLinesAtStartOfScope

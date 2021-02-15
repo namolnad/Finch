@@ -14,7 +14,7 @@ import Version
 
 final class ChangeLogModelTests: TestCase {
     private var model: ChangeLogModel {
-        return ChangeLogModel(
+        ChangeLogModel(
             resolver: VersionsResolverMock(),
             service: ChangeLogInfoServiceMock()
         )
@@ -160,7 +160,7 @@ final class ChangeLogModelTests: TestCase {
 
 extension App {
     static func mock(configuration: Configuration = .mock) -> App {
-        return .init(
+        .init(
             configuration: configuration,
             meta: .mock
         )
@@ -169,7 +169,7 @@ extension App {
 
 struct ChangeLogInfoServiceMock: ChangeLogInfoServiceType {
     func versionsString(app: App) throws -> String {
-        return "0.0.1 6.13.0"
+        "0.0.1 6.13.0"
     }
 
     func buildNumber(options: CompareCommand.Options, app: App) throws -> String? {

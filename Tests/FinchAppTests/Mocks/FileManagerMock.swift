@@ -15,7 +15,7 @@ extension FileManager {
 final class FileManagerMock: FileManager {
 
     override var currentDirectoryPath: String {
-        return "current"
+        "current"
     }
 
     private let customConfigPath: String?

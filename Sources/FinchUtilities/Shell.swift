@@ -70,8 +70,8 @@ public struct Shell {
     }
 }
 
-private extension Process {
-    func run(at path: String) throws {
+extension Process {
+    fileprivate func run(at path: String) throws {
         #if os(macOS)
         if #available(macOS 10.13, *) {
             executableURL = URL(fileURLWithPath: path)

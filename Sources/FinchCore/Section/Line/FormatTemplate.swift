@@ -60,9 +60,9 @@ extension FormatTemplate {
     }
 }
 
-private extension String {
+extension String {
     /// Walk along format string to gather typed LineOutputtable's
-    var lineOutputtables: [LineOutputtable] {
+    fileprivate var lineOutputtables: [LineOutputtable] {
         var components: [String] = []
         var component: String = ""
         if let value = first {

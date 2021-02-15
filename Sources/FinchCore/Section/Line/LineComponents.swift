@@ -68,8 +68,8 @@ extension LineComponents.Kind {
     }
 }
 
-private extension String {
-    func component(kind: LineComponents.Kind, configuration: Configuration) -> String {
+extension String {
+    fileprivate func component(kind: LineComponents.Kind, configuration: Configuration) -> String {
         if let match = range(of: kind.regEx, options: [.regularExpression]) {
             return String(self[match]).replacingOccurrences(of: kind.border, with: "")
         }

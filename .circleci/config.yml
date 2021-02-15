@@ -115,7 +115,7 @@ jobs:
       - run:
           command: |
             git clone https://github.com/yonaskolb/Mint.git
-            swift build --package-path Mint
+            swift build --package-path Mint --verbose
       - run:
           command: |
             swift run --package-path Mint mint run swiftlint swiftlint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml

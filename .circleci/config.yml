@@ -96,7 +96,7 @@ jobs:
           name: Publish release to GitHub
 
   swiftlint:
-    executor: linux
+    executor: mac
     parameters:
       lint-cache-dir:
         default: lint/cache
@@ -112,13 +112,10 @@ jobs:
             - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
           name: Restore lint cache
       - run: mkdir -p << parameters.lint-cache-dir >> << parameters.lint-results-dir >>
+      - run: brew bundle
       - run:
           command: |
-            git clone https://github.com/yonaskolb/Mint.git
-            swift build --package-path Mint --verbose
-      - run:
-          command: |
-            swift run --package-path Mint mint run swiftlint swiftlint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
+            mint run swiftlint swiftlint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
           name: Lint
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}-{{ .Branch }}

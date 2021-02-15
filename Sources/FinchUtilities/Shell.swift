@@ -1,11 +1,3 @@
-//
-//  Shell.swift
-//  Finch
-//
-//  Created by Dan Loman on 8/17/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 import Foundation
 
 public struct Shell {
@@ -18,9 +10,9 @@ public struct Shell {
             switch self {
             case .emptyArguments:
                 return Strings.Error.Shell.emptyArguments
-            case .emptyResult(args: let args):
+            case let .emptyResult(args: args):
                 return Strings.Error.Shell.emptyResult(args: args)
-            case .subprocessNonZeroExit(code: let code, message: let message):
+            case let .subprocessNonZeroExit(code: code, message: message):
                 return Strings.Error.Shell.subprocessNonZeroExit(code: code, message: message)
             }
         }
@@ -66,12 +58,12 @@ public struct Shell {
     }
 
     private func output(fileHandle: FileHandle) -> String? {
-        return String(data: fileHandle.readDataToEndOfFile(), encoding: .utf8)
+        String(data: fileHandle.readDataToEndOfFile(), encoding: .utf8)
     }
 }
 
-private extension Process {
-    func run(at path: String) throws {
+extension Process {
+    fileprivate func run(at path: String) throws {
         #if os(macOS)
         if #available(macOS 10.13, *) {
             executableURL = URL(fileURLWithPath: path)

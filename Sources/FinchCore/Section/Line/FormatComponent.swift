@@ -1,11 +1,3 @@
-//
-//  Line_FormatComponent.swift
-//  Finch
-//
-//  Created by Dan Loman on 11/23/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 /**
  * Enum representing special FormatString objects which indicate
  * where the component's corresponding data should be inserted in
@@ -74,11 +66,11 @@ extension FormatComponent: LineOutputtable {
         case .contributorEmail:
             return components.contributorEmail
         case .contributorHandle:
-            guard let contributor = context.configuration.contributorsConfig.contributors.first(where: { contributor in
-                contributor.emails.contains(components.contributorEmail)
-            }) else {
-                return components.contributorEmail
-            }
+            guard
+                let contributor = context.configuration.contributorsConfig.contributors.first(where: { contributor in
+                    contributor.emails.contains(components.contributorEmail)
+                })
+            else { return components.contributorEmail }
 
             let prefix = context.configuration.contributorsConfig.contributorHandlePrefix
 

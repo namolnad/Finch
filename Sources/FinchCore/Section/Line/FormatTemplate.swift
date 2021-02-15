@@ -1,11 +1,3 @@
-//
-//  FormatTemplate.swift
-//  FinchCore
-//
-//  Created by Dan Loman on 1/2/19.
-//  Copyright © 2019 DHL. All rights reserved.
-//
-
 /**
  * Type-safe template which determines the final format for
  * the per-line output for a given section. Initialized via
@@ -47,7 +39,7 @@ extension FormatTemplate {
 
     /// :nodoc:
     var formatString: String {
-        return outputtables.reduce("") { (partial: String, outputtable: LineOutputtable) in
+        outputtables.reduce("") { (partial: String, outputtable: LineOutputtable) in
             switch outputtable {
             case let component as FormatComponent:
                 return partial + "<< \(component.rawValue) >>"
@@ -60,9 +52,9 @@ extension FormatTemplate {
     }
 }
 
-private extension String {
+extension String {
     /// Walk along format string to gather typed LineOutputtable's
-    var lineOutputtables: [LineOutputtable] {
+    fileprivate var lineOutputtables: [LineOutputtable] {
         var components: [String] = []
         var component: String = ""
         if let value = first {
@@ -76,11 +68,11 @@ private extension String {
         }
 
         func string(for formatComponent: FormatComponent) -> String {
-            return formatComponent.rawValue
+            formatComponent.rawValue
         }
 
         func format(component: FormatComponent) -> LineOutputtable {
-            return component
+            component
         }
 
         for idx in indices.dropFirst().dropLast() {
@@ -89,13 +81,13 @@ private extension String {
             let currentIsOpening = self[idx] == "<"
             let currentIsClosing = self[idx] == ">"
 
-            if nextEqualToCurrent && currentIsOpening {
+            if nextEqualToCurrent, currentIsOpening {
                 flush()
             }
 
             component.append(self[idx])
 
-            if currentEqualToPrev && currentIsClosing {
+            if currentEqualToPrev, currentIsClosing {
                 flush()
             }
         }

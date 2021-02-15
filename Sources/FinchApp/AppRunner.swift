@@ -1,10 +1,3 @@
-//
-//  AppRunner.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 1/29/19.
-//
-
 import FinchUtilities
 import Foundation
 import SwiftCLI
@@ -57,6 +50,6 @@ public class AppRunner {
     /// Runs the app
     @discardableResult
     public func run(with arguments: [String]) -> Int32 {
-        return cli.go(with: Array(arguments.dropFirst()))
+        cli.go(with: Array(arguments.dropFirst()))
     }
 }

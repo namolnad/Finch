@@ -1,11 +1,3 @@
-//
-//  SectionInfo.swift
-//  FinchCore
-//
-//  Created by Dan Loman on 8/14/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 import FinchUtilities
 
 /**
@@ -63,9 +55,9 @@ public struct SectionInfo {
     public let title: String
 
     /**
-    * Internal flag to indicate this should be ignored when
-    * overwriting downstream configs
-    */
+     * Internal flag to indicate this should be ignored when
+     * overwriting downstream configs
+     */
     let isDefault: Bool
 }
 

@@ -1,20 +1,12 @@
-//
-//  ChangeLogModelTests.swift
-//  FinchTests
-//
-//  Created by Dan Loman on 8/16/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 @testable import FinchApp
 import FinchCore
 import SnapshotTesting
-import XCTest
 import Version
+import XCTest
 
 final class ChangeLogModelTests: TestCase {
     private var model: ChangeLogModel {
-        return ChangeLogModel(
+        ChangeLogModel(
             resolver: VersionsResolverMock(),
             service: ChangeLogInfoServiceMock()
         )
@@ -134,7 +126,13 @@ final class ChangeLogModelTests: TestCase {
         )
     }
 
-    private func options(gitLog: String, requiredTags: [String] = [], showReleaseManager: Bool = true, showVersion: Bool = true, useNewlineChar: Bool = false) -> CompareCommand.Options {
+    private func options(
+        gitLog: String,
+        requiredTags: [String] = [],
+        showReleaseManager: Bool = true,
+        showVersion: Bool = true,
+        useNewlineChar: Bool = false
+    ) -> CompareCommand.Options {
         let contributorEmail = Configuration.mock.contributorsConfig
             .contributors.first!.emails.first!
 
@@ -154,7 +152,7 @@ final class ChangeLogModelTests: TestCase {
 
 extension App {
     static func mock(configuration: Configuration = .mock) -> App {
-        return .init(
+        .init(
             configuration: configuration,
             meta: .mock
         )
@@ -163,7 +161,7 @@ extension App {
 
 struct ChangeLogInfoServiceMock: ChangeLogInfoServiceType {
     func versionsString(app: App) throws -> String {
-        return "0.0.1 6.13.0"
+        "0.0.1 6.13.0"
     }
 
     func buildNumber(options: CompareCommand.Options, app: App) throws -> String? {

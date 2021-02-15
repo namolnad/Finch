@@ -1,11 +1,3 @@
-//
-//  String+FinchCore.swift
-//  FinchCore
-//
-//  Created by Dan Loman on 1/7/19.
-//  Copyright © 2019 DHL. All rights reserved.
-//
-
 import Foundation
 
 /// :nodoc:
@@ -23,14 +15,14 @@ extension String {
 /// :nodoc:
 extension String: LineOutputtable {
     func output(components: LineComponents, context: LineContext) -> String {
-        return self
+        self
     }
 }
 
 /// :nodoc:
 extension Array where Element == String {
     public func sorted(by pattern: Regex.Pattern) -> [String] {
-        return sorted {
+        sorted {
             guard let match1 = pattern.matches(in: $0).first else {
                 return false
             }

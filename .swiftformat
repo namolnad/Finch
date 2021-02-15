@@ -1,0 +1,25 @@
+--binarygrouping none
+--commas inline
+--decimalgrouping none
+--extensionacl on-declarations
+--header strip
+--hexgrouping none
+--ifdef no-indent
+--importgrouping testable-top
+--indent 4
+--maxwidth 150
+--modifierorder override,acl,setterACL,dynamic,mutators,lazy,final,required,convenience,typeMethods,owned
+--nospaceoperators ...,..<
+--octalgrouping none
+--patternlet hoist
+--self init-only
+--semicolons never
+--stripunusedargs closure-only
+--wraparguments before-first
+--wrapcollections before-first
+--wrapconditions before-first
+--wrapparameters before-first
+
+--enable isEmpty
+
+--exclude DerivedData

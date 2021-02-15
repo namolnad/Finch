@@ -1,11 +1,3 @@
-//
-//  Configurator.swift
-//  FinchApp.swift
-//
-//  Created by Dan Loman on 8/14/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 import FinchCore
 import FinchUtilities
 import Foundation
@@ -14,7 +6,7 @@ import Foundation
 struct Configurator {
     /// The app's configuration.
     var configuration: Configuration {
-        return getConfiguration()
+        getConfiguration()
     }
 
     /**
@@ -46,7 +38,8 @@ struct Configurator {
         meta: App.Meta,
         environment: Environment,
         fileManager: FileManager = .default,
-        output: OutputType = Output.instance) {
+        output: OutputType = Output.instance
+    ) {
         self.cascadingResolver = .init(
             fileManager: fileManager,
             pathComponent: "/.\(meta.name.lowercased())/config.yml"

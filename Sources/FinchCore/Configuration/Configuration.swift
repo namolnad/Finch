@@ -1,11 +1,3 @@
-//
-//  Configuration.swift
-//  FinchCore
-//
-//  Created by Dan Loman on 8/14/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 /// :nodoc:
 public protocol Mergeable {
     func merge(into other: inout Self)
@@ -89,7 +81,7 @@ extension Configuration: Mergeable {
 /// :nodoc:
 extension Configuration {
     public static func `default`(projectDir: String) -> Configuration {
-        return .init(
+        .init(
             contributorsConfig: .default,
             formatConfig: .default,
             gitConfig: .default,

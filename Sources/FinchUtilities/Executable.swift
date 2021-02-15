@@ -1,10 +1,3 @@
-//
-//  Executable.swift
-//  FinchUtilities
-//
-//  Created by Dan Loman on 2/3/19.
-//
-
 import Foundation
 
 public func executable(_ executable: Executable) throws -> String {
@@ -31,7 +24,7 @@ public enum Executable: String {
 
         public var failureReason: String? {
             switch self {
-            case .notFound(let exec):
+            case let .notFound(exec):
                 return Strings.Error.Exec.notFound(exec)
             }
         }
@@ -68,17 +61,16 @@ private struct ExecutableFinder {
     }
 
     private func searchPaths(from path: String) -> [String] {
-        return path.components(separatedBy: ":")
+        path.components(separatedBy: ":")
     }
 
     fileprivate func executablePath(executable: Executable) throws -> String? {
-        return searchPaths(from: try getSearchPath())
+        searchPaths(from: try getSearchPath())
             .map { $0 + "/" + executable.rawValue }
             .map { Path(string: $0) }
             .first { fileManager.isExecutableFile(atPath: $0.absolutePath) }?
             .absolutePath
     }
-
 }
 
 private struct Path {

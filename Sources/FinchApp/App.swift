@@ -1,18 +1,9 @@
-//
-//  App.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 1/13/19.
-//  Copyright © 2019 DHL. All rights reserved.
-//
-
 import struct FinchCore.Configuration
 import FinchUtilities
 import Version
 
 /// A structure to represent this app and its components.
 public struct App {
-
     /// The meta information of the app.
     public struct Meta {
         /// The app's current build number.
@@ -48,11 +39,13 @@ public struct App {
     private let output: OutputType
 
     /// :nodoc:
-    init(configuration: Configuration,
-         environment: Environment = [:],
-         meta: Meta,
-         verbose: Bool = false,
-         output: OutputType = Output.instance) {
+    init(
+        configuration: Configuration,
+        environment: Environment = [:],
+        meta: Meta,
+        verbose: Bool = false,
+        output: OutputType = Output.instance
+    ) {
         self.configuration = configuration
         self.environment = environment
         self.meta = meta

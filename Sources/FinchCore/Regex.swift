@@ -1,11 +1,3 @@
-//
-//  Regex.swift
-//  Finch
-//
-//  Created by Dan Loman on 11/23/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 import FinchUtilities
 import Foundation
 
@@ -28,19 +20,19 @@ public enum Regex {
 /// :nodoc:
 extension Regex.Replacement {
     public func findReplace(in body: String) -> String {
-        return findReplace(pattern: matching, in: body, with: replacement)
+        findReplace(pattern: matching, in: body, with: replacement)
     }
 
     private func findReplace(pattern: String, in body: String, with replacement: String) -> String {
         guard [pattern, body].contains(where: { !$0.isEmpty }) else {
             return body
         }
-        guard let expression = try? NSRegularExpression(
-            pattern: pattern,
-            options: [.anchorsMatchLines, .useUnixLineSeparators]
-            ) else {
-                return body
-        }
+        guard
+            let expression = try? NSRegularExpression(
+                pattern: pattern,
+                options: [.anchorsMatchLines, .useUnixLineSeparators]
+            )
+        else { return body }
 
         return expression.stringByReplacingMatches(
             in: body,
@@ -65,7 +57,7 @@ extension Regex.Pattern {
     }
 
     func firstMatch(in body: String) -> String? {
-        return matches(in: body)
+        matches(in: body)
             .first?
             .firstMatch(in: body)
     }

@@ -1,10 +1,3 @@
-//
-//  ConfigCommand.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 2/14/19.
-//
-
 import FinchCore
 import FinchUtilities
 import SwiftCLI
@@ -14,7 +7,7 @@ import Yams
 final class ConfigGroup: CommandGroup {
     let children: [Routable]
 
-    var name: String { return Strings.Config.commandName }
+    var name: String { Strings.Config.commandName }
 
     let shortDescription: String = Strings.Config.commandOverview
 
@@ -24,9 +17,9 @@ final class ConfigGroup: CommandGroup {
 }
 
 final class ConfigExampleCommand: BaseCommand {
-    override var name: String { return Strings.Config.Example.commandName }
+    override var name: String { Strings.Config.Example.commandName }
 
-    override var shortDescription: String { return Strings.Config.Example.commandOverview }
+    override var shortDescription: String { Strings.Config.Example.commandOverview }
 
     override func run(with app: App) throws {
         let exampleConfig: Configuration = .example(projectDir: app.configuration.projectDir)

@@ -1,11 +1,3 @@
-//
-//  Resource.swift
-//  Finch
-//
-//  Created by Dan Loman on 1/14/19.
-//  Copyright © 2019 DHL. All rights reserved.
-//
-
 import Foundation
 
 struct Resource {

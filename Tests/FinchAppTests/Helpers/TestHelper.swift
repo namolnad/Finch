@@ -1,11 +1,3 @@
-//
-//  TestHelper.swift
-//  FinchTests
-//
-//  Created by Dan Loman on 12/29/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 import Foundation
 import Yams
 #if !swift(>=5.0)
@@ -20,7 +12,6 @@ typealias TestCase = SnapshotTestCase
 #endif
 
 final class TestHelper {
-
     static var isMacOS: Bool {
         #if os(macOS)
         return true

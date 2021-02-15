@@ -1,10 +1,3 @@
-//
-//  ResolutionCommandsConfiguration.swift
-//  FinchCore
-//
-//  Created by Dan Loman on 2/3/19.
-//
-
 /**
  * Sub-configuration for shell commands used to resolve information
  * only available at run-time.
@@ -39,7 +32,7 @@ extension ResolutionCommandsConfiguration: SubConfiguration {
         versions: nil
     )
 
-    public static var `default`: ResolutionCommandsConfiguration { return .blank }
+    public static var `default`: ResolutionCommandsConfiguration { .blank }
 }
 
 /// :nodoc:

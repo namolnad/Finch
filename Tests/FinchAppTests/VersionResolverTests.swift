@@ -1,10 +1,3 @@
-//
-//  VersionResolverTests.swift
-//  FinchAppTests
-//
-//  Created by Dan Loman on 2/16/19.
-//
-
 @testable import FinchApp
 import SnapshotTesting
 import XCTest
@@ -36,9 +29,12 @@ final class VersionResolverTests: TestCase {
 
         XCTAssertEqual(
             old,
-            .init(major: 6, minor: 12, patch: 1,
-                  prereleaseIdentifiers: ["alpha", "frankenstein"],
-                  buildMetadataIdentifiers: ["12", "345"]
+            .init(
+                major: 6,
+                minor: 12,
+                patch: 1,
+                prereleaseIdentifiers: ["alpha", "frankenstein"],
+                buildMetadataIdentifiers: ["12", "345"]
             )
         )
         XCTAssertEqual(new, .init(major: 7, minor: 38, patch: 0))

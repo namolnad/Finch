@@ -1,11 +1,3 @@
-//
-//  DelimiterPair.swift
-//  Finch
-//
-//  Created by Dan Loman on 8/17/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 /**
  * A structure describing the left and right delimiters surrounding
  * a commit message tag.
@@ -32,7 +24,7 @@ extension DelimiterPair {
 /// :nodoc:
 extension DelimiterPair {
     var isBlank: Bool {
-        return left.isEmpty ||
+        left.isEmpty ||
             right.isEmpty
     }
 }

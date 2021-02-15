@@ -1,11 +1,3 @@
-//
-//  LineComponents.swift
-//  Finch
-//
-//  Created by Dan Loman on 8/15/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 /// :nodoc:
 public struct LineComponents {
     enum Kind: Int {
@@ -28,8 +20,10 @@ public struct LineComponents {
         }
 
         self.contributorEmail = componentString(.contributorEmail)
-        self.message = (Regex.Pattern.filteredMessagePattern(from: configuration).firstMatch(in: rawLine) ??
-            componentString(.message)).trimmingCharacters(in: .whitespacesAndNewlines)
+        self.message = (
+            Regex.Pattern.filteredMessagePattern(from: configuration).firstMatch(in: rawLine) ??
+                componentString(.message)
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
         self.pullRequestNumber = Int(componentString(.pullRequestNumber))
         self.sha = componentString(.sha)
         self.tags = Regex.Pattern.tagPattern(from: configuration)
@@ -68,8 +62,8 @@ extension LineComponents.Kind {
     }
 }
 
-private extension String {
-    func component(kind: LineComponents.Kind, configuration: Configuration) -> String {
+extension String {
+    fileprivate func component(kind: LineComponents.Kind, configuration: Configuration) -> String {
         if let match = range(of: kind.regEx, options: [.regularExpression]) {
             return String(self[match]).replacingOccurrences(of: kind.border, with: "")
         }

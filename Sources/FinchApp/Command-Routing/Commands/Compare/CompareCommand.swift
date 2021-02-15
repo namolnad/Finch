@@ -1,10 +1,3 @@
-//
-//  CompareCommand.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 1/29/19.
-//
-
 import FinchUtilities
 import SwiftCLI
 import Version
@@ -52,9 +45,9 @@ final class CompareCommand: BaseCommand {
         fileprivate(set) var requiredTags: Set<String>
 
         /**
-        * If the new line char is encoded as a new line or as the combined "\n"
-        * Note: Not used for section assignment.
-        */
+         * If the new line char is encoded as a new line or as the combined "\n"
+         * Note: Not used for section assignment.
+         */
         fileprivate(set) var useNewlineChar: Bool
     }
 
@@ -68,10 +61,10 @@ final class CompareCommand: BaseCommand {
     let requiredTags: Key<[String]> = .init("--required-tags", description: Strings.Compare.Options.requiredTags)
     let useNewlineChar: Flag = .init("--use-newline-char", description: Strings.Compare.Options.useNewlineChar)
 
-    override var shortDescription: String { return Strings.Compare.commandOverview }
+    override var shortDescription: String { Strings.Compare.commandOverview }
 
     /// The command's name.
-    override var name: String { return Strings.Compare.commandName }
+    override var name: String { Strings.Compare.commandName }
 
     private let model: ChangeLogModelType
 

@@ -1,11 +1,3 @@
-//
-//  ChangeLogModel.swift
-//  FinchApp.swift
-//
-//  Created by Dan Loman on 7/5/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 import FinchCore
 import Version
 
@@ -76,7 +68,7 @@ final class ChangeLogModel: ChangeLogModelType {
 
     /// See `ChangeLogModelType.versions(app:)` for definition.
     func versions(app: App) throws -> (old: Version, new: Version) {
-        return try resolver.versions(
+        try resolver.versions(
             from: try service.versionsString(app: app)
         )
     }
@@ -114,13 +106,11 @@ final class ChangeLogModel: ChangeLogModelType {
 
         for components in linesComponents {
             let tag = components.tags.first(where: tagToIndex.keys.contains) ?? "*"
-            guard let index = tagToIndex[tag] else {
-                continue
-            }
-            guard case let section = sections[index],
-                options.requiredTags.isSubset(of: components.tags) else {
-                    continue
-            }
+            guard
+                let index = tagToIndex[tag],
+                case let section = sections[index],
+                options.requiredTags.isSubset(of: components.tags)
+            else { continue }
 
             sections[index] = section.inserting(lineComponents: components)
         }
@@ -150,7 +140,7 @@ final class ChangeLogModel: ChangeLogModelType {
     }
 
     private func version(_ version: String) -> String {
-        return """
+        """
 
         # \(version)
 
@@ -158,7 +148,7 @@ final class ChangeLogModel: ChangeLogModelType {
     }
 
     private func formatted(contributorHandlePrefix: String, releaseManager: Contributor) -> String {
-        return """
+        """
 
         ### Release Manager
 

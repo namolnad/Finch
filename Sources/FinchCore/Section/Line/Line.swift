@@ -1,11 +1,3 @@
-//
-//  Line.swift
-//  Finch
-//
-//  Created by Dan Loman on 11/23/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 /// :nodoc:
 public struct Line {
     let value: String
@@ -20,7 +12,7 @@ extension Line {
 
         let value = template.outputtables.reduce("") { partial, next in
             let nextOut = next.output(components: components, context: context)
-            if partial.hasSuffix(" ") && nextOut.hasPrefix(" ") {
+            if partial.hasSuffix(" "), nextOut.hasPrefix(" ") {
                 return partial + String(nextOut.dropFirst())
             } else {
                 return partial + nextOut
@@ -34,6 +26,6 @@ extension Line {
 /// :nodoc:
 extension Line: Outputtable {
     public var output: String {
-        return value
+        value
     }
 }

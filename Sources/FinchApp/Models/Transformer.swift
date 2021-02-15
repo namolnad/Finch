@@ -1,11 +1,3 @@
-//
-//  Transformer.swift
-//  FinchApp.swift
-//
-//  Created by Dan Loman on 11/23/18.
-//  Copyright © 2018 DHL. All rights reserved.
-//
-
 import FinchCore
 
 /// :nodoc:
@@ -13,15 +5,14 @@ struct Transformer {
     let pattern: Regex.Replacement
 
     func transform(text: String) -> String {
-        return pattern.findReplace(in: text)
+        pattern.findReplace(in: text)
     }
-
 }
 
 /// :nodoc:
 extension Array where Element == Transformer {
     static func `default`(for configuration: Configuration) -> [Transformer] {
-        return [
+        [
             exclusionTransformers(for: configuration),
             formattingTransformers
         ].flatMap { $0 }

@@ -1,10 +1,3 @@
-//
-//  FormatConfiguration.swift
-//  FinchCore
-//
-//  Created by Dan Loman on 2/12/19.
-//
-
 /**
  * Sub-configuration for the formatting of the overall output as well
  * as the input for tag delimiters.

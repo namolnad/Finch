@@ -1,10 +1,3 @@
-//
-//  VersionsResolver.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 2/3/19.
-//
-
 import Foundation
 import Version
 
@@ -30,16 +23,14 @@ struct VersionsResolver: VersionsResolving {
 
     /// See `VersionsResolving.versions(from:)` for definition.
     func versions(from versionString: String) throws -> (old: Version, new: Version) {
-        guard case let versionStrings = versionString.split(separator: " "),
+        guard
+            case let versionStrings = versionString.split(separator: " "),
             versionStrings.count == 2,
             let firstVersionString = versionStrings.first,
-            let secondVersionString = versionStrings.last else {
-            throw Error.unableToResolveVersion
-        }
-        guard let firstVersion = Version(String(firstVersionString)),
-            let secondVersion = Version(String(secondVersionString)) else {
-                throw Error.unableToResolveVersion
-        }
+            let secondVersionString = versionStrings.last,
+            let firstVersion = Version(String(firstVersionString)),
+            let secondVersion = Version(String(secondVersionString))
+        else { throw Error.unableToResolveVersion }
 
         guard firstVersion < secondVersion else {
             return (secondVersion, firstVersion)

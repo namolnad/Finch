@@ -1,16 +1,7 @@
-//
-//  FileResolver.swift
-//  Finch
-//
-//  Created by Dan Loman on 1/2/19.
-//  Copyright © 2019 DHL. All rights reserved.
-//
-
 import Foundation
 import Yams
 
 public final class FileResolver<FileType: Decodable> {
-
     private lazy var decoder: YAMLDecoder = .init()
 
     private let fileManager: FileManager
@@ -23,12 +14,11 @@ public final class FileResolver<FileType: Decodable> {
     }
 
     public func resolve(path: String) throws -> FileType? {
-        guard case
-            let filePath = path + pathComponent,
+        guard
+            case let filePath = path + pathComponent,
             let data = fileManager.contents(atPath: filePath),
-            let encodedYaml = String(data: data, encoding: .utf8) else {
-            return nil
-        }
+            let encodedYaml = String(data: data, encoding: .utf8)
+        else { return nil }
 
         return try decoder.decode(from: encodedYaml)
     }

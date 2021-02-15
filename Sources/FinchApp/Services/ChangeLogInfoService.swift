@@ -1,10 +1,3 @@
-//
-//  ChangeLogInfoService.swift
-//  FinchApp
-//
-//  Created by Dan Loman on 2/4/19.
-//
-
 import FinchUtilities
 import Foundation
 
@@ -39,8 +32,9 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
 
     // swiftlint:disable line_length
     private var semVerRegex: String {
-        return "(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?"
+        "(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?"
     }
+
     // swiftlint:enable line_length
 
     /**

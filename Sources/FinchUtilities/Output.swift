@@ -1,10 +1,3 @@
-//
-//  Output.swift
-//  FinchUtilities
-//
-//  Created by Dan Loman on 1/30/19.
-//
-
 import Foundation
 
 public protocol OutputType {
@@ -27,7 +20,7 @@ public struct Output: OutputType {
     }()
 
     private var timeStamp: String {
-        return formatter.string(from: Date())
+        formatter.string(from: Date())
     }
 
     private init() {}

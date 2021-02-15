@@ -54,7 +54,7 @@ install: build symlink config_template
 	install $(APP_EXECUTABLE) $(BIN_DIR)/
 
 lint:
-	swift run --package-path .devtools swiftlint --strict
+	mint run swiftlint swiftlint --strict
 
 linuxmain:
 	$(TEST) --generate-linuxmain

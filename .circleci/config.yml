@@ -4,7 +4,7 @@ executors:
 
   mac:
     macos:
-      xcode: "10.2.0"
+      xcode: "12.3.0"
 
   go:
     docker:
@@ -12,7 +12,7 @@ executors:
 
   linux:
     docker:
-      - image: norionomura/swift:423
+      - image: norionomura/swift:532
 
 commands:
 
@@ -96,16 +96,13 @@ jobs:
           name: Publish release to GitHub
 
   swiftlint:
-    executor: linux
+    executor: mac
     parameters:
       lint-cache-dir:
         default: lint/cache
         type: string
       lint-results-dir:
         default: build/reports/lint
-        type: string
-      lint-bin:
-        default: .build/debug/swiftlint
         type: string
     steps:
       - checkout
@@ -114,25 +111,15 @@ jobs:
             - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}-{{ .Branch }}
             - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
           name: Restore lint cache
-      - restore_cache:
-          keys:
-            - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
-          name: Restore bin cache
       - run: mkdir -p << parameters.lint-cache-dir >> << parameters.lint-results-dir >>
       - run:
           command: |
-            executable=$(echo '<< parameters.lint-bin >>')
-            if ! [ $(command -v $executable) ]; then
-              executable='swift run --package-path .devtools swiftlint'
-            fi
-
-            eval $executable lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
+            git clone https://github.com/yonaskolb/Mint.git
+            make -C Mint
+      - run:
+          command: |
+            mint run swiftlint swiftlint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
           name: Lint
-      - save_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
-          paths:
-            - << parameters.lint-bin >>
-          name: Save bin cache
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}-{{ .Branch }}
           paths:
@@ -183,7 +170,7 @@ jobs:
       - run: mkdir -p << parameters.test-results-dir >>
       - run:
           name: Run tests
-          command: make test
+          command: FINCH_TESTS=1 swift test || FINCH_TESTS=1 swift test || FINCH_TESTS=1 swift test
       - store_test_results:
           path: << parameters.test-results-dir >>
 

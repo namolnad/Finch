@@ -55,7 +55,7 @@ extension ContributorsConfiguration: SubConfiguration {
     )
 
     public static var `default`: ContributorsConfiguration {
-        return .blank
+        .blank
     }
 }
 

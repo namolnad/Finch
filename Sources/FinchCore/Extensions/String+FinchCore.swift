@@ -23,14 +23,14 @@ extension String {
 /// :nodoc:
 extension String: LineOutputtable {
     func output(components: LineComponents, context: LineContext) -> String {
-        return self
+        self
     }
 }
 
 /// :nodoc:
 extension Array where Element == String {
     public func sorted(by pattern: Regex.Pattern) -> [String] {
-        return sorted {
+        sorted {
             guard let match1 = pattern.matches(in: $0).first else {
                 return false
             }

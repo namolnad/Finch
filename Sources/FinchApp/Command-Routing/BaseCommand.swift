@@ -23,7 +23,7 @@ class BaseCommand: Command {
     var shortDescription: String { fatalError("Not implemented") }
 
     /// **[Optional]** A longer description displayed when command-specific help is presented.
-    var longDescription: String { return shortDescription }
+    var longDescription: String { shortDescription }
 
     /// :nodoc:
     let appGenerator: AppGenerator
@@ -53,7 +53,7 @@ class BaseCommand: Command {
 extension BaseCommand {
     /// Global options for all commands: --verbose, --config, --project-dir
     static var globalOptions: [Option] {
-        return [
+        [
             verboseOption,
             configPathOption,
             projectDirOption
@@ -70,14 +70,14 @@ private let projectDirOption: Key<String> = .init("--project-dir", description: 
 /// :nodoc:
 extension Command {
     var verbose: Flag {
-        return verboseOption
+        verboseOption
     }
 
     var configPath: Key<String> {
-        return configPathOption
+        configPathOption
     }
 
     var projectDir: Key<String> {
-        return projectDirOption
+        projectDirOption
     }
 }

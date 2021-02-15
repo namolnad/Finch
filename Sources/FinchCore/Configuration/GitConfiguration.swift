@@ -60,7 +60,7 @@ extension GitConfiguration: SubConfiguration {
         repoBaseUrl: ""
     )
 
-    public static var `default`: GitConfiguration { return .blank }
+    public static var `default`: GitConfiguration { .blank }
 }
 
 /// :nodoc:

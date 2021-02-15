@@ -76,7 +76,7 @@ final class ChangeLogModel: ChangeLogModelType {
 
     /// See `ChangeLogModelType.versions(app:)` for definition.
     func versions(app: App) throws -> (old: Version, new: Version) {
-        return try resolver.versions(
+        try resolver.versions(
             from: try service.versionsString(app: app)
         )
     }
@@ -150,7 +150,7 @@ final class ChangeLogModel: ChangeLogModelType {
     }
 
     private func version(_ version: String) -> String {
-        return """
+        """
 
         # \(version)
 
@@ -158,7 +158,7 @@ final class ChangeLogModel: ChangeLogModelType {
     }
 
     private func formatted(contributorHandlePrefix: String, releaseManager: Contributor) -> String {
-        return """
+        """
 
         ### Release Manager
 

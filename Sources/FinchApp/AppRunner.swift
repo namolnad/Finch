@@ -57,6 +57,6 @@ public class AppRunner {
     /// Runs the app
     @discardableResult
     public func run(with arguments: [String]) -> Int32 {
-        return cli.go(with: Array(arguments.dropFirst()))
+        cli.go(with: Array(arguments.dropFirst()))
     }
 }

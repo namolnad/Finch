@@ -66,7 +66,7 @@ public struct Shell {
     }
 
     private func output(fileHandle: FileHandle) -> String? {
-        return String(data: fileHandle.readDataToEndOfFile(), encoding: .utf8)
+        String(data: fileHandle.readDataToEndOfFile(), encoding: .utf8)
     }
 }
 

@@ -14,7 +14,7 @@ import Foundation
 struct Configurator {
     /// The app's configuration.
     var configuration: Configuration {
-        return getConfiguration()
+        getConfiguration()
     }
 
     /**

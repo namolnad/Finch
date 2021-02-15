@@ -39,7 +39,7 @@ extension ResolutionCommandsConfiguration: SubConfiguration {
         versions: nil
     )
 
-    public static var `default`: ResolutionCommandsConfiguration { return .blank }
+    public static var `default`: ResolutionCommandsConfiguration { .blank }
 }
 
 /// :nodoc:

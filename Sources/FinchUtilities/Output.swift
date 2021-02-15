@@ -27,7 +27,7 @@ public struct Output: OutputType {
     }()
 
     private var timeStamp: String {
-        return formatter.string(from: Date())
+        formatter.string(from: Date())
     }
 
     private init() {}

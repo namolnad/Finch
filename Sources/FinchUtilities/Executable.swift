@@ -68,11 +68,11 @@ private struct ExecutableFinder {
     }
 
     private func searchPaths(from path: String) -> [String] {
-        return path.components(separatedBy: ":")
+        path.components(separatedBy: ":")
     }
 
     fileprivate func executablePath(executable: Executable) throws -> String? {
-        return searchPaths(from: try getSearchPath())
+        searchPaths(from: try getSearchPath())
             .map { $0 + "/" + executable.rawValue }
             .map { Path(string: $0) }
             .first { fileManager.isExecutableFile(atPath: $0.absolutePath) }?

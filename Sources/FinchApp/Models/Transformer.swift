@@ -13,7 +13,7 @@ struct Transformer {
     let pattern: Regex.Replacement
 
     func transform(text: String) -> String {
-        return pattern.findReplace(in: text)
+        pattern.findReplace(in: text)
     }
 
 }
@@ -21,7 +21,7 @@ struct Transformer {
 /// :nodoc:
 extension Array where Element == Transformer {
     static func `default`(for configuration: Configuration) -> [Transformer] {
-        return [
+        [
             exclusionTransformers(for: configuration),
             formattingTransformers
         ].flatMap { $0 }

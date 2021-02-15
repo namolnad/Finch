@@ -32,7 +32,7 @@ extension DelimiterPair {
 /// :nodoc:
 extension DelimiterPair {
     var isBlank: Bool {
-        return left.isEmpty ||
+        left.isEmpty ||
             right.isEmpty
     }
 }

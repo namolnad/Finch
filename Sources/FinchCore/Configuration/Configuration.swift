@@ -89,7 +89,7 @@ extension Configuration: Mergeable {
 /// :nodoc:
 extension Configuration {
     public static func `default`(projectDir: String) -> Configuration {
-        return .init(
+        .init(
             contributorsConfig: .default,
             formatConfig: .default,
             gitConfig: .default,

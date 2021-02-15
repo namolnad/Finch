@@ -28,7 +28,7 @@ public enum Regex {
 /// :nodoc:
 extension Regex.Replacement {
     public func findReplace(in body: String) -> String {
-        return findReplace(pattern: matching, in: body, with: replacement)
+        findReplace(pattern: matching, in: body, with: replacement)
     }
 
     private func findReplace(pattern: String, in body: String, with replacement: String) -> String {
@@ -65,7 +65,7 @@ extension Regex.Pattern {
     }
 
     func firstMatch(in body: String) -> String? {
-        return matches(in: body)
+        matches(in: body)
             .first?
             .firstMatch(in: body)
     }

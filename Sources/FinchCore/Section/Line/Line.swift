@@ -34,6 +34,6 @@ extension Line {
 /// :nodoc:
 extension Line: Outputtable {
     public var output: String {
-        return value
+        value
     }
 }

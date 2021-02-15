@@ -47,7 +47,7 @@ extension FormatTemplate {
 
     /// :nodoc:
     var formatString: String {
-        return outputtables.reduce("") { (partial: String, outputtable: LineOutputtable) in
+        outputtables.reduce("") { (partial: String, outputtable: LineOutputtable) in
             switch outputtable {
             case let component as FormatComponent:
                 return partial + "<< \(component.rawValue) >>"
@@ -76,11 +76,11 @@ private extension String {
         }
 
         func string(for formatComponent: FormatComponent) -> String {
-            return formatComponent.rawValue
+            formatComponent.rawValue
         }
 
         func format(component: FormatComponent) -> LineOutputtable {
-            return component
+            component
         }
 
         for idx in indices.dropFirst().dropLast() {

@@ -22,7 +22,7 @@ public struct Section {
 /// :nodoc:
 extension Section {
     var lines: [Line] {
-        return linesComponents.map { components -> Line in
+        linesComponents.map { components -> Line in
             .from(
                 components: components,
                 context: .init(
@@ -35,7 +35,7 @@ extension Section {
 
     /// :nodoc:
     public func inserting(lineComponents: LineComponents) -> Section {
-        return .init(
+        .init(
             configuration: configuration,
             info: info,
             linesComponents: linesComponents + [lineComponents]
@@ -46,7 +46,7 @@ extension Section {
 /// :nodoc:
 extension Section: Outputtable {
     public var output: String {
-        return """
+        """
 
         ### \(info.title)
         \(lines.output)

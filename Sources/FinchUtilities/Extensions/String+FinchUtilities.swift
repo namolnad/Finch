@@ -10,6 +10,6 @@ import Foundation
 
 extension String {
     public var escaped: String {
-        return NSRegularExpression.escapedPattern(for: self)
+        NSRegularExpression.escapedPattern(for: self)
     }
 }

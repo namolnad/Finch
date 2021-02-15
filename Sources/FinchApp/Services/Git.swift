@@ -18,7 +18,7 @@ struct Git {
 /// :nodoc:
 extension Git {
     private func gitExecutableArgs() throws -> [String] {
-        return [
+        [
             "\(try app.configuration.gitConfig.executablePath ?? executable(.git))",
             "--git-dir",
             "\(app.configuration.projectDir)/.git"
@@ -41,11 +41,11 @@ extension Git {
 
     @discardableResult
     func fetch() throws -> String {
-        return try git("fetch", "--quiet")
+        try git("fetch", "--quiet")
     }
 
     func versionsStringUsingTags() throws -> String {
-        return try git(
+        try git(
             "tag -l --sort=v:refname",
             "|",
             "\(try executable(.tail)) -2",
@@ -75,6 +75,6 @@ extension Git {
     }
 
     private func git(_ args: String...) throws -> String {
-        return try Shell(env: app.environment).run(args: gitExecutableArgs() + args)
+        try Shell(env: app.environment).run(args: gitExecutableArgs() + args)
     }
 }

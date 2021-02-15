@@ -15,7 +15,6 @@ struct Transformer {
     func transform(text: String) -> String {
         pattern.findReplace(in: text)
     }
-
 }
 
 /// :nodoc:

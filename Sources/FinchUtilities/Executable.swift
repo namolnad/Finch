@@ -78,7 +78,6 @@ private struct ExecutableFinder {
             .first { fileManager.isExecutableFile(atPath: $0.absolutePath) }?
             .absolutePath
     }
-
 }
 
 private struct Path {

@@ -10,7 +10,6 @@ import Foundation
 import Yams
 
 public final class FileResolver<FileType: Decodable> {
-
     private lazy var decoder: YAMLDecoder = .init()
 
     private let fileManager: FileManager

@@ -13,7 +13,6 @@ extension FileManager {
 }
 
 final class FileManagerMock: FileManager {
-
     override var currentDirectoryPath: String {
         "current"
     }

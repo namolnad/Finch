@@ -22,9 +22,6 @@
 --wrapparameters before-first
 
 --disable fileHeader
---disable blankLinesAtStartOfScope
---disable blankLinesBetweenScopes
---disable blankLinesAtEndOfScope
 
 --enable isEmpty
 

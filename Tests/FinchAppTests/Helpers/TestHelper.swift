@@ -20,7 +20,6 @@ typealias TestCase = SnapshotTestCase
 #endif
 
 final class TestHelper {
-
     static var isMacOS: Bool {
         #if os(macOS)
         return true

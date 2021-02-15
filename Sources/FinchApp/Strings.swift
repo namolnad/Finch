@@ -90,4 +90,5 @@ enum Strings {
         static let unsupportedConfigMode: String = "Not a valid subcommand"
     }
 }
+
 // swiftlint:enable line_length

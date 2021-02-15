@@ -115,7 +115,7 @@ jobs:
       - run:
           command: |
             git clone https://github.com/yonaskolb/Mint.git
-            make -C Mint/Makefile
+            make -C Mint
       - run:
           command: |
             mint run swiftlint swiftlint lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml

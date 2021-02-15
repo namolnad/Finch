@@ -3,19 +3,15 @@ name: Test
 on: pull_request
 
 jobs:
-  checkout:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
   test:
     needs: checkout
     runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Run Tests
         run: make test
 
   generate_linuxmain:
-    needs: checkout
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2

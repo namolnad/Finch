@@ -112,7 +112,10 @@ jobs:
             - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
           name: Restore lint cache
       - run: mkdir -p << parameters.lint-cache-dir >> << parameters.lint-results-dir >>
-      - run: brew bundle
+      - run:
+          command: |
+            git clone https://github.com/yonaskolb/Mint.git
+            make -C Mint
       - run:
           command: |
             mint run swiftlint swiftlint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml

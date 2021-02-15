@@ -104,9 +104,6 @@ jobs:
       lint-results-dir:
         default: build/reports/lint
         type: string
-      lint-bin:
-        default: .build/debug/swiftlint
-        type: string
     steps:
       - checkout
       - restore_cache:
@@ -114,25 +111,15 @@ jobs:
             - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}-{{ .Branch }}
             - v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}
           name: Restore lint cache
-      - restore_cache:
-          keys:
-            - v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
-          name: Restore bin cache
       - run: mkdir -p << parameters.lint-cache-dir >> << parameters.lint-results-dir >>
       - run:
           command: |
-            executable=$(echo '<< parameters.lint-bin >>')
-            if ! [ $(command -v $executable) ]; then
-              executable='swift run --package-path .devtools swiftlint'
-            fi
-
-            eval $executable lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
+            git clone https://github.com/yonaskolb/Mint.git
+            make -C Mint/Makefile
+      - run:
+          command: |
+            mint run swiftlint swiftlint lint --strict --reporter junit --cache-path << parameters.lint-cache-dir >> | tee << parameters.lint-results-dir >>/results.xml
           name: Lint
-      - save_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-build-cache-{{ arch }}-{{ checksum "Package.resolved" }}
-          paths:
-            - << parameters.lint-bin >>
-          name: Save bin cache
       - save_cache:
           key: v{{ .Environment.CACHE_VERSION }}-lint-cache-{{ arch }}-{{ .Branch }}
           paths:

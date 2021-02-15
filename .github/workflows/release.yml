@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install mint
-        run: HOMEBREW_NO_UPDATE=1 brew install mint
+        run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
       - name: Build Package
         run: make package
       - name: Generate Changelog
@@ -18,4 +18,6 @@ jobs:
           FINCH_CONFIG: .finch/release_config.yml
         run: swift run finch compare > changelog.md
       - name: Publish Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: gh release create ${GITHUB_REF} -d -p -F changelog.md Finch.pkg

@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/jakeheis/SwiftCLI",
         "state": {
           "branch": null,
-          "revision": "df4d5b3ec2c1421a58d71010ff43528db5b19e04",
-          "version": "5.3.3"
+          "revision": "2816678bcc37f4833d32abeddbdf5e757fa891d8",
+          "version": "6.0.2"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/mxcl/Version.git",
         "state": {
           "branch": null,
-          "revision": "200046c93f6d5d78a6d72bfd9c0b27a95e9c0a2b",
-          "version": "1.2.0"
+          "revision": "a94b48f36763c05629fc102837398505032dead9",
+          "version": "2.0.0"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/jpsim/Yams.git",
         "state": {
           "branch": null,
-          "revision": "c947a306d2e80ecb2c0859047b35c73b8e1ca27f",
-          "version": "2.0.0"
+          "revision": "9003d51672e516cc59297b7e96bff1dfdedcb4ea",
+          "version": "4.0.4"
         }
       }
     ]

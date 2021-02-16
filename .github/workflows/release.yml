@@ -15,7 +15,7 @@ jobs:
         run: make package
       - name: Generate Changelog
         env:
-          FINCH_CONFIG: .finch/release_config.yml
+          FINCH_CONFIG: .finch/config.release.yml
         run: swift run finch compare > changelog.md
       - name: Publish Release
         env:

@@ -59,8 +59,13 @@ final class ChangeLogModel: ChangeLogModelType {
             output.append(value)
         }
 
-        if options.useNewlineChar {
+        if options.useNewlineChar, app.configuration.formatConfig.markup != .html {
             output = output.replacingOccurrences(of: "\n", with: "\\n")
+        }
+
+        // Remove newlines from html output
+        if app.configuration.formatConfig.markup == .html {
+            output = output.replacingOccurrences(of: "\n", with: "")
         }
 
         return output

@@ -126,6 +126,18 @@ final class ChangeLogModelTests: TestCase {
         )
     }
 
+    func testHtml() {
+        let output = try! model.changeLog(
+            options: options(gitLog: defaultInputMock),
+            app: .mock(configuration: .mockHtml)
+        )
+
+        assertSnapshot(
+            matching: output,
+            as: .dump
+        )
+    }
+
     private func options(
         gitLog: String,
         requiredTags: [String] = [],

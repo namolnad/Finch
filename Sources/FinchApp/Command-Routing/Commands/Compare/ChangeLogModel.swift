@@ -44,15 +44,15 @@ final class ChangeLogModel: ChangeLogModelType {
         }
 
         if let value = outputInfo.version {
-            output.append(version(value))
+            output.append(version(value, markup: app.configuration.formatConfig.markup))
         }
 
         if let value = outputInfo.releaseManager {
-            output.append(formatted(contributorHandlePrefix: outputInfo.contributorHandlePrefix, releaseManager: value))
+            output.append(formatted(contributorHandlePrefix: outputInfo.contributorHandlePrefix, releaseManager: value, markup: app.configuration.formatConfig.markup))
         }
 
-        outputInfo.sections.forEach {
-            output.append($0.output)
+        outputInfo.sections.forEach { section in
+            output.append(section.output(markup: app.configuration.formatConfig.markup))
         }
 
         if let value = outputInfo.footer {
@@ -139,25 +139,48 @@ final class ChangeLogModel: ChangeLogModelType {
             .filter { !$0.isEmpty }
     }
 
-    private func version(_ version: String) -> String {
-        """
+    private func version(
+        _ version: String,
+        markup: FormatConfiguration.Markup
+    ) -> String {
+        switch markup {
+        case .html:
+            return "<h1>\(version)</h1>"
+        case .markdown:
+            return """
 
-        # \(version)
+            # \(version)
 
-        """
+            """
+        }
     }
 
-    private func formatted(contributorHandlePrefix: String, releaseManager: Contributor) -> String {
-        """
+    private func formatted(
+        contributorHandlePrefix: String,
+        releaseManager: Contributor,
+        markup: FormatConfiguration.Markup
+    ) -> String {
+        switch markup {
+        case .html:
+            return """
+            <h3>Release Manager</h3>
+            \(contributorHandlePrefix)\(releaseManager.handle)
+            """
+        case .markdown:
+            return """
 
-        ### Release Manager
+            ### Release Manager
 
-         - \(contributorHandlePrefix)\(releaseManager.handle)
+             - \(contributorHandlePrefix)\(releaseManager.handle)
 
-        """
+            """
+        }
     }
 
-    private func versionHeader(options: Options, app: App) throws -> String? {
+    private func versionHeader(
+        options: Options,
+        app: App
+    ) throws -> String? {
         guard !options.noShowVersion else {
             return nil
         }

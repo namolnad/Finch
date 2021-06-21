@@ -1,12 +1,12 @@
 /// :nodoc:
 public protocol Outputtable {
-    var output: String { get }
+    func output(markup: FormatConfiguration.Markup) -> String
 }
 
 /// :nodoc:
 extension Array: Outputtable where Element: Outputtable {
-    public var output: String {
-        map(\.output)
+    public func output(markup: FormatConfiguration.Markup) -> String {
+        return map { $0.output(markup: markup) }
             .joined(separator: "\n")
     }
 }

@@ -24,6 +24,8 @@ public struct FormatConfiguration {
      */
     public private(set) var header: String?
 
+    public private(set) var markup: Markup
+
     /**
      * A list of SectionInfo structures for the project. Sections
      * will appear in the final output in the same order they are
@@ -39,6 +41,7 @@ extension FormatConfiguration: Codable {
         case footer
         case formatString = "format_string"
         case header
+        case markup
         case sectionInfos = "section_infos"
     }
 
@@ -50,6 +53,7 @@ extension FormatConfiguration: Codable {
         self.footer = container.optionalDecode(forKey: .footer)
         self.formatTemplate = FormatTemplate(formatString: formatString)
         self.header = container.optionalDecode(forKey: .header)
+        self.markup = container.decode(forKey: .markup, default: .markdown)
         self.sectionInfos = container.decode(forKey: .sectionInfos, default: [])
     }
 
@@ -60,6 +64,7 @@ extension FormatConfiguration: Codable {
         try container.encode(footer, forKey: .footer)
         try container.encode(formatTemplate?.formatString, forKey: .formatString)
         try container.encode(header, forKey: .header)
+        try container.encode(markup, forKey: .markup)
         try container.encode(sectionInfos, forKey: .sectionInfos)
     }
 }
@@ -71,6 +76,7 @@ extension FormatConfiguration: SubConfiguration {
         footer: nil,
         formatTemplate: nil,
         header: nil,
+        markup: .markdown, // TODO: determine if this breaks config - don't think it should based on cursory look
         sectionInfos: []
     )
 
@@ -79,6 +85,7 @@ extension FormatConfiguration: SubConfiguration {
         footer: nil,
         formatTemplate: .default,
         header: nil,
+        markup: .markdown,
         sectionInfos: .default
     )
 }
@@ -102,6 +109,15 @@ extension FormatConfiguration: Mergeable {
             other.footer = footer
         }
 
+        other.markup = markup
+
         delimiterConfig.merge(into: &other.delimiterConfig)
+    }
+}
+
+extension FormatConfiguration {
+    public enum Markup: String, Codable {
+        case html
+        case markdown
     }
 }

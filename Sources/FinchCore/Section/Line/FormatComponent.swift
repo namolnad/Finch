@@ -62,7 +62,12 @@ extension FormatComponent: LineOutputtable {
                 urlTitle = "PR #\(prNum)"
                 url = "\(context.configuration.gitConfig.repoBaseUrl)/pull/\(prNum)"
             }
-            return "[\(urlTitle)](\(url))"
+            switch context.configuration.formatConfig.markup {
+            case .html:
+                return "<a href=\"\(url)\" target=\"_blank\">\(urlTitle)</a>"
+            case .markdown:
+                return "[\(urlTitle)](\(url))"
+            }
         case .contributorEmail:
             return components.contributorEmail
         case .contributorHandle:

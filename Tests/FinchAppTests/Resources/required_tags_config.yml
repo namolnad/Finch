@@ -1,5 +1,5 @@
 format:
-  format_string: "- << message >>"
+  format_string: "<< message >>"
   section_infos:
   - title: Features
     tags:

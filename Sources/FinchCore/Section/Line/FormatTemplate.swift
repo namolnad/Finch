@@ -22,11 +22,10 @@ extension FormatTemplate {
     /**
      * FormatTemplate if no section-specific or global `format_string` has
      * been configured. Equivalent to the format_string value of:
-     * `" - << tags >> << message >> — << commit_type_hyperlink >> — << contributor_handle >>"`
+     * `"<< tags >> << message >> — << commit_type_hyperlink >> — << contributor_handle >>"`
      */
     static let `default`: FormatTemplate = .init(
         outputtables: [
-            " - ",
             FormatComponent.tags,
             " ",
             FormatComponent.message,

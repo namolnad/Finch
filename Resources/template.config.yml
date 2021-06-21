@@ -23,18 +23,18 @@ format:
     - Submission:
     - Release (expected):
     - Release (actual):
-  format_string: ' - << tags >> << message >> - << commit_type_hyperlink >> - << contributor_handle
+  format_string: '<< tags >> << message >> - << commit_type_hyperlink >> - << contributor_handle
     >>'
   header: null
   section_infos:
-  - format_string: ' - << tags >> << message >> - << commit_type_hyperlink >> - <<
+  - format_string: '<< tags >> << message >> - << commit_type_hyperlink >> - <<
       contributor_handle >>'
     capitalizes_message: false
     excluded: false
     tags:
     - '*'
     title: Features
-  - format_string: ' - << tags >> << message >> - << commit_type_hyperlink >> - <<
+  - format_string: '<< tags >> << message >> - << commit_type_hyperlink >> - <<
       contributor_handle >>'
     capitalizes_message: false
     excluded: false

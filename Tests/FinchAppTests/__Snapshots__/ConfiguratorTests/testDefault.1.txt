@@ -26,8 +26,7 @@
       - some: "\n### Timeline\n- Begin development:\n- Feature cut-off / Start of bake / dogfooding:\n- Submission:\n- Release (expected):\n- Release (actual):\n"
     ▿ formatTemplate: Optional<FormatTemplate>
       ▿ some: FormatTemplate
-        ▿ outputtables: 8 elements
-          - " - "
+        ▿ outputtables: 7 elements
           - FormatComponent.tags
           - " "
           - FormatComponent.message
@@ -36,6 +35,7 @@
           - " - "
           - FormatComponent.contributorHandle
     - header: Optional<String>.none
+    - markup: Markup.markdown
     ▿ sectionInfos: 3 elements
       ▿ SectionInfo
         - capitalizesMessage: false
@@ -60,8 +60,7 @@
         - excluded: false
         ▿ formatTemplate: Optional<FormatTemplate>
           ▿ some: FormatTemplate
-            ▿ outputtables: 4 elements
-              - " - "
+            ▿ outputtables: 3 elements
               - FormatComponent.message
               - " — "
               - FormatComponent.commitTypeHyperlink

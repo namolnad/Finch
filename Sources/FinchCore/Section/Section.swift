@@ -37,12 +37,22 @@ extension Section {
 
 /// :nodoc:
 extension Section: Outputtable {
-    public var output: String {
-        """
+    public func output(markup: FormatConfiguration.Markup) -> String {
+        switch markup {
+        case .html:
+            return """
 
-        ### \(info.title)
-        \(lines.output)
+            <h3>\(info.title)<h3>
+            <ul>\(lines.output(markup: markup))</ul>
 
-        """
+            """
+        case .markdown:
+            return """
+
+            ### \(info.title)
+            \(lines.output(markup: markup))
+
+            """
+        }
     }
 }

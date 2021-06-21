@@ -19,13 +19,18 @@ extension Line {
             }
         }
 
-        return .init(value: value)
+        return .init(value: value.trimmingCharacters(in: .whitespaces))
     }
 }
 
 /// :nodoc:
 extension Line: Outputtable {
-    public var output: String {
-        value
+    public func output(markup: FormatConfiguration.Markup) -> String {
+        switch markup {
+        case .html:
+            return "<li>\(value)</li>" // FIXME: figure out what the actual markup is
+        case .markdown:
+            return " - \(value)"
+        }
     }
 }

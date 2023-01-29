@@ -27,9 +27,16 @@ We strongly believe in the importance of a good changelog. We also know changelo
 
 ## Installation
 Finch is available via multiple installation methods:
-- Installable package (**recommended**): Download and run the most recent [release](https://github.com/namolnad/Finch/releases)'s `Finch.pkg` file and follow the on-screen instructions
-- Swift Package Manager: Add to your `Package.swift` file's dependencies: `.package(url: "https://github.com/namolnad/Finch.git", from: "0.0.17")` and call via `swift run finch compare`
-- From source: If you’d like to build from source, you can clone this repository and run `make install` from the root of the cloned directory. This will install and link the Finch binary and will place a template config file at the following location `$HOME/.finch/template.config.yml`
+1. Homebrew
+    1. Add tap `brew tap namolnad/formulae`
+    1. Install finch `brew install --formula finch`
+1. Installable package
+    1. Download and run the most recent [release](https://github.com/namolnad/Finch/releases)'s `Finch.pkg` file and follow the on-screen instructions
+1. Mint:
+    1. Install mint `brew install mint`
+    1. Install finch `mint install namolnad/finch`
+1. From source
+    1. If you’d like to build from source, you can clone this repository and run `make install` from the root of the cloned directory. This will install and link the Finch binary and will place a template config file at the following location `$HOME/.finch/template.config.yml`
 
 
 ## Usage

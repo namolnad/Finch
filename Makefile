@@ -14,7 +14,7 @@ DISTRIBUTION_PLIST=$(APP_TMP)/Distribution.plist
 DOCS=docs
 INSTALL_DIR=$(HOME)/.$(APP_NAME_LOWERCASE)
 INTERNAL_PACKAGE=$(APP_NAME)App.pkg
-JAZZY=bundle exec jazzy --module-version $(VERSION_STRING)
+JAZZY=jazzy --module-version $(VERSION_STRING)
 LN=ln -fs
 MKDIR=mkdir -p
 ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
@@ -46,6 +46,7 @@ config_template:
 	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/
 
 docs: project
+	@command -v jazzy >/dev/null || { echo "\njazzy not found. Install it with: gem install jazzy"; exit 1; }
 	$(JAZZY) --config .jazzy/FinchApp.yml -o $(DOCS)/FinchApp
 	$(JAZZY) --config .jazzy/FinchCore.yml -o $(DOCS)/FinchCore
 
@@ -62,19 +63,19 @@ linuxmain:
 package: build
 	$(MKDIR) $(APP_TMP)
 	$(CP) $(APP_EXECUTABLE) $(APP_TMP)
-	
+
 	pkgbuild \
 	  --identifier $(ORG_IDENTIFIER) \
 	  --install-location $(BINARIES_DIR) \
 	  --root $(APP_TMP) \
 	  --version $(VERSION_STRING) \
 	  $(INTERNAL_PACKAGE)
-	
+
 	productbuild \
 	  --synthesize \
 	  --package $(INTERNAL_PACKAGE) \
 	  $(DISTRIBUTION_PLIST)
-	
+
 	productbuild \
 	  --distribution $(DISTRIBUTION_PLIST) \
 	  --package-path $(INTERNAL_PACKAGE) \

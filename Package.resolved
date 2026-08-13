@@ -2,6 +2,33 @@
   "object": {
     "pins": [
       {
+        "package": "swift-custom-dump",
+        "repositoryURL": "https://github.com/pointfreeco/swift-custom-dump",
+        "state": {
+          "branch": null,
+          "revision": "e9c34fd54ece006b491a0e6d23fe9a6024b9a828",
+          "version": "1.7.0"
+        }
+      },
+      {
+        "package": "swift-snapshot-testing",
+        "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing",
+        "state": {
+          "branch": null,
+          "revision": "59a99c458de4d2dee580529b61b4f78dca7b7fa6",
+          "version": "1.19.4"
+        }
+      },
+      {
+        "package": "swift-syntax",
+        "repositoryURL": "https://github.com/swiftlang/swift-syntax",
+        "state": {
+          "branch": null,
+          "revision": "79e4b74a295b6eb74a8b585e3a39d29e70c1dbd1",
+          "version": "603.0.2"
+        }
+      },
+      {
         "package": "SwiftCLI",
         "repositoryURL": "https://github.com/jakeheis/SwiftCLI",
         "state": {
@@ -17,6 +44,15 @@
           "branch": null,
           "revision": "a94b48f36763c05629fc102837398505032dead9",
           "version": "2.0.0"
+        }
+      },
+      {
+        "package": "xctest-dynamic-overlay",
+        "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
+        "state": {
+          "branch": null,
+          "revision": "8f6abcf4c8950e2679d5b2fee4ca284fd7c34886",
+          "version": "1.11.0"
         }
       },
       {

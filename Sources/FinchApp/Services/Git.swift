@@ -10,8 +10,8 @@ struct Git {
 /// :nodoc:
 extension Git {
     private func gitExecutableArgs() throws -> [String] {
-        [
-            "\(try app.configuration.gitConfig.executablePath ?? executable(.git))",
+        try [
+            "\(app.configuration.gitConfig.executablePath ?? executable(.git))",
             "--git-dir",
             "\(app.configuration.projectDir)/.git"
         ]
@@ -40,9 +40,9 @@ extension Git {
         try git(
             "tag -l --sort=v:refname",
             "|",
-            "\(try executable(.tail)) -2",
+            "\(executable(.tail)) -2",
             "|",
-            "\(try executable(.tr)) '\n' ' '"
+            "\(executable(.tr)) '\n' ' '"
         )
     }
 
@@ -54,15 +54,15 @@ extension Git {
         return try git(
             "branch -r --list",
             "|",
-            "\(try executable(.grep)) -E '\(app.configuration.gitConfig.branchPrefix)\(semVerRegex)'",
+            "\(executable(.grep)) -E '\(app.configuration.gitConfig.branchPrefix)\(semVerRegex)'",
             "|",
-            "\(try executable(.sort)) -V",
+            "\(executable(.sort)) -V",
             "|",
-            "\(try executable(.tail)) -2",
+            "\(executable(.tail)) -2",
             "|",
-            "\(try executable(.sed)) 's#\(app.configuration.gitConfig.branchPrefix)##'",
+            "\(executable(.sed)) 's#\(app.configuration.gitConfig.branchPrefix)##'",
             "|",
-            "\(try executable(.tr)) '\n' ' '"
+            "\(executable(.tr)) '\n' ' '"
         )
     }
 

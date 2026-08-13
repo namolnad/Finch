@@ -27,8 +27,8 @@ extension DelimiterConfiguration: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        input = container.decode(forKey: .input, default: .blank)
-        output = container.decode(forKey: .output, default: .blank)
+        self.input = container.decode(forKey: .input, default: .blank)
+        self.output = container.decode(forKey: .output, default: .blank)
     }
 }
 

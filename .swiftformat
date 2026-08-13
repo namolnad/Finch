@@ -22,4 +22,8 @@
 
 --enable isEmpty
 
+# Converting the test suite's `try!` calls to throwing test methods is a
+# behavioral change to the tests, so it is deferred to its own pass.
+--disable noForceTryInTests
+
 --exclude DerivedData

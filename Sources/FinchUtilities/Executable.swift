@@ -32,10 +32,10 @@ public enum Executable: String {
 }
 
 private struct ExecutableFinder {
-    public enum Error: LocalizedError {
+    enum Error: LocalizedError {
         case noPathVariable
 
-        public var failureReason: String? {
+        var failureReason: String? {
             switch self {
             case .noPathVariable:
                 return Strings.Error.Exec.noPathVariable
@@ -65,7 +65,7 @@ private struct ExecutableFinder {
     }
 
     fileprivate func executablePath(executable: Executable) throws -> String? {
-        searchPaths(from: try getSearchPath())
+        try searchPaths(from: getSearchPath())
             .map { $0 + "/" + executable.rawValue }
             .map { Path(string: $0) }
             .first { fileManager.isExecutableFile(atPath: $0.absolutePath) }?

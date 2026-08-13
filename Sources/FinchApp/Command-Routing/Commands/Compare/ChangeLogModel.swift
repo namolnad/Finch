@@ -51,8 +51,8 @@ final class ChangeLogModel: ChangeLogModelType {
             output.append(formatted(contributorHandlePrefix: outputInfo.contributorHandlePrefix, releaseManager: value))
         }
 
-        outputInfo.sections.forEach {
-            output.append($0.output)
+        for section in outputInfo.sections {
+            output.append(section.output)
         }
 
         if let value = outputInfo.footer {
@@ -69,7 +69,7 @@ final class ChangeLogModel: ChangeLogModelType {
     /// See `ChangeLogModelType.versions(app:)` for definition.
     func versions(app: App) throws -> (old: Version, new: Version) {
         try resolver.versions(
-            from: try service.versionsString(app: app)
+            from: service.versionsString(app: app)
         )
     }
 
@@ -98,7 +98,7 @@ final class ChangeLogModel: ChangeLogModelType {
             .enumerated()
             .reduce([:]) { partial, next in
                 var map = partial
-                next.element.info.tags.forEach { tag in
+                for tag in next.element.info.tags {
                     map.updateValue(next.offset, forKey: tag)
                 }
                 return map
@@ -125,7 +125,7 @@ final class ChangeLogModel: ChangeLogModelType {
         )
     }
 
-    // Normalizes input/removes
+    /// Normalizes input/removes
     private static func filteredLines(input: String, using transformers: [Transformer]) -> [String] {
         // Input must be sorted for regex to remove consecutive matching lines (cherry-picks)
         let sortedInput = input

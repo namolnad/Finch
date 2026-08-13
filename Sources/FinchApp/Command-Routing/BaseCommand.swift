@@ -10,13 +10,19 @@ typealias AppGenerator = (_ configPath: String?, _ projectDir: String?, _ verbos
 /// Abstract base command class. All commands should subclass BaseCommand.
 class BaseCommand: Command {
     /// **[Required]** The name of the command. Must be implemented by subclass.
-    var name: String { fatalError("Not implemented") }
+    var name: String {
+        fatalError("Not implemented")
+    }
 
     /// **[Required]** A short description of the command. Must be implemented by subclass.
-    var shortDescription: String { fatalError("Not implemented") }
+    var shortDescription: String {
+        fatalError("Not implemented")
+    }
 
     /// **[Optional]** A longer description displayed when command-specific help is presented.
-    var longDescription: String { shortDescription }
+    var longDescription: String {
+        shortDescription
+    }
 
     /// :nodoc:
     let appGenerator: AppGenerator

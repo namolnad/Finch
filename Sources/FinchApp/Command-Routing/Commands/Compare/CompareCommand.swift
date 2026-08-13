@@ -61,10 +61,14 @@ final class CompareCommand: BaseCommand {
     let requiredTags: Key<[String]> = .init("--required-tags", description: Strings.Compare.Options.requiredTags)
     let useNewlineChar: Flag = .init("--use-newline-char", description: Strings.Compare.Options.useNewlineChar)
 
-    override var shortDescription: String { Strings.Compare.commandOverview }
+    override var shortDescription: String {
+        Strings.Compare.commandOverview
+    }
 
     /// The command's name.
-    override var name: String { Strings.Compare.commandName }
+    override var name: String {
+        Strings.Compare.commandName
+    }
 
     private let model: ChangeLogModelType
 

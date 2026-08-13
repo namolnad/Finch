@@ -8,9 +8,9 @@ struct Versions: ConvertibleFromString {
 
     static var null: Versions = .init(old: .null, new: .null)
 
-    public static var name: String = "versions"
+    static var name: String = "versions"
 
-    public init?(input: String) {
+    init?(input: String) {
         guard let versions = try? VersionsResolver().versions(from: input) else {
             return nil
         }

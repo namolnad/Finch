@@ -56,7 +56,7 @@ extension String {
     /// Walk along format string to gather typed LineOutputtable's
     fileprivate var lineOutputtables: [LineOutputtable] {
         var components: [String] = []
-        var component: String = ""
+        var component = ""
         if let value = first {
             component.append(value)
         }

@@ -1,6 +1,10 @@
 name: Lint
 
-on: pull_request
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   lint:
@@ -8,11 +12,11 @@ jobs:
     env:
       MINT_PATH: ${{ github.workspace }}/.mint_build
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - name: Install mint
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v6
         with:
           path: ${{ env.MINT_PATH }}
           key: ${{ runner.os }}-mint-${{ hashFiles('**/Mintfile') }}

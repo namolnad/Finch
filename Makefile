@@ -30,7 +30,7 @@ VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(
 RM_SAFELY := bash -c '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && set -o noglob && rm -rf $${1:A}' --
 
 
-.PHONY: all build build_with_disable_sandbox config_template install lint linuxmain package prefix_install project publish symlink test update_build_number update_version
+.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install project publish symlink test update_build_number update_version
 
 all: install
 
@@ -56,9 +56,6 @@ install: build symlink config_template
 
 lint:
 	mint run swiftlint swiftlint --strict
-
-linuxmain:
-	$(TEST) --generate-linuxmain
 
 package: build
 	$(MKDIR) $(APP_TMP)

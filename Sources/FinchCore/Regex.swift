@@ -37,7 +37,7 @@ extension Regex.Replacement {
         return expression.stringByReplacingMatches(
             in: body,
             options: [],
-            range: .init(location: 0, length: body.count),
+            range: .init(location: 0, length: body.utf16.count),
             withTemplate: replacement
         )
     }
@@ -50,7 +50,7 @@ extension Regex.Pattern {
             return []
         }
 
-        let range: NSRange = .init(location: 0, length: body.count)
+        let range: NSRange = .init(location: 0, length: body.utf16.count)
         let options: NSRegularExpression.MatchingOptions = [.withTransparentBounds]
 
         return expression.matches(in: body, options: options, range: range)
@@ -78,6 +78,14 @@ extension NSTextCheckingResult {
 extension Regex.Pattern {
     static let rawPattern: Regex.Pattern = "&&&(.*?)&&&(?:.*?)@@@(.*?)\\(#(.*?)\\)@@@###(.*?)###"
 
+    /// Captures a single commit's log output, whose message may span multiple lines.
+    static let commitPattern: Regex.Pattern = "^(.*?)&&&(.*?)&&&(.*?)@@@([\\s\\S]*)@@@###(.*?)###"
+
+    /// Matches the trailing pull request reference of a commit message. e.g. ` (#1234)`
+    static let pullRequestSuffixPattern: Regex.Pattern = "\\s*\\(#\\d+\\)$"
+
+    static let shaPattern: Regex.Pattern = "&&&(.*?)&&&"
+
     static func filteredMessagePattern(from configuration: Configuration) -> Regex.Pattern {
         let input = configuration.formatConfig.delimiterConfig.input
 
@@ -88,5 +96,10 @@ extension Regex.Pattern {
         let input = configuration.formatConfig.delimiterConfig.input
 
         return "\(input.left.escaped)(.*?)\(input.right.escaped)"
+    }
+
+    /// Matches only a tag opening the line, marking the start of a changelog entry.
+    static func tagPrefixPattern(from configuration: Configuration) -> Regex.Pattern {
+        "^\(tagPattern(from: configuration))"
     }
 }

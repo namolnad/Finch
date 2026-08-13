@@ -25,7 +25,7 @@ extension Git {
             "--left-right",
             "--cherry-pick",
             "--oneline",
-            "--format='format:&&&%H&&& - @@@%s@@@###%ae###'",
+            "--format='format:&&&%H&&& - @@@%B@@@###%ae###'",
             "--date=short",
             "\(prefix)\(oldVersion)...\(prefix)\(newVersion)"
         )

@@ -36,6 +36,18 @@ final class ChangeLogModelTests: TestCase {
         )
     }
 
+    func testMultipleEntriesPerCommitOutput() {
+        let output = try! model.changeLog(
+            options: options(gitLog: multipleEntriesInputMock, showReleaseManager: false),
+            app: .mock()
+        )
+
+        assertSnapshot(
+            matching: output,
+            as: .dump
+        )
+    }
+
     func testExcludedSectionOutput() {
         let output = try! model.changeLog(
             options: options(gitLog: cherryPickedInputMock),

@@ -80,7 +80,7 @@ final class ChangeLogModel: ChangeLogModelType {
         let releaseManager: Contributor? = self.releaseManager(options: options, configuration: configuration)
 
         let linesComponents = type(of: self)
-            .filteredLines(input: rawChangeLog, using: .default(for: configuration))
+            .filteredLines(input: rawChangeLog, configuration: configuration)
             .compactMap { rawLine in
                 LineComponents(
                     rawLine: rawLine,
@@ -126,10 +126,12 @@ final class ChangeLogModel: ChangeLogModelType {
     }
 
     /// Normalizes input/removes
-    private static func filteredLines(input: String, using transformers: [Transformer]) -> [String] {
+    private static func filteredLines(input: String, configuration: Configuration) -> [String] {
+        let transformers: [Transformer] = .default(for: configuration)
+
         // Input must be sorted for regex to remove consecutive matching lines (cherry-picks)
-        let sortedInput = input
-            .components(separatedBy: "\n")
+        let sortedInput = RawLog
+            .entryLines(from: input, configuration: configuration)
             .sorted(by: "@@@(.*)@@@")
             .joined(separator: "\n")
 

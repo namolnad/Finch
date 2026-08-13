@@ -24,7 +24,7 @@ SWIFT_BUILD_FLAGS=--configuration release
 TEST=FINCH_TESTS=1 swift test
 UNAME=$(shell uname)
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
-VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(//p' | tr -d ") " | tr "," ".")
+VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(//p' | tr -d ") " | sed -e 's/[a-z]*://g' | tr "," ".")
 
 # RM_SAFELY · `rm -rf` ensuring first and only parameter is non-null, contains more than whitespace, non-root if resolving absolutely.
 RM_SAFELY := bash -c '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && set -o noglob && rm -rf $${1:A}' --

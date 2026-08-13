@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     container: swift:6.3.3
     steps:
+      - name: Install make
+        run: apt-get update && apt-get install -y make
       - uses: actions/checkout@v7
       - name: Mark workspace as safe for git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"

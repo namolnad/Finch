@@ -21,13 +21,12 @@ extension Line {
              * separator introducing it stranded. The separator opening the
              * line is kept, since that is a bullet rather than a join.
              */
-            if
-                output.isEmpty,
-                outputtable is FormatComponent,
-                let separator = parts.last,
-                separator.isSeparator,
-                parts.dropLast().contains(where: { !$0.isEmpty })
-            {
+            let isStrandingSeparator = output.isEmpty
+                && outputtable is FormatComponent
+                && parts.last?.isSeparator == true
+                && parts.dropLast().contains { !$0.isEmpty }
+
+            if isStrandingSeparator {
                 parts.removeLast()
             }
 

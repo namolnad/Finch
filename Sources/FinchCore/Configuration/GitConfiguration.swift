@@ -64,7 +64,7 @@ extension GitConfiguration: Mergeable {
             other.branchPrefix = branchPrefix
         }
 
-        if let executablePath = executablePath {
+        if let executablePath {
             other.executablePath = executablePath
         }
 

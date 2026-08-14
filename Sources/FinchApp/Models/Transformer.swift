@@ -10,7 +10,7 @@ struct Transformer {
 }
 
 /// :nodoc:
-extension Array where Element == Transformer {
+extension [Transformer] {
     static func `default`(for configuration: Configuration) -> [Transformer] {
         [
             exclusionTransformers(for: configuration),

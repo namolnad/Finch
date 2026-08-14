@@ -42,11 +42,11 @@ extension FormatTemplate {
         outputtables.reduce("") { (partial: String, outputtable: LineOutputtable) in
             switch outputtable {
             case let component as FormatComponent:
-                return partial + "<< \(component.rawValue) >>"
+                partial + "<< \(component.rawValue) >>"
             case let string as String:
-                return partial + string
+                partial + string
             default:
-                return partial
+                partial
             }
         }
     }
@@ -101,23 +101,21 @@ extension String {
         var transformedComps: [LineOutputtable] = []
 
         for component in components {
-            let outputtable: LineOutputtable
-
-            switch component {
+            let outputtable: LineOutputtable = switch component {
             case "<< \(string(for: .commitTypeHyperlink)) >>":
-                outputtable = format(component: .commitTypeHyperlink)
+                format(component: .commitTypeHyperlink)
             case "<< \(string(for: .contributorEmail)) >>":
-                outputtable = format(component: .contributorEmail)
+                format(component: .contributorEmail)
             case "<< \(string(for: .contributorHandle)) >>":
-                outputtable = format(component: .contributorHandle)
+                format(component: .contributorHandle)
             case "<< \(string(for: .message)) >>":
-                outputtable = format(component: .message)
+                format(component: .message)
             case "<< \(string(for: .tags)) >>":
-                outputtable = format(component: .tags)
+                format(component: .tags)
             case "<< \(string(for: .sha)) >>":
-                outputtable = format(component: .sha)
+                format(component: .sha)
             default:
-                outputtable = component
+                component
             }
 
             transformedComps.append(outputtable)

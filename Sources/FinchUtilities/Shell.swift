@@ -9,11 +9,11 @@ public struct Shell {
         public var failureReason: String? {
             switch self {
             case .emptyArguments:
-                return Strings.Error.Shell.emptyArguments
+                Strings.Error.Shell.emptyArguments
             case let .emptyResult(args: args):
-                return Strings.Error.Shell.emptyResult(args: args)
+                Strings.Error.Shell.emptyResult(args: args)
             case let .subprocessNonZeroExit(code: code, message: message):
-                return Strings.Error.Shell.subprocessNonZeroExit(code: code, message: message)
+                Strings.Error.Shell.subprocessNonZeroExit(code: code, message: message)
             }
         }
     }

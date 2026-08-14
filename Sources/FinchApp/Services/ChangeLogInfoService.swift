@@ -25,7 +25,7 @@ struct ChangeLogInfoService: ChangeLogInfoServiceType {
         var failureReason: String? {
             switch self {
             case .noVersionsString:
-                return Strings.Compare.Error.noVersions
+                Strings.Compare.Error.noVersions
             }
         }
     }

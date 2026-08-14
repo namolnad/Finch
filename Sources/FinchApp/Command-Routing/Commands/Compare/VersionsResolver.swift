@@ -16,7 +16,7 @@ struct VersionsResolver: VersionsResolving {
         var failureReason: String? {
             switch self {
             case .unableToResolveVersion:
-                return Strings.Compare.Error.unableToResolve
+                Strings.Compare.Error.unableToResolve
             }
         }
     }

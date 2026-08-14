@@ -66,11 +66,10 @@ struct Configurator {
 
         self.output = output
 
-        let homeDirectoryPath: String
-        if #available(OSX 10.12, *) {
-            homeDirectoryPath = fileManager.homeDirectoryForCurrentUser.path
+        let homeDirectoryPath: String = if #available(OSX 10.12, *) {
+            fileManager.homeDirectoryForCurrentUser.path
         } else {
-            homeDirectoryPath = NSHomeDirectory()
+            NSHomeDirectory()
         }
 
         var cascadingPaths = [

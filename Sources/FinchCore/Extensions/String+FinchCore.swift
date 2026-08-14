@@ -20,7 +20,7 @@ extension String: LineOutputtable {
 }
 
 /// :nodoc:
-extension Array where Element == String {
+extension [String] {
     public func sorted(by pattern: Regex.Pattern) -> [String] {
         sorted {
             guard let match1 = pattern.matches(in: $0).first else {

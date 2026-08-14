@@ -25,7 +25,7 @@ public enum Executable: String {
         public var failureReason: String? {
             switch self {
             case let .notFound(exec):
-                return Strings.Error.Exec.notFound(exec)
+                Strings.Error.Exec.notFound(exec)
             }
         }
     }
@@ -38,7 +38,7 @@ private struct ExecutableFinder {
         var failureReason: String? {
             switch self {
             case .noPathVariable:
-                return Strings.Error.Exec.noPathVariable
+                Strings.Error.Exec.noPathVariable
             }
         }
     }

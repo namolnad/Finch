@@ -1,7 +1,7 @@
 /**
  * Sub-configuration for the project's contributors.
  */
-public struct ContributorsConfiguration {
+public struct ContributorsConfiguration: Sendable {
     /**
      * List of the project's contributors.
      */

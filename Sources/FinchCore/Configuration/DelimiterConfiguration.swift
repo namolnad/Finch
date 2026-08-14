@@ -1,7 +1,7 @@
 /**
  * FormatConfiguration's sub-configuration for the project's tag delimiters.
  */
-public struct DelimiterConfiguration: Equatable {
+public struct DelimiterConfiguration: Equatable, Sendable {
     /**
      * The delimiter pair surrounding a commit tag prior to
      * Finch processing.

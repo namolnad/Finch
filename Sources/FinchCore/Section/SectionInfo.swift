@@ -4,7 +4,7 @@ import FinchUtilities
  * A structure to describe the meta-contents of a section. Used for
  * section description, formatting, and commit-to-section assignment.
  */
-public struct SectionInfo {
+public struct SectionInfo: Sendable {
     /**
      * If true, normalizes each commit message by capitalizing the first
      * letter of the message.

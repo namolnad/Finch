@@ -2,7 +2,7 @@
  * A structure describing the left and right delimiters surrounding
  * a commit message tag.
  */
-public struct DelimiterPair: Codable, Equatable {
+public struct DelimiterPair: Codable, Equatable, Sendable {
     /**
      * The left-hand tag delimiter.
      */

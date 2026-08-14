@@ -59,7 +59,7 @@ struct Configurator {
         ]
 
         self.immediateReturnPaths = immediateReturnPaths
-            .compactMap { $0 }
+            .compactMap(\.self)
             .filter { !$0.isEmpty }
 
         self.defaultConfig = .default(projectDir: projectDir ?? fileManager.currentDirectoryPath)

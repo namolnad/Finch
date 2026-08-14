@@ -2,7 +2,7 @@
  * Sub-configuration for the formatting of the overall output as well
  * as the input for tag delimiters.
  */
-public struct FormatConfiguration {
+public struct FormatConfiguration: Sendable {
     /**
      * Sub-configuration for the project's tag delimiters.
      */
@@ -66,7 +66,7 @@ extension FormatConfiguration: Codable {
 
 /// :nodoc:
 extension FormatConfiguration: SubConfiguration {
-    public static var blank: FormatConfiguration = .init(
+    public static let blank: FormatConfiguration = .init(
         delimiterConfig: .blank,
         footer: nil,
         formatTemplate: nil,
@@ -74,7 +74,7 @@ extension FormatConfiguration: SubConfiguration {
         sectionInfos: []
     )
 
-    public static var `default`: FormatConfiguration = .init(
+    public static let `default`: FormatConfiguration = .init(
         delimiterConfig: .default,
         footer: nil,
         formatTemplate: .default,

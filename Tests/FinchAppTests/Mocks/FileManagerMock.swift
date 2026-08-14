@@ -1,7 +1,10 @@
 import Foundation
 
 extension FileManager {
-    static let mock: FileManager = FileManagerMock()
+    /// Built per access: FileManager is a reference type, and so not Sendable
+    static var mock: FileManager {
+        FileManagerMock()
+    }
 }
 
 final class FileManagerMock: FileManager {

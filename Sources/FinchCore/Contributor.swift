@@ -1,7 +1,7 @@
 /**
  * A structure to describe a given project contributor.
  */
-public struct Contributor {
+public struct Contributor: Sendable {
     /**
      * The contributor's emails. Either singular or list style
      * keys are acceptable in the config file.

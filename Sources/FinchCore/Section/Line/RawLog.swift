@@ -62,7 +62,7 @@ extension RawLog {
 
     /// Returns the message for each changelog entry within a commit message.
     private static func entries(in message: String, configuration: Configuration) -> [String] {
-        let tagPrefix: Regex.Pattern = .tagPrefixPattern(from: configuration)
+        let parser = CommitParser(configuration: configuration)
 
         var entries: [String] = []
         var isExtendable = false
@@ -76,7 +76,7 @@ extension RawLog {
                 continue
             }
 
-            if entries.isEmpty || value.range(of: tagPrefix, options: .regularExpression) != nil {
+            if entries.isEmpty || parser.opensEntry(value) {
                 entries.append(value)
                 isExtendable = true
             } else if isExtendable {

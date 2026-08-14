@@ -86,20 +86,37 @@ extension Regex.Pattern {
 
     static let shaPattern: Regex.Pattern = "&&&(.*?)&&&"
 
-    static func filteredMessagePattern(from configuration: Configuration) -> Regex.Pattern {
-        let input = configuration.formatConfig.delimiterConfig.input
+    /// Captures the message a commit's log output carries.
+    static let messagePattern: Regex.Pattern = "@@@([\\s\\S]*)@@@"
 
-        return "@@@(?:\(input.left.escaped)(?:.*?)\(input.right.escaped))*(.*?)(?: \\(#\\d+\\))?@@@"
-    }
+    /**
+     * Captures a Conventional Commits message: the type, any scopes, the `!`
+     * marking a breaking change, and the description. The type is restricted
+     * to lower case so that ordinary prose containing a colon — `Note: ...`,
+     * `Fixes: #12` — is not mistaken for one.
+     */
+    static let conventionalPattern: Regex.Pattern = "^([a-z][a-z-]*)(?:\\(([^)]*)\\))?(!)?:[ ]*([\\s\\S]*)$"
 
-    static func tagPattern(from configuration: Configuration) -> Regex.Pattern {
-        let input = configuration.formatConfig.delimiterConfig.input
+    /// Matches only a conventional type opening the line, which starts an entry.
+    static let conventionalPrefixPattern: Regex.Pattern = "^[a-z][a-z-]*(?:\\([^)]*\\))?!?:"
 
-        return "\(input.left.escaped)(.*?)\(input.right.escaped)"
+    /// Matches the footer form of a breaking change, per the specification.
+    static let breakingFooterPattern: Regex.Pattern = "^BREAKING[ -]CHANGE:[ ]*"
+
+    static func tagPattern(for delimiters: DelimiterPair) -> Regex.Pattern {
+        "\(delimiters.left.escaped)(.*?)\(delimiters.right.escaped)"
     }
 
     /// Matches only a tag opening the line, marking the start of a changelog entry.
-    static func tagPrefixPattern(from configuration: Configuration) -> Regex.Pattern {
-        "^\(tagPattern(from: configuration))"
+    static func tagPrefixPattern(for delimiters: DelimiterPair) -> Regex.Pattern {
+        "^\(tagPattern(for: delimiters))"
+    }
+
+    /// Matches punctuation left behind once opening tags are removed.
+    static let leadingSeparatorPattern: Regex.Pattern = "^[:\\s]+"
+
+    /// Matches the run of tags opening a message, which the description drops.
+    static func leadingTagsPattern(for delimiters: DelimiterPair) -> Regex.Pattern {
+        "^(?:\(delimiters.left.escaped)(?:.*?)\(delimiters.right.escaped))+"
     }
 }

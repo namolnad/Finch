@@ -104,12 +104,22 @@ extension SectionInfo {
         isDefault: true
     )
 
+    /// Tags from both commit styles, so the defaults suit either convention
     fileprivate static let bugs: SectionInfo = .init(
         capitalizesMessage: false,
         excluded: false,
         formatTemplate: .default,
-        tags: ["bugfix", "bug fix", "bug"],
+        tags: ["fix", "bugfix", "bug fix", "bug"],
         title: "Bug Fixes",
+        isDefault: true
+    )
+
+    fileprivate static let breaking: SectionInfo = .init(
+        capitalizesMessage: false,
+        excluded: false,
+        formatTemplate: .default,
+        tags: ["breaking"],
+        title: "Breaking Changes",
         isDefault: true
     )
 }
@@ -117,6 +127,7 @@ extension SectionInfo {
 /// :nodoc:
 extension [SectionInfo] {
     static let `default`: [SectionInfo] = [
+        .breaking,
         .default,
         .bugs
     ]

@@ -42,22 +42,37 @@ Finch is available via multiple installation methods:
 
 
 ## Usage
-Finch requires a commit message `[tag] commit message` convention (we use square brackets surrounding our tags) which it utilizes to determine an appropriate section into which a given commit should be placed.
+Finch reads [Conventional Commits](https://www.conventionalcommits.org) — `type(scope): description` — and uses the type and scopes as the tags which decide the section a commit belongs to.
 
 **Example commit messages**
-> [cleanup] Remove legacy obj-c code
+> chore: remove legacy obj-c code
 >
-> [feature][app-store] Add teleportation capabilities
+> feat(app-store): add teleportation capabilities
+>
+> feat(api)!: drop v1 endpoints
 
-A commit which does more than one thing can carry more than one changelog entry. Every line of a commit message which opens with a tag becomes its own entry — placed in its own section and linked to the same commit or pull request — while lines which don't open with a tag either continue the entry above them or, when separated from it by a blank line, are left out of the changelog entirely.
+The type and every scope become tags, so `feat(app-store)` carries both `feat` and `app-store` — which is what `--required-tags app-store` matches on. A `!` before the colon, or a line opening with `BREAKING CHANGE:`, adds a `breaking` tag, which the default configuration collects under its own heading.
+
+Prose is left alone: only a lower-case type followed by a colon opens an entry, so an ordinary body line like `Note: ...` or `Fixes: #123` is not mistaken for one.
+
+### Multiple entries per commit
+A commit which does more than one thing can carry more than one changelog entry. Every line which opens an entry becomes one — placed in its own section and linked to the same commit or pull request — while lines which don't either continue the entry above them or, when separated from it by a blank line, are left out of the changelog entirely.
 
 **Example commit message**
 ```
-[feature] Add teleportation capabilities
-[cleanup] Remove legacy obj-c code
+feat: add teleportation capabilities
+chore: remove legacy obj-c code
 
 Teleportation is behind the `beam_me_up` feature flag until the
 telemetry lands.
+```
+
+### Using Finch's original tag convention
+Finch previously required a `[tag] commit message` convention, with one or more delimited tags opening the message. That is still supported — set `commit_style: delimited` under `format:` in your configuration and the delimiters remain configurable as before.
+
+```yaml
+format:
+  commit_style: delimited
 ```
 
 To generate a changelog you must run the `compare` command. If `compare` is passed no arguments, Finch will first look for the two most recent semantically-versioned branches then the two most recent semantically-versioned git tags. You can also explicitly pass two versions by using the `--versions` option and passing 2 version arguments (branch or tag). Other accepted argurments are:

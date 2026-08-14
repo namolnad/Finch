@@ -33,7 +33,9 @@ public struct Output: OutputType, Sendable {
         case .default:
             Swift.print(value)
         case .error:
-            fputs("🚨 \(value)\n", stderr)
+            // Written through FileHandle rather than fputs: on Glibc `stderr`
+            // is a mutable global, which Swift 6 refuses to touch
+            FileHandle.standardError.write(Data("🚨 \(value)\n".utf8))
 
             exit(EXIT_FAILURE)
         case .info:

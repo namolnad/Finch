@@ -17,8 +17,11 @@ LN=ln -fs
 MKDIR=mkdir -p
 ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
 OUTPUT_PACKAGE=$(APP_NAME).pkg
-SWIFT_BUILD_FLAGS=--configuration release
-TEST=FINCH_TESTS=1 swift test
+SWIFT_BUILD_FLAGS=--configuration release $(SWIFT_RESOLUTION_FLAGS)
+# Building with and without FINCH_TESTS resolves different graphs, so pin every
+# target to Package.resolved rather than letting them rewrite it in turn.
+SWIFT_RESOLUTION_FLAGS=--only-use-versions-from-resolved-file
+TEST=FINCH_TESTS=1 swift test $(SWIFT_RESOLUTION_FLAGS)
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
 VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(//p' | tr -d ") " | sed -e 's/[a-z]*://g' | tr "," ".")
 

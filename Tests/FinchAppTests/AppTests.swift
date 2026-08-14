@@ -1,7 +1,7 @@
 @testable import FinchApp
 import XCTest
 
-final class AppTests: TestCase {
+final class AppTests: XCTestCase {
     func testOutput() {
         let outputMock = OutputMock()
 

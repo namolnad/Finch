@@ -1,15 +1,5 @@
 import Foundation
 import Yams
-#if !swift(>=5.0)
-import SnapshotTesting
-#endif
-import XCTest
-
-#if swift(>=5.0)
-typealias TestCase = XCTestCase
-#else
-typealias TestCase = SnapshotTestCase
-#endif
 
 final class TestHelper {
     static var isMacOS: Bool {
@@ -32,8 +22,10 @@ final class TestHelper {
     }
 
     static func data(for path: String) -> Data {
-        let resource = Resource(name: path, type: "yml")
+        guard let url = Bundle.module.url(forResource: path, withExtension: "yml") else {
+            fatalError("Missing test resource: \(path).yml")
+        }
 
-        return try! Data(contentsOf: URL(fileURLWithPath: resource.path))
+        return try! Data(contentsOf: url)
     }
 }

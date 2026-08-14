@@ -1,7 +1,7 @@
 @testable import FinchCore
 import XCTest
 
-final class RawLogTests: TestCase {
+final class RawLogTests: XCTestCase {
     private let sha = "5a544059e165f0703843d1c6c509cc853ad6afa4"
 
     func testSingleEntryCommit() {

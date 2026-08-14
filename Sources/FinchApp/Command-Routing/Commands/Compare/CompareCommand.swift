@@ -58,7 +58,7 @@ final class CompareCommand: BaseCommand {
     let noFetch: Flag = .init("--no-fetch", description: Strings.Compare.Options.noFetch)
     let noShowVersion: Flag = .init("--no-show-version", description: Strings.Compare.Options.noShowVersion)
     let releaseManager: Key<String> = .init("--release-manager", description: Strings.Compare.Options.releaseManager)
-    let requiredTags: Key<[String]> = .init("--required-tags", description: Strings.Compare.Options.requiredTags)
+    let requiredTags: Key<Tags> = .init("--required-tags", description: Strings.Compare.Options.requiredTags)
     let useNewlineChar: Flag = .init("--use-newline-char", description: Strings.Compare.Options.useNewlineChar)
 
     override var shortDescription: String {
@@ -96,7 +96,7 @@ final class CompareCommand: BaseCommand {
             noFetch: noFetch.value,
             noShowVersion: noShowVersion.value,
             releaseManager: releaseManager.value,
-            requiredTags: Set(requiredTags.value ?? []),
+            requiredTags: requiredTags.value?.values ?? [],
             useNewlineChar: useNewlineChar.value
         )
 
@@ -106,11 +106,5 @@ final class CompareCommand: BaseCommand {
         )
 
         app.print(result)
-    }
-}
-
-extension Array: ConvertibleFromString where Element == String {
-    public init?(input: String) {
-        self = input.components(separatedBy: " ")
     }
 }

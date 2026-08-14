@@ -2,7 +2,7 @@
 import SnapshotTesting
 import XCTest
 
-final class CompareCommandTests: TestCase {
+final class CompareCommandTests: XCTestCase {
     func testCommandName() {
         let command = CompareCommand(appGenerator: { _, _, _ in .mock() })
 

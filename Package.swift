@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.9
 
 import Foundation
 import PackageDescription
@@ -9,16 +9,18 @@ var dependencies: [Package.Dependency] = [
     .package(url: "https://github.com/mxcl/Version.git", from: "2.0.0")
 ]
 
-var finchDependencies: [Target.Dependency] = ["FinchCore", "SwiftCLI", "Version"]
-
 var targets: [Target] = [
-    .target(
+    .executableTarget(
         name: "Finch",
         dependencies: ["FinchApp"]
     ),
     .target(
         name: "FinchApp",
-        dependencies: finchDependencies
+        dependencies: [
+            "FinchCore",
+            .product(name: "SwiftCLI", package: "SwiftCLI"),
+            .product(name: "Version", package: "Version")
+        ]
     ),
     .target(
         name: "FinchCore",
@@ -26,16 +28,34 @@ var targets: [Target] = [
     ),
     .target(
         name: "FinchUtilities",
-        dependencies: ["Yams"]
+        dependencies: [
+            .product(name: "Yams", package: "Yams")
+        ]
     )
 ]
 
+/*
+ * The test target and its dependencies are opt-in so that installs — `mint`,
+ * `brew`, `make install` — resolve neither swift-snapshot-testing nor the
+ * swift-syntax tree beneath it. Every make target which touches the package
+ * pins resolution to Package.resolved, so building with and without this set
+ * cannot rewrite the file out from under each other.
+ */
 if ProcessInfo.processInfo.environment["FINCH_TESTS"] != nil {
     targets.append(
         .testTarget(
             name: "FinchAppTests",
-            dependencies: ["FinchApp", "SnapshotTesting", "Yams"],
-            path: "Tests"
+            dependencies: [
+                "FinchApp",
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+                .product(name: "Yams", package: "Yams")
+            ],
+            path: "Tests",
+            // Snapshots are read from source by SnapshotTesting, not from the bundle
+            exclude: ["FinchAppTests/__Snapshots__"],
+            resources: [
+                .process("FinchAppTests/Resources")
+            ]
         )
     )
     dependencies.append(
@@ -45,10 +65,12 @@ if ProcessInfo.processInfo.environment["FINCH_TESTS"] != nil {
 
 let package = Package(
     name: "Finch",
+    platforms: [
+        .macOS(.v10_15)
+    ],
     products: [
         .executable(name: "finch", targets: ["Finch"])
     ],
     dependencies: dependencies,
-    targets: targets,
-    swiftLanguageVersions: [.v4, .v4_2, .version("5")]
+    targets: targets
 )

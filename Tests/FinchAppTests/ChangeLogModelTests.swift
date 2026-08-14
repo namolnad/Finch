@@ -4,7 +4,7 @@ import SnapshotTesting
 import Version
 import XCTest
 
-final class ChangeLogModelTests: TestCase {
+final class ChangeLogModelTests: XCTestCase {
     private var model: ChangeLogModel {
         ChangeLogModel(
             resolver: VersionsResolverMock(),
@@ -19,7 +19,7 @@ final class ChangeLogModelTests: TestCase {
         )
 
         assertSnapshot(
-            matching: output,
+            of: output,
             as: .dump
         )
     }
@@ -31,7 +31,7 @@ final class ChangeLogModelTests: TestCase {
         )
 
         assertSnapshot(
-            matching: output,
+            of: output,
             as: .dump
         )
     }
@@ -43,7 +43,7 @@ final class ChangeLogModelTests: TestCase {
         )
 
         assertSnapshot(
-            matching: output,
+            of: output,
             as: .dump
         )
     }
@@ -55,7 +55,7 @@ final class ChangeLogModelTests: TestCase {
         )
 
         assertSnapshot(
-            matching: output,
+            of: output,
             as: .dump
         )
     }
@@ -79,7 +79,7 @@ final class ChangeLogModelTests: TestCase {
         )
 
         assertSnapshot(
-            matching: output,
+            of: output,
             as: .dump
         )
     }
@@ -91,7 +91,7 @@ final class ChangeLogModelTests: TestCase {
         )
 
         assertSnapshot(
-            matching: output,
+            of: output,
             as: .dump
         )
     }
@@ -115,7 +115,7 @@ final class ChangeLogModelTests: TestCase {
         )
 
         assertSnapshot(
-            matching: output,
+            of: output,
             as: .dump
         )
     }
@@ -133,7 +133,7 @@ final class ChangeLogModelTests: TestCase {
         )
 
         assertSnapshot(
-            matching: output,
+            of: output,
             as: .dump
         )
     }

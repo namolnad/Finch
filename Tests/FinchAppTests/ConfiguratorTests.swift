@@ -1,10 +1,11 @@
 @testable import FinchApp
 import SnapshotTesting
+import XCTest
 
-final class ConfiguratorTests: TestCase {
+final class ConfiguratorTests: XCTestCase {
     func testDefault() {
         assertSnapshot(
-            matching: Configurator(
+            of: Configurator(
                 configPath: nil,
                 projectDir: "current",
                 meta: .mock,
@@ -17,7 +18,7 @@ final class ConfiguratorTests: TestCase {
 
     func testProjectDirOption() {
         assertSnapshot(
-            matching: Configurator(
+            of: Configurator(
                 configPath: nil,
                 projectDir: "current",
                 meta: .mock,

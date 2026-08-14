@@ -14,6 +14,18 @@ opt_in_rules:
   - private_over_fileprivate
   - sorted_imports
 
+custom_rules:
+  # A condition long enough for SwiftFormat to wrap is long enough to deserve a
+  # name. `let isStrandingSeparator = a && b` then `if isStrandingSeparator {`
+  # reads better than five clauses stacked above a brace, and sidesteps the
+  # disagreement between SwiftFormat's wrapping and SwiftLint's opening_brace.
+  # Multi-line `guard`s are untouched: `guard … else { return }` reads fine.
+  named_multiline_condition:
+    name: "Named Multiline Condition"
+    regex: '(?m)^[ \t]*if[ \t]*$'
+    message: "Name a multi-line condition — `let isThing = a && b`, then `if isThing {`"
+    severity: warning
+
 included:
   - Sources
   - Tests

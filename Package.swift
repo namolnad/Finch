@@ -4,7 +4,7 @@ import Foundation
 import PackageDescription
 
 var dependencies: [Package.Dependency] = [
-    .package(url: "https://github.com/jakeheis/SwiftCLI", from: "6.0.0"),
+    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.8.0"),
     .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.0"),
     .package(url: "https://github.com/mxcl/Version.git", from: "2.0.0")
 ]
@@ -18,7 +18,7 @@ var targets: [Target] = [
         name: "FinchApp",
         dependencies: [
             "FinchCore",
-            .product(name: "SwiftCLI", package: "SwiftCLI"),
+            .product(name: "ArgumentParser", package: "swift-argument-parser"),
             .product(name: "Version", package: "Version")
         ]
     ),

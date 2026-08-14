@@ -1,33 +1,31 @@
+import ArgumentParser
 import FinchCore
 import FinchUtilities
-import SwiftCLI
 import Yams
 
-/// Command to run configuration-centric operations.
-final class ConfigGroup: CommandGroup {
-    let children: [Routable]
+/// Command group for configuration-centric operations.
+struct ConfigCommand: ParsableCommand {
+    static let configuration: CommandConfiguration = .init(
+        commandName: Strings.Config.commandName,
+        abstract: Strings.Config.commandOverview,
+        subcommands: [ConfigExampleCommand.self]
+    )
 
-    var name: String {
-        Strings.Config.commandName
-    }
-
-    let shortDescription: String = Strings.Config.commandOverview
-
-    init(children: [Routable]) {
-        self.children = children
+    /// Invoked bare, the group has nothing to do but describe itself.
+    func run() throws {
+        throw CleanExit.helpRequest(self)
     }
 }
 
-final class ConfigExampleCommand: BaseCommand {
-    override var name: String {
-        Strings.Config.Example.commandName
-    }
+struct ConfigExampleCommand: AppCommand {
+    static let configuration: CommandConfiguration = .init(
+        commandName: Strings.Config.Example.commandName,
+        abstract: Strings.Config.Example.commandOverview
+    )
 
-    override var shortDescription: String {
-        Strings.Config.Example.commandOverview
-    }
+    @OptionGroup var globalOptions: GlobalOptions
 
-    override func run(with app: App) throws {
+    func run(with app: App) throws {
         let exampleConfig: Configuration = .example(projectDir: app.configuration.projectDir)
 
         try app.print(YAMLEncoder().encode(exampleConfig))

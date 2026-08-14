@@ -1,9 +1,9 @@
+import ArgumentParser
 import FinchUtilities
-import SwiftCLI
 import Version
 
 /// Command to compare two versions and generate the appropriate changelog.
-final class CompareCommand: BaseCommand {
+struct CompareCommand: AppCommand {
     struct Options {
         /// The versions for comparison.
         fileprivate(set) var versions: Versions
@@ -51,37 +51,46 @@ final class CompareCommand: BaseCommand {
         fileprivate(set) var useNewlineChar: Bool
     }
 
-    let versions: Key<Versions> = .init("--versions", description: Strings.Compare.Options.versions)
-    let buildNumber: Key<String> = .init("--build-number", description: Strings.Compare.Options.buildNumber)
-    let gitLog: Key<String> = .init("--git-log", description: Strings.Compare.Options.gitLog)
-    let normalizeTags: Flag = .init("--normalize-tags", description: Strings.Compare.Options.normalizeTags)
-    let noFetch: Flag = .init("--no-fetch", description: Strings.Compare.Options.noFetch)
-    let noShowVersion: Flag = .init("--no-show-version", description: Strings.Compare.Options.noShowVersion)
-    let releaseManager: Key<String> = .init("--release-manager", description: Strings.Compare.Options.releaseManager)
-    let requiredTags: Key<Tags> = .init("--required-tags", description: Strings.Compare.Options.requiredTags)
-    let useNewlineChar: Flag = .init("--use-newline-char", description: Strings.Compare.Options.useNewlineChar)
+    static let configuration: CommandConfiguration = .init(
+        commandName: Strings.Compare.commandName,
+        abstract: Strings.Compare.commandOverview
+    )
 
-    override var shortDescription: String {
-        Strings.Compare.commandOverview
-    }
+    @OptionGroup var globalOptions: GlobalOptions
 
-    /// The command's name.
-    override var name: String {
-        Strings.Compare.commandName
-    }
+    @Option(help: .init(Strings.Compare.Options.versions))
+    var versions: Versions?
 
-    private let model: ChangeLogModelType
+    @Option(help: .init(Strings.Compare.Options.buildNumber))
+    var buildNumber: String?
 
-    /// :nodoc:
-    init(appGenerator: @escaping AppGenerator, model: ChangeLogModelType = ChangeLogModel()) {
-        self.model = model
+    @Option(help: .init(Strings.Compare.Options.gitLog))
+    var gitLog: String?
 
-        super.init(appGenerator: appGenerator)
-    }
+    @Flag(help: .init(Strings.Compare.Options.normalizeTags))
+    var normalizeTags: Bool = false
 
-    override func run(with app: App) throws {
+    @Flag(help: .init(Strings.Compare.Options.noFetch))
+    var noFetch: Bool = false
+
+    @Flag(help: .init(Strings.Compare.Options.noShowVersion))
+    var noShowVersion: Bool = false
+
+    @Option(help: .init(Strings.Compare.Options.releaseManager))
+    var releaseManager: String?
+
+    @Option(help: .init(Strings.Compare.Options.requiredTags))
+    var requiredTags: Tags?
+
+    @Flag(help: .init(Strings.Compare.Options.useNewlineChar))
+    var useNewlineChar: Bool = false
+
+    func run(with app: App) throws {
+        // A stored property would have to satisfy the parser's Decodable conformance
+        let model: ChangeLogModelType = ChangeLogModel()
+
         let versions: Versions
-        if let value = self.versions.value {
+        if let value = self.versions {
             versions = value
         } else {
             let derivedVersions = try model.versions(app: app)
@@ -90,14 +99,14 @@ final class CompareCommand: BaseCommand {
 
         let options: Options = .init(
             versions: versions,
-            buildNumber: buildNumber.value,
-            gitLog: gitLog.value,
-            normalizeTags: normalizeTags.value,
-            noFetch: noFetch.value,
-            noShowVersion: noShowVersion.value,
-            releaseManager: releaseManager.value,
-            requiredTags: requiredTags.value?.values ?? [],
-            useNewlineChar: useNewlineChar.value
+            buildNumber: buildNumber,
+            gitLog: gitLog,
+            normalizeTags: normalizeTags,
+            noFetch: noFetch,
+            noShowVersion: noShowVersion,
+            releaseManager: releaseManager,
+            requiredTags: requiredTags?.values ?? [],
+            useNewlineChar: useNewlineChar
         )
 
         let result = try model.changeLog(

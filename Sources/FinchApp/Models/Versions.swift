@@ -1,17 +1,13 @@
-import SwiftCLI
+import ArgumentParser
 import Version
 
-struct Versions: ConvertibleFromString {
+struct Versions: ExpressibleByArgument {
     let old: Version
 
     let new: Version
 
-    static var null: Versions = .init(old: .null, new: .null)
-
-    static var name: String = "versions"
-
-    init?(input: String) {
-        guard let versions = try? VersionsResolver().versions(from: input) else {
+    init?(argument: String) {
+        guard let versions = try? VersionsResolver().versions(from: argument) else {
             return nil
         }
 

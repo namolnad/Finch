@@ -15,6 +15,11 @@ public struct App {
         /// The app's current version.
         let version: Version
 
+        /// The app's version and build number, as reported by `--version`.
+        var versionDescription: String {
+            "Version: \(version.description) (\(buildNumber))"
+        }
+
         /// :nodoc:
         public init(buildNumber: Int, name: String, version: Version) {
             self.buildNumber = buildNumber

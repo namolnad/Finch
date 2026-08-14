@@ -5,10 +5,18 @@ enum Strings {
     private static let repoBaseUrl: String = "https://github.com/namolnad"
 
     enum App {
+        static var commandName: String {
+            appName.lowercased()
+        }
+
         static let overview: String = "A flexible tool for generating well-formatted changelogs between application versions"
 
         static var seeAlso: String {
             "Visit \(repoBaseUrl)/\(appName) for more information"
+        }
+
+        enum Error {
+            static let noAppContext: String = "Commands must be run through AppRunner, which supplies the app they run against"
         }
 
         enum Options {
@@ -21,6 +29,12 @@ enum Strings {
             }
 
             static var verbose: String = "Run with verbose output"
+
+            static let versionFlag: String = "--version"
+        }
+
+        enum Version {
+            static let commandName: String = "version"
         }
     }
 

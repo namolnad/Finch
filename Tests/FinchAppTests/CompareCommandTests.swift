@@ -1,11 +1,8 @@
 @testable import FinchApp
-import SnapshotTesting
 import XCTest
 
 final class CompareCommandTests: XCTestCase {
     func testCommandName() {
-        let command = CompareCommand(appGenerator: { _, _, _ in .mock() })
-
-        XCTAssertEqual(command.name, "compare")
+        XCTAssertEqual(CompareCommand.configuration.commandName, "compare")
     }
 }

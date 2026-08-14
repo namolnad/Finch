@@ -26,4 +26,10 @@
 # behavioral change to the tests, so it is deferred to its own pass.
 --disable noForceTryInTests
 
+# This rule moves the brace of a multiline condition onto its own line, which
+# SwiftLint's opening_brace rule then rejects. Only CI runs both, so the
+# disagreement surfaces as a failed lint job after the formatter has passed
+# locally. SwiftLint wins, since it is the stricter of the two here.
+--disable wrapMultilineStatementBraces
+
 --exclude DerivedData

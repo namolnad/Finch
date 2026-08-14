@@ -11,18 +11,14 @@ CONFIRM=./Scripts/prompt_confirmation
 CP=cp
 CURRENT_BRANCH=$(shell git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||')
 DISTRIBUTION_PLIST=$(APP_TMP)/Distribution.plist
-DOCS=docs
 INSTALL_DIR=$(HOME)/.$(APP_NAME_LOWERCASE)
 INTERNAL_PACKAGE=$(APP_NAME)App.pkg
-JAZZY=jazzy --module-version $(VERSION_STRING)
 LN=ln -fs
 MKDIR=mkdir -p
 ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
 OUTPUT_PACKAGE=$(APP_NAME).pkg
-PIPEFAIL=set -o pipefail
 SWIFT_BUILD_FLAGS=--configuration release
 TEST=FINCH_TESTS=1 swift test
-UNAME=$(shell uname)
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
 VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(//p' | tr -d ") " | sed -e 's/[a-z]*://g' | tr "," ".")
 
@@ -30,7 +26,7 @@ VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(
 RM_SAFELY := bash -c '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && set -o noglob && rm -rf $${1:A}' --
 
 
-.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install project publish symlink test update_build_number update_version
+.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install publish symlink test update_build_number update_version
 
 all: install
 
@@ -44,11 +40,6 @@ config_template:
 	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
 	$(MKDIR) $(INSTALL_DIR)
 	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/
-
-docs: project
-	@command -v jazzy >/dev/null || { echo "\njazzy not found. Install it with: gem install jazzy"; exit 1; }
-	$(JAZZY) --config .jazzy/FinchApp.yml -o $(DOCS)/FinchApp
-	$(JAZZY) --config .jazzy/FinchCore.yml -o $(DOCS)/FinchCore
 
 install: build symlink config_template
 	install -d $(BIN_DIR)
@@ -108,11 +99,7 @@ symlink: build
 
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest
-ifeq ($(UNAME), Darwin)
-	$(PIPEFAIL) && $(TEST) 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
-else
 	$(TEST)
-endif
 
 update_build_number:
 ifndef NO_UPDATE_BUILD_NUMBER
@@ -127,9 +114,6 @@ ifdef NEW_VERSION
 	$(eval PATCH:=$(word 3,$(VERSION_COMPONENTS)))
 	@echo "import Version\n\nlet appVersion: Version = .init(major: $(MAJOR), minor: $(MINOR), patch: $(PATCH))" > $(VERSION_FILE)
 endif
-
-project:
-	FINCH_TESTS=1 swift package generate-xcodeproj --enable-code-coverage
 
 %:
 	@:

@@ -16,11 +16,14 @@ MKDIR=mkdir -p
 ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
 OUTPUT_PACKAGE=$(APP_NAME).pkg
 SWIFT_BUILD_FLAGS=--configuration release $(SWIFT_RESOLUTION_FLAGS)
-# Building with and without FINCH_TESTS resolves different graphs, so pin every
-# target to Package.resolved rather than letting them take turns rewriting it.
-# The cost is that a build fetches the test-only pins it will never compile.
+# A build resolves a narrower graph than the tests do, and would otherwise prune
+# the test-only pins out of Package.resolved on the way past, so it is pinned to
+# the file. The tests are deliberately left unpinned: Package.resolved gets
+# regenerated from the build graph by tooling which knows nothing of FINCH_TESTS
+# — dependabot, for one — and pinning the tests turns every such update into a
+# CI failure instead of a resolution.
 SWIFT_RESOLUTION_FLAGS=--only-use-versions-from-resolved-file
-TEST=FINCH_TESTS=1 swift test $(SWIFT_RESOLUTION_FLAGS)
+TEST=FINCH_TESTS=1 swift test
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
 VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(//p' | tr -d ") " | sed -e 's/[a-z]*://g' | tr "," ".")
 

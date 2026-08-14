@@ -1,4 +1,5 @@
 ▿ LineComponents
+  - breakingChange: Optional<String>.none
   - contributorEmail: "author+1234@email.com"
   - message: "fixing something somewhere"
   - pullRequestNumber: Optional<Int>.none

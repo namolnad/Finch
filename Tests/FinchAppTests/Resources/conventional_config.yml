@@ -2,6 +2,7 @@ format:
   commit_style: conventional
   section_infos:
   - title: Breaking Changes
+    format_string: ' - << tags >> << message >> — << breaking_change >>'
     tags:
     - breaking
   - title: Features

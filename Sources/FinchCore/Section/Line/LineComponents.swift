@@ -7,6 +7,8 @@ public struct LineComponents {
         case contributorEmail
     }
 
+    /// The description carried by the commit's `BREAKING CHANGE:` footer, if it has one.
+    public let breakingChange: String?
     public let contributorEmail: String
     public let message: String
     public let pullRequestNumber: Int?
@@ -24,12 +26,20 @@ public struct LineComponents {
         // otherwise read as a tag
         let message = Regex.Pattern.messagePattern.firstMatch(in: rawLine) ?? componentString(.message)
         let components = CommitParser(configuration: configuration).components(of: message)
+        let breakingChange = Regex.Pattern.breakingPattern.firstMatch(in: rawLine)
 
+        // A footer marks the commit breaking just as `!` does, so it earns the
+        // same tag, and leads for the same reason
+        let tags = breakingChange != nil && !components.tags.contains(CommitParser.Strings.breakingTag)
+            ? [CommitParser.Strings.breakingTag] + components.tags
+            : components.tags
+
+        self.breakingChange = breakingChange
         self.contributorEmail = componentString(.contributorEmail)
         self.message = components.description
         self.pullRequestNumber = Int(componentString(.pullRequestNumber))
         self.sha = componentString(.sha)
-        self.tags = components.tags.map { normalizeTags ? $0.lowercased() : $0 }
+        self.tags = tags.map { normalizeTags ? $0.lowercased() : $0 }
     }
 }
 

@@ -102,6 +102,8 @@ extension String {
 
         for component in components {
             let outputtable: LineOutputtable = switch component {
+            case "<< \(string(for: .breakingChange)) >>":
+                format(component: .breakingChange)
             case "<< \(string(for: .commitTypeHyperlink)) >>":
                 format(component: .commitTypeHyperlink)
             case "<< \(string(for: .contributorEmail)) >>":

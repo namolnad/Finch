@@ -166,4 +166,9 @@ Note: this prose is not an entry, and neither is the bullet below.
 @@@###elvis1935+still-alive@theking.com###
 &&&23ac4d92a5a735dc31c64197eddedd856cc85fcc&&& - @@@Order status V2.5 (#988)@@@###elvis1935+still-alive@theking.com###
 &&&f6dd6d9e1c0ac3e8b06b4dcfa8ea0a4d1a1a7d4c&&& - @@@Bump rexml from 3.3.7 to 3.3.9 (#139)@@@###49699333+dependabot[bot]@users.noreply.github.com###
+&&&c0ffee1c0ac3e8b06b4dcfa8ea0a4d1a1a7d4cab&&& - @@@feat(api)!: drop the v1 endpoints (#1031)
+
+BREAKING CHANGE: v1 is gone. Move to v2, which takes the same
+parameters and returns an envelope.
+@@@###jony.ive@apple.com###
 """

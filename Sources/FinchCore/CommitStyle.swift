@@ -78,10 +78,6 @@ struct CommitParser {
     func opensEntry(_ line: String) -> Bool {
         switch style {
         case .conventional:
-            guard line.range(of: Regex.Pattern.breakingFooterPattern, options: .regularExpression) == nil else {
-                return true
-            }
-
             guard
                 let match = Regex.Pattern.conventionalPattern.matches(in: line).first,
                 let type = match.firstMatch(in: line)
@@ -94,6 +90,21 @@ struct CommitParser {
                 options: .regularExpression
             ) != nil
         }
+    }
+
+    /**
+     * The description a `BREAKING CHANGE:` footer carries, if the line is one.
+     *
+     * A footer describes the commit rather than standing on its own, so it is
+     * read as the commit's breaking change rather than as an entry — and it is
+     * recognized whichever style the project writes its subjects in.
+     */
+    func breakingDescription(inFooter line: String) -> String? {
+        guard let range = line.range(of: Regex.Pattern.breakingFooterPattern, options: .regularExpression) else {
+            return nil
+        }
+
+        return String(line[range.upperBound...]).trimmingCharacters(in: .whitespaces)
     }
 
     private func conventionalComponents(of message: String) -> CommitComponents {
@@ -170,7 +181,7 @@ struct CommitParser {
 }
 
 extension CommitParser {
-    private enum Strings {
+    enum Strings {
         static let breakingTag: String = "breaking"
     }
 }

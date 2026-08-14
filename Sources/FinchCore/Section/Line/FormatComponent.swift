@@ -12,6 +12,16 @@ enum FormatComponent: String {
      * ### Example
      * \[PR #123\]\(url-to-pr\)
      */
+    /**
+     * ### Represents
+     * The description carried by the commit's `BREAKING CHANGE:` footer.
+     * Renders as nothing when the commit has no such footer.
+     * ### Example
+     * `BREAKING CHANGE: the express_start event is gone` produces
+     * `the express_start event is gone`
+     */
+    case breakingChange = "breaking_change"
+
     case commitTypeHyperlink = "commit_type_hyperlink"
 
     /**
@@ -55,6 +65,8 @@ extension FormatComponent: Codable {}
 extension FormatComponent: LineOutputtable {
     func output(components: LineComponents, context: LineContext) -> String {
         switch self {
+        case .breakingChange:
+            return components.breakingChange ?? ""
         case .commitTypeHyperlink:
             var urlTitle = "Commit"
             var url = "\(context.configuration.gitConfig.repoBaseUrl)/commit/\(components.sha)"

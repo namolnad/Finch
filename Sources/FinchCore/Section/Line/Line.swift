@@ -10,16 +10,45 @@ extension Line {
             context.configuration.formatConfig.formatTemplate ??
             .default
 
-        let value = template.outputtables.reduce("") { partial, next in
-            let nextOut = next.output(components: components, context: context)
-            if partial.hasSuffix(" "), nextOut.hasPrefix(" ") {
-                return partial + String(nextOut.dropFirst())
+        var parts: [String] = []
+
+        for outputtable in template.outputtables {
+            let output = outputtable.output(components: components, context: context)
+
+            /*
+             * A component which renders nothing — a commit with no tags, or
+             * none of the breaking changes — would otherwise leave the
+             * separator introducing it stranded. The separator opening the
+             * line is kept, since that is a bullet rather than a join.
+             */
+            let isStrandingSeparator = output.isEmpty
+                && outputtable is FormatComponent
+                && parts.last?.isSeparator == true
+                && parts.dropLast().contains { !$0.isEmpty }
+
+            if isStrandingSeparator {
+                parts.removeLast()
+            }
+
+            parts.append(output)
+        }
+
+        let value = parts.reduce("") { partial, next in
+            if partial.hasSuffix(" "), next.hasPrefix(" ") {
+                partial + String(next.dropFirst())
             } else {
-                return partial + nextOut
+                partial + next
             }
         }
 
         return .init(value: value)
+    }
+}
+
+extension String {
+    /// Whether the string is only the punctuation and spacing which joins two components.
+    fileprivate var isSeparator: Bool {
+        !isEmpty && allSatisfy { $0.isWhitespace || $0.isPunctuation || $0.isSymbol }
     }
 }
 

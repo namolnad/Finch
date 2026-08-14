@@ -55,26 +55,54 @@ extension RawLog {
         let separator = component(.separator)
         let email = component(.contributorEmail)
 
-        return entries(in: component(.message), configuration: configuration).map { entry in
-            "\(prefix)&&&\(sha)&&&\(separator)@@@\(entry)@@@###\(email)###"
+        let commitMessage = components(of: component(.message), configuration: configuration)
+
+        return commitMessage.entries.enumerated().map { offset, entry in
+            // The footer describes the commit, so it rides with the subject
+            let breaking = offset == 0
+                ? commitMessage.breaking.map { "%%%\($0)%%%" } ?? ""
+                : ""
+
+            return "\(prefix)&&&\(sha)&&&\(separator)@@@\(entry)@@@###\(email)###\(breaking)"
         }
     }
 
-    /// Returns the message for each changelog entry within a commit message.
-    private static func entries(in message: String, configuration: Configuration) -> [String] {
+    /// Splits a commit message into its changelog entries and its breaking change description.
+    private static func components(
+        of message: String,
+        configuration: Configuration
+    ) -> (entries: [String], breaking: String?) {
         let parser = CommitParser(configuration: configuration)
 
         var entries: [String] = []
+        var breaking: String?
         var isExtendable = false
+        var isDescribingBreak = false
 
         for line in message.components(separatedBy: "\n") {
             let value = line.trimmingCharacters(in: .whitespaces)
 
-            // A blank line ends the entry above it
+            // A blank line ends the entry, or the footer, above it
             guard !value.isEmpty else {
+                isExtendable = false
+                isDescribingBreak = false
+                continue
+            }
+
+            if let description = parser.breakingDescription(inFooter: value) {
+                breaking = description
+                isDescribingBreak = true
                 isExtendable = false
                 continue
             }
+
+            // A footer wraps like any other prose
+            if isDescribingBreak, !parser.opensEntry(value) {
+                breaking = [breaking, value].compactMap(\.self).joined(separator: " ")
+                continue
+            }
+
+            isDescribingBreak = false
 
             if entries.isEmpty || parser.opensEntry(value) {
                 entries.append(value)
@@ -84,7 +112,7 @@ extension RawLog {
             }
         }
 
-        return propagatingPullRequest(across: entries)
+        return (propagatingPullRequest(across: entries), breaking)
     }
 
     /**

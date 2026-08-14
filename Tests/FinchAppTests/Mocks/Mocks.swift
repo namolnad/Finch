@@ -97,6 +97,28 @@ let cherryPickedInputMock = """
 < &&&fce9cb800905de678a99577a64c8230e63f1cc37&&& - @@@[autocomplete-v3] add analytics (#1030)@@@###elvis1935+still-alive@theking.com###
 """
 
+let multipleEntriesInputMock = """
+&&&fce9cb800905de678a99577a64c8230e63f1cc37&&& - @@@[bug] Don't show express placement every cold start (#1030)
+[platform] background actions@@@###elvis1935+still-alive@theking.com###
+&&&2236c36e40c4409927fdcd2b6ebd29b18aa03e36&&& - @@@[express-placement] build error fix (#1025)
+
+[bug fix][app-store] fix LossyCodableArray
+@@@###jony.ive@apple.com###
+&&&9a33ff13804bcce98a4c81279cc1254e499e4932&&& - @@@[push-notificatons] Request for permission after user
+places an order with 90 day re-prompt (#1024)
+
+The prompt is deferred until the user has demonstrated intent, and the
+90 day window is tracked in user defaults.
+@@@###jony.ive@apple.com###
+&&&23ac4d92a5a735dc31c64197eddedd856cc85fcc&&& - @@@Order status V2.5 (#988)
+
+* consolidate searchBar cornerRadius to 4
+* increase autocomplete-v3 term height
+@@@###elvis1935+still-alive@theking.com###
+&&&1c659ebb3dfde5b078894741a75eb0e3387656f2&&& - @@@[version] 6.13.0
+@@@###elvis1935+still-alive@theking.com###
+"""
+
 let multipleTagsMock = """
 > &&&fce9cb800905de678a99577a64c8230e63f1cc37&&& - @@@[autocomplete-v3] add analytics (#1030)@@@###elvis1935+still-alive@theking.com###
 > &&&2236c36e40c4409927fdcd2b6ebd29b18aa03e36&&& - @@@[express-placement] build error fix (#1025)@@@###jony.ive@apple.com###

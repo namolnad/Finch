@@ -43,14 +43,26 @@ Finch is available via multiple installation methods:
 Finch requires a commit message `[tag] commit message` convention (we use square brackets surrounding our tags) which it utilizes to determine an appropriate section into which a given commit should be placed.
 
 **Example commit messages**
-> [cleanup] Remove legacy obj-c code  
+> [cleanup] Remove legacy obj-c code
+>
 > [feature][app-store] Add teleportation capabilities
+
+A commit which does more than one thing can carry more than one changelog entry. Every line of a commit message which opens with a tag becomes its own entry — placed in its own section and linked to the same commit or pull request — while lines which don't open with a tag either continue the entry above them or, when separated from it by a blank line, are left out of the changelog entirely.
+
+**Example commit message**
+```
+[feature] Add teleportation capabilities
+[cleanup] Remove legacy obj-c code
+
+Teleportation is behind the `beam_me_up` feature flag until the
+telemetry lands.
+```
 
 To generate a changelog you must run the `compare` command. If `compare` is passed no arguments, Finch will first look for the two most recent semantically-versioned branches then the two most recent semantically-versioned git tags. You can also explicitly pass two versions by using the `--versions` option and passing 2 version arguments (branch or tag). Other accepted argurments are:
 1. The ability to hide the version header (`--no-show-version`)
 1. Release manager (`--release-manager`)
 1. Project directory (`--project-dir`) if Finch is not called from project directory
-1. Manual git log (`--git-log`). Must be received in format: `git log --left-right --graph --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%s@@@###%ae###' --date=short OLD_VERSION...NEW_VERSION`
+1. Manual git log (`--git-log`). Must be received in format: `git log --left-right --cherry-pick --oneline --format=format:'&&&%H&&& - @@@%B@@@###%ae###' --date=short OLD_VERSION...NEW_VERSION`. Note: `--graph` is not supported, as its connecting lines are indistinguishable from the body of a commit message
 1. Don't fetch origin before auto-generating changelog (`--no-fetch`).
 1. Build number string to be included in version header (`--build-number`) Takes precedence over build number command in config. Example output: `6.19.1 (6258)`
 

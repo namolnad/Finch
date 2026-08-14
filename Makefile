@@ -7,9 +7,7 @@ BINARIES_DIR=/usr/local/bin
 BUILD=swift build
 BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
 CONFIG_TEMPLATE=template.config.yml
-CONFIRM=./Scripts/prompt_confirmation
 CP=cp
-CURRENT_BRANCH=$(shell git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||')
 DISTRIBUTION_PLIST=$(APP_TMP)/Distribution.plist
 INSTALL_DIR=$(HOME)/.$(APP_NAME_LOWERCASE)
 INTERNAL_PACKAGE=$(APP_NAME)App.pkg
@@ -19,7 +17,8 @@ ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
 OUTPUT_PACKAGE=$(APP_NAME).pkg
 SWIFT_BUILD_FLAGS=--configuration release $(SWIFT_RESOLUTION_FLAGS)
 # Building with and without FINCH_TESTS resolves different graphs, so pin every
-# target to Package.resolved rather than letting them rewrite it in turn.
+# target to Package.resolved rather than letting them take turns rewriting it.
+# The cost is that a build fetches the test-only pins it will never compile.
 SWIFT_RESOLUTION_FLAGS=--only-use-versions-from-resolved-file
 TEST=FINCH_TESTS=1 swift test $(SWIFT_RESOLUTION_FLAGS)
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
@@ -29,7 +28,7 @@ VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(
 RM_SAFELY := bash -c '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && set -o noglob && rm -rf $${1:A}' --
 
 
-.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install publish symlink test update_build_number update_version
+.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install symlink tag_release test update_build_number update_version
 
 all: install
 
@@ -81,24 +80,24 @@ prefix_install:
 	install "$(APP_EXECUTABLE)" "$(PREFIX)/bin/"
 	@$(MAKE) config_template
 
-publish: test
-	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
-	@$(CONFIRM) "Warning: This will create and push a tag for '$(NEW_VERSION)' \
-	based off the current state of the current branch: $(CURRENT_BRANCH)."
-	@NEW_VERSION=$(NEW_VERSION) $(MAKE) update_version
-	git add $(VERSION_FILE)
-	git commit --allow-empty -m "[version] Publish version $(NEW_VERSION)"
-	@$(MAKE) update_build_number
-	cat $(BUILD_NUMBER_FILE)
-	git add -f $(BUILD_NUMBER_FILE)
-	git commit --amend --no-edit
-	git tag $(NEW_VERSION)
-	git push origin $(NEW_VERSION)
-	git reset origin/$(CURRENT_BRANCH)
-
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
 	$(LN) $(BIN_DIR)/$(APP_NAME_LOWERCASE) $(BINARIES_DIR)
+
+# Commits the version and build number into a local tag, leaving the branch as
+# it was. The build number is regenerated after the commit so that it counts the
+# commit it ships in. Pushing the tag is the caller's business.
+tag_release:
+ifndef NEW_VERSION
+	$(error NEW_VERSION is required. e.g. `make tag_release NEW_VERSION=0.4.0`)
+endif
+	@$(MAKE) update_version
+	git add $(VERSION_FILE)
+	git commit --allow-empty -m "[version] Publish version $(NEW_VERSION)"
+	@$(MAKE) update_build_number
+	git add -f $(BUILD_NUMBER_FILE)
+	git commit --amend --no-edit
+	git tag $(NEW_VERSION)
 
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest
@@ -117,6 +116,3 @@ ifdef NEW_VERSION
 	$(eval PATCH:=$(word 3,$(VERSION_COMPONENTS)))
 	@echo "import Version\n\nlet appVersion: Version = .init(major: $(MAJOR), minor: $(MINOR), patch: $(PATCH))" > $(VERSION_FILE)
 endif
-
-%:
-	@:

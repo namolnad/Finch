@@ -1,23 +1,62 @@
 name: Release
 
 on:
-  create:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release, e.g. 0.4.0. Released from the branch or tag this workflow is run against.'
+        required: true
+        type: string
+      prerelease:
+        description: 'Mark the GitHub release as a pre-release'
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
 
 jobs:
   publish_release:
-    if: ${{ startsWith(github.ref, 'refs/tags/') }}
     runs-on: macos-latest
+    env:
+      NEW_VERSION: ${{ inputs.version }}
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+
+      - name: Validate version
+        run: |
+          if ! [[ "$NEW_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::'$NEW_VERSION' is not a MAJOR.MINOR.PATCH version"
+            exit 1
+          fi
+          if git rev-parse -q --verify "refs/tags/$NEW_VERSION" >/dev/null; then
+            echo "::error::Tag '$NEW_VERSION' already exists"
+            exit 1
+          fi
+
+      - name: Run Tests
+        run: make test
+
+      - name: Tag Release
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          make tag_release
+          git push origin "$NEW_VERSION"
+
       - name: Build Package
         run: make package
+
       - name: Generate Changelog
         env:
           FINCH_CONFIG: .finch/config.release.yml
-        run: swift run finch compare > changelog.md
+        run: swift run --only-use-versions-from-resolved-file finch compare --no-fetch > changelog.md
+
       - name: Publish Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: gh release create ${GITHUB_REF} -p -F changelog.md Finch.pkg
+          GITHUB_TOKEN: ${{ github.token }}
+          PRERELEASE: ${{ inputs.prerelease && '--prerelease' || '' }}
+        run: gh release create "$NEW_VERSION" --title "$NEW_VERSION" --notes-file changelog.md $PRERELEASE Finch.pkg

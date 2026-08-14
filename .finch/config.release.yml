@@ -1,4 +1,7 @@
 format:
+  # This project's history predates Conventional Commits and uses `[tag]`
+  # subjects throughout, so its own changelog is generated the old way
+  commit_style: delimited
   format_string: ' - << message >> - << commit_type_hyperlink >>'
   section_infos:
   - capitalizes_message: true

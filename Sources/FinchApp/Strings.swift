@@ -20,6 +20,8 @@ enum Strings {
         }
 
         enum Options {
+            static let commitStyle: String = "How commit messages are read, overriding the `commit_style` config value. `conventional` reads Conventional Commits, `delimited` reads Finch's original `[tag] description` convention"
+
             static let configPath: String = "Path to config"
 
             static let projectDir: String = "Path to project if command is run from separate directory"

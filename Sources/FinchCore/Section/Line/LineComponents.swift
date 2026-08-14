@@ -19,17 +19,17 @@ public struct LineComponents {
             rawLine.component(kind: kind, configuration: configuration)
         }
 
+        // Parsed from the message alone: the surrounding line carries a sha and
+        // an author address, and an address such as `dependabot[bot]@…` would
+        // otherwise read as a tag
+        let message = Regex.Pattern.messagePattern.firstMatch(in: rawLine) ?? componentString(.message)
+        let components = CommitParser(configuration: configuration).components(of: message)
+
         self.contributorEmail = componentString(.contributorEmail)
-        self.message = (
-            Regex.Pattern.filteredMessagePattern(from: configuration).firstMatch(in: rawLine) ??
-                componentString(.message)
-        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        self.message = components.description
         self.pullRequestNumber = Int(componentString(.pullRequestNumber))
         self.sha = componentString(.sha)
-        self.tags = Regex.Pattern.tagPattern(from: configuration)
-            .matches(in: rawLine)
-            .compactMap { $0.firstMatch(in: rawLine) }
-            .map { normalizeTags ? $0.lowercased() : $0 }
+        self.tags = components.tags.map { normalizeTags ? $0.lowercased() : $0 }
     }
 }
 

@@ -8,6 +8,10 @@ contributors:
     handle: OlafIsEvil
   contributor_handle_prefix: '@'
 format:
+  # How commit messages are read: `conventional` for Conventional Commits,
+  # `type(scope): description`, or `delimited` for Finch's original
+  # `[tag] description` convention. The delimiters below apply only to the latter.
+  commit_style: conventional
   delimiters:
     input:
       left: '['
@@ -16,7 +20,7 @@ format:
       left: '|'
       right: '|'
   footer: |
-  
+
     ### Timeline
     - Begin development:
     - Feature cut-off / Start of bake / dogfooding:

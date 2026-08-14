@@ -63,7 +63,7 @@ public class AppRunner {
         ).configuration
 
         return .init(
-            configuration: configuration,
+            configuration: configuration.applying(commitStyle: globalOptions.commitStyle),
             environment: environment,
             meta: meta,
             verbose: globalOptions.verbose,

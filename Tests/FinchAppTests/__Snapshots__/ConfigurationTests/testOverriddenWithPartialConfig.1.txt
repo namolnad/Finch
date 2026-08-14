@@ -15,6 +15,8 @@
           - "elvis1935+still-alive@theking.com"
         - handle: "Elvis.Presley"
   ▿ formatConfig: FormatConfiguration
+    ▿ commitStyle: Optional<CommitStyle>
+      - some: CommitStyle.conventional
     ▿ delimiterConfig: DelimiterConfiguration
       ▿ input: DelimiterPair
         - left: "["

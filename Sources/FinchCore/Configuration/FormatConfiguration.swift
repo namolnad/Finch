@@ -4,6 +4,13 @@
  */
 public struct FormatConfiguration: Sendable {
     /**
+     * The convention the project's commit messages follow, which decides how
+     * a message is split into its tags and its description.
+     * > Defaults to `conventional`
+     */
+    public private(set) var commitStyle: CommitStyle?
+
+    /**
      * Sub-configuration for the project's tag delimiters.
      */
     public private(set) var delimiterConfig: DelimiterConfiguration
@@ -35,6 +42,7 @@ public struct FormatConfiguration: Sendable {
 /// :nodoc:
 extension FormatConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
+        case commitStyle = "commit_style"
         case delimiterConfig = "delimiters"
         case footer
         case formatString = "format_string"
@@ -46,6 +54,7 @@ extension FormatConfiguration: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         let formatString: String? = container.optionalDecode(forKey: .formatString)
+        self.commitStyle = container.optionalDecode(forKey: .commitStyle)
         self.delimiterConfig = container.decode(forKey: .delimiterConfig, default: .blank)
         self.footer = container.optionalDecode(forKey: .footer)
         self.formatTemplate = FormatTemplate(formatString: formatString)
@@ -56,6 +65,7 @@ extension FormatConfiguration: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
+        try container.encode(commitStyle, forKey: .commitStyle)
         try container.encode(delimiterConfig, forKey: .delimiterConfig)
         try container.encode(footer, forKey: .footer)
         try container.encode(formatTemplate?.formatString, forKey: .formatString)
@@ -67,6 +77,7 @@ extension FormatConfiguration: Codable {
 /// :nodoc:
 extension FormatConfiguration: SubConfiguration {
     public static let blank: FormatConfiguration = .init(
+        commitStyle: nil,
         delimiterConfig: .blank,
         footer: nil,
         formatTemplate: nil,
@@ -75,6 +86,7 @@ extension FormatConfiguration: SubConfiguration {
     )
 
     public static let `default`: FormatConfiguration = .init(
+        commitStyle: .conventional,
         delimiterConfig: .default,
         footer: nil,
         formatTemplate: .default,
@@ -84,8 +96,20 @@ extension FormatConfiguration: SubConfiguration {
 }
 
 /// :nodoc:
+extension FormatConfiguration {
+    /// Replaces the resolved commit style, as `Configuration.applying(commitStyle:)` does.
+    mutating func apply(commitStyle: CommitStyle) {
+        self.commitStyle = commitStyle
+    }
+}
+
+/// :nodoc:
 extension FormatConfiguration: Mergeable {
     public func merge(into other: inout FormatConfiguration) {
+        if let commitStyle {
+            other.commitStyle = commitStyle
+        }
+
         if !sectionInfos.isEmpty, sectionInfos.allSatisfy({ !$0.isDefault }) {
             other.sectionInfos = sectionInfos
         }

@@ -35,6 +35,15 @@ extension Configuration {
         return config
     }()
 
+    /// The mock configuration, but reading commits as Conventional Commits
+    static let mockConventional: Configuration = {
+        var config: Configuration = .mock
+        let newConfig: Configuration = TestHelper.model(for: "conventional_config")
+        newConfig.merge(into: &config)
+
+        return config
+    }()
+
     static let mockRequiredTags: Configuration = {
         var config: Configuration = .mock
         let newConfig: Configuration = TestHelper.model(for: "required_tags_config")
@@ -139,4 +148,22 @@ let multipleTagsMock = """
 > &&&d157b78a5f440654ee243c676642466ff72912a6&&& - @@@[rollbar] update to v1.0.0 final (#1007)@@@###elvis1935+still-alive@theking.com###
 > &&&a7586919f6b096d884958e3386e535ecc986cd57&&& - @@@[feature][app-store] Autocomplete V3 (#1004)@@@###elvis1935+still-alive@theking.com###
 > &&&1c659ebb3dfde5b078894741a75eb0e3387656f2&&& - @@@[version] 6.13.0@@@###elvis1935+still-alive@theking.com###
+"""
+
+let conventionalInputMock = """
+&&&fce9cb800905de678a99577a64c8230e63f1cc37&&& - @@@feat(autocomplete): add analytics (#1030)@@@###elvis1935+still-alive@theking.com###
+&&&2236c36e40c4409927fdcd2b6ebd29b18aa03e36&&& - @@@fix: build error in express placement (#1025)@@@###jony.ive@apple.com###
+&&&9a33ff13804bcce98a4c81279cc1254e499e4932&&& - @@@feat(push,checkout)!: request permission after an order (#1024)@@@###jony.ive@apple.com###
+&&&092510f3eb3f85592b6973858c2b9591dd78d692&&& - @@@chore: clean up analytics (#1021)
+
+BREAKING CHANGE: the express_start event is gone
+@@@###jony.ive@apple.com###
+&&&6e12ce047d1513a148456ede004ed4d89cedcec5&&& - @@@feat: better support for AnyEncodables (#1022)
+fix(codable): drop the legacy path
+
+Note: this prose is not an entry, and neither is the bullet below.
+* nor this one
+@@@###elvis1935+still-alive@theking.com###
+&&&23ac4d92a5a735dc31c64197eddedd856cc85fcc&&& - @@@Order status V2.5 (#988)@@@###elvis1935+still-alive@theking.com###
+&&&f6dd6d9e1c0ac3e8b06b4dcfa8ea0a4d1a1a7d4c&&& - @@@Bump rexml from 3.3.7 to 3.3.9 (#139)@@@###49699333+dependabot[bot]@users.noreply.github.com###
 """

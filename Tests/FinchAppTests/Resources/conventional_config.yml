@@ -1,0 +1,15 @@
+format:
+  commit_style: conventional
+  section_infos:
+  - title: Breaking Changes
+    tags:
+    - breaking
+  - title: Features
+    tags:
+    - feat
+  - title: Bug Fixes
+    tags:
+    - fix
+  - title: Other
+    tags:
+    - "*"

@@ -80,6 +80,21 @@ extension Configuration: Mergeable {
 
 /// :nodoc:
 extension Configuration {
+    /**
+     * Returns a copy reading commits in the given style, for a command line
+     * flag to override whatever the configuration files resolved to.
+     */
+    public func applying(commitStyle: CommitStyle?) -> Configuration {
+        guard let commitStyle else {
+            return self
+        }
+
+        var configuration = self
+        configuration.formatConfig.apply(commitStyle: commitStyle)
+
+        return configuration
+    }
+
     public static func `default`(projectDir: String) -> Configuration {
         .init(
             contributorsConfig: .default,

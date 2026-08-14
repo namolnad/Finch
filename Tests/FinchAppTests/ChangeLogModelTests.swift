@@ -36,6 +36,18 @@ final class ChangeLogModelTests: XCTestCase {
         )
     }
 
+    func testConventionalCommitsOutput() {
+        let output = try! model.changeLog(
+            options: options(gitLog: conventionalInputMock, showReleaseManager: false),
+            app: .mock(configuration: .mockConventional)
+        )
+
+        assertSnapshot(
+            of: output,
+            as: .dump
+        )
+    }
+
     func testMultipleEntriesPerCommitOutput() {
         let output = try! model.changeLog(
             options: options(gitLog: multipleEntriesInputMock, showReleaseManager: false),

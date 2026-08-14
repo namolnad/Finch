@@ -64,15 +64,8 @@ public struct Shell {
 
 extension Process {
     fileprivate func run(at path: String) throws {
-        #if os(macOS)
-        if #available(macOS 10.13, *) {
-            executableURL = URL(fileURLWithPath: path)
-            try run()
-            return
-        }
-        #endif
+        executableURL = URL(fileURLWithPath: path)
 
-        launchPath = path
-        launch()
+        try run()
     }
 }

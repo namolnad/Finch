@@ -53,7 +53,7 @@ jobs:
       - name: Generate Changelog
         env:
           FINCH_CONFIG: .finch/config.release.yml
-        run: swift run --only-use-versions-from-resolved-file finch compare --no-fetch > changelog.md
+        run: swift run --only-use-versions-from-resolved-file finch compare --no-fetch --normalize-tags > changelog.md
 
       - name: Publish Release
         env:

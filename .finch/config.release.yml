@@ -13,6 +13,18 @@ format:
     - bugfix
     - bug-fix
     title: Bug Fixes
+  - capitalizes_message: true
+    tags:
+    - platform
+    - ci
+    - tooling
+    - upgrade
+    - cleanup
+    - clean up
+    - refactor
+    - tests
+    - docs
+    title: Platform Improvements
 git:
   repo_base_url: https://github.com/namolnad/finch
 resolution_commands:

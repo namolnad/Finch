@@ -5,7 +5,7 @@ import Version
 /// A structure to represent this app and its components.
 public struct App {
     /// The meta information of the app.
-    public struct Meta {
+    public struct Meta: Sendable {
         /// The app's current build number.
         let buildNumber: Int
 

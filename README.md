@@ -26,6 +26,8 @@ The name Finch is derived from the purpose of the application itself — trackin
 We strongly believe in the importance of a good changelog. We also know changelogs can occasionally end up A) overlooked/untimely and B) difficult to maintain in terms of styling/approach as different team-members are managing a given release. It was these issues, and the desire to automate them for our team, which led to the creation of Finch. We believe that well-formed and intentional Git commit messages can serve as the underlying data for powering an automated and hassle-free changelog system. Through the use of some relatively minor commit-message discipline — and according to whatever conventions your team would like to use — Finch can help you automate your internal and external-facing changelogs, providing as much detail or polish as is desired.
 
 ## Installation
+Building Finch from source — via Homebrew, Mint or `make install` — requires a **Swift 6.0 or newer** toolchain. The packaged release requires nothing beyond macOS.
+
 Finch is available via multiple installation methods:
 1. Homebrew
     1. Add tap `brew tap namolnad/formulae`

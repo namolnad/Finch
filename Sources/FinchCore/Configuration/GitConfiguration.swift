@@ -1,7 +1,7 @@
 /**
  * Sub-configuration for the project's Git setup.
  */
-public struct GitConfiguration {
+public struct GitConfiguration: Sendable {
     /**
      * An optional branch prefix for the project. This string will
      * prefix the included versions when running the compare command.

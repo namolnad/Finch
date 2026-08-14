@@ -2,7 +2,7 @@
  * Sub-configuration for shell commands used to resolve information
  * only available at run-time.
  */
-public struct ResolutionCommandsConfiguration {
+public struct ResolutionCommandsConfiguration: Sendable {
     /**
      * Optional command string to resolve a project's build
      * number at run-time.

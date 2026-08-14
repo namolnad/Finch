@@ -4,7 +4,7 @@
  * a `format_string` at the global or section level in the
  * configuration file.
  */
-public struct FormatTemplate {
+public struct FormatTemplate: Sendable {
     /// :nodoc:
     let outputtables: [LineOutputtable]
 }

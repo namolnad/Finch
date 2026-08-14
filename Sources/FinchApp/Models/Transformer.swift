@@ -15,7 +15,7 @@ extension [Transformer] {
         [
             exclusionTransformers(for: configuration),
             formattingTransformers
-        ].flatMap { $0 }
+        ].flatMap(\.self)
     }
 
     private static func exclusionTransformers(for configuration: Configuration) -> [Transformer] {

@@ -1,4 +1,4 @@
 /// :nodoc:
-protocol LineOutputtable {
+protocol LineOutputtable: Sendable {
     func output(components: LineComponents, context: LineContext) -> String
 }

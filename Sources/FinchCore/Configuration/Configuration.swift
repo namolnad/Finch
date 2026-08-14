@@ -13,7 +13,7 @@ public protocol SubConfiguration {
  * A structure describing a project's configuration. Comprised of
  * multiple sub-configurations.
  */
-public struct Configuration {
+public struct Configuration: Sendable {
     /**
      * Sub-configuration for the project's contributors.
      */

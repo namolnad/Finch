@@ -20,15 +20,15 @@ enum Strings {
         }
 
         enum Options {
-            static var configPath: String = "Path to config"
+            static let configPath: String = "Path to config"
 
-            static var projectDir: String = "Path to project if command is run from separate directory"
+            static let projectDir: String = "Path to project if command is run from separate directory"
 
             static var showVersion: String {
                 "Displays current \(appName) version and build number"
             }
 
-            static var verbose: String = "Run with verbose output"
+            static let verbose: String = "Run with verbose output"
 
             static let versionFlag: String = "--version"
         }

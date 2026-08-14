@@ -53,9 +53,22 @@ final class CommitParserTests: XCTestCase {
     func testConventionalOpensEntry() {
         XCTAssertTrue(conventional.opensEntry("fix: a thing"))
         XCTAssertTrue(conventional.opensEntry("feat(scope)!: a thing"))
-        XCTAssertTrue(conventional.opensEntry("BREAKING CHANGE: a thing"))
         XCTAssertFalse(conventional.opensEntry("* a bullet"))
         XCTAssertFalse(conventional.opensEntry("[fixed] a delimited tag"))
+        // A footer describes the commit rather than standing on its own
+        XCTAssertFalse(conventional.opensEntry("BREAKING CHANGE: a thing"))
+    }
+
+    func testBreakingFooterDescription() {
+        XCTAssertEqual(
+            conventional.breakingDescription(inFooter: "BREAKING CHANGE: the express_start event is gone"),
+            "the express_start event is gone"
+        )
+        XCTAssertEqual(conventional.breakingDescription(inFooter: "BREAKING-CHANGE: hyphenated"), "hyphenated")
+        XCTAssertNil(conventional.breakingDescription(inFooter: "feat: not a footer"))
+
+        // Recognized whichever style the project writes its subjects in
+        XCTAssertEqual(delimited.breakingDescription(inFooter: "BREAKING CHANGE: also here"), "also here")
     }
 
     func testDelimitedStyleIsUnchanged() {

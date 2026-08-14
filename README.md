@@ -55,6 +55,25 @@ The type and every scope become tags, so `feat(app-store)` carries both `feat` a
 
 Prose is left alone: only a lower-case type followed by a colon opens an entry, so an ordinary body line like `Note: ...` or `Fixes: #123` is not mistaken for one.
 
+### Describing a breaking change
+A `BREAKING CHANGE:` footer describes the commit rather than standing on its own, so its text is attached to the commit's entry instead of becoming a separate one, and the entry is tagged `breaking` exactly as a `!` would. Wrapped footers are joined, and footers are read whichever commit style the project uses.
+
+Put `<< breaking_change >>` in a section's `format_string` to print that description:
+
+```yaml
+- title: Breaking Changes
+  tags: [breaking]
+  format_string: ' - << tags >> << message >> — << breaking_change >>'
+```
+
+```
+### Breaking Changes
+ - |breaking||feat||api| drop the v1 endpoints — v1 is gone. Move to v2, which takes the same parameters and returns an envelope.
+ - |breaking||feat||ui| restyle the header
+```
+
+The second entry has no footer, and the separator introducing it is dropped rather than left dangling — which holds for any component rendering nothing, `<< tags >>` on an untagged commit included.
+
 ### Multiple entries per commit
 A commit which does more than one thing can carry more than one changelog entry. Every line which opens an entry becomes one — placed in its own section and linked to the same commit or pull request — while lines which don't either continue the entry above them or, when separated from it by a blank line, are left out of the changelog entirely.
 

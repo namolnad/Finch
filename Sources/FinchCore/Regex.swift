@@ -89,6 +89,9 @@ extension Regex.Pattern {
     /// Captures the message a commit's log output carries.
     static let messagePattern: Regex.Pattern = "@@@([\\s\\S]*)@@@"
 
+    /// Captures the breaking change description carried alongside an entry.
+    static let breakingPattern: Regex.Pattern = "%%%([\\s\\S]*)%%%"
+
     /**
      * Captures a Conventional Commits message: the type, any scopes, the `!`
      * marking a breaking change, and the description. The type is restricted

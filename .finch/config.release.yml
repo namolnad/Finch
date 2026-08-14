@@ -4,6 +4,14 @@ format:
   commit_style: delimited
   format_string: ' - << message >> - << commit_type_hyperlink >>'
   section_infos:
+  # Footers are read whichever style the subjects use, so this works despite
+  # the delimited setting above — and means a release can describe what it
+  # breaks without the note being written by hand afterwards
+  - capitalizes_message: true
+    format_string: ' - << message >> — << breaking_change >> - << commit_type_hyperlink >>'
+    tags:
+    - breaking
+    title: Breaking Changes
   - capitalizes_message: true
     tags:
     - feature

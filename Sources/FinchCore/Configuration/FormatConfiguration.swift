@@ -96,6 +96,14 @@ extension FormatConfiguration: SubConfiguration {
 }
 
 /// :nodoc:
+extension FormatConfiguration {
+    /// Replaces the resolved commit style, as `Configuration.applying(commitStyle:)` does.
+    mutating func apply(commitStyle: CommitStyle) {
+        self.commitStyle = commitStyle
+    }
+}
+
+/// :nodoc:
 extension FormatConfiguration: Mergeable {
     public func merge(into other: inout FormatConfiguration) {
         if let commitStyle {

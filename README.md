@@ -75,6 +75,8 @@ format:
   commit_style: delimited
 ```
 
+A `--commit-style conventional|delimited` argument overrides the configured value for a single run, which is useful when comparing versions either side of a migration.
+
 To generate a changelog you must run the `compare` command. If `compare` is passed no arguments, Finch will first look for the two most recent semantically-versioned branches then the two most recent semantically-versioned git tags. You can also explicitly pass two versions by using the `--versions` option and passing 2 version arguments (branch or tag). Other accepted argurments are:
 1. The ability to hide the version header (`--no-show-version`)
 1. Release manager (`--release-manager`)

@@ -20,6 +20,28 @@ final class AppRunnerTests: XCTestCase {
         assertSnapshot(of: outputMock.outputs, as: .dump)
     }
 
+    /// `--commit-style` overrides the style the configuration resolved to
+    func testCommitStyleOverride() {
+        let outputMock = OutputMock()
+
+        AppRunner(
+            environment: environment,
+            meta: .mock,
+            output: outputMock
+        ).run(with: [
+            "finch",
+            "compare",
+            "--commit-style", "conventional",
+            "--git-log", conventionalInputMock,
+            "--versions", "6.20.0 5.3.0",
+            "--no-show-version"
+        ])
+
+        // The config in `environment` is delimited, so parsing conventionally is the flag's doing
+        XCTAssertTrue(outputMock.outputs.joined().contains("add analytics"))
+        XCTAssertFalse(outputMock.outputs.joined().contains("feat(autocomplete)"))
+    }
+
     func testRunConfigExample() {
         let outputMock = OutputMock()
 

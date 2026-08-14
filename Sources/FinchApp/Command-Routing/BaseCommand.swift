@@ -1,8 +1,12 @@
 import ArgumentParser
+import FinchCore
 import FinchUtilities
 
 /// :nodoc:
 public typealias Environment = [String: String]
+
+/// Declared here rather than in FinchCore, which has no business importing an argument parser
+extension CommitStyle: ExpressibleByArgument {}
 
 /// The options accepted by every command which runs against an `App`.
 struct GlobalOptions: ParsableArguments {
@@ -11,6 +15,9 @@ struct GlobalOptions: ParsableArguments {
 
     @Option(name: [.customShort("c"), .long], help: .init(Strings.App.Options.configPath))
     var config: String?
+
+    @Option(name: .long, help: .init(Strings.App.Options.commitStyle))
+    var commitStyle: CommitStyle?
 
     @Option(name: .long, help: .init(Strings.App.Options.projectDir))
     var projectDir: String?

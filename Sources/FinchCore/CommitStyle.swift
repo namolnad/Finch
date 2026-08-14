@@ -5,7 +5,7 @@ import Foundation
  * message is split into the tags routing it to a section and the description
  * which is printed.
  */
-public enum CommitStyle: String, Codable, Sendable {
+public enum CommitStyle: String, CaseIterable, Codable, Sendable {
     /**
      * [Conventional Commits](https://www.conventionalcommits.org):
      * `type(scope)!: description`.

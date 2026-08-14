@@ -2,7 +2,7 @@
 import SnapshotTesting
 import XCTest
 
-final class AppRunnerTests: TestCase {
+final class AppRunnerTests: XCTestCase {
     func testRunCompare() {
         let outputMock = OutputMock()
 
@@ -12,7 +12,7 @@ final class AppRunnerTests: TestCase {
             output: outputMock
         ).run(with: ["finch", "compare", "--git-log", defaultInputMock, "--versions", "6.20.0 5.3.0", "--build-number", "612"])
 
-        assertSnapshot(matching: outputMock.outputs, as: .dump)
+        assertSnapshot(of: outputMock.outputs, as: .dump)
     }
 
     func testRunConfigExample() {
@@ -24,6 +24,6 @@ final class AppRunnerTests: TestCase {
             output: outputMock
         ).run(with: ["finch", "config", "show-example"])
 
-        assertSnapshot(matching: outputMock.outputs, as: .dump)
+        assertSnapshot(of: outputMock.outputs, as: .dump)
     }
 }

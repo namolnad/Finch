@@ -35,7 +35,7 @@ final class ChangeLogModel: ChangeLogModelType {
 
     /// See `ChangeLogModelType.changeLog(options:app:)` for definition.
     func changeLog(options: Options, app: App) throws -> String {
-        let outputInfo: OutputInfo = try self.outputInfo(for: options, app: app)
+        let outputInfo: OutputInfo = try outputInfo(for: options, app: app)
 
         var output = ""
 
@@ -77,7 +77,7 @@ final class ChangeLogModel: ChangeLogModelType {
         let configuration = app.configuration
         let rawChangeLog: String = try service.changeLog(options: options, app: app)
         let version: String? = try versionHeader(options: options, app: app)
-        let releaseManager: Contributor? = self.releaseManager(options: options, configuration: configuration)
+        let releaseManager: Contributor? = releaseManager(options: options, configuration: configuration)
 
         let linesComponents = type(of: self)
             .filteredLines(input: rawChangeLog, configuration: configuration)

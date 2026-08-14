@@ -38,26 +38,26 @@ extension LineComponents.Kind {
     var regEx: String {
         switch self {
         case .sha:
-            return "(?:\(border))(.*?)(?:\(border))"
+            "(?:\(border))(.*?)(?:\(border))"
         case .message:
-            return "\(border)(.*?)\\(?:#(.*?)\\)\(border)"
+            "\(border)(.*?)\\(?:#(.*?)\\)\(border)"
         case .pullRequestNumber:
-            return "\\d+?\\\(border)"
+            "\\d+?\\\(border)"
         case .contributorEmail:
-            return "\(border)(.*?)\(border)"
+            "\(border)(.*?)\(border)"
         }
     }
 
     var border: String {
         switch self {
         case .sha:
-            return "&&&"
+            "&&&"
         case .message:
-            return "@@@"
+            "@@@"
         case .pullRequestNumber:
-            return ")@@@"
+            ")@@@"
         case .contributorEmail:
-            return "###"
+            "###"
         }
     }
 }

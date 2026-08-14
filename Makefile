@@ -7,22 +7,20 @@ BINARIES_DIR=/usr/local/bin
 BUILD=swift build
 BUILD_NUMBER_FILE=./Sources/$(APP_NAME)/App/BuildNumber.swift
 CONFIG_TEMPLATE=template.config.yml
-CONFIRM=./Scripts/prompt_confirmation
 CP=cp
-CURRENT_BRANCH=$(shell git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||')
 DISTRIBUTION_PLIST=$(APP_TMP)/Distribution.plist
-DOCS=docs
 INSTALL_DIR=$(HOME)/.$(APP_NAME_LOWERCASE)
 INTERNAL_PACKAGE=$(APP_NAME)App.pkg
-JAZZY=jazzy --module-version $(VERSION_STRING)
 LN=ln -fs
 MKDIR=mkdir -p
 ORG_IDENTIFIER=org.$(APP_NAME_LOWERCASE).$(APP_NAME_LOWERCASE)
 OUTPUT_PACKAGE=$(APP_NAME).pkg
-PIPEFAIL=set -o pipefail
-SWIFT_BUILD_FLAGS=--configuration release
-TEST=FINCH_TESTS=1 swift test
-UNAME=$(shell uname)
+SWIFT_BUILD_FLAGS=--configuration release $(SWIFT_RESOLUTION_FLAGS)
+# Building with and without FINCH_TESTS resolves different graphs, so pin every
+# target to Package.resolved rather than letting them take turns rewriting it.
+# The cost is that a build fetches the test-only pins it will never compile.
+SWIFT_RESOLUTION_FLAGS=--only-use-versions-from-resolved-file
+TEST=FINCH_TESTS=1 swift test $(SWIFT_RESOLUTION_FLAGS)
 VERSION_FILE=./Sources/$(APP_NAME)/App/Version.swift
 VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(//p' | tr -d ") " | sed -e 's/[a-z]*://g' | tr "," ".")
 
@@ -30,7 +28,7 @@ VERSION_STRING=$(shell cat $(VERSION_FILE) | grep appVersion | sed -n -e 's/^.*(
 RM_SAFELY := bash -c '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && set -o noglob && rm -rf $${1:A}' --
 
 
-.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install project publish symlink test update_build_number update_version
+.PHONY: all build build_with_disable_sandbox config_template install lint package prefix_install symlink tag_release test update_build_number update_version
 
 all: install
 
@@ -44,11 +42,6 @@ config_template:
 	@echo "\nAdding config template to $(INSTALL_DIR)/$(CONFIG_TEMPLATE)"
 	$(MKDIR) $(INSTALL_DIR)
 	$(CP) Resources/$(CONFIG_TEMPLATE) $(INSTALL_DIR)/
-
-docs: project
-	@command -v jazzy >/dev/null || { echo "\njazzy not found. Install it with: gem install jazzy"; exit 1; }
-	$(JAZZY) --config .jazzy/FinchApp.yml -o $(DOCS)/FinchApp
-	$(JAZZY) --config .jazzy/FinchCore.yml -o $(DOCS)/FinchCore
 
 install: build symlink config_template
 	install -d $(BIN_DIR)
@@ -87,32 +80,28 @@ prefix_install:
 	install "$(APP_EXECUTABLE)" "$(PREFIX)/bin/"
 	@$(MAKE) config_template
 
-publish: test
-	$(eval NEW_VERSION:=$(filter-out $@, $(MAKECMDGOALS)))
-	@$(CONFIRM) "Warning: This will create and push a tag for '$(NEW_VERSION)' \
-	based off the current state of the current branch: $(CURRENT_BRANCH)."
-	@NEW_VERSION=$(NEW_VERSION) $(MAKE) update_version
-	git add $(VERSION_FILE)
-	git commit --allow-empty -m "[version] Publish version $(NEW_VERSION)"
-	@$(MAKE) update_build_number
-	cat $(BUILD_NUMBER_FILE)
-	git add -f $(BUILD_NUMBER_FILE)
-	git commit --amend --no-edit
-	git tag $(NEW_VERSION)
-	git push origin $(NEW_VERSION)
-	git reset origin/$(CURRENT_BRANCH)
-
 symlink: build
 	@echo "\nSymlinking $(APP_NAME)"
 	$(LN) $(BIN_DIR)/$(APP_NAME_LOWERCASE) $(BINARIES_DIR)
 
+# Commits the version and build number into a local tag, leaving the branch as
+# it was. The build number is regenerated after the commit so that it counts the
+# commit it ships in. Pushing the tag is the caller's business.
+tag_release:
+ifndef NEW_VERSION
+	$(error NEW_VERSION is required. e.g. `make tag_release NEW_VERSION=0.4.0`)
+endif
+	@$(MAKE) update_version
+	git add $(VERSION_FILE)
+	git commit --allow-empty -m "[version] Publish version $(NEW_VERSION)"
+	@$(MAKE) update_build_number
+	git add -f $(BUILD_NUMBER_FILE)
+	git commit --amend --no-edit
+	git tag $(NEW_VERSION)
+
 test: update_build_number
 	@$(RM_SAFELY) ./.build/debug/$(APP_NAME)PackageTests.xctest
-ifeq ($(UNAME), Darwin)
-	$(PIPEFAIL) && $(TEST) 2>&1 | xcpretty -r junit --output build/reports/test/junit.xml
-else
 	$(TEST)
-endif
 
 update_build_number:
 ifndef NO_UPDATE_BUILD_NUMBER
@@ -127,9 +116,3 @@ ifdef NEW_VERSION
 	$(eval PATCH:=$(word 3,$(VERSION_COMPONENTS)))
 	@echo "import Version\n\nlet appVersion: Version = .init(major: $(MAJOR), minor: $(MINOR), patch: $(PATCH))" > $(VERSION_FILE)
 endif
-
-project:
-	FINCH_TESTS=1 swift package generate-xcodeproj --enable-code-coverage
-
-%:
-	@:

@@ -90,15 +90,15 @@ extension FormatConfiguration: Mergeable {
             other.sectionInfos = sectionInfos
         }
 
-        if let formatTemplate = formatTemplate {
+        if let formatTemplate {
             other.formatTemplate = formatTemplate
         }
 
-        if let header = header {
+        if let header {
             other.header = header
         }
 
-        if let footer = footer {
+        if let footer {
             other.footer = footer
         }
 

@@ -40,11 +40,11 @@ extension ResolutionCommandsConfiguration: SubConfiguration {
 /// :nodoc:
 extension ResolutionCommandsConfiguration: Mergeable {
     public func merge(into other: inout ResolutionCommandsConfiguration) {
-        if let buildNumber = buildNumber, !buildNumber.isEmpty {
+        if let buildNumber, !buildNumber.isEmpty {
             other.buildNumber = buildNumber
         }
 
-        if let versions = versions, !versions.isEmpty {
+        if let versions, !versions.isEmpty {
             other.versions = versions
         }
     }

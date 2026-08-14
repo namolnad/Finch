@@ -115,7 +115,7 @@ extension SectionInfo {
 }
 
 /// :nodoc:
-extension Array where Element == SectionInfo {
+extension [SectionInfo] {
     static let `default`: [SectionInfo] = [
         .default,
         .bugs

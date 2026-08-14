@@ -2,7 +2,7 @@
 import SnapshotTesting
 import XCTest
 
-final class VersionResolverTests: TestCase {
+final class VersionResolverTests: XCTestCase {
     func testDefault() {
         let (old, new) = try! VersionsResolver().versions(from: "6.12.1 6.38.0")
 
@@ -49,7 +49,7 @@ final class VersionResolverTests: TestCase {
         do {
             _ = try VersionsResolver().versions(from: "6.0.2 6.4.3 6.12.1")
         } catch {
-            assertSnapshot(matching: error.localizedDescription, as: .dump)
+            assertSnapshot(of: error.localizedDescription, as: .dump)
         }
     }
 
@@ -62,7 +62,7 @@ final class VersionResolverTests: TestCase {
         do {
             _ = try VersionsResolver().versions(from: "blah 6.12.1")
         } catch {
-            assertSnapshot(matching: error.localizedDescription, as: .dump)
+            assertSnapshot(of: error.localizedDescription, as: .dump)
         }
     }
 }

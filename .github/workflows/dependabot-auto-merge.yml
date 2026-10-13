@@ -1,0 +1,29 @@
+# Turns on GitHub auto-merge for Dependabot's patch and minor updates, so they
+# merge once the checks required by the "dependabot: require CI" ruleset pass.
+# Majors, and anything whose update type can't be read, wait for a person.
+name: Dependabot auto-merge
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - id: meta
+        uses: dependabot/fetch-metadata@v3
+
+      - if: contains(fromJSON('["version-update:semver-patch", "version-update:semver-minor"]'), steps.meta.outputs.update-type)
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          # A merge made with the workflow's own GITHUB_TOKEN starts no push
+          # workflows, so main's CI and deploy wouldn't run for it. A token in
+          # the DEPENDABOT_AUTOMERGE_TOKEN Dependabot secret merges as its owner
+          # and does trigger them; without one, the update ships with the next
+          # deploy.
+          GH_TOKEN: ${{ secrets.DEPENDABOT_AUTOMERGE_TOKEN || github.token }}

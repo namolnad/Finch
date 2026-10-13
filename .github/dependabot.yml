@@ -1,4 +1,6 @@
 version: 2
+# .github/workflows/dependabot-auto-merge.yml merges the grouped patch and
+# minor pull request once CI is green.
 
 updates:
   - package-ecosystem: github-actions
@@ -7,6 +9,9 @@ updates:
       interval: monthly
     commit-message:
       prefix: '[platform]'
+    groups:
+      patch-and-minor:
+        update-types: [minor, patch]
 
   - package-ecosystem: swift
     directory: /
@@ -14,3 +19,6 @@ updates:
       interval: monthly
     commit-message:
       prefix: '[platform]'
+    groups:
+      patch-and-minor:
+        update-types: [minor, patch]
